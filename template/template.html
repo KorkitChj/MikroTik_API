@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--dropdown-->
+    <script src="../js/popper_1_14_3.min.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--ใช้คู่กันทำค้นหาให้สวย-->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="../js/delete_script.js"></script>
+
+    <!--custom css-->
+    <link rel="stylesheet" href="../css/custom-site-Copy.css">
+    <!--logo-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
+        integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="../glyphicons/css/bootstrap-glyphicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--table logo-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" />
+    <style>
+        .navbar-dark {
+            background:#2a6592   !important;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        #example_filter {
+            float: right;
+        }
+
+        #example_paginate {
+            float: right;
+        }
+
+        label {
+            display: inline-flex;
+            margin-bottom: .5rem;
+            margin-top: .5rem;
+
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+
+        .pad>a:hover {
+            background: #262626;
+        }
+
+        .color-custom {
+            background-color:white !important;
+            margin-bottom: 5em;
+            
+
+        }
+        .bor{
+            border-bottom: 0.75em solid red;
+        }
+
+        body {
+            /* background-color:whitesmoke !important; */
+            /* margin-bottom: 4em; */
+            background-image: url('../img/background-worst-password-blue.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color:whitesmoke;
+            height: 100%;
+        }
+        /* .container-fluid{
+            background-image: url('../img/background-worst-password-blue.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color:whitesmoke;
+            height: 100%;
+        } */
+
+        /* #design ul li a:hover span,
+        #design .using>li:hover>a>span {
+            border-bottom: 2px solid #FA9C14;
+            transition: 0.1s;
+        }
+
+        #dev ul li a:hover span,
+        #dev .using>li:hover>a>span {
+            border-bottom: 2px solid red;
+            transition: 0.1s;
+        }
+
+        #blog ul li a:hover span,
+        #blog .using>li:hover>a>span {
+            border-bottom: 2px solid blue;
+            transition: 0.1s;
+        } */
+    </style>
+    <!-- <script type="text/javascript">
+        function date_time(id) {
+            date = new Date;
+            year = date.getFullYear();
+            month = date.getMonth();
+            months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev');
+            d = date.getDate();
+            day = date.getDay();
+            days = new Array('sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+            h = date.getHours();
+            if (h < 10) {
+                h = "0" + h;
+            }
+            m = date.getMinutes();
+            if (m < 10) {
+                m = "0" + m;
+            }
+            s = date.getSeconds();
+            if (s < 10) {
+                s = "0" + s;
+            }
+            result = '' + days[day] + ' ' + d + ' ' + months[month] + ' ' + year + ' ' + h + ':' + m + ':' + s;
+            document.getElementById(id).innerHTML = result;
+            setTimeout('date_time("' + id + '");', '1000');
+            return true;
+        }     
+    </script> -->
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row float-right">
+            <div class="col">
+                <!---->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col ">
+                <!---->
+            </div>
+        </div>
+    </div>
+    <div class=" row mx-auto d-block bor">
+        <div class="col ">
+            <p><div style="height:1em"></div></p>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col ">
+                <!-- <div style="color:rgb(144, 142, 142);
+                        padding: 15px 15px 15px 15px;
+                        float: left;
+                        font-weight: bold;
+                        font-size: 18px;"> Last access : <span id="date_time" style=" font-size: 18px;"></span>
+                    <script type="text/javascript"> window.onload = date_time('date_time');</script>
+                </div> -->
+                <!--หน้าถัดจากBrandner-->
+            </div>
+
+            <div class="col ">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
