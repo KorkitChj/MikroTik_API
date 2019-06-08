@@ -1,5 +1,5 @@
 <?php
-session_start();
+require('conn.php');
 ?>
 <?php
 if (!$_SESSION["cus_id"]) {
@@ -20,9 +20,6 @@ if (!$_SESSION["cus_id"]) {
     <title>Add Employee</title>
     <?php
     error_reporting(0);
-    require('../include/connect_db.php');
-    require('../config/routeros_api.class.php');
-    require('../template/template.html');
     $idc = $_SESSION['cus_id'];
     if ($result = $conn->query("SELECT * FROM siteadmin WHERE cus_id = '$idc'")) {
         $numrows = $result->num_rows;
@@ -45,7 +42,7 @@ if (!$_SESSION["cus_id"]) {
         $site = $_POST["site"];
         $id = $_POST['id'];
         if ($id) {
-            $sql1 = "UPDATE employee SET username='$username',pass_w='$password'
+            $sql1 = "UPDATE employee SET pass_w='$password'
         ,full_name='$name' WHERE emp_id = '$id'";
             if ($conn->query($sql1)) {
                 echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">บันทึกข้อมูลแล้ว</h5>";
@@ -55,13 +52,40 @@ if (!$_SESSION["cus_id"]) {
                 echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">ไม่สามารถแก้ไขข้อมูลได้กรุณาเปลี่ยน Username</h5>";
             }
         } else {
+            $idc = $_GET['cus_id'];
+            $location_id = $_GET['location_id'];
             $result = $conn->query("SELECT * FROM employee WHERE username = '$username'");
             if ($result->num_rows != 0) {
                 echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">ไม่สามารถเพิ่มข้อมูลได้กรุณาเปลี่ยน Username</h5>";
             } else {
+                $min = 1;
+                $max = 99999;
+                $pass_router = rand($min, $max);
+                $employee = "employee" . "$pass_router";
+                $group = "full";
                 $sql = "INSERT INTO  employee VALUES
-            ('','$username','$password','$name','$location_id')";
+            ('','$username','$password','$pass_router','$name','$location_id')";
                 if ($conn->query($sql)) {
+                    $sql = "SELECT * FROM location WHERE cus_id='" . $idc . "' AND location_id ='" . $location_id . "'";
+                    $result = mysqli_query($link, $sql) or die("Could not connect");
+                    $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $ip = $rows['ip_address'];
+                    $port = $rows['api_port'];
+                    $user = $rows['username'];
+                    $pass = $rows['password'];
+
+                    if ($API->connect($ip . ":" . $port, $user, $pass)) {
+                        $ARRAY = $API->comm("/user/add", array(
+                            "name" => $username,
+                            "password" => $pass_router,
+                            "comment" => $employee,
+                            "group" => $group,
+                        ));
+                    } else {
+                        echo "<script language='javascript'>alert('Disconnect')</script>";
+                        echo "<meta http-equiv='refresh' content='0;url=../siteadmin/connectstatus.php'/>";
+                        exit(0);
+                    }
                     echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">บันทึกข้อมูลแล้ว</h5>";
                     echo "<meta http-equiv='refresh' content='0;url=employeestatus.php?location_id=" . $location_id . "' />";
                     exit(0);
@@ -88,16 +112,16 @@ if (!$_SESSION["cus_id"]) {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <!-- <li class="nav-item ">
-                                    <a href="../siteadmin/connectstatus.php" class="nav-link ">
-                                        <span class="badge badge-primary"><i class="fa fa-home"></i></span>
-                                        หน้าหลัก</a>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a href="../siteadmin/addconnect.php" class="nav-link ">
-                                        <span class="badge badge-primary"><i class="fas fa-hotel"></i></span>
-                                        เพิ่มสถานบริการ</a>
-                                </li> -->
+                                        <a href="../siteadmin/connectstatus.php" class="nav-link ">
+                                            <span class="badge badge-primary"><i class="fa fa-home"></i></span>
+                                            หน้าหลัก</a>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="../siteadmin/addconnect.php" class="nav-link ">
+                                            <span class="badge badge-primary"><i class="fas fa-hotel"></i></span>
+                                            เพิ่มสถานบริการ</a>
+                                    </li> -->
                             <li class="nav-item dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <span class="badge badge-primary"><i class="fas fa-user"></i></span>
@@ -117,7 +141,7 @@ if (!$_SESSION["cus_id"]) {
                                     <?php echo "<a class=\"dropdown-item\" href=\"profilestatus.php?location_id=$location_id\">สถานะ Profile</a>" ?>
                                     <?php echo "<a class=\"dropdown-item\" href=\"addprofile.php?location_id=$location_id\">เพิ่ม Profile</a>" ?>
                                     <!-- <a href="profilestatus.php" class="dropdown-item">สถานะ Profile</a>
-                                        <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a> -->
+                                            <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a> -->
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -129,14 +153,14 @@ if (!$_SESSION["cus_id"]) {
                                     <?php echo "<a class=\"dropdown-item\" href=\"wallgardenstatus.php?location_id=$location_id\">สถานะ</a>" ?>
                                     <?php echo "<a class=\"dropdown-item\" href=\"addwallgarden.php?location_id=$location_id\">เพิ่ม</a>" ?>
                                     <!-- <a href="wallgardenstatus.php" class="dropdown-item ">สถานะ</a>
-                                        <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a> -->
+                                            <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a> -->
                                 </div>
                             </li>
                             <!-- <li class="nav-item">
-                                    <a href="../siteadmin/changpwsite.php" class="nav-link ">
-                                        <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
-                                        เปลี่ยนรหัสผ่าน</a>
-                                </li> -->
+                                        <a href="../siteadmin/changpwsite.php" class="nav-link ">
+                                            <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
+                                            เปลี่ยนรหัสผ่าน</a>
+                                    </li> -->
                             <li class="nav-item">
                                 <a href="../siteadmin/cus_logout.php" class="nav-link " onclick="return confirm('ยืนยันการออกจากระบบ')">
                                     <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
@@ -152,12 +176,12 @@ if (!$_SESSION["cus_id"]) {
 
     <div class="container-fluid">
         <!-- <div class="row">
-                                <div class="col d-flex justify-content-center">
-                                    <p>
-                                        <h3 style="font-weight:bold">เพิ่มพนักงานดูแล</h3>
-                                    </p>
-                                </div>
-                            </div> -->
+                                    <div class="col d-flex justify-content-center">
+                                        <p>
+                                            <h3 style="font-weight:bold">เพิ่มพนักงานดูแล</h3>
+                                        </p>
+                                    </div>
+                                </div> -->
         <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-info \"><a style=\"color:white\" href=\"employeestatus.php?location_id=$location_id\">รายการสถานะพนักงาน</a></button>" ?>;
         <div class="row ">
             <div class="col d-flex justify-content-center">
@@ -168,7 +192,7 @@ if (!$_SESSION["cus_id"]) {
                         $result = $conn->query($sql);
                         $rows = $result->fetch_array(MYSQLI_ASSOC);
                         echo "<div id=\"border-login\">";
-                        echo "<form action=\"#\" method=\"post\">";
+                        echo "<form action=\"\" method=\"post\">";
                         echo "<div class=\"form-group row\">";
                         echo "<label for=\"id\" class=\"col-sm-4 col-form-label\">ID: </label>";
                         echo "<div class=\"col-sm-8\">";
@@ -181,12 +205,12 @@ if (!$_SESSION["cus_id"]) {
                         echo "<input type=\"text\" class=\"form-control\" name=\"name\" value=\"{$rows['full_name']}\" required>";
                         echo "</div>";
                         echo "</div>";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"username\" class=\"col-sm-4 col-form-label\">Username:</label>";
-                        echo "<div class=\"col-sm-8\">";
-                        echo "<input type=\"text\" class=\"form-control\" name=\"username\" value=\"{$rows['username']}\" required>";
-                        echo "</div>";
-                        echo "</div>";
+                        // echo "<div class=\"form-group row\">";
+                        // echo "<label for=\"username\" class=\"col-sm-4 col-form-label\">Username:</label>";
+                        // echo "<div class=\"col-sm-8\">";
+                        // echo "<input type=\"text\" class=\"form-control\" name=\"username\" value=\"{$rows['username']}\" required>";
+                        // echo "</div>";
+                        // echo "</div>";
                         echo "<div class=\"form-group row\">";
                         echo "<label for=\"password\" class=\"col-sm-4 col-form-label\">Password:</label>";
                         echo "<div class=\"col-sm-8\">";
@@ -214,7 +238,7 @@ if (!$_SESSION["cus_id"]) {
                     }
                 } else {
                     echo "<div id=\"border-login\">";
-                    echo "<form action=\"#\" method=\"post\">";
+                    echo "<form action=\"addemployee.php?cus_id=$idc&location_id=$location_id\" method=\"post\">";
                     echo "<div class=\"form-group row\">";
                     echo "<label for=\"name\" class=\"col-sm-4 col-form-label\">Full Name: </label>";
                     echo "<div class=\"col-sm-8\">";
@@ -256,11 +280,11 @@ if (!$_SESSION["cus_id"]) {
         </div>
     </div>
     <!-- <script>
-                $(document).ready(function() {
-                    $('.dropdown-menu li').on('click', function() {
-                        var getValue = $(this).text();
-                        $('.dropdown-select').text(getValue);
+                    $(document).ready(function() {
+                        $('.dropdown-menu li').on('click', function() {
+                            var getValue = $(this).text();
+                            $('.dropdown-select').text(getValue);
+                        });
                     });
-                });
-            </script> -->
+                </script> -->
 <?php } ?>
