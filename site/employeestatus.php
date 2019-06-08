@@ -54,7 +54,6 @@ if (!$_SESSION["cus_id"]) {
     if (isset($_GET['del'])) {
         $ida = $_GET['del'];
         $idc = $_GET['cus_id'];
-        $ide = $_POST['emp_id'];
         $location_id = $_GET['location_id'];
         $sql2 = "SELECT pass_router FROM employee WHERE emp_id = '$ida'";
         if ($result2 = $conn->query($sql2)) {
