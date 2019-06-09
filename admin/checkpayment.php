@@ -13,13 +13,28 @@ if (!$_SESSION["admin_id"]) {
             float: left;
             font-weight: bold;
         }
+
+        .btn-danger,
+        .btn-success,
+        .btn-warning {
+            background-color: white;
+            color: black;
+        }
+
+        .bg-info {
+            background: #bdc3c7;
+            background: linear-gradient(to bottom,#bdc3c7,#2c3e50);
+            background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
+        }
+        th{
+            color:darkblue;
+        }
     </style>
     <?php
     if (isset($_POST['cus_id'])) {
         $id = implode(", ", $_POST['cus_id']);
         $conn->query("DELETE FROM siteadmin WHERE cus_id IN($id)");
     }
-
 
     ?>
     <title>Check Payment</title>
@@ -69,25 +84,25 @@ if (!$_SESSION["admin_id"]) {
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <!-- <div class="row ">
-            <div class="col d-flex justify-content-center ">
-                หน้าถัดจากBrandner
-                <p>
-                    <h3 style="font-weight:bold ;margin-top:1em;color:white">การตรวจสอบการชำระเงิน</h3>
-                </p>
-            </div>
-        </div> -->
+                        <div class="col d-flex justify-content-center ">
+                            หน้าถัดจากBrandner
+                            <p>
+                                <h3 style="font-weight:bold ;margin-top:1em;color:white">การตรวจสอบการชำระเงิน</h3>
+                            </p>
+                        </div>
+                    </div> -->
         <div class="row ">
             <div class="col">
                 <form action="#" method="post" id="confirm">
                     <button class="btn btn-danger" style="margin:1em 1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
-                    <table id="example" class="table table-striped table-hover table-bordered table-dark table-sm" style="width:100%">
-                        <thead class="bg-danger">
+                    <table id="example" class="table table-striped table-hover table-bordered table-sm" style="width:100%">
+                        <thead class="bg-info">
                             <!-- <tr>
-                                    <td><span class="rows_selected" id="select_count">0 Selected </span>
-                                        <button type="button" id="delete_records" class="btn btn-danger pull-right">Delete</button></td>
-                                </tr> <input type="checkbox" id="select_all">-->
+                                                <td><span class="rows_selected" id="select_count">0 Selected </span>
+                                                    <button type="button" id="delete_records" class="btn btn-danger pull-right">Delete</button></td>
+                                            </tr> <input type="checkbox" id="select_all">-->
                             <tr>
                                 <th></th>
                                 <th>เจ้าของไซต์</th>

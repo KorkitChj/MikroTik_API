@@ -58,16 +58,16 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                         $target = "slips/$name";
                         $newname = $name;
                         if (file_exists($target)) {
-                            $oldname = pathinfo($name,PATHINFO_FILENAME);
-                            $ext = pathinfo($name,PATHINFO_EXTENSION);
+                            $oldname = pathinfo($name, PATHINFO_FILENAME);
+                            $ext = pathinfo($name, PATHINFO_EXTENSION);
                             $newname = $oldname;
                             do {
                                 $r = rand(1000, 9999);
-                                $newname = $oldname."-".$r.".$ext";
+                                $newname = $oldname . "-" . $r . ".$ext";
                                 $target = "slips/$newname";
                             } while (file_exists($target));
                         }
-                        move_uploaded_file($_FILES['file']['tmp_name'],$target);
+                        move_uploaded_file($_FILES['file']['tmp_name'], $target);
                         $id = "";
                         while ($row = $ar->fetch_array(MYSQLI_ASSOC)) {
                             $id = $row['cus_id'];
@@ -96,23 +96,27 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
 <style>
     html {
         height: 100%;
+        border-top: red 0.25em solid;
     }
 
     body {
-        background-image: url('img/marble.jpg');
+        /* background-image: url('img/marble.jpg'); */
         background-repeat: no-repeat;
         background-size: cover;
+        background: rgb(255, 255, 255);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(227, 227, 227, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(175, 238, 255, 1) 100%);
     }
 
     #border-login {
         /* background: #e3e3e3; */
-        background: url('img/3.jpg');
-        background-color: rgba(255, 0, 0, 0.4);
+        /* background: url('img/3.jpg');
+        background-color: rgba(255, 0, 0, 0.4); */
+        background: white;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 1.5em;
         border-radius: 5px;
-        box-shadow: 0px 0px 8px 4px rgb(0, 0, 0);
+        /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
         margin: 2em 2em;
     }
 
@@ -121,11 +125,24 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
         font-weight: bold;
     }
 
-    .ax {
+    /* .ax {
         border-bottom: red 0.5em solid;
+    } */
+    p {
+        color:red;
+        font-weight: bold;
+        font-size:2em;
+    }
+
+    p:hover {
+        color:black;
+    }
+    .btn-danger,.btn-primary,.btn-warning{
+        background-color:white;
+        color:black;
     }
 </style>
-<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -144,10 +161,10 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                 <a href="payment.php" class="nav-link z"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i></span>
                     สั่งซื้อ</a>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                                             <a href="register.php" class="nav-link z"><span class="badge badge-warning"><i class="fas fa-registered"></i></span>
                                             สมัครสมาชิก</a>
-                                        </li> -->
+                                        </li>
             <li class="nav-item active">
                 <a href="#" class="nav-link active z"><span class="badge badge-danger"><i class="fas fa-clipboard-check"></i></span>
                     แจ้งโอนเงิน</a>
@@ -158,11 +175,12 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 <div class="container-fluid">
     <div class="row">
         <div class="col d-flex justify-content-center">
             <div id="border-login">
+                <p align="center">แจ้งโอนเงิน</p>
                 <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
                     <div class="form-group row">
                         <label for="inputusername" class="col-sm-1 col-form-label"><i class="far fa-user"></i></label>

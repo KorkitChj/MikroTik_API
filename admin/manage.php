@@ -8,26 +8,30 @@ if (!$_SESSION["admin_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <style>
-        /* .rows_selected {
-            margin-top: 7px;
-            float: left;
-            font-weight: bold;
-        } */
-        /* .container-fluid{
-            margin-top: 7px;
-        } */
-        /* .a{
-            margin-top: 5em;
-            margin-bottom: 5em;
-        } */
+        .btn-danger,
+        .btn-success,
+        .btn-warning {
+            background-color: white;
+            color: black;
+        }
+
+        .bg-info {
+            background: #bdc3c7;
+            background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
+            background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
+        }
+
+        th {
+            color: darkblue;
+        }
     </style>
-        <?php
-    if(isset($_POST['cus_id'])){
-        $id = implode(", ",$_POST['cus_id']);
+    <?php
+    if (isset($_POST['cus_id'])) {
+        $id = implode(", ", $_POST['cus_id']);
         $conn->query("DELETE FROM siteadmin WHERE cus_id IN($id)");
     }
-    
-    
+
+
     ?>
     <title>Manage</title>
     <div class="container-fluid">
@@ -76,21 +80,21 @@ if (!$_SESSION["admin_id"]) {
         </div>
     </div>
 
-    <div class="container-fluid a">
+    <div class="container">
         <!-- <div class="row ">
-            <div class="col d-flex justify-content-center ">
-                หน้าถัดจากBrandner
-                <p>
-                    <h3 style="font-weight:bold ;margin-top:1em; color:white">ข้อมูลสถานบริการอินเตอร์เน็ต</h3>
-                </p>
-            </div>
-        </div> -->
+                <div class="col d-flex justify-content-center ">
+                    หน้าถัดจากBrandner
+                    <p>
+                        <h3 style="font-weight:bold ;margin-top:1em; color:white">ข้อมูลสถานบริการอินเตอร์เน็ต</h3>
+                    </p>
+                </div>
+            </div> -->
         <div class="row ">
             <div class="col">
                 <form action="#" method="post">
-                <button class="btn btn-danger" style="margin:1em 1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
-                    <table id="example" class="table table-striped table-hover table-bordered table-dark table-sm" style="width:100%">
-                        <thead class="bg-danger"> 
+                    <button class="btn btn-danger" style="margin:1em 1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
+                    <table id="example" class="table table-striped table-hover table-bordered table-sm" style="width:100%">
+                        <thead class="bg-info">
                             <tr>
                                 <th></th>
                                 <th>เจ้าของไซต์</th>
@@ -100,7 +104,7 @@ if (!$_SESSION["admin_id"]) {
                                 <th>วันหมดอายุ</th>
                                 <th>สถานะ</th>
                                 <th>ลบ</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -125,10 +129,10 @@ if (!$_SESSION["admin_id"]) {
                                 if ($row["paid"] == 1) {
                                     $status = "ชำระเงินแล้ว";
                                 }
-                                
+
                                 ?>
                                 <tr>
-                                    <td><input type="checkbox" class="cus_checkbox"  name="cus_id[]" value="<?php echo $row["cus_id"]; ?>"></td>
+                                    <td><input type="checkbox" class="cus_checkbox" name="cus_id[]" value="<?php echo $row["cus_id"]; ?>"></td>
                                     <td><?php echo $row["username"]; ?></td>
                                     <td><?php echo $row["site_name"]; ?></td>
                                     <td><?php echo $row["total_cash"]; ?></td>
@@ -138,24 +142,24 @@ if (!$_SESSION["admin_id"]) {
                                     <td><?php echo "<a href=\"JavaScript:if(confirm('Confirm Delete?') == true)
                                     {window.location='delete.php?id={$row['cus_id']}';}\"<button type=\"button\" id=\delete\" class=\"update btn btn-danger btn-sm\">
                                             <span class=\"glyphicon glyphicon-trash\"></span></button></a>"; ?>
-                                    </td> 
+                                    </td>
                                     <!-- <td><button type="button" id="trach" class="trach btn btn-danger btn-sm">
-                                    <a href="JavaScript:if(confirm('Confirm Delete?') == true)
-                                    {window.location='delete.php?cusid=
-                                        <?php echo $row["cus_id"];?>';}"><span style="color:white" class="glyphicon glyphicon-trash"></span></a></button>
-                                    </td> -->
-                                    
+                                            <a href="JavaScript:if(confirm('Confirm Delete?') == true)
+                                            {window.location='delete.php?cusid=
+                                                <?php echo $row["cus_id"]; ?>';}"><span style="color:white" class="glyphicon glyphicon-trash"></span></a></button>
+                                            </td> -->
+
                                 </tr>
                             <?php } ?>
                         </tbody>
                     </table>
                     <tr>
                         <!-- <div class="row">
-                            <div class="col ">
-                                <span class="rows_selected" id="select_count">0 Selected </span>
-                                <button type="button" id="delete_records" class="btn btn-danger pull-right"> Delete</button>
-                            </div>
-                        </div> -->
+                                <div class="col ">
+                                    <span class="rows_selected" id="select_count">0 Selected </span>
+                                    <button type="button" id="delete_records" class="btn btn-danger pull-right"> Delete</button>
+                                </div>
+                            </div> -->
                     </tr>
                 </form>
             </div>

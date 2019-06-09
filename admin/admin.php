@@ -12,11 +12,21 @@ if (!$_SESSION["admin_id"]) {
     //  FROM siteadmin AS a LEFT JOIN orderpd AS b ON
     //  a.cus_id = b.cus_id LEFT JOIN payment AS c ON
     //  b.order_id = c.order_id WHERE c.paid = 0");
-        //$result = $conn->query("SELECT*FROM siteadmin");
+    //$result = $conn->query("SELECT*FROM siteadmin");
     $result = $conn->query("SELECT*FROM siteadmin");
     //$result = $conn->query("SELECT*FROM siteadmin AS a  WHERE a.cus_id  NOT IN (SELECT cus_id FROM orderpd)");
     ?>
     <title>Admin</title>
+    <style>
+        .bg-info {
+            background: #bdc3c7;
+            background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
+            background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
+        }
+        th {
+            color: darkblue;
+        }
+    </style>
     <div class="container-fluid">
         <div class="row">
             <div class="col ">
@@ -25,7 +35,7 @@ if (!$_SESSION["admin_id"]) {
         <div class="row">
             <div class="col ">
                 <nav class="navbar fixed-top navbar-icon-top navbar-expand-lg navbar-dark bg-danger">
-                    <a class="navbar-brand" href="#"><span style="color:#ff6600">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["admin_name"]); ?></a>
+                    <a class="navbar-brand" href="#"><span style="color:red">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["admin_name"]); ?></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -63,20 +73,20 @@ if (!$_SESSION["admin_id"]) {
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row ">
             <div class="col d-flex justify-content-center ">
                 <!--หน้าถัดจากBrandner-->
                 <p>
-                    <h3 style="font-weight:bold ;margin-top:1em;color:white">ข้อมูลสถานบริการอินเตอร์เน็ต</h3>
+                    <h3 style="font-weight:bold ;margin-top:1em;color:red">ข้อมูลสถานบริการอินเตอร์เน็ต</h3>
                 </p>
             </div>
         </div>
         <div class="row ">
             <div class="col">
                 <form action="admin.php" method="post">
-                    <table id="example" class="table table-striped table-hover table-bordered table-dark table-sm" style="width:100%">
-                        <thead class="bg-danger">
+                    <table id="example" class="table table-striped table-hover table-bordered  table-sm" style="width:100%">
+                        <thead class="bg-info">
                             <tr>
                                 <th>ID</th>
                                 <th>เจ้าของไซต์</th>
@@ -89,7 +99,7 @@ if (!$_SESSION["admin_id"]) {
                         </thead>
                         <tbody>
 
-                            <?php while ($row = $result->fetch_array(MYSQLI_ASSOC)) {?>
+                            <?php while ($row = $result->fetch_array(MYSQLI_ASSOC)) { ?>
                                 <tr>
                                     <td><?php echo $row["cus_id"]; ?></td>
                                     <td><?php echo $row["username"]; ?></td>
@@ -97,10 +107,10 @@ if (!$_SESSION["admin_id"]) {
                                     <td><?php echo $row["work_phone"]; ?></td>
                                     <td><?php echo $row["e_mail"]; ?></td>
                                     <!-- <td><button type="button" id="trach" class="trach btn btn-danger btn-sm">
-                                    <a href="JavaScript:if(confirm('Confirm Delete?') == true)
-                                    {window.location='delete.php?cusid=
-                                        <?php echo $row["cus_id"];?>';}"><span style="color:white" class="glyphicon glyphicon-trash"></span></a></button>
-                                    </td> -->
+                                            <a href="JavaScript:if(confirm('Confirm Delete?') == true)
+                                            {window.location='delete.php?cusid=
+                                                <?php echo $row["cus_id"]; ?>';}"><span style="color:white" class="glyphicon glyphicon-trash"></span></a></button>
+                                            </td> -->
                                 </tr>
                             <?php } ?>
                         </tbody>

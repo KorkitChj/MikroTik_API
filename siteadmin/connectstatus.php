@@ -31,10 +31,24 @@ if (!$_SESSION["cus_id"]) {
 
     ?>
     <style>
-        /* .container-fluid {
-            padding-bottom: 1em;
-            border-bottom: none;
-        } */
+        .btn-danger,
+        .btn-success,
+        .btn-warning,
+        .btn-info,
+        .btn-primary {
+            background-color: white;
+            color: black;
+        }
+
+        .bg-info {
+            background: #bdc3c7;
+            background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
+            background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
+        }
+
+        th {
+            color: darkblue;
+        }
     </style>
     <title>Connect Status</title>
     <div class="container-fluid">
@@ -63,35 +77,35 @@ if (!$_SESSION["cus_id"]) {
                                     เพิ่มสถานบริการ</a>
                             </li>
                             <!-- <li class="nav-item dropdown">
-                                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                    <span class="badge badge-primary"><i class="fas fa-user"></i></span>
-                                                                                    พนักงานดูแล
-                                                                                </a>
-                                                                                <div class="dropdown-menu">
-                                                                                    <a href="employeestatus.php" class="dropdown-item">สถานะพนักงาน</a>
-                                                                                    <a href="addemployee.php" class="dropdown-item">เพิ่มพนักงาน</a>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="nav-item dropdown">
-                                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                    <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
-                                                                                    Hotspot
-                                                                                </a>
-                                                                                <div class="dropdown-menu">
-                                                                                    <a href="profilestatus.php" class="dropdown-item">สถานะ Profile</a>
-                                                                                    <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="nav-item dropdown">
-                                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                    <span class="badge badge-primary"><i class="fas fa-unlock"></i></span>
-                                                                                    ตั้งค่าเว็บไม่ต้อง Login
-                                                                                </a>
-                                                                                <div class="dropdown-menu">
-                                                                                    <a href="wallgardenstatus.php" class="dropdown-item ">สถานะ</a>
-                                                                                    <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a>
-                                                                                </div>
-                                                                            </li> -->
+                                                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                                                                        <span class="badge badge-primary"><i class="fas fa-user"></i></span>
+                                                                                        พนักงานดูแล
+                                                                                    </a>
+                                                                                    <div class="dropdown-menu">
+                                                                                        <a href="employeestatus.php" class="dropdown-item">สถานะพนักงาน</a>
+                                                                                        <a href="addemployee.php" class="dropdown-item">เพิ่มพนักงาน</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li class="nav-item dropdown">
+                                                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                                                                        <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
+                                                                                        Hotspot
+                                                                                    </a>
+                                                                                    <div class="dropdown-menu">
+                                                                                        <a href="profilestatus.php" class="dropdown-item">สถานะ Profile</a>
+                                                                                        <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li class="nav-item dropdown">
+                                                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                                                                        <span class="badge badge-primary"><i class="fas fa-unlock"></i></span>
+                                                                                        ตั้งค่าเว็บไม่ต้อง Login
+                                                                                    </a>
+                                                                                    <div class="dropdown-menu">
+                                                                                        <a href="wallgardenstatus.php" class="dropdown-item ">สถานะ</a>
+                                                                                        <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a>
+                                                                                    </div>
+                                                                                </li> -->
                             <li class="nav-item">
                                 <a href="changpwsite.php" class="nav-link ">
                                     <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
@@ -109,25 +123,24 @@ if (!$_SESSION["cus_id"]) {
         </div>
     </div>
     </div>
-
-    <div class="container-fluid">
+    <div class="container">
         <!-- <div class="row ">
-                                                <div class="col d-flex justify-content-center">
-                                                    หน้าถัดจากBrandner
-                                                    <p>
-                                                        <h3 style="font-weight:bold; color:white;margin-top:1em">รายการสถานบริการ</h3>
-                                                    </p>
-                                                </div>
-                                            </div> -->
+                                                    <div class="col d-flex justify-content-center">
+                                                        หน้าถัดจากBrandner
+                                                        <p>
+                                                            <h3 style="font-weight:bold; color:white;margin-top:1em">รายการสถานบริการ</h3>
+                                                        </p>
+                                                    </div>
+                                                </div> -->
 
         <div class="row " style="padding-bottom:15%">
             <div class="col">
                 <form action="#" method="post" id="confirm">
-                    <button type="button" style="margin:1em 1em" class="btn btn-primary "><a style="color:white" href="addconnect.php">เพิ่มสถานบริการ</a></button>   
+                    <button type="button" style="margin:1em 1em" class="btn btn-primary "><a style="color:black;text-decoration:none" href="addconnect.php">เพิ่มสถานบริการ</a></button>
                     <button class="btn btn-danger" style="margin-right:1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
                     <a href="connectstatus.php"><img src="../img/refresh.png" width="20" title="Refresh"></a>
-                    <table id="example" class="table table-striped table-bordered table-hover table-dark table-sm" style="width:100%">
-                        <thead class="bg-danger">
+                    <table id="example" class="table table-striped table-bordered table-hover table-sm" style="width:100%">
+                        <thead class="bg-info">
                             <tr>
                                 <!-- <th><input type="checkbox" id="select_all"></th> -->
                                 <th></th>
@@ -217,9 +230,9 @@ if (!$_SESSION["cus_id"]) {
                     </table>
                 </form>
                 <!-- <tr>
-                                                                                    <span class="rows_selected" id="select_count">0 Selected </span>
-                                                                                    <button type="button" id="delete_records" class="btn btn-danger pull-right">Delete</button>
-                                                                                </tr> -->
+                                                                                        <span class="rows_selected" id="select_count">0 Selected </span>
+                                                                                        <button type="button" id="delete_records" class="btn btn-danger pull-right">Delete</button>
+                                                                                    </tr> -->
             </div>
         </div>
         <div id="edit" class="modal fade" role="dialog">

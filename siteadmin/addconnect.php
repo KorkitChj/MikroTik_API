@@ -64,17 +64,23 @@ if (!$_SESSION["cus_id"]) {
     <style>
         #border-login {
             /* background: #e3e3e3; */
-            background: url('../img/3.jpg');
-            background-color: rgba(255, 0, 0, 0.4);
+            /* background: url('../img/3.jpg');
+            background-color: rgba(255, 0, 0, 0.4); */
+            background:honeydew;
             background-repeat: no-repeat;
             background-size: cover;
             padding: 1.5em;
             border-radius: 5px;
-            box-shadow: 0px 0px 8px 4px rgb(0, 0, 0);
+            /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
             margin-bottom: 2em;
         }
-        .container-fluid {
-            /* padding-bottom: 1.5em; */
+        .btn-danger,
+        .btn-primary {
+            background-color: white;
+            color: black;
+        }
+        .container{
+            margin-bottom: -30em;
         }
     </style>
     <title>Add Connect</title>
@@ -150,7 +156,7 @@ if (!$_SESSION["cus_id"]) {
         </div>
     </div>
     </div>
-    <div class="container-fluid">
+    <div class="container">
         <!-- <div class="row">
                                                                                 <div class="col d-flex justify-content-center">
                                                                                     <p>
@@ -158,7 +164,7 @@ if (!$_SESSION["cus_id"]) {
                                                                                     </p>
                                                                                 </div>
                                                                             </div> -->
-        <button type="button" style="margin:1em 1em" class="btn btn-danger "><a style="color:white" href="connectstatus.php">รายการสถานะการเชื่อมต่อ</a></button>
+        <button type="button" style="margin:1em 1em" class="btn btn-danger "><a style="color:black;text-decoration:none" href="connectstatus.php">รายการสถานะการเชื่อมต่อ</a></button>
         <div class="row">
             <?php
             if (isset($_GET['action'])) {
@@ -171,45 +177,45 @@ if (!$_SESSION["cus_id"]) {
                     echo "<div id=\"border-login\">";
                     echo "<form action=\"\" id=\"site\" method=\"post\">";
                     echo "<div class=\"form-group row\">";
-                    echo "<label for=\"idl\" class=\"col-sm-4 col-form-label\">Location ID:&nbsp;</label>";
-                    echo "<div class=\"col-sm-8\">";
+                    echo "<label for=\"idl\" class=\"col-sm-3 col-form-label\">Location ID:&nbsp;</label>";
+                    echo "<div class=\"col-sm-9\">";
                     echo "<input type=\"text\" class=\"form-control\" name=\"idl\" value=\"{$row['location_id']}\" readonly required>";
                     echo "</div>";
                     echo "</div>";
                     echo "<div class=\"form-group row\">";
-                    echo "<label for=\"ipaddress\" class=\"col-sm-4 col-form-label\">IP:&nbsp; <i class=\"fas fa-server\"></i></label>";
-                    echo "<div class=\"col-sm-8\">";
+                    echo "<label for=\"ipaddress\" class=\"col-sm-3 col-form-label\">IP:</label>";
+                    echo "<div class=\"col-sm-9\">";
                     echo "<input type=\"text\" class=\"form-control\" name=\"ipaddress\" placeholder=\"ไอพี หรือ โดเมนเนม\" value=\"{$row['ip_address']}\" required>";
                     echo "</div>";
                     echo "</div>";
                     echo "<div class=\"form-group row\">";
-                    echo "<label for=\"username\" class=\"col-sm-4 col-form-label\">Username:&nbsp; <i class=\"fas fa-user\"></i></label>";
-                    echo "<div class=\"col-sm-8\">";
+                    echo "<label for=\"username\" class=\"col-sm-3 col-form-label\">Username:</label>";
+                    echo "<div class=\"col-sm-9\">";
                     echo "<input type=\"text\" class=\"form-control\" name=\"username\" placeholder=\"ชื่อใช้งาน\" value=\"{$row['username']}\" required>";
                     echo "</div>";
                     echo "</div>";
                     echo "<div class=\"form-group row\">";
-                    echo "<label for=\"password\" class=\"col-sm-4 col-form-label\">Password:&nbsp;<i class=\"fas fa-key\"></i></label>";
-                    echo "<div class=\"col-sm-8\">";
+                    echo "<label for=\"password\" class=\"col-sm-3 col-form-label\">Password:</label>";
+                    echo "<div class=\"col-sm-9\">";
                     echo "<input type=\"password\" class=\"form-control\" name=\"password\" placeholder=\"รหัสผ่าน\" value=\"{$row['password']}\" required>";
                     echo "</div>";
                     echo "</div>";
                     echo "<div class=\"form-group row\">";
-                    echo "<label for=\"portapi\" class=\"col-sm-4 col-form-label\">API Port:</label>";
-                    echo "<div class=\"col-sm-8\">";
+                    echo "<label for=\"portapi\" class=\"col-sm-3 col-form-label\">API Port:</label>";
+                    echo "<div class=\"col-sm-9\">";
                     echo "<input type=\"text\" class=\"form-control\" name=\"portapi\" placeholder=\"พอร์ตเอพีไอ\" value=\"{$row['api_port']}\" required>";
                     echo "</div>";
                     echo "</div>";
                     echo "<div class=\"form-group row\">";
-                    echo "<label for=\"namesite\" class=\"col-sm-4 col-form-label\">Site Name:</label>";
-                    echo "<div class=\"col-sm-8\">";
+                    echo "<label for=\"namesite\" class=\"col-sm-3 col-form-label\">Site Name:</label>";
+                    echo "<div class=\"col-sm-9\">";
                     echo "<input type=\"text\" class=\"form-control\" name=\"namesite\" placeholder=\"ชื่อไซต์งาน\" value=\"{$row['working_site']}\" required>";
                     echo "</div>";
                     echo "</div>";
                     echo "<div class=\"form-group row\">";
-                    echo "<label for=\"b\" class=\"col-sm-4 col-form-label\"></label>";
-                    echo "<div class=\"col-sm-8\">";
-                    echo "<button type=\"submit\" name=\"connect\" class=\"btn btn-primary\">บันทึก</button>";
+                    echo "<label for=\"b\" class=\"col-sm-3 col-form-label\"></label>";
+                    echo "<div class=\"col-sm-9\">";
+                    echo "<button type=\"submit\" name=\"connect\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
                     echo "<button type=\"bottom\" class=\"btn btn-danger\" onClick=\"history.go(-1); return false;\">ยกเลิก</button>";
                     echo "</div>";
                     echo "</div>";
@@ -222,39 +228,39 @@ if (!$_SESSION["cus_id"]) {
                 echo "<div id=\"border-login\">";
                 echo "<form action=\"\" id=\"site\" method=\"post\">";
                 echo "<div class=\"form-group row\">";
-                echo "<label for=\"ipaddress\" class=\"col-sm-4 col-form-label\">IP:&nbsp; <i class=\"fas fa-server\"></i></label>";
-                echo "<div class=\"col-sm-8\">";
+                echo "<label for=\"ipaddress\" class=\"col-sm-3 col-form-label\">IP:</label>";
+                echo "<div class=\"col-sm-9\">";
                 echo "<input type=\"text\" class=\"form-control\" name=\"ipaddress\" placeholder=\"ไอพี หรือ โดเมนเนม\" required>";
                 echo "</div>";
                 echo "</div>";
                 echo "<div class=\"form-group row\">";
-                echo "<label for=\"username\" class=\"col-sm-4 col-form-label\">Username:&nbsp; <i class=\"fas fa-user\"></i></label>";
-                echo "<div class=\"col-sm-8\">";
+                echo "<label for=\"username\" class=\"col-sm-3 col-form-label\">Username:</label>";
+                echo "<div class=\"col-sm-9\">";
                 echo "<input type=\"text\" class=\"form-control\" name=\"username\" placeholder=\"ชื่อใช้งาน\" required>";
                 echo "</div>";
                 echo "</div>";
                 echo "<div class=\"form-group row\">";
-                echo "<label for=\"password\" class=\"col-sm-4 col-form-label\">Password:&nbsp;<i class=\"fas fa-key\"></i></label>";
-                echo "<div class=\"col-sm-8\">";
+                echo "<label for=\"password\" class=\"col-sm-3 col-form-label\">Password:</label>";
+                echo "<div class=\"col-sm-9\">";
                 echo "<input type=\"password\" class=\"form-control\" name=\"password\" placeholder=\"รหัสผ่าน\" required>";
                 echo "</div>";
                 echo "</div>";
                 echo "<div class=\"form-group row\">";
-                echo "<label for=\"portapi\" class=\"col-sm-4 col-form-label\">API Port:</label>";
-                echo "<div class=\"col-sm-8\">";
+                echo "<label for=\"portapi\" class=\"col-sm-3 col-form-label\">API Port:</label>";
+                echo "<div class=\"col-sm-9\">";
                 echo "<input type=\"text\" class=\"form-control\" name=\"portapi\" placeholder=\"พอร์ตเอพีไอ\" required>";
                 echo "</div>";
                 echo "</div>";
                 echo "<div class=\"form-group row\">";
-                echo "<label for=\"namesite\" class=\"col-sm-4 col-form-label\">Site Name:</label>";
-                echo "<div class=\"col-sm-8\">";
+                echo "<label for=\"namesite\" class=\"col-sm-3 col-form-label\">Site Name:</label>";
+                echo "<div class=\"col-sm-9\">";
                 echo "<input type=\"text\" class=\"form-control\" name=\"namesite\" placeholder=\"ชื่อไซต์งาน\" required>";
                 echo "</div>";
                 echo "</div>";
                 echo "<div class=\"form-group row\">";
-                echo "<label for=\"b\" class=\"col-sm-4 col-form-label\"></label>";
-                echo "<div class=\"col-sm-8\">";
-                echo "<button type=\"submit\" name=\"connect\" class=\"btn btn-primary\">บันทึก</button>";
+                echo "<label for=\"b\" class=\"col-sm-3 col-form-label\"></label>";
+                echo "<div class=\"col-sm-9\">";
+                echo "<button type=\"submit\" name=\"connect\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
                 echo "<button type=\"bottom\" class=\"btn btn-danger\" onClick=\"history.go(-1); return false;\">ยกเลิก</button>";
                 echo "</div>";
                 echo "</div>";

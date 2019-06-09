@@ -18,11 +18,11 @@ if (!$_SESSION["order"]) {
         /* background-image: linear-gradient(to top, #99CC66 0%, #FFFFCC 100%); */
         margin-top: 1em;
         margin-bottom: 4em;
-        background-image: url('img/marble.jpg');
+        /* background-image: url('img/marble.jpg'); */
         background-repeat: no-repeat;
         background-size: cover;
-        /* background: rgb(255,255,255);
-        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(227,227,227,1) 100%, rgba(186,186,186,1) 100%, rgba(181,181,181,1) 100%, rgba(175,238,255,1) 100%); */
+        background: rgb(255,255,255);
+        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(227,227,227,1) 100%, rgba(186,186,186,1) 100%, rgba(181,181,181,1) 100%, rgba(175,238,255,1) 100%);
     }
 
     .container-fluid {
@@ -32,13 +32,27 @@ if (!$_SESSION["order"]) {
 
     #border-login {
         /* background: #e3e3e3; */
-        background: url('img/3.jpg');
-        background-color: rgba(255, 0, 0, 0.4);
+        /* background: url('img/3.jpg');
+        background-color: rgba(255, 0, 0, 0.4); */
+        background:white;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 1.5em;
         border-radius: 5px;
-        box-shadow: 0px 0px 8px 4px rgb(0, 0, 0);
+        /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
+    }
+    p {
+        color:red;
+        font-weight: bold;
+        font-size:2em;
+    }
+
+    p:hover {
+        color:black;
+    }
+    .btn-danger,.btn-primary,.btn-warning{
+        background-color:white;
+        color:black;
     }
 </style>
 <!-- <div class="container-fluid">
@@ -93,7 +107,7 @@ if (!$_SESSION["order"]) {
                     <form action="s_register.php" method="post">
                         <div class="col d-flex justify-content-center">
                             <p>
-                                <h3 style="font-weight:bold">สมัครสมาชิก</h3>
+                                สมัครสมาชิก
                             </p>
                         </div>
                         <div class="form-group row">
@@ -159,7 +173,7 @@ if (!$_SESSION["order"]) {
                             </div>
                         </div>
                         <div class="col d-flex justify-content-center">
-                            <p style="color:red"><b>***คุณจะต้องลงทะเบียนก่อนทำการสั่งซื้อสินค้า***</b></p>
+                            <b>***คุณจะต้องลงทะเบียนก่อนทำการสั่งซื้อสินค้า***</b>
                         </div>
                     </form>
                 </div>
