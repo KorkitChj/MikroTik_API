@@ -45,7 +45,7 @@ if (isset($_POST['username'])) {
                                 INNER JOIN orderpd AS b ON
                                 a.cus_id = b.cus_id 
                                 INNER JOIN payment AS c ON b.order_id = c.order_id
-                                 WHERE username = '$username' AND paid = 1")) {
+                                 WHERE username = '$username' AND pass_w = '$password' AND paid = 1")) {
                                     if ($sitepayment->num_rows != 1) {
                                         echo "<script>";
                                         echo "alert(\"กรุณารอการยืนยันการชำระเงินจากAdmin หรือคุณยังไม่ยืนยันชำระเงิน\");";

@@ -36,15 +36,22 @@ if (!$_SESSION["cus_id"]) {
     }
     ?>
     <style>
-        #border-login {
-            background: url('../img/3.jpg');
-            background-color: rgba(255, 0, 0, 0.4);
+            #border-login {
+            background:honeydew;
             background-repeat: no-repeat;
             background-size: cover;
             padding: 1.5em;
             border-radius: 5px;
-            box-shadow: 0px 0px 8px 4px rgb(0, 0, 0);
-            margin-bottom: 3em;
+            margin-top: 0.5em;
+            margin-bottom: 1em;
+            border:brown solid 1px;
+        }
+        .btn-danger,
+        .btn-primary,
+        .btn-info,
+        .btn-warning {
+            background-color: white;
+            color: black;
         }
     </style>
     <title>Add Wall Garden</title>
@@ -124,7 +131,7 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container">
         <!-- <div class="row ">
                                                     <div class="col d-flex justify-content-center">
                                                         หน้าถัดจากBrandner
@@ -133,7 +140,7 @@ if (!$_SESSION["cus_id"]) {
                                                         </p>
                                                     </div>
                                                 </div> -->
-        <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-primary \"><a style=\"color:white\" href=\"wallgardenstatus.php?location_id=$location_id\">รายการ Wall Garden</a></button>"; ?>
+        <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-primary \"><a style=\"color:black;text-decoration:none\" href=\"wallgardenstatus.php?location_id=$location_id\">รายการ Wall Garden</a></button>"; ?>
         <div class="row ">
             <div class="col d-flex justify-content-center">
                 <?php
@@ -179,7 +186,7 @@ if (!$_SESSION["cus_id"]) {
                         echo "<div class=\"form-group row\">";
                         echo "<label for=\"bk\" class=\"col-sm-4 col-form-label\"></label>";
                         echo "<div class=\" col-sm-8\">";
-                        echo "<button type=\"submit\" name=\"sm\" class=\"btn btn-primary\">บันทึก</button>";
+                        echo "<button type=\"submit\" name=\"sm\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
                         echo "<a href=\"javascript:history.go(-1)\" class=\"btn btn-danger\">ยกเลิก</a>";
                         echo "</div>";
                         echo "</div>";
@@ -214,7 +221,7 @@ if (!$_SESSION["cus_id"]) {
                     echo "<div class=\"form-group row\">";
                     echo "<label for=\"bk\" class=\"col-sm-4 col-form-label\"></label>";
                     echo "<div class=\" col-sm-8\">";
-                    echo "<button type=\"submit\" name=\"sm\" class=\"btn btn-primary\">บันทึก</button>";
+                    echo "<button type=\"submit\" name=\"sm\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
                     echo "<a href=\"javascript:history.go(-1)\" class=\"btn btn-danger\">ยกเลิก</a>";
                     echo "</div>";
                     echo "</div>";

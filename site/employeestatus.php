@@ -75,12 +75,24 @@ if (!$_SESSION["cus_id"]) {
         exit(0);
     }
     ?>
-    <!-- <style>
-                                            .container {
-                                                background-color: white;
-                                                padding: 20px;
-                                            }
-                                        </style> -->
+    <style>
+        .btn-danger,
+        .btn-success,
+        .btn-warning,
+        .btn-info {
+            background-color: white;
+            color: black;
+        }
+
+        .bg-info {
+            background: #bdc3c7;
+            background: linear-gradient(to bottom,#bdc3c7,#2c3e50);
+            background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
+        }
+        th{
+            color:darkblue;
+        }
+    </style>
     <title>Employee Status</title>
     <div class="container-fluid">
         <div class="row">
@@ -159,7 +171,7 @@ if (!$_SESSION["cus_id"]) {
     </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <!-- <div class="row ">
                                                 <div class="col d-flex justify-content-center">
                                                     หน้าถัดจากBrandner
@@ -171,10 +183,10 @@ if (!$_SESSION["cus_id"]) {
         <div class="row ">
             <div class="col">
                 <form action="#" method="post" id="confirm">
-                    <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-info \"><a style=\"color:white\" href=\"addemployee.php?location_id=$location_id\">เพิ่มพนักงาน</a></button>" ?>
+                    <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-info \"><a style=\"color:black;text-decoration:none\" href=\"addemployee.php?location_id=$location_id\">เพิ่มพนักงาน</a></button>" ?>
                     <button class="btn btn-danger" style="margin-right:1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
-                    <table id="example" class="table table-striped table-bordered table-dark table-sm" style="width:100%">
-                        <thead class="bg-danger">
+                    <table id="example" class="table table-striped table-bordered  table-sm" style="width:100%">
+                        <thead class="bg-info">
                             <tr>
                                 <th></th>
                                 <th>Number</th>

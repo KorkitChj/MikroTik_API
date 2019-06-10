@@ -6,15 +6,21 @@ if (!$_SESSION["cus_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <style>
-        #border-login {
-            background: url('../img/3.jpg');
-            background-color: rgba(255, 0, 0, 0.4);
+            #border-login {
+            background:honeydew;
             background-repeat: no-repeat;
             background-size: cover;
             padding: 1.5em;
             border-radius: 5px;
-            box-shadow: 0px 0px 8px 4px rgb(0, 0, 0);
-            margin-top: 3em;
+            margin-top: 0.5em;
+            margin-bottom: 1em;
+            border:brown solid 1px;
+        }
+        .btn-danger,
+        .btn-primary,
+        .btn-info {
+            background-color: white;
+            color: black;
         }
     </style>
     <title>Add Employee</title>
@@ -180,9 +186,7 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    </div>
-
-    <div class="container-fluid">
+    <div class="container">
         <!-- <div class="row">
                                                         <div class="col d-flex justify-content-center">
                                                             <p>
@@ -190,7 +194,7 @@ if (!$_SESSION["cus_id"]) {
                                                             </p>
                                                         </div>
                                                     </div> -->
-        <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-info \"><a style=\"color:white\" href=\"employeestatus.php?location_id=$location_id\">รายการสถานะพนักงาน</a></button>" ?>;
+        <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-info \"><a style=\"color:black;text-decoration:none\" href=\"employeestatus.php?location_id=$location_id\">รายการสถานะพนักงาน</a></button>" ?>
         <div class="row ">
             <div class="col d-flex justify-content-center">
                 <?php if (isset($_GET['action']) && (isset($_GET['id']))) {
@@ -237,7 +241,7 @@ if (!$_SESSION["cus_id"]) {
                         echo "<div class=\"form-group row\">";
                         echo "<label for=\"s\" class=\"col-sm-4 col-form-label\"></label>";
                         echo "<div class=\"col-sm-8\">";
-                        echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">บันทึก</button>";
+                        echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
                         echo "<button type=\"bottom\" class=\"btn btn-danger\" onClick=\"history.go(-1); return false;\">ยกเลิก</button>";
                         echo "</div>";
                         echo "</div>";
@@ -277,7 +281,7 @@ if (!$_SESSION["cus_id"]) {
                     echo "<div class=\"form-group row\">";
                     echo "<label for=\"s\" class=\"col-sm-4 col-form-label\"></label>";
                     echo "<div class=\"col-sm-8\">";
-                    echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">บันทึก</button>";
+                    echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
                     echo "<button type=\"bottom\" class=\"btn btn-danger\" onClick=\"history.go(-1); return false;\">ยกเลิก</button>";
                     echo "</div>";
                     echo "</div>";

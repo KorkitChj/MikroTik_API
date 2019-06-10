@@ -8,11 +8,11 @@ if (!$_SESSION["admin_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <style>
-        .rows_selected {
+        /* .rows_selected {
             margin-top: 7px;
             float: left;
             font-weight: bold;
-        }
+        } */
 
         .btn-danger,
         .btn-success,

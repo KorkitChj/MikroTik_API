@@ -22,11 +22,6 @@ if (!$_SESSION["admin_id"]) {
             margin-top: 5em;
             margin-bottom: 5em;
         }
-        .container-fluid{
-            /* background-image: url('../img/background-worst-password-blue.png'); */
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
         .btn-danger,
         .btn-primary {
             background-color: white;

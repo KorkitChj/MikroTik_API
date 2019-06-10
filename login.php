@@ -66,7 +66,7 @@ require('template/template_customer.html');
             <div class="col">
                 <div class="rounded d-flex align-items-center flex-column justify-content-center h-100 bg-transparent text-white" id="header" style="margin-top:1em">
                     <div id="border-login">
-                        <p align="center">Login</p>
+                        <p align="center">Sign in to MikroTik API</p>
                         <form method="post" action="rlogin.php">
                             <div class="form-group row">
                                 <label for="" class="col col-form-label"><i class="far fa-user"></i></label>
@@ -89,7 +89,7 @@ require('template/template_customer.html');
                             <div class="form-group row">
                                 <label for="" class="col col-form-label"></label>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success btn-lg btn-block">Login</button>
+                                    <button type="submit" class="btn btn-success btn-lg btn-block">Sign In</button>
                                 </div>
                             </div>
                         </form>

@@ -23,16 +23,20 @@ if (!$_SESSION["cus_id"]) {
     ?>
     <title>Chang Password Site</title>
     <style>
-        /* .container {
-                        padding: 20px;
-                    } */
         #border-login {
-            background: #e3e3e3;
+            background:honeydew;
             padding: 1.5em;
-            border-radius: 10px;
-            box-shadow: 0px 0px 12px 6px rgb(0, 0, 0);
+            border-radius: 5px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* box-shadow: 0px 0px 12px 6px rgb(0, 0, 0); */
             margin-top: 5em;
             margin-bottom: 5em;
+        }
+        .btn-danger,
+        .btn-primary {
+            background-color: white;
+            color: black;
         }
     </style>
     <div class="container-fluid">
@@ -108,7 +112,7 @@ if (!$_SESSION["cus_id"]) {
     </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <!-- <div class="row ">
                 <div class="col d-flex justify-content-center">
                     หน้าถัดจากBrandner
@@ -123,28 +127,28 @@ if (!$_SESSION["cus_id"]) {
                     <form id="myform" action="../include/s_changpw.php" method="post" class="margin-custom">
                         <!-- <iframe id="iframe_target" name="iframe_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>target="iframe_target" -->
                         <div class="form-group row">
-                            <label for="oldpassword" class="control-label col-sm-4">รหัสผ่านเก่า:<i class="fas fa-key"></i></label>
-                            <div class="col-sm-8">
+                            <label for="oldpassword" class="control-label col-sm">รหัสผ่านเก่า:<i class="fas fa-key"></i></label>
+                            <div class="col-sm-12">
                                 <input type="password" class="form-control" name="oldpassword" placeholder="รหัสผ่านเก่า" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="newpassword" class="control-label col-sm-4">รหัสผ่านใหม่:<i class="fas fa-key"></i></label>
-                            <div class="col-sm-8">
+                            <label for="newpassword" class="control-label col-sm">รหัสผ่านใหม่:<i class="fas fa-key"></i></label>
+                            <div class="col-sm-12">
                                 <input type="password" class="form-control" name="newpassword" placeholder="รหัสผ่านใหม่" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="renewpassword" class="control-label col-sm-4">ยืนยันรหัสผ่านใหม่:<i class="fas fa-key"></i></label>
-                            <div class="col-sm-8">
+                            <label for="renewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:<i class="fas fa-key"></i></label>
+                            <div class="col-sm-12">
                                 <input type="password" class="form-control" name="renewpassword" placeholder="ยืนยันรหัสผ่านใหม่" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="kkk" class="control-label col-sm-4"></label>
-                            <div class="col-sm-8">
+                            <label for="kkk" class="control-label col-sm"></label>
+                            <div class="col-sm-12">
                                 <button type="submit" name="changpw" class="btn btn-primary">บันทึก</button>
-                                <button type="bottom" class="btn btn-danger"><a style="color:#fff" href="connectstatus.php">ยกเลิก</a></button>
+                                <button type="bottom" class="btn btn-danger"><a style="color:black;text-decoration:none" href="connectstatus.php">ยกเลิก</a></button>
                             </div>
                         </div>
                     </form>
