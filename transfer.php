@@ -100,22 +100,23 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
     }
 
     body {
-        /* background-image: url('img/marble.jpg'); */
+        background-image: url('img/16948.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        background: rgb(255, 255, 255);
-        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(227, 227, 227, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(175, 238, 255, 1) 100%);
+        /* background: rgb(255, 255, 255);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(227, 227, 227, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(175, 238, 255, 1) 100%); */
     }
 
     #border-login {
         /* background: #e3e3e3; */
         /* background: url('img/3.jpg');
         background-color: rgba(255, 0, 0, 0.4); */
-        background: white;
+        background: #ccffff;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 1.5em;
         border-radius: 5px;
+        border-left:#0099ff 5px solid;
         /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
         margin: 2em 2em;
     }
@@ -140,6 +141,12 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
     .btn-danger,.btn-primary,.btn-warning{
         background-color:white;
         color:black;
+    }
+    input[type="text"],[type="datetime-local"],[type="number"],[type="file"],[type="file"]
+    {
+        border: 0;
+        border-bottom: 1px solid red;
+        outline: 0;
     }
 </style>
 <!-- <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">

@@ -18,11 +18,11 @@ if (!$_SESSION["order"]) {
         /* background-image: linear-gradient(to top, #99CC66 0%, #FFFFCC 100%); */
         margin-top: 1em;
         margin-bottom: 4em;
-        /* background-image: url('img/marble.jpg'); */
+        background-image: url('img/16948.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        background: rgb(255,255,255);
-        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(227,227,227,1) 100%, rgba(186,186,186,1) 100%, rgba(181,181,181,1) 100%, rgba(175,238,255,1) 100%);
+        /* background: rgb(255,255,255);
+        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(227,227,227,1) 100%, rgba(186,186,186,1) 100%, rgba(181,181,181,1) 100%, rgba(175,238,255,1) 100%); */
     }
 
     .container-fluid {
@@ -34,11 +34,12 @@ if (!$_SESSION["order"]) {
         /* background: #e3e3e3; */
         /* background: url('img/3.jpg');
         background-color: rgba(255, 0, 0, 0.4); */
-        background:white;
+        background:#ccffff;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 1.5em;
         border-radius: 5px;
+        border-left:#0099ff 5px solid;
         /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
     }
     p {
@@ -53,6 +54,12 @@ if (!$_SESSION["order"]) {
     .btn-danger,.btn-primary,.btn-warning{
         background-color:white;
         color:black;
+    }
+    input[type="text"],
+    [type="password"] {
+        border: 0;
+        border-bottom: 1px solid red;
+        outline: 0;
     }
 </style>
 <!-- <div class="container-fluid">

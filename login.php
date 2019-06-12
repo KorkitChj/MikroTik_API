@@ -4,7 +4,7 @@ require('template/template_customer.html');
 <title>Login|Register</title>
 <style>
     #border-login {
-        background:white;
+        background: #ccffff;
         /* background-color: transparent; */
         /* background: url('img/3.jpg'); */
         /* background-color: rgba(white);
@@ -12,28 +12,30 @@ require('template/template_customer.html');
         background-size: cover;
         padding: 1.5em;
         border-radius: 5px;
-        margin-top:-1.5em;
-        margin-bottom:1.5em;
+        border-left: #0099ff 5px solid;
+        margin-top: -1.5em;
+        margin-bottom: 1.5em;
         /* border: 1px solid black; */
     }
 
     p {
-        color:red;
+        color: red;
         font-weight: bold;
-        font-size:2em;
+        font-size: 2em;
     }
 
     p:hover {
-        color:black;
+        color: black;
     }
 
     body {
-        /* background-image: url('img/marble.jpg'); */
+        background-image: url('img/16948.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        background: rgb(255,255,255);
-        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(227,227,227,1) 100%, rgba(186,186,186,1) 100%, rgba(181,181,181,1) 100%, rgba(175,238,255,1) 100%);
+        /* background: rgb(255, 255, 255);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(227, 227, 227, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(175, 238, 255, 1) 100%); */
     }
+
     a {
         /* color: white; */
         font-weight: bold;
@@ -43,21 +45,41 @@ require('template/template_customer.html');
         color: red;
         text-decoration: none;
     }
-    .btn-danger,.btn-success{
-        background-color:white;
-        color:black;
-    }
-    #d{
-        text-decoration:none;
-    }
-    .far,.fas{
-        color:black;
-    }
-    html{
-        border-top:red 0.25em solid; 
-        height:100%;
+
+    .btn-danger,
+    .btn-success {
+        background-color: white;
+        color: black;
     }
 
+    #d {
+        text-decoration: none;
+    }
+
+    .far,
+    .fas {
+        color: black;
+    }
+
+    html {
+        border-top: red 0.25em solid;
+        height: 100%;
+    }
+
+    input[type="text"],
+    [type="password"] {
+        border: 0;
+        border-bottom: 1px solid red;
+        outline: 0;
+    }
+    .errspan {
+        float: right;
+        margin-right: 6px;
+        margin-top: -30px;
+        position: relative;
+        z-index: 2;
+        color: red;
+    }
 </style>
 
 <body>
@@ -68,16 +90,18 @@ require('template/template_customer.html');
                     <div id="border-login">
                         <p align="center">Sign in to MikroTik API</p>
                         <form method="post" action="rlogin.php">
-                            <div class="form-group row">
-                                <label for="" class="col col-form-label"><i class="far fa-user"></i></label>
+                            <div class="form-group row has-success has-feedback">
+                                <label for="" class="col col-form-label"></label>
                                 <div class="col-12">
-                                    <input class="form-control form-control-lg" name="username" placeholder="Username" type="text" required>
+                                    <input class="form-control form-control-lg" name="username" placeholder="Username" type="text"  required>
+                                    <span class="far fa-user errspan"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col col-form-label"><i class="fas fa-key"></i></label>
+                                <label for="" class="col col-form-label"></label>
                                 <div class="col-12">
                                     <input class="form-control form-control-lg" name="password" placeholder="Password" type="password" required>
+                                    <span class="fas fa-key errspan"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
