@@ -33,9 +33,11 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
         } else {
             $bk = "กรุงเทพ";
         }
-        $sqlor = "SELECT a.username FROM siteadmin AS a WHERE username = '$username'";
-        if ($us = $conn->query($sqlor)) {
-            $num_rows = $us->num_rows;
+        $sqlor = "SELECT a.username FROM siteadmin AS a WHERE username = :username";
+        $query = $conn->prepare($sqlor);
+        $query->bindparam(':username', $username);
+        if ($query->execute()) {
+            $num_rows = $query->rowCount();
             if ($num_rows == 0) {
                 echo "<script>";
                 echo "alert(\"usernameไม่มีอยู่\");";
@@ -44,10 +46,12 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                 exit;
             } else {
                 $sqlar = "SELECT b.cus_id FROM siteadmin AS a INNER JOIN orderpd AS b ON
-                                a.cus_id = b.cus_id WHERE username = '$username'";
-                if ($ar = $conn->query($sqlar)) {
-                    $num_rows = $ar->num_rows;
-                    if ($num_rows == 0) {
+                                a.cus_id = b.cus_id WHERE username = :username";
+                $query1 = $conn->prepare($sqlar);
+                $query1->bindparam(':username', $username);
+                if ($query1->execute()) {
+                    $num_rows1 = $query1->rowCount();
+                    if ($num_rows1 == 0) {
                         echo "<script>";
                         echo "alert(\"คุณยังไม่ใด้สั่งซื้อ\");";
                         echo "window.history.back()";
@@ -69,15 +73,24 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                         }
                         move_uploaded_file($_FILES['file']['tmp_name'], $target);
                         $id = "";
-                        while ($row = $ar->fetch_array(MYSQLI_ASSOC)) {
+                        while ($row = $query1->fetch(PDO::FETCH_ASSOC)) {
                             $id = $row['cus_id'];
                         }
-                        $sqlid = "SELECT a.order_id FROM orderpd AS a WHERE a.cus_id = '$id'";
-                        if ($idd = $conn->query($sqlid)) {
-                            $result = $idd->fetch_array(MYSQLI_ASSOC);
+                        $sqlid = "SELECT a.order_id FROM orderpd AS a WHERE a.cus_id = :id";
+                        $query2 = $conn->prepare($sqlid);
+                        $query2->bindparam(':id', $id);
+                        $query2->execute();
+                        if ($query2 !== false) {
+                            $result = $query2->fetch(PDO::FETCH_ASSOC);
                             $orderid = $result['order_id'];
-                            $sqlp = "INSERT INTO payment VALUES('','$bk','$date','$money','$newname',0,'$orderid')";
-                            $conn->query($sqlp);
+                            $sqlp = "INSERT INTO payment VALUES('',:bk,:date,:money,:newname,0,:orderid)";
+                            $query3 = $conn->prepare($sqlp);
+                            $query3->bindparam(':bk', $bk);
+                            $query3->bindparam(':date', $date);
+                            $query3->bindparam(':money', $money);
+                            $query3->bindparam(':newname', $newname);
+                            $query3->bindparam(':orderid', $orderid);
+                            $query3->execute();
                             echo "<script>";
                             echo "alert(\"ดำเนินการเรียบร้อยแล้ว\");";
                             echo "window.location.href='login.php';";
@@ -103,21 +116,15 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
         background-image: url('img/16948.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        /* background: rgb(255, 255, 255);
-        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(227, 227, 227, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(175, 238, 255, 1) 100%); */
     }
 
     #border-login {
-        /* background: #e3e3e3; */
-        /* background: url('img/3.jpg');
-        background-color: rgba(255, 0, 0, 0.4); */
         background: #ccffff;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 1.5em;
         border-radius: 5px;
         border-left:#0099ff 5px solid;
-        /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
         margin: 2em 2em;
     }
 
@@ -125,10 +132,6 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
         color: black;
         font-weight: bold;
     }
-
-    /* .ax {
-        border-bottom: red 0.5em solid;
-    } */
     p {
         color:red;
         font-weight: bold;
@@ -149,40 +152,6 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
         outline: 0;
     }
 </style>
-<!-- <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="index.php"><img style="width:50px;height:50px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item ">
-                <a href="index.php" class="nav-link z"><span class="badge badge-primary"><i class="fas fa-home"></i></span>
-                    หน้าหลัก</a>
-            </li>
-            <li class="nav-item ">
-                <a href="products.php" class="nav-link z"><span class="badge badge-success  "><i class="fab fa-product-hunt"></i></span>
-                    สินค้า</a>
-            </li>
-            <li class="nav-item ">
-                <a href="payment.php" class="nav-link z"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i></span>
-                    สั่งซื้อ</a>
-            </li>
-            <li class="nav-item">
-                                            <a href="register.php" class="nav-link z"><span class="badge badge-warning"><i class="fas fa-registered"></i></span>
-                                            สมัครสมาชิก</a>
-                                        </li>
-            <li class="nav-item active">
-                <a href="#" class="nav-link active z"><span class="badge badge-danger"><i class="fas fa-clipboard-check"></i></span>
-                    แจ้งโอนเงิน</a>
-            </li>
-            <li class="nav-item">
-                <a href="login.php" class="nav-link z"><span class="badge badge-info"><i class="fas fa-sign-in-alt"></i></span>
-                    เข้าสู่ระบบ/สมัครสมาชิก</a>
-            </li>
-        </ul>
-    </div>
-</nav> -->
 <div class="container-fluid">
     <div class="row">
         <div class="col d-flex justify-content-center">

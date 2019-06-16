@@ -8,12 +8,6 @@ if (!$_SESSION["admin_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <style>
-        /* .rows_selected {
-            margin-top: 7px;
-            float: left;
-            font-weight: bold;
-        } */
-
         .btn-danger,
         .btn-success,
         .btn-warning {
@@ -23,19 +17,57 @@ if (!$_SESSION["admin_id"]) {
 
         .bg-info {
             background: #bdc3c7;
-            background: linear-gradient(to bottom,#bdc3c7,#2c3e50);
+            background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
             background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
         }
-        th{
-            color:darkblue;
+
+        th {
+            color: darkblue;
+        }
+        td{
+            color:white;
+        }
+        table.dataTable thead th{
+            border-bottom: 0;
+        }
+        .pad-a{
+            background-color:rgba(0, 0, 0, 0.3);
         }
     </style>
     <?php
     if (isset($_POST['cus_id'])) {
         $id = implode(", ", $_POST['cus_id']);
-        $conn->query("DELETE FROM siteadmin WHERE cus_id IN($id)");
+        $sql = "DELETE FROM siteadmin WHERE cus_id IN ($id)";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        echo "<div class=\"alert alert-danger alert-dismissible fade show\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+        <strong>Success!</strong> ลบข้อมูลแล้ว
+        </div>";
     }
-
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $sql = "UPDATE payment SET paid = 1 WHERE order_id = :id";
+        $result =  $conn->prepare($sql);
+        $result->bindparam(':id', $id);
+        if ($result->execute()) {
+            echo "<div class=\"alert alert-success alert-dismissible fade show\">
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+            <strong>Success!</strong> ยืนยันข้อมูลแล้ว
+            </div>";
+        }
+    }
+    if (isset($_GET['id_del'])) {
+        $id_del = $_GET['id_del'];
+        $sql = "DELETE FROM siteadmin WHERE cus_id = :id_del";
+        $result =  $conn->prepare($sql);
+        $result->bindparam(':id_del', $id_del);
+        $result->execute();
+        echo "<div class=\"alert alert-danger alert-dismissible fade show\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+        <strong>Success!</strong> ลบข้อมูลแล้ว
+        </div>";
+    }
     ?>
     <title>Check Payment</title>
     <div class="container-fluid">
@@ -57,7 +89,7 @@ if (!$_SESSION["admin_id"]) {
                                     <span class="badge badge-primary"><i class="fa fa-home"></i></span>
                                     หน้าหลัก</a>
                             </li>
-                            <li class="nav-item active  pad">
+                            <li class="nav-item active  pad-a">
                                 <a href="#" class="nav-link active">
                                     <span class="badge badge-primary"><i class="fas fa-user-check"></i></span>
                                     ยืนยันการชำระเงิน</a>
@@ -85,24 +117,12 @@ if (!$_SESSION["admin_id"]) {
     </div>
 
     <div class="container">
-        <!-- <div class="row ">
-                        <div class="col d-flex justify-content-center ">
-                            หน้าถัดจากBrandner
-                            <p>
-                                <h3 style="font-weight:bold ;margin-top:1em;color:white">การตรวจสอบการชำระเงิน</h3>
-                            </p>
-                        </div>
-                    </div> -->
         <div class="row ">
             <div class="col">
                 <form action="#" method="post" id="confirm">
-                    <button class="btn btn-danger" style="margin:1em 1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
-                    <table id="example" class="table table-striped table-hover table-bordered table-sm" style="width:100%">
+                    <button onClick="return confirm('คุณต้องการที่จะลบข้อมูลที่เลือกนี้หรือไม่ ?');" class="btn btn-danger" style="margin:1em 1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
+                    <table id="example" class="table table-striped table-hover  table-sm" style="width:100%">
                         <thead class="bg-info">
-                            <!-- <tr>
-                                                <td><span class="rows_selected" id="select_count">0 Selected </span>
-                                                    <button type="button" id="delete_records" class="btn btn-danger pull-right">Delete</button></td>
-                                            </tr> <input type="checkbox" id="select_all">-->
                             <tr>
                                 <th></th>
                                 <th>เจ้าของไซต์</th>
@@ -110,21 +130,17 @@ if (!$_SESSION["admin_id"]) {
                                 <th>หลักฐาน</th>
                                 <th>วันที่ยืนยันการชำระเงิน</th>
                                 <th>วันนัดชำระ</th>
-                                <th>ยืนยันรายการ</th>
-                                <th>ลบ</th>
-
+                                <th>จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-
-                            // echo '<button class="btn btn-danger">ลบข้อมูลแถวที่เลือก</button>';
                             $result =  $conn->query("SELECT a.cus_id,username,b.order_id,total_cash,paid,
                             slip_name,transfer_date,appointment
                         FROM siteadmin AS a INNER JOIN orderpd AS b ON
                         a.cus_id = b.cus_id INNER JOIN payment AS c ON
                         b.order_id = c.order_id WHERE c.paid = 0");
-                            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                 $startdate = $row["transfer_date"];
                                 $enddate = strtotime('+7 days', strtotime($startdate));
                                 $src = "../slips/{$row['slip_name']}";
@@ -135,26 +151,19 @@ if (!$_SESSION["admin_id"]) {
                                     <td><?php echo $row["order_id"]; ?></td>
                                     <td><?php echo "<a href=\"view.php?id={$row['slip_name']}\" target=\"_blank\"><img src=\"$src\" style=\"width:50px;height:50px;\"></a>
                                         <a href=\"download.php?id={$row['slip_name']}\" target=\"iframe\"><button type=\"button\" id=\"dl\" class=\"update btn btn-warning btn-sm\">
-                                        <span class=\"glyphicon glyphicon-cloud-download\"></span></button></a>"; ?>
+                                        <span title=\"ดาวน์โหลด\" class=\"glyphicon glyphicon-cloud-download\"></span></button></a>"; ?>
                                     </td>
                                     <td><?php echo $row["transfer_date"]; ?></td>
                                     <td><?php echo date('Y-m-d', $enddate); ?></td>
-                                    <td><?php echo "<a href=\"JavaScript:if(confirm('Confirm?') == true)
-                                    {window.location='confirm.php?id={$row['order_id']}';}\"<button type=\"button\" id=\"ok_records\" class=\"update btn btn-success btn-sm\">
-                                            <span class=\"glyphicon glyphicon-check\"></span></button></a>"; ?>
-                                    </td>
-                                    <td><?php echo "<a href=\"JavaScript:if(confirm('Confirm Delete?') == true)
-                                    {window.location='delete.php?id={$row['cus_id']}';}\"<button type=\"button\" id=\delete\" class=\"update btn btn-danger btn-sm\">
-                                            <span class=\"glyphicon glyphicon-trash\"></span></button></a>"; ?>
+                                    <td><?php echo "<a onClick=\"return confirm('คุณต้องการที่จะยืนยันข้อมูลนี้หรือไม่ ?');\" href=\"checkpayment.php?id={$row['order_id']}\"><button  type=\"button\" id=\"ok_records\" class=\"update btn btn-success btn-sm\">
+                                            <span title=\"ยืนยันข้อมูล\" class=\"glyphicon glyphicon-check\"></span></button></a>"; ?>
+                                        <?php echo "<a onClick=\"return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?');\" href=\"checkpayment.php?id_del={$row['cus_id']}\"><button  type=\"button\" id=\delete\" class=\"update btn btn-danger btn-sm\">
+                                            <span title=\"ลบข้อมูล\" class=\"glyphicon glyphicon-trash\"></span></button></a>"; ?>
                                     </td>
                                 </tr>
-
                             <?php } ?>
                         </tbody>
                     </table>
-                    <!-- <td><?php echo "<a href=\"confirm.php?id={$row['order_id']}\"<button type=\"button\" id=\"ok_records\" class=\"update btn btn-success btn-sm\">
-                                            <span class=\"glyphicon glyphicon-check\"></span></button>"; ?></td> -->
-                    <!-- <iframe id="iframe"></iframe> -->
                 </form>
             </div>
         </div>

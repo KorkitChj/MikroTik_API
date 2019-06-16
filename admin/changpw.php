@@ -10,22 +10,26 @@ if (!$_SESSION["admin_id"]) {
     <title>Chang Password</title>
     <style>
         #border-login {
-            /* background: #e3e3e3; */
-            /* background: url('../img/3.jpg');
-            background-color: rgba(255, 0, 0, 0.4); */
-            background:honeydew;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-color:rgba(0, 0, 0, 0.3);
             padding: 1.5em;
             border-radius: 5px;
-            /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
             margin-top: 5em;
             margin-bottom: 5em;
+            border:white 2px dotted;
         }
         .btn-danger,
         .btn-primary {
             background-color: white;
             color: black;
+        }
+        label{
+            color:white;
+        }
+        .fa-key{
+            color:tomato;
+        }
+        .pad-a{
+            background-color:rgba(0, 0, 0, 0.3);
         }
     </style>
     <div class="container-fluid">
@@ -57,7 +61,7 @@ if (!$_SESSION["admin_id"]) {
                                     <span class="badge badge-danger"><i class="fas fa-tasks"></i></span>
                                     จัดการเจ้าของไซต์</a>
                             </li>
-                            <li class="nav-item active  pad">
+                            <li class="nav-item active  pad-a">
                                 <a href="#" class="nav-link active">
                                     <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
                                     เปลี่ยนรหัสผ่าน</a>
@@ -88,19 +92,19 @@ if (!$_SESSION["admin_id"]) {
                     <form id="myform" action="../include/s_changpw.php" method="post" class="margin-custom">
                         <!-- <iframe id="iframe_target" name="iframe_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>target="iframe_target" -->
                         <div class="form-group row">
-                            <label for="inputoldpassword" class="control-label col-sm">รหัสผ่านเก่า:<i class="fas fa-key"></i></label>
+                            <label for="inputoldpassword" class="control-label col-sm">รหัสผ่านเก่า:&nbsp; <i class="fas fa-key"></i></label>
                             <div class="col-sm-12">
                                 <input type="password" class="form-control" name="oldpassword" placeholder="รหัสผ่านเก่า" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputnewpassword" class="control-label col-sm">รหัสผ่านใหม่:<i class="fas fa-key"></i></label>
+                            <label for="inputnewpassword" class="control-label col-sm">รหัสผ่านใหม่:&nbsp; <i class="fas fa-key"></i></label>
                             <div class="col-sm-12">
                                 <input type="password" class="form-control" name="newpassword" placeholder="รหัสผ่านใหม่" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputrenewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:<i class="fas fa-key"></i></label>
+                            <label for="inputrenewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:&nbsp; <i class="fas fa-key"></i></label>
                             <div class="col-sm-12">
                                 <input type="password" class="form-control" name="renewpassword" placeholder="ยืนยันรหัสผ่านใหม่" required>
                             </div>

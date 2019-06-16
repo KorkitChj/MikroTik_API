@@ -6,12 +6,19 @@ if (!$_SESSION["cus_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <?php
+    error_reporting(0);
     if (isset($_GET['location_id'])) {
         $location_id = $_GET['location_id'];
+        $id = $_GET['cus_id'];
+        $location_id = $_GET['location_id'];
+        $profile = $_GET['profile'];
     }
     $id = $_SESSION['cus_id'];
-    if ($result = $conn->query("SELECT * FROM siteadmin WHERE cus_id = '$id'")) {
-        $numrows = $result->num_rows;
+    $sql = "SELECT * FROM siteadmin WHERE cus_id = :id";
+    $query = $conn->prepare($sql);
+    $query->bindparam(':id', $id);
+    if ($query->execute()) {
+        $numrows = $query->rowCount();
         if ($numrows == 0) {
             echo "<script>";
             echo "alert(\"หมดอายุแล้ว\");";
@@ -21,37 +28,113 @@ if (!$_SESSION["cus_id"]) {
             exit(0);
         }
     }
-    $sql = "SELECT * FROM location WHERE cus_id='" . $id . "' AND location_id ='" . $location_id . "'";
-    $result = mysqli_query($link, $sql) or die("Could not connect");
-    $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $sql = "SELECT * FROM location WHERE cus_id= :id  AND location_id = :location_id ";
+    $query1 = $conn->prepare($sql);
+    $query1->bindparam(':id', $id);
+    $query1->bindparam(':location_id', $location_id);
+    $query1->execute();
+    $rows = $query1->fetch(PDO::FETCH_ASSOC);
     $ip = $rows['ip_address'];
     $port = $rows['api_port'];
     $user = $rows['username'];
     $pass = $rows['password'];
-
-    if ($API->connect($ip . ":" . $port, $user, $pass)) {} else {
-        echo "<script language='javascript'>alert('Disconnect')</script>";
-        echo "<meta http-equiv='refresh' content='0;url=../siteadmin/connectstatus.php'/>";
-        exit(0);
+    if (isset($_POST['submit'])) {
+        $name = $_POST['name'];
+        $session = $_POST['session'];
+        $idle = $_POST['idle'];
+        $use = $_POST['use'];
+        $limit = $_POST['limit'];
+        $maccookie = $_POST['maccookie'];
+        if ($API->connect($ip . ":" . $port, $user, $pass)) {
+            $ARRAY1 = $API->comm("/ip/hotspot/user/profile/print");
+            $count = count($ARRAY1);
+            for ($i = 0; $i < $count; $i++) {
+                $a[] = $ARRAY1[$i]['name'];
+                if ($a[$i] == $name) {
+                    echo ("<script LANGUAGE='JavaScript'>
+                                    window.alert('ไม่สามารถแก้ไขข้อมูลได้กรุณาเปลี่ยนชื่อ Profile');
+                                    window.location.href='addprofile.php?action=edit_site&name=" . $profile . "&location_id=" . $location_id . "';
+                                    </script>");
+                    exit(0);
+                }
+            }
+            if ($profile != "") {
+                $ARRAY = $API->comm("/ip/hotspot/user/profile/set", array(
+                    "name" => $name,
+                    "session-timeout" => $session,
+                    "idle-timeout" => $idle,
+                    "shared-users" => $use,
+                    "mac-cookie-timeout" => $maccookie,
+                    "rate-limit" => $limit,
+                    "numbers" => $profile,
+                ));
+                echo "<div class=\"alert alert-success alert-dismissible fade show\">
+                                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                                <strong>Success!</strong>ทำการอัพเดทข้อมูลแล้ว.
+                                </div>";
+                echo "<meta http-equiv='refresh' content='1;url=profilestatus.php?location_id=$location_id' />";
+            } else {
+                $ARRAY1 = $API->comm("/ip/hotspot/user/profile/print");
+                $count = count($ARRAY1);
+                for ($i = 0; $i < $count; $i++) {
+                    $a[] = $ARRAY1[$i]['name'];
+                    if ($a[$i] == $name) {
+                        echo ("<script LANGUAGE='JavaScript'>
+                                    window.alert('ไม่สามารถเพิ่มข้อมูลได้กรุณาเปลี่ยนชื่อ Profile');
+                                    window.location.href='addprofile.php?location_id=" . $location_id . "&cus_id=" . $id . "';
+                                    </script>");
+                        exit(0);
+                    }
+                }
+                $ARRAY = $API->comm("/ip/hotspot/user/profile/add", array(
+                    "name" => $name,
+                    "session-timeout" => $session,
+                    "idle-timeout" => $idle,
+                    "shared-users" => $use,
+                    "mac-cookie-timeout" => $maccookie,
+                    "rate-limit" => $limit,
+                ));
+                echo "<div class=\"alert alert-success alert-dismissible fade show\">
+                                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                                <strong>Success!</strong>ทำการเพิ่มแพคเกจเข้าระบบเรียบร้อยแล้ว.
+                                </div>";
+                echo "<meta http-equiv='refresh' content='1;url=profilestatus.php?location_id=$location_id' />";
+            }
+        } else {
+            echo "<div class=\"alert alert-danger alert-dismissible fade show\">
+                                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                                <strong>Unsuccess!</strong>Disconnect
+                                </div>";
+            echo "<meta http-equiv='refresh' content='1;url=../siteadmin/connectstatus.php'/>";
+        }
+    } elseif (isset($_GET['action'])) {
+        if ($API->connect($ip . ":" . $port, $user, $pass)) { }
     }
     ?>
     <style>
-              #border-login {
-            background:honeydew;
-            background-repeat: no-repeat;
-            background-size: cover;
+        #border-login {
+            background-color: rgba(0, 0, 0, 0.3);
             padding: 1.5em;
             border-radius: 5px;
             margin-top: 0.5em;
             margin-bottom: 1em;
-            border:brown solid 1px;
+            border: white dotted 2px;
+            color: white;
         }
+
         .btn-danger,
         .btn-primary,
         .btn-info,
         .btn-warning {
             background-color: white;
             color: black;
+        }
+
+        .pad-a {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .bor{
+            border-bottom: none;
         }
     </style>
     <title>Add Profile</title>
@@ -69,18 +152,7 @@ if (!$_SESSION["cus_id"]) {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <!-- <li class="nav-item ">
-                                        <a href="connectstatus.php" class="nav-link ">
-                                            <span class="badge badge-primary"><i class="fa fa-home"></i></span>
-                                            หน้าหลัก</a>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a href="addconnect.php" class="nav-link ">
-                                            <span class="badge badge-primary"><i class="fas fa-hotel"></i></span>
-                                            เพิ่มสถานบริการ</a>
-                                    </li> -->
-                            <li class="nav-item dropdown ">
+                            <li class="nav-item dropdown pad">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <span class="badge badge-primary"><i class="fas fa-user"></i></span>
                                     พนักงานดูแล
@@ -89,10 +161,10 @@ if (!$_SESSION["cus_id"]) {
                                     <?php echo "<a class=\"dropdown-item\" href=\"employeestatus.php?location_id=$location_id\">สถานะพนักงาน</a>" ?>
                                     <?php echo "<a class=\"dropdown-item\" href=\"addemployee.php?location_id=$location_id\">เพิ่มพนักงาน</a>" ?>
                                     <!-- <a href="employeestatus.php" class="dropdown-item ">สถานะพนักงาน</a>
-                                            <a href="addemployee.php" class="dropdown-item ">เพิ่มพนักงาน</a> -->
+                                                                                <a href="addemployee.php" class="dropdown-item ">เพิ่มพนักงาน</a> -->
                                 </div>
                             </li>
-                            <li class="nav-item dropdown active">
+                            <li class="nav-item dropdown active pad-a">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
                                     Hotspot
@@ -103,7 +175,7 @@ if (!$_SESSION["cus_id"]) {
                                     <a href="#" class="dropdown-item active">เพิ่ม Profile</a>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown pad">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <span class="badge badge-primary"><i class="fas fa-unlock"></i></span>
                                     ตั้งค่าเว็บไม่ต้อง Login
@@ -112,15 +184,15 @@ if (!$_SESSION["cus_id"]) {
                                     <?php echo "<a class=\"dropdown-item\" href=\"wallgardenstatus.php?location_id=$location_id\">สถานะ</a>" ?>
                                     <?php echo "<a class=\"dropdown-item\" href=\"addwallgarden.php?location_id=$location_id\">เพิ่ม</a>" ?>
                                     <!-- <a href="wallgardenstatus.php" class="dropdown-item ">สถานะ</a>
-                                            <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a> -->
+                                                                                <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a> -->
                                 </div>
                             </li>
                             <!-- <li class="nav-item">
-                                        <a href="../siteadmin/changpwsite.php" class="nav-link ">
-                                            <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
-                                            เปลี่ยนรหัสผ่าน</a>
-                                    </li> -->
-                            <li class="nav-item">
+                                                                            <a href="../siteadmin/changpwsite.php" class="nav-link ">
+                                                                                <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
+                                                                                เปลี่ยนรหัสผ่าน</a>
+                                                                        </li> -->
+                            <li class="nav-item pad">
                                 <a href="../siteadmin/cus_logout.php" class="nav-link " onclick="return confirm('ยืนยันการออกจากระบบ')">
                                     <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
                                     ออกจากระบบ</a>
@@ -134,74 +206,63 @@ if (!$_SESSION["cus_id"]) {
     </div>
 
     <div class="container">
-        <!-- <div class="row ">
-                    <div class="col d-flex justify-content-center">
-                        หน้าถัดจากBrandner
-                        <p>
-                            <h3 style="font-weight:bold">เพิ่ม Profile</h3>
-                        </p>
-                    </div>
-                </div> -->
         <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-primary \"><a style=\"color:black;text-decoration:none\" href=\"profilestatus.php?location_id=$location_id\">รายการ Profile</a></button>"; ?>
         <div class="row ">
             <div class="col d-flex justify-content-center">
                 <?php
-                if (isset($_GET['action'])) {
-                    if ($_GET['action'] == "edit_site") {
-                        error_reporting(0);
-                        $name = $_GET['name'];
-                        $ARRAY = $API->comm("/ip/hotspot/user/profile/print",array("from" => $name,));
-                        echo "<div id=\"border-login\">";
-                        echo "<form action=\"con_editprofile.php?location_id=$location_id&cus_id=$id&profile={$ARRAY[0]['name']}\" method=\"post\">";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"name\" class=\"col-sm-4 col-form-label\">Name: </label>";
-                        echo "<div class=\"col-sm-8\">";
-                        echo "<input type=\"text\" class=\"form-control \" name=\"name\" value=\"{$ARRAY[0]['name']}\" required>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"idle\" class=\"col-sm-4 col-form-label\">IdleTimeout:</label>";
-                        echo "<div class=\"col-sm-8\">";
-                        echo "<input type=\"text\" class=\"form-control\" name=\"idle\" value=\"{$ARRAY[0]['idle-timeout']}\" required>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"session\" class=\"col-sm-4 col-form-label\">SessionTimeout:</label>";
-                        echo "<div class=\"col-sm-8\">";
-                        echo "<input type=\"text\" class=\"form-control\" name=\"session\" value=\"{$ARRAY[0]['session-timeout']}\" required>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"use\" class=\"col-sm-4 col-form-label\">Shared:</label>";
-                        echo "<div class=\"col-sm-8\">";
-                        echo "<input type=\"text\" class=\"form-control\" name=\"use\" value=\"{$ARRAY[0]['shared-users']}\" required>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"maccookie\" class=\"col-sm-4 col-form-label\">Mac Cookie Timeout:</label>";
-                        echo "<div class=\"col-sm-8\">";
-                        echo "<input type=\"text\" class=\"form-control\" name=\"maccookie\" value=\"{$ARRAY[0]['mac-cookie-timeout']}\" required>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"limit\" class=\"col-sm-4 col-form-label\">Rate Limit(RX/TX):</label>";
-                        echo "<div class=\"col-sm-8\">";
-                        echo "<input type=\"text\" class=\"form-control\" name=\"limit\" value=\"{$ARRAY[0]['rate-limit']}\" required>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<div class=\"form-group row\">";
-                        echo "<label for=\"ia\" class=\"col-sm col-form-label\"></label>";
-                        echo "<div class=\" col-sm-12\">";
-                        echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
-                        echo "<a href=\"profilestatus.php?location_id=$location_id\" class=\"btn btn-danger\">ยกเลิก</a>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</form>";
-                        echo "</div>";
-                    }
+                if ($_GET['action'] == "edit_site") {
+                    $name = $_GET['name'];
+                    $ARRAY = $API->comm("/ip/hotspot/user/profile/print", array("from" => $name,));
+                    echo "<div id=\"border-login\">";
+                    echo "<form action=\"addprofile.php?location_id=$location_id&cus_id=$id&profile={$ARRAY[0]['name']}\" method=\"post\">";
+                    echo "<div class=\"form-group row\">";
+                    echo "<label for=\"name\" class=\"col-sm-4 col-form-label\">Name: </label>";
+                    echo "<div class=\"col-sm-8\">";
+                    echo "<input type=\"text\" class=\"form-control \" name=\"name\" value=\"{$ARRAY[0]['name']}\" required>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class=\"form-group row\">";
+                    echo "<label for=\"idle\" class=\"col-sm-4 col-form-label\">IdleTimeout:</label>";
+                    echo "<div class=\"col-sm-8\">";
+                    echo "<input type=\"text\" class=\"form-control\" name=\"idle\" value=\"{$ARRAY[0]['idle-timeout']}\" required>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class=\"form-group row\">";
+                    echo "<label for=\"session\" class=\"col-sm-4 col-form-label\">SessionTimeout:</label>";
+                    echo "<div class=\"col-sm-8\">";
+                    echo "<input type=\"text\" class=\"form-control\" name=\"session\" value=\"{$ARRAY[0]['session-timeout']}\" required>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class=\"form-group row\">";
+                    echo "<label for=\"use\" class=\"col-sm-4 col-form-label\">Shared:</label>";
+                    echo "<div class=\"col-sm-8\">";
+                    echo "<input type=\"text\" class=\"form-control\" name=\"use\" value=\"{$ARRAY[0]['shared-users']}\" required>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class=\"form-group row\">";
+                    echo "<label for=\"maccookie\" class=\"col-sm-4 col-form-label\">Mac Cookie Timeout:</label>";
+                    echo "<div class=\"col-sm-8\">";
+                    echo "<input type=\"text\" class=\"form-control\" name=\"maccookie\" value=\"{$ARRAY[0]['mac-cookie-timeout']}\" required>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class=\"form-group row\">";
+                    echo "<label for=\"limit\" class=\"col-sm-4 col-form-label\">Rate Limit(RX/TX):</label>";
+                    echo "<div class=\"col-sm-8\">";
+                    echo "<input type=\"text\" class=\"form-control\" name=\"limit\" value=\"{$ARRAY[0]['rate-limit']}\" required>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class=\"form-group row\">";
+                    echo "<label for=\"ia\" class=\"col-sm col-form-label\"></label>";
+                    echo "<div class=\" col-sm-12\">";
+                    echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">บันทึก</button>&nbsp;";
+                    echo "<a href=\"profilestatus.php?location_id=$location_id\" class=\"btn btn-danger\">ยกเลิก</a>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</form>";
+                    echo "</div>";
                 } else {
                     echo "<div id=\"border-login\">";
-                    echo "<form action=\"con_addprofile.php?location_id=$location_id&cus_id=$id\" method=\"post\">";
+                    echo "<form action=\"addprofile.php?location_id=$location_id&cus_id=$id\" method=\"post\">";
                     echo "<div class=\"form-group row\">";
                     echo "<label for=\"name\" class=\"col-sm-4 col-form-label\">Name: </label>";
                     echo "<div class=\"col-sm-8\">";

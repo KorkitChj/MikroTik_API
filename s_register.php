@@ -4,27 +4,39 @@ session_start();
 <?php
 require('include/connect_db.php');
 if (isset($_POST["MM_insert"])) {
-	$inputusername = $_POST["inputusername"];
-	$sql1 = "SELECT *FROM siteadmin WHERE username = '$inputusername'";
-	$result = $conn->query($sql1);
-	$num_rows = $result->num_rows;
+	$username = $_POST["inputusername"];
+	$sql1 = "SELECT *FROM siteadmin WHERE username = :username";
+	$query1 = $conn->prepare($sql1);
+	$query1->bindparam(':username', $username);
+	$query1->execute();
+	$num_rows = $query1->fetchColumn(); 
+
 	if ($num_rows == 0) {
-		$inputusername = $_POST["inputusername"];
-		$inputpassword = MD5($_POST["inputpassword"]);
+		$password = MD5($_POST["inputpassword"]);
 		$fullname = $_POST["inputfullname"];
-		$inputemail  = $_POST["inputemail"];
-		$inputphonenumber  = $_POST["inputphonenumber"];
+		$email  = $_POST["inputemail"];
+		$phonenumber  = $_POST["inputphonenumber"];
 		$site = $_POST["inputworkingsite"];
 		$address = $_POST["address"];
 		$_SESSION["cus_name"] = $_POST["inputusername"];
 
 		$sql = "INSERT INTO siteadmin 
-                            values('','$inputusername','$inputpassword','$address','$inputphonenumber'
-                            ,'$inputemail','$site','$fullname')";
-		if ($conn->query($sql)) {
+                            values('',:username,:password,:address,:phonenumber
+							,:email,:site,:fullname)";
+		$query = $conn->prepare($sql);
+
+        $query->bindparam(':username', $username);
+        $query->bindparam(':password', $password);
+		$query->bindparam(':address', $address);
+		$query->bindparam(':phonenumber', $phonenumber);
+        $query->bindparam(':email', $email);
+		$query->bindparam(':site', $site);
+		$query->bindparam(':fullname', $fullname);
+        
+		if ($query->execute()) {
 			echo "<script>";
 			echo "alert(\"ข้อมูลของคุณบันทึกเรียบร้อยแล้ว\");";
-			echo "window.history.back()";
+			echo "window.location='payment.php'";
 			echo "</script>";
 			exit;
 		}
@@ -34,5 +46,6 @@ if (isset($_POST["MM_insert"])) {
 		echo "window.history.back()";
 		echo "</script>";
 	}
+	$conn->null;
 }
 ?>

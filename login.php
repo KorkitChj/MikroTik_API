@@ -5,17 +5,12 @@ require('template/template_customer.html');
 <style>
     #border-login {
         background: #ccffff;
-        /* background-color: transparent; */
-        /* background: url('img/3.jpg'); */
-        /* background-color: rgba(white);
-        background-repeat: no-repeat; */
         background-size: cover;
         padding: 1.5em;
         border-radius: 5px;
         border-left: #0099ff 5px solid;
         margin-top: -1.5em;
         margin-bottom: 1.5em;
-        /* border: 1px solid black; */
     }
 
     p {
@@ -32,12 +27,9 @@ require('template/template_customer.html');
         background-image: url('img/16948.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        /* background: rgb(255, 255, 255);
-        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(227, 227, 227, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(175, 238, 255, 1) 100%); */
     }
 
     a {
-        /* color: white; */
         font-weight: bold;
     }
 

@@ -148,10 +148,6 @@ hr{
                     <a href="payment.php" class="nav-link z"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i></span>
                         สั่งซื้อ</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="register.php" class="nav-link z"><span class="badge badge-warning"><i class="fas fa-registered"></i></span>
-                        สมัครสมาชิก</a>
-                </li> -->
                 <li class="nav-item">
                     <a href="transfer.php" class="nav-link z"><span class="badge badge-danger"><i class="fas fa-clipboard-check"></i></span>
                     แจ้งโอนเงิน</a>
@@ -193,31 +189,6 @@ hr{
                 หรือหากท่านมีปัญหาการใช้งานหรือข้อสงสัยสามารถติดต่อผู้ดูแลระบบได้ที่ Facebook</p>
         </div>
     </div>
-    <!-- <div class="row ">
-        <div class="col-3 ">
-            <img src="img/mikrotik router.png" alt="mikrotik router" class="mikrotik-margin-left img-fluid">
-            <table class="mikrotik-margin-left table table-striped table-bordered table-info table-hover">
-                <tbody>
-                    <tr>
-                        <td>ไม่จำกัด Mikrotik site</td>
-                    </tr>
-                    <tr>
-                        <td>ไม่จำกัด พนักงานดูแลระบบ</td>
-                    </tr>
-                    <tr>
-                        <td>ฟังก์ชันจัดการเราเตอร์/เปลี่ยนรหัสผ่าน</td>
-                    </tr>
-                    <tr>
-                        <td>ยินดีให้คำปรึกษา</td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="payment.php"><img src="img/Cart-512.png" style="margin-bottom: 2em" class="mikrotik-margin-left-cart api-logo1" alt="Cart-512"></a>
-        </div>
-        <div class="col ">
-            <div align="right" style="margin:2em 2em;"><iframe width="560" height="315" src="https://www.youtube.com/embed/wlnJOZxW3LI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-        </div>
-    </div> -->
 </div>
 </body>
 <footer>
@@ -229,9 +200,6 @@ hr{
             <div class="col-md-2">
                 <h2><a href="payment.php" id="b">สั่งซื้อ</a></h2>
             </div>
-            <!-- <div class="col-md-2">
-                <h2><a href="register.php" id="c">สมัครสมาชิก</a></h2>
-            </div> -->
             <div class="col-md-2">
                 <h2><a href="transfer.php" id="d">ยืนยัน</a></h2>
             </div>

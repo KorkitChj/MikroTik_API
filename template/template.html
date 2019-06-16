@@ -8,8 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!--dropdown-->
-    <script src="../js/popper_1_14_3.min.js"></script>
-    <script src="../js/jquery-3.3.1.min.js"></script>
+    <!-- <script src="../js/popper_1_14_3.min.js"></script> -->
+    <!-- <script src="../js/jquery-3.3.1.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!--ใช้คู่กันทำค้นหาให้สวย-->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -56,92 +60,30 @@
         }
 
         .pad>a:hover {
-            background: #262626;
-        }
-
-        .color-custom {
-            background-color: white !important;
-            margin-bottom: 5em;
-
-
+            background-color: rgba(0, 0, 0, 0.3);
         }
 
         .bor {
             border-bottom: 0.75em solid red;
         }
-        .container{
-            background-color: white;
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.3);
             height: 40em;
-            border-top: 0.1em solid rgb(148, 146, 146);
-            /* border-right: 0.1em solid red;
-            border-left: 0.1em solid red; */
         }
 
         body {
-            /* background-color:whitesmoke !important; */
-            /* margin-bottom: 4em; */
-            /* background-image: url('../img/background-worst-password-blue.png'); */
             background-repeat: no-repeat;
             background-size: cover;
-            /* background-color:whitesmoke; */
             height: 100%;
-            background: rgb(255, 255, 255);
-            background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(227, 227, 227, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(175, 238, 255, 1) 100%);
+            background-image: url('../img/blue-gradient-background.png');
         }
-
-        /* .container-fluid{
-            background-image: url('../img/background-worst-password-blue.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-color:whitesmoke;
-            height: 100%;
-        } */
-
-        /* #design ul li a:hover span,
-        #design .using>li:hover>a>span {
-            border-bottom: 2px solid #FA9C14;
-            transition: 0.1s;
-        }
-
-        #dev ul li a:hover span,
-        #dev .using>li:hover>a>span {
-            border-bottom: 2px solid red;
-            transition: 0.1s;
-        }
-
-        #blog ul li a:hover span,
-        #blog .using>li:hover>a>span {
-            border-bottom: 2px solid blue;
-            transition: 0.1s;
-        } */
     </style>
-    <!-- <script type="text/javascript">
-        function date_time(id) {
-            date = new Date;
-            year = date.getFullYear();
-            month = date.getMonth();
-            months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev');
-            d = date.getDate();
-            day = date.getDay();
-            days = new Array('sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-            h = date.getHours();
-            if (h < 10) {
-                h = "0" + h;
-            }
-            m = date.getMinutes();
-            if (m < 10) {
-                m = "0" + m;
-            }
-            s = date.getSeconds();
-            if (s < 10) {
-                s = "0" + s;
-            }
-            result = '' + days[day] + ' ' + d + ' ' + months[month] + ' ' + year + ' ' + h + ':' + m + ':' + s;
-            document.getElementById(id).innerHTML = result;
-            setTimeout('date_time("' + id + '");', '1000');
-            return true;
-        }     
-    </script> -->
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
 </head>
 
 <body>

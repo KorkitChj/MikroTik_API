@@ -185,7 +185,6 @@ if (!$_SESSION["cus_name"]) {
           <div class="form-group col-md-12 ">
             <?php
             $date = strtotime("+7 day");
-            // echo "<b>กำหนดชำระภายใน:<b> "."<button type=\"bottom\" class=\"btn btn-danger\">".date('M d, Y', $date)."</button>";
             echo "<b>กำหนดชำระภายใน:<b> "."<input class=\"btn btn-danger\" readonly=\"readonly\" value=\"".date('Y-m-d', $date)."\" name=\"date\" id=\"date\" />";
             ?>
             <p align="right"><label for="order_ยอดรวม">ยอดรวม</label>
@@ -197,10 +196,8 @@ if (!$_SESSION["cus_name"]) {
             <div class="actions">
               <div class='form-group'>
                 <div class='text-right'>
-                  <!-- <a href="invoices.php" class="btn btn-primary">ยืนยันการสั่งซื้อ</button></a> -->
                   <button type="submit" class="btn btn-primary" name="sm">ยืนยันการสั่งซื้อ</button>
                   <button type="submit" class="btn btn-warning" name="in">ใบ Invoice</button>
-                  <!-- <a href="invoice" class="btn btn-warning" name="in" onclick="return confirm('ปริ้นใบ Invoice');">ใบ Invoice</a> -->
                   <button type="bottom" class="btn btn-danger" onclick="window.history.back();">ยกเลิก</button>
                   <br><br>
                 </div>

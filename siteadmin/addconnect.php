@@ -1,18 +1,18 @@
 <?php
-session_start();
+require('../site/conn.php');
 ?>
 <?php
 error_reporting(0);
-require('../config/routeros_api.class.php');
-require('../include/connect_db.php');
-require('../template/template.html');
 if (!$_SESSION["cus_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <?php
     $id = $_SESSION['cus_id'];
-    if ($result = $conn->query("SELECT * FROM siteadmin WHERE cus_id = '$id'")) {
-        $numrows = $result->num_rows;
+    $sql = "SELECT * FROM siteadmin WHERE cus_id = :id";
+    $query = $conn->prepare($sql);
+    $query->bindparam(':id', $id);
+    if ($query->execute()) {
+        $numrows = $query->rowCount();
         if ($numrows == 0) {
             echo "<script>";
             echo "alert(\"หมดอายุแล้ว\");";
@@ -31,31 +31,66 @@ if (!$_SESSION["cus_id"]) {
         $cus_id = $_SESSION["cus_id"];
         $idl = $_POST['idl'];
         if ($idl) {
-            $sql1 = "UPDATE location SET ip_address='$ipaddress',username='$username'
-            ,password='$password',api_port='$portapi',working_site='$namesite'WHERE location_id = '$idl'";
-            if ($conn->query($sql1)) {
-                echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">บันทึกข้อมูลแล้ว</h5>";
-                // echo "<script language='javascript'>alert('บันทึกข้อมูลแล้ว')</script>";
-                echo "<meta http-equiv=\"refresh\" content=\"0;url=connectstatus.php\">";
-                exit(0);
-            } else {
-                echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">ไม่สามารถแก้ไขข้อมูลได้กรุณาเปลี่ยน IP Address</h5>";
-                // echo $conn->error;
+            try {
+                $sql5 = "UPDATE location SET ip_address= :ipaddress,username= :username
+            ,password= :password ,api_port= :portapi,working_site= :namesite WHERE location_id = :idl";
+                $query5 = $conn->prepare($sql5);
+                $query5->bindparam(':ipaddress', $ipaddress);
+                $query5->bindparam(':username', $username);
+                $query5->bindparam(':password', $password);
+                $query5->bindparam(':portapi', $portapi);
+                $query5->bindparam(':namesite', $namesite);
+                $query5->bindparam(':idl', $idl);
+                $query5->execute();
+            } catch (PDOException $e) {
+                $message = $e->getMessage();
+                echo "<div class=\"alert alert-danger alert-dismissible fade show\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                        <strong>Unsuccess!</strong>ไม่สามารถแก้ไขข้อมูลได้กรุณาเปลี่ยน IP Address
+                        </div>";
+            }
+            if (empty($e)) {
+                echo "<div class=\"alert alert-success alert-dismissible fade show\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                        <strong>Success!</strong>แก้ไขข้อมูลแล้ว
+                        </div>";
+                echo "<meta http-equiv=\"refresh\" content=\"1;url=connectstatus.php\">";
             }
         } else {
-            $result = $conn->query("SELECT * FROM location WHERE ip_address = '$ipaddress'");
-            if ($result->num_rows != 0) {
-                echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">ไม่สามารถเพิ่มข้อมูลได้กรุณาเปลี่ยน IP Address</h5>";
+            $sql3 = "SELECT * FROM location WHERE ip_address = :ipaddress";
+            $query3 = $conn->prepare($sql3);
+            $query3->bindparam(':ipaddress', $ipaddress);
+            $query3->execute();
+            if ($query3->rowCount() != 0) {
+                echo "<div class=\"alert alert-danger alert-dismissible fade show\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                        <strong>Unsuccess!</strong>ไม่สามารถเพิ่มข้อมูลได้กรุณาเปลี่ยน IP Address
+                        </div>";
             } else {
-                $sql = "INSERT INTO  location VALUES
-                ('','$username','$password','$namesite','$portapi','$ipaddress','$cus_id')";
-                if ($conn->query($sql)) {
-                    echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">บันทึกข้อมูลแล้ว</h5>";
-                    // echo "<script language='javascript'>alert('บันทึกข้อมูลแล้ว')</script>";
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=connectstatus.php\">";
-                    exit(0);
-                } else {
-                    echo $conn->error;
+                try{
+                    $sql4 = "INSERT INTO  location VALUES
+                    ('',:username,:password,:namesite,:portapi,:ipaddress,:cus_id)";
+                    $query4 = $conn->prepare($sql4);
+                    $query4->bindparam(':username' ,$username);
+                    $query4->bindparam(':password',$password);
+                    $query4->bindparam(':namesite',$namesite);
+                    $query4->bindparam(':portapi',$portapi);
+                    $query4->bindparam(':ipaddress',$ipaddress);
+                    $query4->bindparam(':cus_id',$cus_id);
+                    $query4->execute();
+                }
+                catch(PDOException $e) {
+                    echo "<div class=\"alert alert-danger alert-dismissible fade show\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                        <strong>Unsuccess!</strong>echo $e
+                        </div>";
+                }
+                if(empty($e)){
+                    echo "<div class=\"alert alert-success alert-dismissible fade show\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                        <strong>Unsuccess!</strong>บันทึกข้อมูลแล้ว
+                        </div>";
+                    echo "<meta http-equiv=\"refresh\" content=\"1;url=connectstatus.php\">";
                 }
             }
         }
@@ -63,24 +98,26 @@ if (!$_SESSION["cus_id"]) {
     ?>
     <style>
         #border-login {
-            /* background: #e3e3e3; */
-            /* background: url('../img/3.jpg');
-            background-color: rgba(255, 0, 0, 0.4); */
-            background:honeydew;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-color: rgba(0, 0, 0, 0.2);
             padding: 1.5em;
             border-radius: 5px;
-            /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
             margin-bottom: 2em;
+            color: white;
+            border: 2px dotted white;
         }
+
         .btn-danger,
         .btn-primary {
             background-color: white;
             color: black;
         }
-        .container{
+
+        .container {
             margin-bottom: -30em;
+        }
+
+        .pad-a {
+            background-color: rgba(0, 0, 0, 0.3);
         }
     </style>
     <title>Add Connect</title>
@@ -98,53 +135,53 @@ if (!$_SESSION["cus_id"]) {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item ">
+                            <li class="nav-item pad">
                                 <a href="connectstatus.php" class="nav-link ">
                                     <span class="badge badge-primary"><i class="fa fa-home"></i></span>
                                     หน้าหลัก</a>
                                 </a>
                             </li>
-                            <li class="nav-item active">
+                            <li class="nav-item active pad-a">
                                 <a href="#" class="nav-link active">
                                     <span class="badge badge-primary"><i class="fas fa-hotel"></i></span>
                                     เพิ่มสถานบริการ</a>
                             </li>
                             <!-- <li class="nav-item dropdown">
-                                                                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                                                <span class="badge badge-primary"><i class="fas fa-user"></i></span>
-                                                                                                                พนักงานดูแล
-                                                                                                            </a>
-                                                                                                            <div class="dropdown-menu">
-                                                                                                                <a href="employeestatus.php" class="dropdown-item">สถานะพนักงาน</a>
-                                                                                                                <a href="addemployee.php" class="dropdown-item">เพิ่มพนักงาน</a>
-                                                                                                            </div>
-                                                                                                        </li>
-                                                                                                        <li class="nav-item dropdown">
-                                                                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                                                <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
-                                                                                                                Hotspot
-                                                                                                            </a>
-                                                                                                            <div class="dropdown-menu">
-                                                                                                                <a href="profilestatus.php" class="dropdown-item">สถานะ Profile</a>
-                                                                                                                <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a>
-                                                                                                            </div>
-                                                                                                        </li>
-                                                                                                        <li class="nav-item dropdown">
-                                                                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                                                <span class="badge badge-primary"><i class="fas fa-unlock"></i></span>
-                                                                                                                ตั้งค่าเว็บไม่ต้อง Login
-                                                                                                            </a>
-                                                                                                            <div class="dropdown-menu">
-                                                                                                                <a href="wallgardenstatus.php" class="dropdown-item">สถานะ</a>
-                                                                                                                <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a>
-                                                                                                            </div>
-                                                                                                        </li> -->
-                            <li class="nav-item">
+                                                                                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                                                                                                        <span class="badge badge-primary"><i class="fas fa-user"></i></span>
+                                                                                                                        พนักงานดูแล
+                                                                                                                    </a>
+                                                                                                                    <div class="dropdown-menu">
+                                                                                                                        <a href="employeestatus.php" class="dropdown-item">สถานะพนักงาน</a>
+                                                                                                                        <a href="addemployee.php" class="dropdown-item">เพิ่มพนักงาน</a>
+                                                                                                                    </div>
+                                                                                                                </li>
+                                                                                                                <li class="nav-item dropdown">
+                                                                                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                                                                                                        <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
+                                                                                                                        Hotspot
+                                                                                                                    </a>
+                                                                                                                    <div class="dropdown-menu">
+                                                                                                                        <a href="profilestatus.php" class="dropdown-item">สถานะ Profile</a>
+                                                                                                                        <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a>
+                                                                                                                    </div>
+                                                                                                                </li>
+                                                                                                                <li class="nav-item dropdown">
+                                                                                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                                                                                                        <span class="badge badge-primary"><i class="fas fa-unlock"></i></span>
+                                                                                                                        ตั้งค่าเว็บไม่ต้อง Login
+                                                                                                                    </a>
+                                                                                                                    <div class="dropdown-menu">
+                                                                                                                        <a href="wallgardenstatus.php" class="dropdown-item">สถานะ</a>
+                                                                                                                        <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a>
+                                                                                                                    </div>
+                                                                                                                </li> -->
+                            <li class="nav-item pad">
                                 <a href="changpwsite.php" class="nav-link ">
                                     <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
                                     เปลี่ยนรหัสผ่าน</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item pad">
                                 <a href="cus_logout.php" class="nav-link " onclick="return confirm('ยืนยันการออกจากระบบ')">
                                     <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
                                     ออกจากระบบ</a>
@@ -157,22 +194,18 @@ if (!$_SESSION["cus_id"]) {
     </div>
     </div>
     <div class="container">
-        <!-- <div class="row">
-                                                                                <div class="col d-flex justify-content-center">
-                                                                                    <p>
-                                                                                        <h3 style="font-weight:bold;color:white;margin-top:1em">เพิ่มสถานบริการ</h3>
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div> -->
         <button type="button" style="margin:1em 1em" class="btn btn-danger "><a style="color:black;text-decoration:none" href="connectstatus.php">รายการสถานะการเชื่อมต่อ</a></button>
         <div class="row">
             <?php
             if (isset($_GET['action'])) {
                 if ($_GET['action'] == "edit_site") {
                     $id = $_GET['id'];
-                    $result = $conn->query("SELECT * FROM location WHERE location_id = $id");
-                    $row = $result->fetch_array(MYSQLI_ASSOC);
-                    // echo $row['ip_address'];
+                    $sql2 = "SELECT * FROM location WHERE location_id = :id";
+                    $query2 = $conn->prepare($sql2);
+                    $query2->bindparam( ':id',$id);
+                    $query2->execute();
+                    $row = $query2->fetch(PDO::FETCH_ASSOC);
+                    //echo "<script> window.scrollBy(0, 60);</script>";
                     echo "<div class=\"col d-flex justify-content-center\">";
                     echo "<div id=\"border-login\">";
                     echo "<form action=\"\" id=\"site\" method=\"post\">";
@@ -224,6 +257,7 @@ if (!$_SESSION["cus_id"]) {
                     echo "</div>";
                 }
             } else {
+                //echo "<script> window.scrollBy(0, 60);</script>";
                 echo "<div class=\"col d-flex justify-content-center\">";
                 echo "<div id=\"border-login\">";
                 echo "<form action=\"\" id=\"site\" method=\"post\">";
@@ -269,49 +303,6 @@ if (!$_SESSION["cus_id"]) {
                 echo "</div>";
             }
             ?>
-            <!-- <div class="col d-flex justify-content-center">
-                                                                                    <div id="border-login">
-                                                                                        <form action="" id="site" method="post">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="ipaddress" class="col-sm-4 col-form-label">IP:&nbsp; <i class="fas fa-server"></i></label>
-                                                                                                <div class="col-sm-8">
-                                                                                                    <input type="text" class="form-control " name="ipaddress" placeholder="ไอพี หรือ โดเมนเนม" required>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="form-group row">
-                                                                                                <label for="username" class="col-sm-4 col-form-label">Username:&nbsp; <i class="fas fa-user"></i></label>
-                                                                                                <div class="col-sm-8">
-                                                                                                    <input type="text" class="form-control" name="username" placeholder="ชื่อใช้งาน" required>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="form-group row">
-                                                                                                <label for="password" class="col-sm-4 col-form-label">Password:&nbsp;<i class="fas fa-key"></i></label>
-                                                                                                <div class="col-sm-8">
-                                                                                                    <input type="password" class="form-control" name="password" placeholder="รหัสผ่าน" required>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="form-group row">
-                                                                                                <label for="portapi" class="col-sm-4 col-form-label">API Port:</label>
-                                                                                                <div class="col-sm-8">
-                                                                                                    <input type="text" class="form-control" name="portapi" placeholder="พอร์ตเอพีไอ" required>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="form-group row">
-                                                                                                <label for="namesite" class="col-sm-4 col-form-label">Site Name:</label>
-                                                                                                <div class="col-sm-8">
-                                                                                                    <input type="text" class="form-control" name="namesite" placeholder="ชื่อไซต์งาน" required>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="form-group row">
-                                                                                                <label for="b" class="col-sm-4 col-form-label"></label>
-                                                                                                <div class="col-sm-8">
-                                                                                                    <button type="submit" name="connect" class="btn btn-primary">บันทึก</button>
-                                                                                                    <button type="bottom" class="btn btn-danger" onclick="window.location='connectstatus.php'">ยกเลิก</button>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div> -->
         </div>
     </div>
 <?php } ?>

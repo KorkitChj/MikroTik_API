@@ -8,45 +8,61 @@ if (isset($_POST['username'])) {
     $password = MD5($_POST['password']);
 
     if ($username) {
-        if ($admin = $conn->query("SELECT * FROM admin WHERE  
-        username = '$username' AND pass_w = '$password'")) {
-            if ($admin->num_rows == 1) {
-                while ($row = $admin->fetch_array(MYSQLI_ASSOC)) {
+            $sql = "SELECT * FROM admin WHERE  
+            username = :username AND pass_w = :password";
+            $query = $conn->prepare($sql);
+            $query->bindparam(':username', $username);
+            $query->bindparam(':password', $password);
+        if ($query->execute()) {
+            if ($query->rowCount() == 1) {
+                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                     $_SESSION["admin_id"] = $row["admin_id"];
                     $_SESSION["admin_name"] = $row["username"];
                 }
                 Header("Location:admin/admin.php");
                 exit(0);
             } else {
-                if ($employee = $conn->query("SELECT * FROM employee WHERE  
-                        username = '$username' AND pass_w = '$password'")) {
-                    if ($employee->num_rows == 1) {
-                        while ($row = $employee->fetch_array(MYSQLI_ASSOC)) {
+                $sql2 = "SELECT * FROM employee WHERE  
+                username = :username AND pass_w = :password";
+                $query2 = $conn->prepare($sql2);
+                $query2->bindparam(':username', $username);
+                $query2->bindparam(':password', $password);
+                if ($query2->execute()) {
+                    if ($query2->rowCount() == 1) {
+                        while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
                             $_SESSION["emp_id"] = $row["emp_id"];
                             $_SESSION["emp_name"] = $row["username"];
                         }
                         Header("Location:employee/employee.php");
                         exit(0);
                     } else {
-                        if ($siteadmin = $conn->query("SELECT * FROM siteadmin WHERE  
-                        username = '$username' AND pass_w = '$password'")) {
-                            if ($siteadmin->num_rows != 1) {
+                        $sql3 = "SELECT * FROM siteadmin WHERE  
+                        username = :username AND pass_w = :password";
+                        $query3 = $conn->prepare($sql3);
+                        $query3->bindparam(':username', $username);
+                        $query3->bindparam(':password', $password);
+                        if ($query3->execute()) {
+                            if ($query3->rowCount() != 1) {
                                 echo "<script>";
                                 echo "alert(\"Username หรือ Password ไม่ถูกต้อง\");";
                                 echo "window.history.back()";
                                 echo "</script>";
                                 exit(0);
                             } else {
-                                while ($row = $siteadmin->fetch_array(MYSQLI_ASSOC)) {
+                                while ($row = $query3->fetch(PDO::FETCH_ASSOC)) {
                                     $_SESSION["cus_id"] = $row["cus_id"];
                                     $_SESSION["cus_name"] = $row["username"];
                                 }
-                                if ($sitepayment = $conn->query("SELECT b.cus_id FROM siteadmin AS a 
+                                $sql4 = "SELECT b.cus_id FROM siteadmin AS a 
                                 INNER JOIN orderpd AS b ON
                                 a.cus_id = b.cus_id 
                                 INNER JOIN payment AS c ON b.order_id = c.order_id
-                                 WHERE username = '$username' AND pass_w = '$password' AND paid = 1")) {
-                                    if ($sitepayment->num_rows != 1) {
+                                 WHERE username = '$username' AND pass_w = '$password' AND paid = 1";
+                                 $query4 = $conn->prepare($sql4);
+                                 $query4->bindparam(':username', $username);
+                                 $query4->bindparam(':password', $password);
+                                if ($query4->execute()) {
+                                    if ($query4->rowCount() != 1) {
                                         echo "<script>";
                                         echo "alert(\"กรุณารอการยืนยันการชำระเงินจากAdmin หรือคุณยังไม่ยืนยันชำระเงิน\");";
                                         echo "window.history.back()";

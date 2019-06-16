@@ -12,8 +12,11 @@ if (!$_SESSION["cus_id"]) {
         //$cus_id = $_GET['cus_id'];
     }
     $idc = $_SESSION['cus_id'];
-    if ($result = $conn->query("SELECT * FROM siteadmin WHERE cus_id = '$idc'")) {
-        $numrows = $result->num_rows;
+    $sql = "SELECT * FROM siteadmin WHERE cus_id = :id";
+    $query = $conn->prepare($sql);
+    $query->bindparam(':id', $idc);
+    if ($query->execute()) {
+        $numrows = $query->rowCount();
         if ($numrows == 0) {
             echo "<script>";
             echo "alert(\"หมดอายุแล้ว\");";
@@ -23,10 +26,12 @@ if (!$_SESSION["cus_id"]) {
             exit(0);
         }
     }
-
-    $sql = "SELECT * FROM location WHERE cus_id='" . $idc . "' AND location_id ='" . $location_id . "'";
-    $result = mysqli_query($link, $sql) or die("Could not connect");
-    $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $sql = "SELECT * FROM location WHERE cus_id= :idc  AND location_id = :location_id ";
+    $query1 = $conn->prepare($sql);
+    $query1->bindparam(':idc', $idc);
+    $query1->bindparam(':location_id', $location_id);
+    $query1->execute();
+    $rows = $query1->fetch(PDO::FETCH_ASSOC);
     $ip = $rows['ip_address'];
     $port = $rows['api_port'];
     $user = $rows['username'];
@@ -43,36 +48,50 @@ if (!$_SESSION["cus_id"]) {
                 echo "<meta http-equiv='refresh' content='0;url=index.php?opt=profile' />";
                 exit;
             } else {
-                $sql2 = "SELECT pass_router FROM employee WHERE emp_id = '$name_del'";
-                if ($result2 = $conn->query($sql2)) {
-                    $result3 = $result2->fetch_array(MYSQLI_ASSOC);
+                $sql2 = "SELECT pass_router FROM employee WHERE emp_id = :name_del";
+                $query2 = $conn->prepare($sql2);
+                $query2->bindparam(':name_del', $name_del);
+                if ($query2->execute()) {
+                    $result3 = $query2->fetch(PDO::FETCH_ASSOC);
                     $pass_router = $result3['pass_router'];
                     $ARRAY = $API->comm("/user/remove", array(
                         "numbers" => $pass_router,
                     ));
-                    $sql = "DELETE FROM employee WHERE emp_id = '$name_del'";
-                    $conn->query($sql);
-                    echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">ทำการลบแพคเกจที่เลือกเรียบร้อยแล้ว.</h5>";
+                    $sql = "DELETE FROM employee WHERE emp_id = :name_del";
+                    $query3 = $conn->prepare($sql);
+                    $query3->bindparam(':name_del', $name_del);
+                    $query3->execute();
+                    echo "<div class=\"alert alert-success alert-dismissible fade show\">
+                                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                                <strong>Success!</strong>ทำการลบแพคเกจที่เลือกเรียบร้อยแล้ว.
+                                </div>";
                     echo "<meta http-equiv='refresh' content='1;url=employeestatus.php?location_id=$location_id' />";
                 }
             }
         } elseif ($_POST['emp_id']) {
             $ide = implode(", ", $_POST['emp_id']);
             $result2 = $conn->query("SELECT pass_router FROM employee WHERE emp_id IN('" . implode("','", $_POST['emp_id']) . "')");
-            while ($result3 = $result2->fetch_array(MYSQLI_ASSOC)) {
+            while ($result3 = $result2->fetch(PDO::FETCH_ASSOC)) {
                 $pass_router = $result3['pass_router'];
                 $ARRAY = $API->comm("/user/remove", array(
                     "numbers" => $pass_router,
                 ));
             }
-            $conn->query("DELETE FROM employee WHERE emp_id IN($ide)");
-            echo "<h5 style=\"border-bottom:5px white solid;background:red;text-align:center;font-weight:bold;padding:0.5em;color:white\">ลบข้อมูลที่เลือกแล้ว</h5>";
+            $sql = "DELETE FROM employee WHERE emp_id IN($ide)";
+            $query = $conn->prepare($sql);
+            $query->execute();
+            echo "<div class=\"alert alert-success alert-dismissible fade show\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+        <strong>Success!</strong> ลบข้อมูลที่เลือกแล้ว
+        </div>";
             echo "<meta http-equiv='refresh' content='1;url=employeestatus.php?location_id=$location_id' />";
         }
     } else {
-        echo "<script language='javascript'>alert('Disconnect')</script>";
+        echo "<div class=\"alert alert-danger alert-dismissible fade show\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+        <strong>Unsuccess!</strong>Disconnect
+        </div>";
         echo "<meta http-equiv='refresh' content='0;url=../siteadmin/connectstatus.php'/>";
-        exit(0);
     }
     ?>
     <style>
@@ -86,11 +105,21 @@ if (!$_SESSION["cus_id"]) {
 
         .bg-info {
             background: #bdc3c7;
-            background: linear-gradient(to bottom,#bdc3c7,#2c3e50);
+            background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
             background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
         }
-        th{
-            color:darkblue;
+
+        th {
+            color: darkblue;
+        }
+        td{
+            color:white;
+        }
+        table.dataTable thead th{
+            border-bottom: 0;
+        }
+        .pad-a{
+            background-color:rgba(0, 0, 0, 0.3);
         }
     </style>
     <title>Employee Status</title>
@@ -109,17 +138,17 @@ if (!$_SESSION["cus_id"]) {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <!-- <li class="nav-item ">
-                                                <a href="../siteadmin/connectstatus.php" class="nav-link ">
-                                                    <span class="badge badge-primary"><i class="fa fa-home"></i></span>
-                                                    หน้าหลัก</a>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item ">
-                                                <a href="../siteadmin/addconnect.php" class="nav-link ">
-                                                    <span class="badge badge-primary"><i class="fas fa-hotel"></i></span>
-                                                    เพิ่มสถานบริการ</a>
-                                            </li> -->
-                            <li class="nav-item dropdown active">
+                                                    <a href="../siteadmin/connectstatus.php" class="nav-link ">
+                                                        <span class="badge badge-primary"><i class="fa fa-home"></i></span>
+                                                        หน้าหลัก</a>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item ">
+                                                    <a href="../siteadmin/addconnect.php" class="nav-link ">
+                                                        <span class="badge badge-primary"><i class="fas fa-hotel"></i></span>
+                                                        เพิ่มสถานบริการ</a>
+                                                </li> -->
+                            <li class="nav-item dropdown active pad-a">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <span class="badge badge-primary"><i class="fas fa-user"></i></span>
                                     พนักงานดูแล
@@ -129,7 +158,7 @@ if (!$_SESSION["cus_id"]) {
                                     <?php echo "<a class=\"dropdown-item\" href=\"addemployee.php?location_id=$location_id\">เพิ่มพนักงาน</a>" ?>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown pad">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
                                     Hotspot
@@ -138,10 +167,10 @@ if (!$_SESSION["cus_id"]) {
                                     <?php echo "<a class=\"dropdown-item\" href=\"profilestatus.php?location_id=$location_id\">สถานะ Profile</a>" ?>
                                     <?php echo "<a class=\"dropdown-item\" href=\"addprofile.php?location_id=$location_id\">เพิ่ม Profile</a>" ?>
                                     <!-- <a href="profilestatus.php" class="dropdown-item">สถานะ Profile</a>
-                                                    <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a> -->
+                                                        <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a> -->
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown pad">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <span class="badge badge-primary"><i class="fas fa-unlock"></i></span>
                                     ตั้งค่าเว็บไม่ต้อง Login
@@ -150,15 +179,15 @@ if (!$_SESSION["cus_id"]) {
                                     <?php echo "<a class=\"dropdown-item\" href=\"wallgardenstatus.php?location_id=$location_id\">สถานะ</a>" ?>
                                     <?php echo "<a class=\"dropdown-item\" href=\"addwallgarden.php?location_id=$location_id\">เพิ่ม</a>" ?>
                                     <!-- <a href="wallgardenstatus.php" class="dropdown-item ">สถานะ</a>
-                                                    <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a> -->
+                                                        <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a> -->
                                 </div>
                             </li>
                             <!-- <li class="nav-item">
-                                                <a href="../siteadmin/changpwsite.php" class="nav-link ">
-                                                    <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
-                                                    เปลี่ยนรหัสผ่าน</a>
-                                            </li> -->
-                            <li class="nav-item">
+                                                    <a href="../siteadmin/changpwsite.php" class="nav-link ">
+                                                        <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
+                                                        เปลี่ยนรหัสผ่าน</a>
+                                                </li> -->
+                            <li class="nav-item pad">
                                 <a href="../siteadmin/cus_logout.php" class="nav-link " onclick="return confirm('ยืนยันการออกจากระบบ')">
                                     <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
                                     ออกจากระบบ</a>
@@ -172,20 +201,12 @@ if (!$_SESSION["cus_id"]) {
     </div>
 
     <div class="container">
-        <!-- <div class="row ">
-                                                <div class="col d-flex justify-content-center">
-                                                    หน้าถัดจากBrandner
-                                                    <p>
-                                                        <h3 style="font-weight:bold">ข้อมูลพนักงานดูแลระบบ</h3>
-                                                    </p>
-                                                </div>
-                                            </div> -->
         <div class="row ">
             <div class="col">
                 <form action="#" method="post" id="confirm">
                     <?php echo "<button type=\"button\" style=\"margin:1em 1em\" class=\"btn btn-info \"><a style=\"color:black;text-decoration:none\" href=\"addemployee.php?location_id=$location_id\">เพิ่มพนักงาน</a></button>" ?>
-                    <button class="btn btn-danger" style="margin-right:1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
-                    <table id="example" class="table table-striped table-bordered  table-sm" style="width:100%">
+                    <button onClick="return confirm('คุณต้องการที่จะลบข้อมูลที่เลือกนี้หรือไม่ ?');" class="btn btn-danger" style="margin-right:1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
+                    <table id="example" class="table table-striped table-sm" style="width:100%">
                         <thead class="bg-info">
                             <tr>
                                 <th></th>
@@ -201,10 +222,12 @@ if (!$_SESSION["cus_id"]) {
                             if (isset($_GET['location_id'])) {
                                 $location_id = $_GET['location_id'];
                                 $sql = "SELECT b.emp_id,a.working_site,b.full_name,b.username FROM location AS a INNER JOIN employee AS b
-                        on a.location_id = b.location_id WHERE a.location_id = '$location_id'";
-                                $result = $conn->query($sql);
+                        on a.location_id = b.location_id WHERE a.location_id = :location_id";
+                                $query = $conn->prepare($sql);
+                                $query->bindparam(':location_id', $location_id);
+                                $query->execute();
                                 $n = 0;
-                                while ($rows = $result->fetch_array(MYSQLI_ASSOC)) {
+                                while ($rows = $query->fetch(PDO::FETCH_ASSOC)) {
                                     $n++;
                                     echo "<tr>";
                                     echo "<td><input type=\"checkbox\" class=\"cus_checkbox\" name=\"emp_id[]\" value=" . $rows['emp_id'] . "></td>";
@@ -224,7 +247,6 @@ if (!$_SESSION["cus_id"]) {
                                     echo "</td>";
                                     echo "</tr>";
                                 }
-                                $conn->close();
                             }
                             ?>
                         </tbody>
