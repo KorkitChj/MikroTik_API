@@ -7,6 +7,7 @@ if (!$_SESSION["cus_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <?php
+    include('useronlinejs.php');
     $id = $_SESSION['cus_id'];
     $sql = "SELECT * FROM siteadmin WHERE cus_id = :id";
     $query = $conn->prepare($sql);

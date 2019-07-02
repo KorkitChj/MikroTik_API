@@ -23,35 +23,31 @@ if (!$_SESSION["emp_id"]) {
         <div class="row">
             <div class="col ">
                 <nav class="navbar fixed-top navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="employee.php">Employee: <?php print_r($_SESSION["emp_name"]); ?></a>
+                    <a class="navbar-brand" href="employee.php"><span style="color:White">Employee</span><span style="color:blue">|</span><?php print_r($_SESSION["emp_name"]); ?></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item ">
-                                <a href="employee.php" class="nav-link ">
-                                    <span class="badge badge-primary"><i class="fa fa-home"></i></span>
-                                    หน้าหลัก</a>
-                                </a>
+                            <li class="nav-item">
+                                <a href="useronline.php" class="nav-link ">
+                                    <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
+                                    สถานะ User</a>
                             </li>
-                            <li class="nav-item dropdown ">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                    <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
-                                    Hotspot
-                                </a>
-                                <div class="dropdown-menu active">
-                                    <a href="useronline.php" class="dropdown-item ">สถานะ User</a>
-                                    <a href="useronlinegroup.php" class="dropdown-item">สถานะ User กลุ่ม</a>
-                                    <a href="adduser.php" class="dropdown-item">เพิ่ม User ครั้งละ 1คน</a>
-                                    <a href="addusergroup.php" class="dropdown-item">เพิ่ม User ครั้งละเป็นกลุ่ม</a>
-                                    <a href="#" class="dropdown-item active">ปริ้นคูปอง</a>
-                                </div>
+                            <li class="nav-item">
+                                <a href="adduser.php" class="nav-link ">
+                                    <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
+                                    เพิ่ม User ครั้งละ 1คน</a>
                             </li>
-                            <li class="nav-item ">
-                                <a href="changpwemp.php" class="nav-link">
-                                    <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
-                                    เปลี่ยนรหัสผ่าน</a>
+                            <li class="nav-item">
+                                <a href="addusergroup.php" class="nav-link ">
+                                    <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
+                                    เพิ่ม User ครั้งละเป็นกลุ่ม</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a href="printuser.php" class="nav-link ">
+                                    <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
+                                    คูปอง</a>
                             </li>
                             <li class="nav-item">
                                 <a href="emp_logout.php" class="nav-link ">
@@ -105,4 +101,4 @@ if (!$_SESSION["emp_id"]) {
             $('#example').DataTable();
         });
     </script>
-      <?php } ?>
+<?php } ?>

@@ -32,6 +32,7 @@ if (!$_SESSION["cus_id"]) {
         }
     </style>
     <?php
+    include('../siteadmin/useronlinejs.php');
     error_reporting(0);
     $idc = $_SESSION['cus_id'];
     $sql = "SELECT * FROM siteadmin WHERE cus_id = :id";

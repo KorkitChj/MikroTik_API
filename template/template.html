@@ -7,32 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!--new-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="../js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../css/sweetalert.css" type="text/css" />
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <!--dropdown-->
-    <!-- <script src="../js/popper_1_14_3.min.js"></script> -->
-    <!-- <script src="../js/jquery-3.3.1.min.js"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!--ใช้คู่กันทำค้นหาให้สวย-->
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
-    <script src="../js/delete_script.js"></script>
-
-    <!--custom css-->
-    <link rel="stylesheet" href="../css/custom-site-Copy.css">
-    <!--logo-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
         integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     <link href="../glyphicons/css/bootstrap-glyphicons.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!--table logo-->
+
+
+
+
+    <!--ใช้คู่กันทำค้นหาให้สวย-->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+
+
+
     <style>
         .navbar-dark {
-            background: #2a6592 !important;
+            /* background:black !important; */
+            /* background: rgb(71, 71, 71);
+            background: linear-gradient(180deg, rgba(71, 71, 71, 1) 0%, rgba(40, 40, 40, 1) 100%, rgba(186, 186, 186, 1) 100%, rgba(181, 181, 181, 1) 100%, rgba(0, 0, 0, 1) 100%); */
+            background: rgb(0, 0, 0);
+            background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(46, 46, 46) 100%);
         }
 
         table {
@@ -51,7 +60,7 @@
             display: inline-flex;
             margin-bottom: .5rem;
             margin-top: .5rem;
-
+            color: white;
         }
 
         th,
@@ -59,71 +68,207 @@
             text-align: center;
         }
 
-        .pad>a:hover {
-            background-color: rgba(0, 0, 0, 0.3);
+        a {
+            margin-left: 2px;
+            margin-right: 2px;
         }
 
-        .bor {
-            border-bottom: 0.75em solid red;
+        .bor-red {
+            border-bottom: 0.2em solid rgb(0, 38, 255);
         }
 
-        .container {
-            background-color: rgba(0, 0, 0, 0.3);
-            height: 40em;
+        .bor-orange {
+            border-bottom: 0.2em solid orange;
+        }
+
+        .bor-yellow {
+            border-bottom: 0.2em solid yellow;
+        }
+
+        .bor-green {
+            border-bottom: 0.2em solid green;
+        }
+
+        .bor-violet {
+            border-bottom: 0.2em solid violet;
         }
 
         body {
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 100%;
-            background-image: url('../img/blue-gradient-background.png');
+            margin: 0;
+            padding: 0;
+            background:
+                linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
+                linear-gradient(225deg, black 25%, transparent 25%) -50px 0,
+                linear-gradient(315deg, black 25%, transparent 25%),
+                linear-gradient(45deg, black 25%, transparent 25%);
+            background-size: 2em 2em;
+            background-color: #232323;
+        }
+
+        .box {
+            width: 1450px;
+            padding: 20px;
+            /* background-color: #fff; */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 6em;
+            margin-bottom: 15px;
+            -webkit-box-shadow: 10px 5px 90px 0px rgba(255, 255, 255, 0.66);
+            -moz-box-shadow: 10px 5px 90px 0px rgba(255, 255, 255, 0.66);
+            box-shadow: 10px 5px 90px 0px rgba(255, 255, 255, 0.66);
+        }
+
+        th {
+            color: darkblue;
+        }
+
+        center>p {
+            font-size: 2em;
+        }
+
+        table.dataTable thead th {
+            border-bottom: 0;
+        }
+
+        .pad-a {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .navbar-branda>img {
+            max-height: 100%;
+            padding: 1%;
+            height: 7%;
+            border-radius: 10px;
+            width: auto;
+            margin: 0 auto;
+            margin-left: 3em;
+            border: 1px solid white;
+            -o-object-fit: contain;
+            object-fit: contain;
+
+        }
+
+        #border-login {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1.5em;
+            border-radius: 5px;
+            margin-top: 5em;
+            margin-bottom: 5em;
+            border: white 2px solid;
+        }
+
+        .m {
+            margin-right: 4em;
+        }
+
+        .dropdown:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .dropdown>a {
+            text-decoration: none;
+        }
+
+        /* .btn-danger {
+            background-color: #fff;
+            color: black;
+        } */
+
+        .fa-key {
+            color: tomato;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .modal-body {
+            background-color: red;
+        }
+
+        .modal-body>p {
+            font-size: 20px;
+            font-style: italic;
         }
     </style>
+    <!-- Modal Logout-->
+    <div class="modal fade" id="logoutModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn btn-dark bg-dark" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-primary logout">ออกจากระบบ</button>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            $('#example').DataTable();
+            $("#myform").submit(function (event) {
+                submitForm();
+                return false;
+            });
+            function submitForm() {
+                $.ajax({
+                    type: "POST",
+                    url: "../include/s_changpw.php",
+                    cache: false,
+                    data: $('form#myform').serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success == true) {
+                            swal("สำเร็จ", response.messages, "success");
+                            $("#changpwModal").modal('hide');
+                        }
+                        else {
+                            $('input[type="password"]').val('');
+                            swal("ผิดพลาด", response.messages, "error");
+                        }
+                    },
+                    error: function () {
+                        alert("Error");
+                    }
+                });
+            }
+            $(".logout").click(function () {
+                swal({
+                    title: "ออกจากระบบ?",
+                    text: "คุณกำลังจะออกจากระบบ!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            swal("ออกจากระบบ!", "ออกจากระบบเสร็จสิ้น!", "success");
+                            window.location.href = "../login.php";
+                        } else {
+                            swal("ยกเลิก", "ยกเลิกออกจากระบบ :)", "error");
+                            e.preventDefault();
+                        }
+                    });
+            });
         });
+        $(".btn-group, .dropdown").hover(
+            function () {
+                $('>.dropdown-menu', this).stop(true, true).fadeIn("fast");
+                $(this).addClass('open');
+            },
+            function () {
+                $('>.dropdown-menu', this).stop(true, true).fadeOut("fast");
+                $(this).removeClass('open');
+            });
     </script>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row float-right">
-            <div class="col">
-                <!---->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col ">
-                <!---->
-            </div>
-        </div>
-    </div>
-    <div class=" row mx-auto d-block bor">
-        <div class="col ">
-            <p>
-                <div style="height:1em"></div>
-            </p>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row ">
-            <div class="col ">
-                <!-- <div style="color:rgb(144, 142, 142);
-                        padding: 15px 15px 15px 15px;
-                        float: left;
-                        font-weight: bold;
-                        font-size: 18px;"> Last access : <span id="date_time" style=" font-size: 18px;"></span>
-                    <script type="text/javascript"> window.onload = date_time('date_time');</script>
-                </div> -->
-                <!--หน้าถัดจากBrandner-->
-            </div>
-
-            <div class="col ">
-
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

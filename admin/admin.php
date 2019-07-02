@@ -5,30 +5,13 @@ session_start();
 if (!$_SESSION["admin_id"]) {
     Header("Location:../login.php");
 } else { ?>
-    <?php
-    require('../template/template.html');
-    require('../include/connect_db.php');
-    ?>
     <title>Admin</title>
-    <style>
-        .bg-info {
-            background: #bdc3c7;
-            background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
-            background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
-        }
-        th {
-            color: darkblue;
-        }
-        td{
-            color:white;
-        }
-        table.dataTable thead th{
-            border-bottom: 0;
-        }
-        .pad-a{
-            background-color:rgba(0, 0, 0, 0.3);
-        }
-    </style>
+    <?php
+    $admin_name = $_SESSION["admin_name"];
+    require('../template/template.html');
+    require('function.php');
+    include('changpw.php');
+    ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col ">
@@ -36,8 +19,9 @@ if (!$_SESSION["admin_id"]) {
         </div>
         <div class="row">
             <div class="col ">
-                <nav class="navbar fixed-top navbar-icon-top navbar-expand-lg navbar-dark bg-danger">
-                    <a class="navbar-brand" href="#"><span style="color:red">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["admin_name"]); ?></a>
+                <nav class="navbar fixed-top navbar-icon-top navbar-expand-lg navbar-dark bg-dark bor-orange">
+                    <?php echo admin_image_profile($admin_name); ?>
+                    <a class="navbar-brand" href="#"><span style="color:white;text-shadow:2px 2px black">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["admin_name"]); ?></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -45,78 +29,104 @@ if (!$_SESSION["admin_id"]) {
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item  active pad-a">
                                 <a href="#" class="nav-link active">
-                                    <span class="badge badge-primary"><i class="fa fa-home"></i></span>
-                                    หน้าหลัก</a>
+                                    <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
                             </li>
                             <li class="nav-item  pad">
                                 <a href="checkpayment.php" class="nav-link ">
-                                    <span class="badge badge-primary"><i class="fas fa-user-check"></i></span>
+                                    <i class="glyphicon glyphicon-check"></i>&nbsp;
                                     ยืนยันการชำระเงิน</a>
                             </li>
                             <li class="nav-item  pad">
                                 <a href="manage.php" class="nav-link ">
-                                    <span class="badge badge-danger"><i class="fas fa-tasks"></i></span>
+                                    <i class="glyphicon glyphicon-list"></i>&nbsp;
                                     จัดการเจ้าของไซต์</a>
                             </li>
                             <li class="nav-item  pad">
-                                <a href="changpw.php" class="nav-link ">
-                                    <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
-                                    เปลี่ยนรหัสผ่าน</a>
-                            </li>
-                            <li class="nav-item  pad">
-                                <a href="admin_logout.php" class="nav-link" onclick="return confirm('ยืนยันการออกจากระบบ')">
-                                    <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
-                                    ออกจากระบบ</a>
+                                <a href="useronline.php" class="nav-link ">
+                                    <i class="glyphicon glyphicon-globe"></i>&nbsp;
+                                    User Online</a>
                             </li>
                         </ul>
+                        <div class="navbar-nav m dropdown">
+                            <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="">
+                                <span class="glyphicon glyphicon-cog"></span>&nbsp;จัดการ
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                <li><a href="" data-toggle="modal" data-target="#changpwModal" class="dropdown-item">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                        เปลี่ยนรหัสผ่าน</a></li>
+                                <li><a href="" class="dropdown-item" data-toggle="modal" data-target="#logoutModalCenter">
+                                        <i class="glyphicon glyphicon-log-out"></i></span>
+                                        ออกจากระบบ</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row ">
-            <div class="col d-flex justify-content-center ">
-                <!--หน้าถัดจากBrandner-->
-                <p>
-                    <h3 style="font-weight:bold ;margin-top:1em;color:white">ข้อมูลสถานบริการอินเตอร์เน็ต</h3>
-                </p>
-            </div>
-        </div>
+    <div class="container-fluid box">
         <div class="row ">
             <div class="col">
-                <form action="admin.php" method="post">
-                    <table id="example" class="table table-striped table-hover table-sm" style="width:100%">
-                        <thead class="bg-info">
-                            <tr>
-                                <th>ID</th>
-                                <th>เจ้าของไซต์</th>
-                                <th>สถานบริการ</th>
-                                <th>เบอร์โทร</th>
-                                <th>E-mail</th>
-                                <!-- <th>ลบ</th> -->
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <?php 
-                            $sql = "SELECT * FROM siteadmin ORDER BY cus_id ASC";
-                            $result = $conn->query($sql);
-                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
-                                <tr>
-                                    <td><?php echo $row["cus_id"]; ?></td>
-                                    <td><?php echo $row["username"]; ?></td>
-                                    <td><?php echo $row["site_name"]; ?></td>
-                                    <td><?php echo $row["work_phone"]; ?></td>
-                                    <td><?php echo $row["e_mail"]; ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </form>
+                <center>
+                    <p>รายการลงทะเบียน</p>
+                </center>
+                <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
+                    <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
+                </button><br /><br />
+                <table id="site_manage" class="table table-striped table-hover table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th width="1%"></th>
+                            <th width="3%">รายการสั่งซื้อ</th>
+                            <th width="0.5%">รหัส</th>
+                            <th width="5%">เจ้าของไซต์</th>
+                            <th width="5%">สถานบริการ</th>
+                            <th width="5%">เบอร์โทร</th>
+                            <th width="5%">E-mail</th>
+                            <th width="2%">ลบ</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
+    <!-- remove modal -->
+    <div class="modal fade " tabindex="-1" role="dialog" id="removeMemberModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-trash"></span>ลบสมาชิก</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>คุณแน่ใจที่จะลบสมาชิก ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="removeBtn">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- remove all modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="removeAllMemberModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-trash"></span>ลบสมาชิกที่เลือก</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>คุณแน่ใจที่จะลบสมาชิกที่เลือก ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="removeAllBtn">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="admin_del.js"></script>
 <?php } ?>

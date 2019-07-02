@@ -6,6 +6,7 @@ if (!$_SESSION["cus_id"]) {
     Header("Location:../login.php");
 } else { ?>
     <?php
+    include('../siteadmin/useronlinejs.php');
     error_reporting(0);
     if (isset($_GET['location_id'])) {
         $location_id = $_GET['location_id'];

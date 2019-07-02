@@ -5,7 +5,7 @@ session_start();
 if (!$_SESSION["admin_id"]) {
     Header("Location:../login.php");
 } else { ?>
-    <title>Manage</title>
+    <title>User Online</title>
     <?php
     $admin_name = $_SESSION["admin_name"];
     require('../template/template.html');
@@ -36,13 +36,13 @@ if (!$_SESSION["admin_id"]) {
                                     <i class="glyphicon glyphicon-check"></i>&nbsp;
                                     ยืนยันการชำระเงิน</a>
                             </li>
-                            <li class="nav-item active pad-a">
-                                <a href="#" class="nav-link active">
+                            <li class="nav-item pad">
+                                <a href="manage.php" class="nav-link ">
                                     <i class="glyphicon glyphicon-list"></i>&nbsp;
                                     จัดการเจ้าของไซต์</a>
                             </li>
-                            <li class="nav-item  pad">
-                                <a href="useronline.php" class="nav-link ">
+                            <li class="nav-item active pad-a">
+                                <a href="#" class="nav-link active">
                                     <i class="glyphicon glyphicon-globe"></i>&nbsp;
                                     User Online</a>
                             </li>
@@ -68,60 +68,40 @@ if (!$_SESSION["admin_id"]) {
     <div class="container-fluid box">
         <div class="row ">
             <div class="col">
-                <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
-                    <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
-                </button><br /><br />
-                <table id="managemember" class="table table-striped table-hover table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th width="1%"></th>
-                            <th width="5%">เจ้าของไซต์</th>
-                            <th width="5%">สถานบริการ</th>
-                            <th width="2%">ราคา</th>
-                            <th width="3%">วันที่ชำระเงิน</th>
-                            <th width="3%">วันหมดอายุ</th>
-                            <th width="1%">ลบ</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- remove modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"><span class="glyphicon glyphicon-trash"></span>ลบสมาชิก</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <p>คุณแน่ใจที่จะลบสมาชิก ?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="removeBtn">Save changes</button>
+                <br /><br />
+                <div class="panel panel-default">
+                    <div class="panel-heading">Online User Details</div>
+                    <div id="user_login_status" class="panel-body">
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- remove all modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="removeAllMemberModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"><span class="glyphicon glyphicon-trash"></span>ลบสมาชิกที่เลือก</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <p>คุณแน่ใจที่จะลบสมาชิกที่เลือก ?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="removeAllBtn">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="manage_del.js"></script>
+    <script>
+    $(document).ready(function() {
+        <?php
+        if ($_SESSION["cus_id"]) {
+            ?>
+            fetch_user_login_data();
+            setInterval(function() {
+                fetch_user_login_data();
+            }, 3000);
+
+            function fetch_user_login_data() {
+                var action = "fetch_data";
+                $.ajax({
+                    url: "useronline_action.php",
+                    method: "POST",
+                    data: {
+                        action: action
+                    },
+                    success: function(data) {
+                        $('#user_login_status').html(data);
+                    }
+                });
+            } 
+        <?php }?> 
+    });
+</script>
 <?php } ?>
