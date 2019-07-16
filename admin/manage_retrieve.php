@@ -16,7 +16,7 @@ foreach ($result as $row) {
         $startdate = $row["transfer_date"];
         $enddate = strtotime('+183 days', strtotime($startdate));
     }
-    $checkbox = '<input type="checkbox" class="cus_checkbox" name="cus_id[]" value="' . $row["cus_id"] . '">';
+    $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="cus_checkbox custom-control-input" name="cus_id[]" value="'.$row["cus_id"].'"><span class="custom-control-indicator"></span></label>';
     $del = '<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeMember('.$row['cus_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
     $output['data'][] = array(
         $checkbox,

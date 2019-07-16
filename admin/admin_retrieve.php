@@ -40,7 +40,7 @@ foreach ($result as $row=>$val)
 			break;
 		}
 	}
-	$sub_array[] = '<input type="checkbox" class="cus_checkbox" name="cus_id[]" value="'.$val["cus_id"].'">';
+	$sub_array[] = '<label class="custom-control custom-checkbox"><input type="checkbox" class="cus_checkbox custom-control-input" name="cus_id[]" value="'.$val["cus_id"].'"><span class="custom-control-indicator"></span></label>';
 	$sub_array[] = $status;
 	$sub_array[] = $val["cus_id"];
 	$sub_array[] = $val["username"];

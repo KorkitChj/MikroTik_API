@@ -12,81 +12,104 @@ if (!$_SESSION["admin_id"]) {
     require('function.php');
     include('changpw.php');
     ?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col ">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col ">
-                <nav class="navbar fixed-top navbar-icon-top navbar-expand-lg navbar-dark bg-dark bor-yellow">
-                    <?php echo admin_image_profile($admin_name); ?>
-                    <a class="navbar-brand" href="admin.php"><span style="color:white;text-shadow:2px 2px black">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["admin_name"]); ?></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item  pad">
-                                <a href="admin.php" class="nav-link">
-                                    <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
-                            </li>
-                            <li class="nav-item  pad">
-                                <a href="checkpayment.php" class="nav-link ">
-                                    <i class="glyphicon glyphicon-check"></i>&nbsp;
-                                    ยืนยันการชำระเงิน</a>
-                            </li>
-                            <li class="nav-item active pad-a">
-                                <a href="#" class="nav-link active">
-                                    <i class="glyphicon glyphicon-list"></i>&nbsp;
-                                    จัดการเจ้าของไซต์</a>
-                            </li>
-                            <li class="nav-item  pad">
-                                <a href="useronline.php" class="nav-link ">
-                                    <i class="glyphicon glyphicon-globe"></i>&nbsp;
-                                    User Online</a>
-                            </li>
-                        </ul>
-                        <div class="navbar-nav m dropdown">
-                            <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="">
-                                <span class="glyphicon glyphicon-cog"></span>&nbsp;จัดการ
-                            </a>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                <li><a href="" data-toggle="modal" data-target="#changpwModal" class="dropdown-item">
-                                        <i class="glyphicon glyphicon-edit"></i>
-                                        เปลี่ยนรหัสผ่าน</a></li>
-                                <li><a href="" class="dropdown-item" data-toggle="modal" data-target="#logoutModalCenter">
-                                        <i class="glyphicon glyphicon-log-out"></i>
-                                        ออกจากระบบ</a></li>
-                            </ul>
-                        </div>
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="#">Web API MikroTik</a>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
                     </div>
-                </nav>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <?php echo admin_image_profile($admin_name); ?>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">
+                            <strong><a class="navbar-brand" href="#"><span style="color:white;text-shadow:2px 2px black">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["admin_name"]); ?></a></strong>
+                        </span>
+                        <span class="user-role">ผู้ดูแล</span>
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span>
+                    </div>
+                </div>
+                <!-- sidebar-header  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>ทั่วไป</span>
+                        </li>
+                        <li>
+                            <a href="admin.php">
+                                <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
+                        </li>
+                        <li>
+                            <a href="checkpayment.php">
+                                <i class="glyphicon glyphicon-check"></i>&nbsp;
+                                ยืนยันการชำระเงิน</a>
+                        </li>
+                        <li class="pad-a bor-yellow">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-list"></i>&nbsp;
+                                จัดการเจ้าของไซต์</a>
+                        </li>
+                        <li>
+                            <a href="useronline.php">
+                                <i class="glyphicon glyphicon-globe"></i>&nbsp;
+                                User Online</a>
+                        </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#changpwModal">
+                                <i class="glyphicon glyphicon-edit"></i>&nbsp;
+                                เปลี่ยนรหัสผ่าน</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
             </div>
-        </div>
-    </div>
-    <div class="container-fluid box">
-        <div class="row ">
-            <div class="col">
-                <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
-                    <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
-                </button><br /><br />
-                <table id="managemember" class="table table-striped table-hover table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th width="1%"></th>
-                            <th width="5%">เจ้าของไซต์</th>
-                            <th width="5%">สถานบริการ</th>
-                            <th width="2%">ราคา</th>
-                            <th width="3%">วันที่ชำระเงิน</th>
-                            <th width="3%">วันหมดอายุ</th>
-                            <th width="1%">ลบ</th>
-                        </tr>
-                    </thead>
-                </table>
+            <!-- sidebar-content  -->
+            <div class="sidebar-footer">
+                <a href="#" data-toggle="modal" data-target="#logoutModalCenter">
+                    <i class="fa fa-power-off">ออกจากระบบ</i>
+                </a>
             </div>
-        </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+            <div class="container-fluid">
+                <h2>รายการยืนยันชำระเงิน</h2>
+                <hr>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
+                            <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
+                        </button><br /><br />
+                        <table id="managemember" class="table table-striped table-hover display responsive nowrap" style="width:100%">
+                            <thead class="btn-info">
+                                <tr>
+                                    <th width="1%"></th>
+                                    <th width="5%">เจ้าของไซต์</th>
+                                    <th width="5%">สถานบริการ</th>
+                                    <th width="2%">ราคา</th>
+                                    <th width="3%">วันที่ชำระเงิน</th>
+                                    <th width="3%">วันหมดอายุ</th>
+                                    <th width="1%">ลบ</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- page-content" -->
     </div>
+    <!-- page-wrapper -->
     <!-- remove modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModal">
         <div class="modal-dialog" role="document">
@@ -96,11 +119,11 @@ if (!$_SESSION["admin_id"]) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <p>คุณแน่ใจที่จะลบสมาชิก ?</p>
+                    <p>คุณต้องการลบสมาชิก ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="removeBtn">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-primary" id="removeBtn">ยืนยัน</button>
                 </div>
             </div>
         </div>
@@ -114,11 +137,11 @@ if (!$_SESSION["admin_id"]) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <p>คุณแน่ใจที่จะลบสมาชิกที่เลือก ?</p>
+                    <p>คุณต้องการลบสมาชิกที่เลือก ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="removeAllBtn">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-primary" id="removeAllBtn">ยืนยัน</button>
                 </div>
             </div>
         </div>

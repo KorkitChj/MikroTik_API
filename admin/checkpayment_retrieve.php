@@ -11,7 +11,7 @@ $result = $result->fetchAll();
 foreach ($result as $row) {
     $src = '../slips/'.$row["slip_name"].'';
 
-    $checkbox = '<input type="checkbox" class="cus_checkbox" name="cus_id[]" value="'.$row["cus_id"].'">';        
+    $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="cus_checkbox custom-control-input" name="cus_id[]" value="'.$row["cus_id"].'"><span class="custom-control-indicator"></span></label>';      
     $download = '<a href="view.php?id='.$row["slip_name"].'" target="_blank"><img class="img-thumbnail" src="'.$src.'" style="width:100px;height:120px;"></a>
             <a href="download.php?id='.$row["slip_name"].'" target="iframe"><button type="button" id="dl" class="update btn btn-warning">
             <span title="ดาวน์โหลด" class="glyphicon glyphicon-cloud-download"></span></button></a>';

@@ -36,7 +36,8 @@ if(isset($_POST["action"]))
    <div align="right">
     '.$count.' Users Online
    </div>
-   <table class="table table-bordered table-striped">
+   <table class="table table-striped display responsive nowrap">
+   <thead class="bg-info">
     <tr>
      <th>No.</th>
      <th>Username</th>
@@ -44,6 +45,7 @@ if(isset($_POST["action"]))
      <th>Image</th>
      <th>ID</th>
     </tr>
+    </thead>
   ';
   $i = 0;
   foreach($result as $row)

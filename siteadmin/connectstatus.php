@@ -1,251 +1,291 @@
 <?php
-require('../site/conn.php');
+session_start();
 ?>
 <?php
 if (!$_SESSION["cus_id"]) {
     Header("Location:../login.php");
 } else { ?>
-    <?php
-    include('useronlinejs.php');
-    error_reporting(0);
-    $id = $_SESSION['cus_id'];
-    $sql = "SELECT * FROM siteadmin WHERE cus_id = :id";
-    $query = $conn->prepare($sql);
-    $query->bindparam(':id',$id);
-    if ($query->execute()) {
-        $numrows = $query->rowCount();
-        if ($numrows == 0) {
-            echo "<script>";
-            echo "alert(\"หมดอายุแล้ว\");";
-            echo "</script>";
-            unset($_SESSION["cus_id"]);
-            echo "<a style=\"margin:5em 5em\" href=\"../index.php\"><bottom type=\"bottom\" class=\"btn btn-danger\">กลับสู่หน้าหลัก</a>";
-            exit(0);
-        }
-    }
-    if (isset($_POST['location_id'])) {
-        $id = implode(", ", $_POST['location_id']);
-        $sql = "DELETE FROM location WHERE location_id IN ($id)";
-        $query = $conn->prepare($sql);
-        $query->execute();
-        echo "<div class=\"alert alert-danger alert-dismissible fade show\">
-        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
-        <strong>Success!</strong> ลบข้อมูลแล้ว
-        </div>";
-        echo "<meta http-equiv=\"refresh\" content=\"1;url=connectstatus.php\">";
-    }
-
-    if (isset($_GET['id_del'])) {
-        $id_del = $_GET['id_del'];
-        $sql = "DELETE FROM location WHERE location_id = :id_del";
-        $result =  $conn->prepare($sql);
-        $result->bindparam(':id_del', $id_del);
-        $result->execute();
-        echo "<div class=\"alert alert-danger alert-dismissible fade show\">
-        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
-        <strong>Success!</strong> ลบข้อมูลแล้ว
-        </div>";
-        // echo "<meta http-equiv=\"refresh\" content=\"1;url=connectstatus.php\">";
-    }
-    ?>
-    <style>
-        .btn-danger,
-        .btn-success,
-        .btn-warning,
-        .btn-info,
-        .btn-primary {
-            background-color: white;
-            color: black;
-        }
-
-        .bg-info {
-            background: #bdc3c7;
-            background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
-            background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);
-        }
-
-        th {
-            color: darkblue;
-        }
-        td{
-            color:white;
-        }
-        table.dataTable thead th{
-            border-bottom: 0;
-        }
-        .pad-a{
-            background-color:rgba(0, 0, 0, 0.3);
-        }
-    </style>
     <title>Connect Status</title>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col ">
-                <nav class="navbar fixed-top navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#"><span style="color:red">Site Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["cus_name"]); ?></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active pad-a">
-                                <a href="#" class="nav-link active">
-                                    <span class="badge badge-primary"><i class="fa fa-home"></i></span>
-                                    หน้าหลัก</a>
-                                </a>
-                            </li>
-                            <li class="nav-item pad">
-                                <a href="addconnect.php" class="nav-link ">
-                                    <span class="badge badge-primary"><i class="fas fa-hotel"></i></span>
-                                    เพิ่มสถานบริการ</a>
-                            </li>
-                            <!-- <li class="nav-item dropdown">
-                                                                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                            <span class="badge badge-primary"><i class="fas fa-user"></i></span>
-                                                                                            พนักงานดูแล
-                                                                                        </a>
-                                                                                        <div class="dropdown-menu">
-                                                                                            <a href="employeestatus.php" class="dropdown-item">สถานะพนักงาน</a>
-                                                                                            <a href="addemployee.php" class="dropdown-item">เพิ่มพนักงาน</a>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li class="nav-item dropdown">
-                                                                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                            <span class="badge badge-primary"><i class="fas fa-wifi"></i></span>
-                                                                                            Hotspot
-                                                                                        </a>
-                                                                                        <div class="dropdown-menu">
-                                                                                            <a href="profilestatus.php" class="dropdown-item">สถานะ Profile</a>
-                                                                                            <a href="addprofile.php" class="dropdown-item">เพิ่ม Profile</a>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li class="nav-item dropdown">
-                                                                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                                                                            <span class="badge badge-primary"><i class="fas fa-unlock"></i></span>
-                                                                                            ตั้งค่าเว็บไม่ต้อง Login
-                                                                                        </a>
-                                                                                        <div class="dropdown-menu">
-                                                                                            <a href="wallgardenstatus.php" class="dropdown-item ">สถานะ</a>
-                                                                                            <a href="addwallgarden.php" class="dropdown-item">เพิ่ม</a>
-                                                                                        </div>
-                                                                                    </li> -->
-                            <li class="nav-item pad">
-                                <a href="changpwsite.php" class="nav-link ">
-                                    <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
-                                    เปลี่ยนรหัสผ่าน</a>
-                            </li>
-                            <li class="nav-item pad">
-                                <a href="cus_logout.php" class="nav-link " onclick="return confirm('ยืนยันการออกจากระบบ')">
-                                    <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
-                                    ออกจากระบบ</a>
-                            </li>
-                        </ul>
+    <?php
+    include('expired.php');
+    require('../template/template.html');
+    include('useronlinejs.php');
+    include('changpwsite.php');
+    ?>
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="#">Web API MikroTik</a>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
                     </div>
-                </nav>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["cus_name"]); ?></a></strong>
+                        </span>
+                        <span class="user-role">ผู้ดูแล</span>
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span>
+                    </div>
+                </div>
+                <!-- sidebar-header  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>ทั่วไป</span>
+                        </li>
+                        <li class="pad-a bor-red">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
+                        </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#changpwModal">
+                                <i class="glyphicon glyphicon-edit"></i>&nbsp;
+                                เปลี่ยนรหัสผ่าน</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+            <div class="sidebar-footer">
+                <a href="#" data-toggle="modal" data-target="#logoutModalCenter">
+                    <i class="fa fa-power-off">ออกจากระบบ</i>
+                </a>
+            </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+            <div class="container-fluid">
+                <h2>Site</h2>
+                <hr>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary pull pull-right" data-toggle="modal" data-target="#addSiteModal" id="addSiteModalBtn">
+                            <span class="glyphicon glyphicon-plus "></span>เพิ่มสถานบริการ
+                        </button>
+                        <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllSiteModal" id="removeAllSiteModalBtn">
+                            <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
+                        </button>
+                        <a href="connectstatus.php"><img src="../img/refresh.png" width="20" title="Refresh"></a>
+                        <br /><br />
+                        <table id="connectstatus" class="table table-striped table-hover display responsive nowrap" style="width:100%">
+                            <thead class="bg-info">
+                                <tr>
+                                    <th width="1%"></th>
+                                    <th width="1%">#</th>
+                                    <th width="5%">IP Address/Port</th>
+                                    <th width="5%">Username</th>
+                                    <th width="5%">Site Name</th>
+                                    <th width="1%">ซีพียู</th>
+                                    <th width="1%">แรม</th>
+                                    <th width="1%">ฮาร์ดดิส</th>
+                                    <th width="2%">Connect Status</th>
+                                    <th width="4%">Manage</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- page-content" -->
+    </div>
+    <!-- page-wrapper -->
+    <!-- addsite modal -->
+    <div class="modal fade " tabindex="-1" role="dialog" id="addSiteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-plus"></span>เพิ่มสถานบริการ</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="addsite" method="post">
+                        <div class="form-group">
+                            <label for="ipaddress" class="col-sm control-label">IP:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-globe"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="ipaddress" id="ipaddress" placeholder="ไอพี หรือ โดเมนเนม" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm control-label">Username:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="ชื่อใช้งาน" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm control-label">Password:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </div>
+                                </div>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="รหัสผ่าน" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="portapi" class="col-sm control-label">API Port:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-link"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="portapi" id="portapi" placeholder="พอร์ตเอพีไอ" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="namesite" class="col-sm control-label">Site Name:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-cloud"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="namesite" id="namesite" placeholder="ชื่อไซต์งาน" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="submit" class="btn btn-primary" id="addSiteBtn">บันทึก</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    <div class="container">
-        <div class="row " style="padding-bottom:15%">
-            <div class="col">
-                <form action="#" method="post" id="confirm">
-                    <button type="button" style="margin:1em 1em" class="btn btn-primary "><a style="color:black;text-decoration:none" href="addconnect.php">เพิ่มสถานบริการ</a></button>
-                    <button onClick="return confirm('คุณต้องการที่จะลบข้อมูลที่เลือกนี้หรือไม่ ?');" class="btn btn-danger" style="margin-right:1em" name="del_all">ลบข้อมูลแถวที่เลือก</button>
-                    <a href="connectstatus.php"><img src="../img/refresh.png" width="20" title="Refresh"></a>
-                    <table id="example" class="table table-striped table-hover table-sm" style="width:100%">
-                        <thead class="bg-info">
-                            <tr>
-                                <th></th>
-                                <th>Number</th>
-                                <th>IP Address</th>
-                                <th>Username</th>
-                                <th>Site Name</th>
-                                <th>ซีพียู</th>
-                                <th>แรม</th>
-                                <th>ฮาร์ดดิส</th>
-                                <th>Connect Status</th>
-                                <th>Manage</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $sql1 = "SELECT * FROM location WHERE cus_id = :cus_id";
-                            $query1 = $conn->prepare($sql1);
-                            $query1->bindparam(':cus_id',$id);
-                            $query1->execute();
-                            $no = 0;
-                            while ($result = $query1->fetch(PDO::FETCH_ASSOC)) {
-                                $no++;
-                                $API = new routeros_api();
-                                $API->debug = false;
-                                $port = $result['api_port'];
-                                if ($API->connect($result['ip_address'] . ":" . $port, $result['username'], $result['password'])) {
-                                    $ARRAY = $API->comm("/system/resource/print");
-                                    $ram =    $ARRAY['0']['free-memory'] / 1048576;
-                                    $hdd =    $ARRAY['0']['free-hdd-space'] / 1048576;
-                                    echo "<tr>";
-                                    echo "<td><input type=\"checkbox\" class=\"cus_checkbox\" name=\"location_id[]\" value=" . $result['location_id'] . "></td>";
-                                    echo "<td>" . $no . "</td>";
-                                    echo "<td>" . $result['ip_address'] . "</td>";
-                                    echo "<td>" . $result['username'] . "</td>";
-                                    echo "<td>" . $result['working_site'] . "</td>";
-                                    echo "<td>" . $ARRAY['0']['cpu-load'] . "%</td>";
-                                    echo "<td>" . round($ram, 1) . " MB</td>";
-                                    echo "<td>" . round($hdd, 1) . " MB</td>";
-                                    echo "<td><button type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-check\"></i> CONNECT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></td>";
-                                    $conn = "connect";
-                                    echo "<td>                   
-                                <a href='javascript:void(0)' onClick=\"JavaScript:if(confirm('คุณต้องการเข้าจัดการ')==true)
-                                {window.location='../site/site_conn.php?id=" . $result['location_id'] . "&conn=" . $conn . "'}\">
-                                <button type=\"button\" class=\"btn btn-success\" title=\"เข้าบริหารจัดการ\">
-                                <i class=\"glyphicon glyphicon-new-window\"></i></button></a>
-                                <a href='javascript:void(0)' onClick=\"JavaScript:if(confirm('คุณต้องการแก้ไขรายการนี้!')==true)
-                                {window.location='addconnect.php?action=edit_site&id=" . $result['location_id'] . "'}\">
-                                <button type=\"button\" class=\"btn btn-info\" title=\"แก้ไข\">
-                                <i class=\"glyphicon glyphicon-edit\"></i></button></a>
-                                <a onClick=\"return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?');\" href='connectstatus.php?id_del=".$result['location_id']."'>
-                                <button type=\"button\" class=\"btn btn-danger\" title=\"ลบ\">
-                                <i class=\"glyphicon glyphicon-trash\"></i></button></a>";
-                                    echo "</td>";
-                                    echo "</tr>";
-                                } else {
-                                    echo "<tr>";
-                                    echo "<td><input type=\"checkbox\" class=\"cus_checkbox\" name=\"location_id[]\" value=" . $result['location_id'] . "></td>";
-                                    echo "<td>" . $no . "</td>";
-                                    echo "<td>" . $result['ip_address'] . "</td>";
-                                    echo "<td>" . $result['username'] . "</td>";
-                                    echo "<td>" . $result['working_site'] . "</td>";
-                                    echo "<td> -% </td>";
-                                    echo "<td> - MB </td>";
-                                    echo "<td> - MB </td>";
-                                    echo "<td><button type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-times\"></i> DISCONNECT</button></td>";
-                                    $conn = "disconnect";
-                                    echo "<td>
-                                    <a href='javascript:void(0)' onClick=\"JavaScript:if(confirm('คุณต้องการเข้าจัดการ')==true)
-                                    {window.location='../site/site_conn.php?id=" . $result['location_id'] . "&conn=" . $conn . "'}\">
-                                    <button type=\"button\" class=\"btn btn-success\" title=\"เข้าบริหารจัดการ\">
-                                    <i class=\"glyphicon glyphicon-new-window\"></i></button></a>
-                                    <a href='javascript:void(0)' onClick=\"JavaScript:if(confirm('คุณต้องการแก้ไขรายการนี้!')==true)
-                                    {window.location='addconnect.php?action=edit_site&id=" . $result['location_id'] . "'}\">
-                                    <button type=\"button\" class=\"btn btn-info\" title=\"แก้ไข\">
-                                    <i class=\"glyphicon glyphicon-edit\"></i></button></a>
-                                    <a onClick=\"return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?');\" href='connectstatus.php?id_del=".$result['location_id']."'>
-                                    <button type=\"button\" class=\"btn btn-danger\" title=\"ลบ\">
-                                    <i class=\"glyphicon glyphicon-trash\"></i></button></a>";
-                                    echo "</td>";
-                                    echo "</tr>";
-                                }
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </form>
+    <!-- editsite modal -->
+    <div class="modal fade " tabindex="-1" role="dialog" id="editSiteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span>แก้ไขสถานบริการ</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="editSite" method="post">
+                        <div class="form-group">
+                            <label for="editipaddress" class="col-sm control-label">IP:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-globe"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="editipaddress" id="editipaddress" placeholder="ไอพี หรือ โดเมนเนม" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editusername" class="col-sm control-label">Username:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="editusername" id="editusername" placeholder="ชื่อใช้งาน" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editpassword" class="col-sm control-label">Password:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </div>
+                                </div>
+                                <input type="password" class="form-control" name="editpassword" id="editpassword" placeholder="รหัสผ่าน" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editportapi" class="col-sm control-label">API Port:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-link"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="editportapi" id="editportapi" placeholder="พอร์ตเอพีไอ" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editnamesite" class="col-sm control-label">Site Name:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-cloud"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="editnamesite" id="editnamesite" placeholder="ชื่อไซต์งาน" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="submit" class="btn btn-primary" id="editSiteBtn">บันทึก</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <!-- remove all modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="removeAllSiteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-trash"></span>ลบไซต์ที่เลือก</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>คุณต้องการลบไซต์ที่เลือก ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-primary" id="removeAllSiteBtn">ยืนยัน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- remove modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="removeSiteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-trash"></span>ลบไซต์</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>คุณต้องการลบไซต์ ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-primary" id="removeSiteBtn">ยืนยัน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="connectstatus.js"></script>
 <?php } ?>

@@ -24,7 +24,7 @@ require('template/template_customer.html');
     }
 
     body {
-        background-image: url('img/16948.jpg');
+        background-color:#fff;
         background-repeat: no-repeat;
         background-size: cover;
     }

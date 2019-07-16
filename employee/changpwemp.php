@@ -1,117 +1,147 @@
 <?php
 session_start();
-require('../template/template.html');
-require('../include/connect_db.php');
-require('../include/connect_db_router.php');
 ?>
 <?php
 if (!$_SESSION["emp_id"]) {
     Header("Location:../login.php");
 } else { ?>
-    <style>
-        /* .container {
-                background-color: white;
-                padding: 20px;
-            } */
-
-        #border-login {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 1.5em;
-            border-radius: 5px;
-            margin-top: 5em;
-            margin-bottom: 5em;
-            border: white 2px dotted;
-        }
-
-        .btn-danger,
-        .btn-primary {
-
-            color: black;
-        }
-
-        label {
-            color: white;
-        }
-
-        .fa-key {
-            color: tomato;
-        }
-
-        .pad-a {
-            background-color: rgba(0, 0, 0, 0.3);
-        }
-    </style>
     <title>Chang Password Employee</title>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col ">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col ">
-                <nav class="navbar fixed-top navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="employee.php"><span style="color:White">Employee</span><span style="color:blue">|</span><?php print_r($_SESSION["emp_name"]); ?></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item pad">
-                                <a href="employee.php" class="nav-link ">
-                                    <span class="badge badge-primary"><i class="fa fa-home"></i></span>
-                                    หน้าหลัก</a>
-                                </a>
-                            </li>
-                            <li class="nav-item active pad-a">
-                                <a href="#" class="nav-link active">
-                                    <span class="badge badge-danger"><i class="fas fa-exchange-alt"></i></span>
-                                    เปลี่ยนรหัสผ่าน</a>
-                            </li>
-                            <li class="nav-item pad">
-                                <a href="emp_logout.php" class="nav-link " onclick="return confirm('ยืนยันการออกจากระบบ')">
-                                    <span class="badge badge-danger"><i class="fas fa-sign-out-alt"></i></span>
-                                    ออกจากระบบ</a>
-                            </li>
-                        </ul>
+    <?php
+    require('../template/template.html');
+    ?>
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="#">Web API MikroTik</a>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
                     </div>
-                </nav>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span><span style="color:blue">|</span><?php print_r($_SESSION["emp_name"]); ?></a></strong>
+                        </span>
+                        <span class="user-role">พนักงาน</span>
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span>
+                    </div>
+                </div>
+                <!-- sidebar-header  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>ทั่วไป</span>
+                        </li>
+                        <li>
+                            <a href="employee.php">
+                                <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
+                        </li>
+                        <li class="pad-a bor-green">
+                            <a href="">
+                                <i class="glyphicon glyphicon-edit"></i>&nbsp;
+                                เปลี่ยนรหัสผ่าน</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
             </div>
-        </div>
-    </div>
-    </div>
-
-    <div class="container color-custom ">
-        <div class="row ">
-            <div class="col d-flex justify-content-center">
-                <div id="border-login">
-                    <form id="myform" action="s_changpw.php" method="post" class="margin-custom">
-                        <div class="form-group row">
-                            <label for="inputoldpassword" class="control-label col-sm">รหัสผ่านเก่า:</label>
-                            <div class="col-sm-12">
-                                <input type="password" class="form-control" name="oldpassword" placeholder="รหัสผ่านเก่า" required>
+            <!-- sidebar-content  -->
+            <div class="sidebar-footer">              
+                <a href="emp_logout.php" class="logout fa fa-power-off" data-confirm="คุณต้องการออกจากระบบ?">ออกจากระบบ</a>
+            </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+            <div class="container-fluid">
+                <h2><i class="glyphicon glyphicon-edit"></i> เปลี่ยนรหัสผ่าน</h2>
+                <hr>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <form id="changpw" action="" method="post">
+                            <div class="form-group">
+                                <label for="oldpassword" class="control-label col-sm">รหัสผ่านเก่า:&nbsp;</label>
+                                <div class="col-sm-12 input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </div>
+                                    </div>
+                                    <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="รหัสผ่านเก่า" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputnewpassword" class="control-label col-sm">รหัสผ่านใหม่:</label>
-                            <div class="col-sm-12">
-                                <input type="password" class="form-control" name="newpassword" placeholder="รหัสผ่านใหม่" required>
+                            <div class="form-group">
+                                <label for="newpassword" class="control-label col-sm">รหัสผ่านใหม่:&nbsp;</label>
+                                <div class="col-sm-12 input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </div>
+                                    </div>
+                                    <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="รหัสผ่านใหม่" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputrenewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:</label>
-                            <div class="col-sm-12">
-                                <input type="password" class="form-control" name="renewpassword" placeholder="ยืนยันรหัสผ่านใหม่" required>
+                            <div class="form-group">
+                                <label for="renewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:&nbsp;</label>
+                                <div class="col-sm-12 input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </div>
+                                    </div>
+                                    <input type="password" class="form-control" name="renewpassword" id="renewpassword" placeholder="ยืนยันรหัสผ่านใหม่" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="b" class="control-label col-sm"></label>
-                            <div class="col-sm-12">
-                                <button type="submit" name="changpw" class=" btn btn-primary ">บันทึก</button>
-                                <button type="bottom" class=" btn btn-danger "><a style="color:black;text-decoration:none" href="admin.php">ยกเลิก</a></button>
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm"></label>
+                                <div class="col-sm-12 input-group">
+                                    <button type="button" class="btn btn-danger" onclick="history.back();">ยกเลิก</button>
+                                    <button type="submit" class="btn btn-primary" id="submit">บันทึก</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php } ?>
+        </main>
+        <!-- page-content" -->
+    </div>
+    <!-- page-wrapper -->
+    <script>
+        $(document).ready(function() {
+            $("#changpw").unbind('submit').bind('submit', function() {
+                var form = $(this);
+                var oldpassword = $("#oldpassword").val();
+                var newpassword = $("#newpassword").val();
+                var renewpassword= $("#renewpassword").val();
+                if (oldpassword && newpassword && renewpassword) {
+                    $.ajax({
+                        url: 's_changpw.php',
+                        type: 'POST',
+                        data: form.serialize(),
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success == true) {
+                                swal("สำเร็จ", response.messages, "success");
+                                $("#changpw")[0].reset();
+                            } else {
+                                swal("ผิดพลาด", response.messages, "error");
+                            }
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+    <script src="logout.js"></script>
+<?php } ?>
