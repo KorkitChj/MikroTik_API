@@ -7,7 +7,7 @@ $(document).ready(function () {
             type: "POST",
             dataSrc: function (response) {
                 if (response.success == false) {
-                    swal("Disconnect", response.messages, "error");
+                    swal("Error", response.messages, "error");
                 } else {
                     return response.data;
                 }

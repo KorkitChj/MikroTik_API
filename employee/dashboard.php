@@ -35,7 +35,7 @@ if (!$_SESSION["emp_id"]) {
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span><span style="color:blue">|</span><?php print_r($_SESSION["emp_name"]); ?></a></strong>
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span>&nbsp;<?php print_r($_SESSION["emp_name"]); ?></a></strong>
                         </span>
                         <span class="user-role">พนักงาน</span>
                         <span class="user-status">
@@ -61,11 +61,6 @@ if (!$_SESSION["emp_id"]) {
                                 &nbsp;รายการ Users</a>
                         </li>
                         <li>
-                            <a href="profilestatus.php">
-                                <i class="glyphicon glyphicon-th-list"></i>
-                                &nbsp;รายการคูปอง</a>
-                        </li>
-                        <li>
                             <a href="employee.php">
                                 <i class="glyphicon glyphicon-log-out"></i>&nbsp;
                                 กลับหน้าหลัก</a>
@@ -76,7 +71,9 @@ if (!$_SESSION["emp_id"]) {
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-            <a href="emp_logout.php" class="logout fa fa-power-off" data-confirm="คุณต้องการออกจากระบบ?">ออกจากระบบ</a>
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
+                </a>
             </div>
         </nav>
         <!-- sidebar-wrapper  -->

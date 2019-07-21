@@ -30,7 +30,7 @@ if (!$_SESSION["admin_id"]) {
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:white;text-shadow:2px 2px black">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["admin_name"]); ?></a></strong>
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span>&nbsp;<?php print_r($_SESSION["admin_name"]); ?></a></strong>
                         </span>
                         <span class="user-role">ผู้ดูแล</span>
                         <span class="user-status">
@@ -75,8 +75,8 @@ if (!$_SESSION["admin_id"]) {
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-                <a href="#" data-toggle="modal" data-target="#logoutModalCenter">
-                    <i class="fa fa-power-off">ออกจากระบบ</i>
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
                 </a>
             </div>
         </nav>
@@ -90,10 +90,10 @@ if (!$_SESSION["admin_id"]) {
                         <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
                             <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
                         </button><br /><br />
-                        <table id="MemberTable" class="table table-striped table-hover display responsive nowrap" style="width:100%">
-                            <thead class="btn-info">
+                        <table id="MemberTable" class="table table-striped table-hover table-sm table-bordered display responsive nowrap" style="width:100%">
+                            <thead class="aa">
                                 <tr>
-                                    <th width="1%"></th>
+                                    <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label></th>
                                     <th width="10%">เจ้าของไซต์</th>
                                     <th width="2%">ใบสั่งซื้อ</th>
                                     <th width="7%">หลักฐาน</th>
@@ -123,8 +123,8 @@ if (!$_SESSION["admin_id"]) {
                     <p>คุณต้องการลบสมาชิก ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary" id="removeBtn">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="button" class="btn btn-success" id="removeBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                 </div>
             </div>
         </div>
@@ -141,8 +141,8 @@ if (!$_SESSION["admin_id"]) {
                     <p>คุณต้องการลบสมาชิกที่เลือก ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary" id="removeAllBtn">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="button" class="btn btn-success" id="removeAllBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                 </div>
             </div>
         </div>
@@ -159,8 +159,21 @@ if (!$_SESSION["admin_id"]) {
                     <p>คุณต้องการยืนยันการชำระเงิน ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary" id="confirmBtn">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="button" class="btn btn-success" id="confirmBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- displayimag modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="displayimgMemberModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <span id="slip"></span>
                 </div>
             </div>
         </div>

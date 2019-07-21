@@ -40,15 +40,20 @@ function removeMember(id = null) {
         alert('Error: Refresh the page again');
     }
 }
+$('#checkall').click(function(){
+    $('.checkitem').prop("checked", $(this).prop("checked"))
+})
 $('#removeAllBtn').click(function () {
     var cus_id = [];
-    $(':checkbox:checked').each(function (i) {
+    $('.checkitem:checked').each(function (i) {
         cus_id[i] = $(this).val();
     });
-    if (cus_id.length === 0) //tell you if the array is empty
+    if (cus_id.length === 0)
     {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
+        //console.log(cus_id);
+        //return false;
         $.ajax({
             url: 'admin_del_check.php',
             method: 'POST',
@@ -98,4 +103,17 @@ function confirmMember(id = null) {
         alert('Error: Refresh the page again');
     }
 }
+$(document).on('click', '.displayimg', function(){
+    var slip_name = $(this).attr("id");
+    $.ajax({
+        url:"fetch_img.php",
+        method:"POST",
+        data:{slip_name:slip_name},
+        dataType:"json",
+        success:function(data)
+        {
+            $('#slip').html(data.user_image);
+        }
+    })
+});
 

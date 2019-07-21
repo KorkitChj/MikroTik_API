@@ -17,7 +17,7 @@ $no = 0;
 foreach ($result as $row) {
     $no++;
     $port = $row['api_port'];
-    $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="cus_checkbox custom-control-input" name="location_id[]" value="' . $row["location_id"] . '"><span class="custom-control-indicator"></span></label>';
+    $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="location_id[]" value="' . $row["location_id"] . '"><span class="custom-control-indicator"></span></label>';
     if ($API->connect($row['ip_address'].":".$port,$row['username'],$row['password'])) {
         $ARRAY = $API->comm("/system/resource/print");
         $ram =    $ARRAY['0']['free-memory'] / 1048576;
@@ -27,18 +27,20 @@ foreach ($result as $row) {
         $hdd = round($hdd, 1)."MB";
         $connect = '<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>CONNECT</button>';
         $connz = "connect";       
-        $manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
+        $manage = '<a class="btn btn-info" href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\'><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></a>
         <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editSiteModal"  onclick="editSite('.$row['location_id'].')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
         <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeSiteModal"  onclick="removeSite('.$row['location_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
+        // $manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
     } else {
         $cpu = "-%";
         $ram = "-MB";
         $hdd = "-MB";
         $connect = '<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>DISCONNECT</button>';
         $connz = "disconnect";
-        $manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
+        $manage = '<a class="btn btn-info" href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\'><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></a>
         <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editSiteModal"  onclick="editSite('.$row['location_id'].')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
         <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeSiteModal"  onclick="removeSite('.$row['location_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
+        // $manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
     }
     $output['data'][]  = array(
         $checkbox,

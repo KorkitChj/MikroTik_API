@@ -65,9 +65,12 @@ function removeMember(id = null) {
         alert('Error: Refresh the page again');
     }
 }
+$('#checkall').click(function(){
+    $('.checkitem').prop("checked", $(this).prop("checked"))
+})
 $('#removeAllMemberBtn').click(function () {
     var emp_id = [];
-    $(':checkbox:checked').each(function (i) {
+    $('.checkitem:checked').each(function (i) {
         emp_id[i] = $(this).val();
     });
     if (emp_id.length === 0) {

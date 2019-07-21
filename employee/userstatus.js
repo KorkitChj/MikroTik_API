@@ -113,6 +113,52 @@ $(document).ready(function () {
             return false;
         });
     });
+
+    $('#checkall').click(function () {
+        $('.checkitem').prop("checked", $(this).prop("checked"))
+    })
+    $('#removeAllUsersBtn').click(function () {
+        var users_name = [];
+        $('.checkitem:checked').each(function (i) {
+            users_name[i] = $(this).val();
+        });
+        if (users_name.length === 0) {
+            swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
+        } else {
+            //console.log(users_name);
+            //return false;
+            $.ajax({
+                url: 'userstatus_del.php',
+                method: 'POST',
+                data: {
+                    'users_name': users_name, 'type': 'many'
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        userstatus.ajax.reload(null, false);
+                        $("#removeAllUsersModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
+                    }
+                }
+            });
+        }
+    });
+    $('#print').click(function () {
+        var users_name = [];
+        $('.checkitem:checked').each(function (i) {
+            users_name[i] = $(this).val();
+        });
+        if (users_name.length === 0) {
+            swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
+        } else {
+            //console.log(users_name);
+            //return false;
+            window.location = "prints.php"+"?users_name="+users_name;
+        }
+    });
 });
 
 function removeUser(user_name) {
@@ -138,33 +184,6 @@ function removeUser(user_name) {
         alert('Error: Refresh the page again');
     }
 }
-$('#removeAllUsersBtn').click(function () {
-    var users_name = [];
-    $(':checkbox:checked').each(function (i) {
-        users_name[i] = $(this).val();
-    });
-    if (users_name.length === 0) {
-        swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
-    } else {
-        $.ajax({
-            url: 'userstatus_del.php',
-            method: 'POST',
-            data: {
-                'users_name': users_name, 'type': 'many'
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.success == true) {
-                    swal("สำเร็จ", response.messages, "success");
-                    userstatus.ajax.reload(null, false);
-                    $("#removeAllUsersModal").modal('hide');
-                } else {
-                    swal("ผิดพลาด", response.messages, "error");
-                }
-            }
-        });
-    }
-});
 function editUser(User_name) {
     if (User_name) {
         $.ajax({
@@ -188,7 +207,7 @@ function editUser(User_name) {
                     var editprofile = $("#editprofile").val();
                     var editlimituptime = $("#editlimituptime").val();
                     var editcomment = $("#editcomment").val();
-                    
+
 
                     if (editname && editpassword && editprofile && editlimituptime && editcomment) {
                         $.ajax({

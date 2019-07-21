@@ -20,6 +20,15 @@ if (!$_SESSION["emp_id"]) {
         $num = count($ARRAY);
     }
     ?>
+    <style>
+        #coupong {
+            background: #f1f1f1;
+        }
+
+        .th {
+            background: #66ccff;
+        }
+    </style>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
@@ -38,7 +47,7 @@ if (!$_SESSION["emp_id"]) {
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span><span style="color:blue">|</span><?php print_r($_SESSION["emp_name"]); ?></a></strong>
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span>&nbsp;<?php print_r($_SESSION["emp_name"]); ?></a></strong>
                         </span>
                         <span class="user-role">พนักงาน</span>
                         <span class="user-status">
@@ -83,11 +92,6 @@ if (!$_SESSION["emp_id"]) {
                             </div>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="glyphicon glyphicon-th-list"></i>
-                                &nbsp;รายการคูปอง</a>
-                        </li>
-                        <li>
                             <a href="employee.php">
                                 <i class="glyphicon glyphicon-log-out"></i>&nbsp;
                                 กลับหน้าหลัก</a>
@@ -98,7 +102,9 @@ if (!$_SESSION["emp_id"]) {
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-                <a href="emp_logout.php" class="logout fa fa-power-off" data-confirm="คุณต้องการออกจากระบบ?">ออกจากระบบ</a>
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
+                </a>
             </div>
         </nav>
         <!-- sidebar-wrapper  -->
@@ -109,11 +115,14 @@ if (!$_SESSION["emp_id"]) {
                 <div class="row">
                     <div class="form-group col-md-12">
                         <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllUsersModal" id="removeAllUsersModalBtn">
-                            <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
+                            <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
                         </button>
+                        <button id="print" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-print"></i>&nbsp;Print คูปอง&nbsp;</button>
+                        <!-- <button id="check" class="btn btn-info" type="submit"><i class="glyphicon glyphicon-print"></i>&nbsp;Print คูปอง ทั้งหมด</button> -->
+                        <!-- <button id="check" class="btn btn-info" type="submit"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label>Print คูปอง ทั้งหมด</button> -->
                         <br /><br />
-                        <table id="userstatus" class="table table-striped table-hover display responsive nowrap" style="width:100%">
-                            <thead class="bg-info">
+                        <table id="userstatus" class="table table-striped table-hover table-bordered table-sm display responsive nowrap" style="width:100%">
+                            <thead class="aa">
                                 <tr>
                                     <th width="1%"></th>
                                     <th width="1%">#</th>
@@ -121,7 +130,7 @@ if (!$_SESSION["emp_id"]) {
                                     <th width="3%">Profile</th>
                                     <th width="3%">Limit-UpTime</th>
                                     <th width="3%">UpTime</th>
-                                    <th width="3%">Manage</th>
+                                    <th width="3%">Options</th>
                                 </tr>
                             </thead>
                         </table>

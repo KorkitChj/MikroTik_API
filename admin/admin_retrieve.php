@@ -31,16 +31,16 @@ $result1 = $statement1->fetchAll();
 $filtered_rows = $statement1->rowCount();
 foreach ($result as $row=>$val) 
 {
-	$status = '<button class="update btn btn-success" type="button"><span class="glyphicon glyphicon-ok-sign"></span></button>';
+	$status = '<i class="fas fa-check-circle"></i>';
 	$sub_array = array();
 	foreach ($result1 as $val2) 
 	{	
 		if($val['cus_id'] == $val2['cus_id']){
-			$status = '<button class="update btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-sign"></span></button>';
+			$status = '<i class="fas fa-ban"></i>';
 			break;
 		}
 	}
-	$sub_array[] = '<label class="custom-control custom-checkbox"><input type="checkbox" class="cus_checkbox custom-control-input" name="cus_id[]" value="'.$val["cus_id"].'"><span class="custom-control-indicator"></span></label>';
+	$sub_array[] = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="cus_id[]" value="'.$val["cus_id"].'"><span class="custom-control-indicator"></span></label>';
 	$sub_array[] = $status;
 	$sub_array[] = $val["cus_id"];
 	$sub_array[] = $val["username"];

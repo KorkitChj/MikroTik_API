@@ -27,7 +27,7 @@ if (!$_SESSION["emp_id"]) {
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span><span style="color:blue">|</span><?php print_r($_SESSION["emp_name"]); ?></a></strong>
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span>&nbsp;<?php print_r($_SESSION["emp_name"]); ?></a></strong>
                         </span>
                         <span class="user-role">พนักงาน</span>
                         <span class="user-status">
@@ -57,7 +57,9 @@ if (!$_SESSION["emp_id"]) {
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">              
-                <a href="emp_logout.php" class="logout fa fa-power-off" data-confirm="คุณต้องการออกจากระบบ?">ออกจากระบบ</a>
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
+                </a>
             </div>
         </nav>
         <!-- sidebar-wrapper  -->
@@ -104,8 +106,9 @@ if (!$_SESSION["emp_id"]) {
                             <div class="form-group">
                                 <label for="" class="control-label col-sm"></label>
                                 <div class="col-sm-12 input-group">
-                                    <button type="button" class="btn btn-danger" onclick="history.back();">ยกเลิก</button>
-                                    <button type="submit" class="btn btn-primary" id="submit">บันทึก</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="history.back();"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                                    <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
+                                    <button type="submit" class="btn btn-success" id="submit"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                                 </div>
                             </div>
                         </form>

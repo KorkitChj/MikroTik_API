@@ -36,8 +36,8 @@ if(isset($_POST["action"]))
    <div align="right">
     '.$count.' Users Online
    </div>
-   <table class="table table-striped display responsive nowrap">
-   <thead class="bg-info">
+   <table class="table table-sm table-bordered table-striped display responsive nowrap">
+   <thead class="aa">
     <tr>
      <th>No.</th>
      <th>Username</th>

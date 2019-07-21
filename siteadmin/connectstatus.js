@@ -40,7 +40,7 @@ $(document).ready(function () {
             }
             return false;
         });
-    });
+    });   
 });
 
 function removeSite(id = null) {
@@ -67,6 +67,9 @@ function removeSite(id = null) {
         alert('Error: Refresh the page again');
     }
 }
+$('#checkall').click(function(){
+    $('.checkitem').prop("checked", $(this).prop("checked"))
+})
 $('#removeAllSiteBtn').click(function () {
     var location_id = [];
     $(':checkbox:checked').each(function (i) {
@@ -145,5 +148,5 @@ function editSite(id = null) {
     }
 }
 
-                    
-            
+
+

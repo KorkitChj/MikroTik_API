@@ -1,18 +1,9 @@
-<!-- Modal Logout-->
-<div class="modal fade" id="logoutModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="btn btn-dark bg-dark" data-dismiss="modal">ยกเลิก</button>
-            <button type="button" class="btn btn-primary logout">ออกจากระบบ</button>
-        </div>
-    </div>
-</div>
 <!-- changpw modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="changpwModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span>เปลี่ยนรหัสผ่าน</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span>&nbsp;เปลี่ยนรหัสผ่าน</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <form id="myform" name="contact" role="form">
@@ -52,8 +43,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="submit" class="btn btn-primary" id="submit">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
+                    <button type="submit" class="btn btn-success" id="submit"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                 </div>
             </form>
         </div>

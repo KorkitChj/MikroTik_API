@@ -17,6 +17,10 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
     $ARRAY = $API->comm("/ip/hotspot/walled-garden/ip/print");
 
     $num = count($ARRAY);
+    if($num == 0){
+        $output['success'] = false;
+        $output['messages'] = "ไม่มีรายการ Bypass";
+    }
     for ($i = 0; $i < $num; $i++) {
         $no = $i + 1;
 

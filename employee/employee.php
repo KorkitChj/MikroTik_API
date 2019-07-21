@@ -7,14 +7,16 @@ if (!$_SESSION["emp_id"]) {
 } else { ?>
     <title>Employee</title>
     <?php
+    error_reporting(0);
+    
     require('../template/template.html');
 
     include('function.php');
 
     $emp_id = $_SESSION['emp_id'];
-    
+
     list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
-    
+
     ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -34,7 +36,7 @@ if (!$_SESSION["emp_id"]) {
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span><span style="color:blue">|</span><?php print_r($_SESSION["emp_name"]); ?></a></strong>
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span>&nbsp;<?php print_r($_SESSION["emp_name"]); ?></a></strong>
                         </span>
                         <span class="user-role">พนักงาน</span>
                         <span class="user-status">
@@ -64,7 +66,9 @@ if (!$_SESSION["emp_id"]) {
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-                <a href="emp_logout.php" class="logout fa fa-power-off" data-confirm="คุณต้องการออกจากระบบ?">ออกจากระบบ</a>
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
+                </a>
             </div>
         </nav>
         <!-- sidebar-wrapper  -->
@@ -76,8 +80,8 @@ if (!$_SESSION["emp_id"]) {
                     <div class="form-group col-md-12">
                         <a href="employee.php"><img src="../img/refresh.png" width="20" title="Refresh"></a>
                         <br /><br />
-                        <table id="connectstatus" class="table table-striped table-hover display responsive nowrap" style="width:100%">
-                            <thead class="bg-info">
+                        <table id="connectstatus" class="table table-striped table-hover table-bordered table-sm display responsive nowrap" style="width:100%">
+                            <thead class="aa">
                                 <th width="3%">IP Address</th>
                                 <th width="2%">Port</th>
                                 <th width="3%">Site</th>
@@ -85,7 +89,7 @@ if (!$_SESSION["emp_id"]) {
                                 <th width="2%">RAM</th>
                                 <th width="2%">Harddisk</th>
                                 <th width="3%">Status</th>
-                                <th width="3%">Manage</th>
+                                <th width="3%">Options</th>
                             </thead>
                             <tbody>
                                 <?php
@@ -103,7 +107,7 @@ if (!$_SESSION["emp_id"]) {
                                     echo "<td><button type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-check\"></i> CONNECT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></td>";
                                     $conn = "connect";
                                     echo "<td>                   
-                                <a onclick=\"return confirm('คุณต้องการเข้าจัดการ')\" href=\"site_conn.php?&conn=" . $conn . "\">
+                                <a  href=\"site_conn.php?&conn=" . $conn . "\">
                                 <button type=\"button\" class=\"btn btn-info\" title=\"เข้าบริหารจัดการ\">
                                 <i class=\"glyphicon glyphicon-new-window\"></i></button></a>";
                                     echo "</td>";
@@ -111,7 +115,7 @@ if (!$_SESSION["emp_id"]) {
                                 } else {
                                     echo "<tr>";
                                     echo "<td>" . $ip . "</td>";
-                                    echo "<td>" . $port. "</td>";
+                                    echo "<td>" . $port . "</td>";
                                     echo "<td>" . $site . "</td>";
                                     echo "<td> -% </td>";
                                     echo "<td> - MB </td>";
@@ -119,7 +123,7 @@ if (!$_SESSION["emp_id"]) {
                                     echo "<td><button type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-times\"></i> DISCONNECT</button></td>";
                                     $conn = "disconnect";
                                     echo "<td>
-                                    <a onclick=\"return confirm('คุณต้องการเข้าจัดการ')\" href=\"employee.php?&conn=" . $conn . "\">
+                                    <a href=\"employee.php?&conn=" . $conn . "\">
                                     <button type=\"button\" class=\"btn btn-success\" title=\"เข้าบริหารจัดการ\">
                                     <i class=\"glyphicon glyphicon-new-window\"></i></button></a>";
                                     echo "</td>";

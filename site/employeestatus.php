@@ -36,7 +36,7 @@ if (!$_SESSION["cus_id"]) {
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["cus_name"]); ?></a></strong>
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span>&nbsp;<?php print_r($_SESSION["cus_name"]); ?></a></strong>
                         </span>
                         <span class="user-role">ผู้ดูแล</span>
                         <span class="user-status">
@@ -82,8 +82,8 @@ if (!$_SESSION["cus_id"]) {
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-                <a href="#" data-toggle="modal" data-target="#logoutModalCenter">
-                    <i class="fa fa-power-off">ออกจากระบบ</i>
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
                 </a>
             </div>
         </nav>
@@ -101,15 +101,15 @@ if (!$_SESSION["cus_id"]) {
                             <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
                         </button>
                         <br /><br />
-                        <table id="employeestatus" class="table table-striped table-hover display responsive nowrap" style="width:100%">
-                            <thead class="bg-info">
+                        <table id="employeestatus" class="table table-striped table-hover table-sm table-bordered display responsive nowrap" style="width:100%">
+                            <thead class="aa">
                                 <tr>
-                                    <th width="1%"></th>
+                                    <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label></th>
                                     <th width="1%">#</th>
                                     <th width="2%">ไซต์</th>
                                     <th width="2%">ชื่อ</th>
                                     <th width="2%">Username</th>
-                                    <th width="3%">Manage</th>
+                                    <th width="3%">Options</th>
                                 </tr>
                             </thead>
                         </table>
@@ -175,8 +175,9 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="submit" class="btn btn-primary" id="addMemberBtn">บันทึก</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                            <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
+                            <button type="submit" class="btn btn-success" id="addMemberBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                         </div>
                     </form>
                 </div>
@@ -238,8 +239,8 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="submit" class="btn btn-primary" id="editMemberBtn">บันทึก</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                            <button type="submit" class="btn btn-success" id="editMemberBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                         </div>
                     </form>
                 </div>
@@ -258,8 +259,8 @@ if (!$_SESSION["cus_id"]) {
                     <p>คุณต้องการลบพนักงานที่เลือก ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary" id="removeAllMemberBtn">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="button" class="btn btn-success" id="removeAllMemberBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                 </div>
             </div>
         </div>
@@ -276,8 +277,8 @@ if (!$_SESSION["cus_id"]) {
                     <p>คุณต้องการลบพนักงาน ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary" id="removeMemberBtn">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="button" class="btn btn-success" id="removeMemberBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                 </div>
             </div>
         </div>

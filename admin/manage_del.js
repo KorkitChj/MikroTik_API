@@ -40,9 +40,12 @@ function removeMember(id = null) {
         alert('Error: Refresh the page again');
     }
 }
+$('#checkall').click(function(){
+    $('.checkitem').prop("checked", $(this).prop("checked"))
+})
 $('#removeAllBtn').click(function () {
     var cus_id = [];
-    $(':checkbox:checked').each(function (i) {
+    $('.checkitem:checked').each(function (i) {
         cus_id[i] = $(this).val();
     });
     if (cus_id.length === 0) //tell you if the array is empty

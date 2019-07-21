@@ -11,13 +11,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="../js/sweetalert.min.js"></script> 
+    <script src="../js/sweetalert.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script src="../js/sidebar.js"></script>
     <!--dropdown-->
-    
+
     <link rel="stylesheet" href="../css/sweetalert.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -48,33 +48,37 @@
         }
 
         .bor-red {
-            border-bottom: 0.2em solid rgb(0, 38, 255);
+            border-bottom: 0.2em solid rgb(187, 187, 187);
         }
 
         .bor-orange {
-            border-bottom: 0.2em solid orange;
+            border-bottom: 0.2em solid rgb(187, 187, 187);
         }
 
         .bor-yellow {
-            border-bottom: 0.2em solid yellow;
+            border-bottom: 0.2em solid rgb(187, 187, 187);
         }
 
         .bor-green {
-            border-bottom: 0.2em solid green;
+            border-bottom: 0.2em solid rgb(187, 187, 187);
         }
 
         .bor-violet {
-            border-bottom: 0.2em solid violet;
+            border-bottom: 0.2em solid rgb(187, 187, 187);
         }
 
         body {
-            /* background: #474747 url(../img/bg.png); */
-            background:#f1f1f1;
+            background:#ffffff;
             font-family: 'Kanit', sans-serif;
         }
 
+        .aa {
+            background: rgb(228, 228, 228);
+            background: linear-gradient(180deg, rgba(228, 228, 228, 1) 0%, rgba(255, 251, 251, 1) 100%);
+        }
+
         h2 {
-            color:#fff;
+            color: #fff;
             font-family: 'Kanit', sans-serif;
             text-shadow: 3px 5px 10px #000;
         }
@@ -94,20 +98,20 @@
         }
 
         th {
-            color: darkblue;
+            color: rgb(30, 45, 255);
         }
 
         center>p {
             font-size: 2em;
         }
 
-        table.dataTable thead th {
+        /* table.dataTable thead th {
             border-bottom: 0;
-        }
+        } */
 
         .pad-a {
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+            background-color:#ff751a;
+            box-shadow: 0px -1px 5px #f1f1f1;
         }
 
         #border-login {
@@ -149,7 +153,7 @@
         }
 
         .btn {
-            margin: 5px;
+            margin: 1px;
         }
 
         p {
@@ -195,13 +199,13 @@
         }
 
         .custom-checkbox .custom-control-input:checked~.custom-control-indicator {
-            background-color: #84c7c1;
+            background-color: #4d94ff;
             background-image: none;
             box-shadow: none !important;
         }
 
         .custom-checkbox .custom-control-input:checked~.custom-control-indicator:after {
-            background-color: #84c7c1;
+            background-color:#0066ff;
             left: 15px;
         }
 
@@ -255,19 +259,52 @@
         .f-right {
             float: right;
         }
-        #changpw{
-            background-color:white;
-            padding:1em;
-            margin:1em;
-            border-bottom:gray solid 5px;
-            -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-            -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+        #changpw {
+            background-color:#f1f1f1;
+            padding: 1em;
+            margin: 1em;
+            border-bottom: gray solid 5px;
+        }
+        .navbar-light{
+            background-color: #4da6ff !important;
+            box-shadow: 0px -1px 5px #a7a7a7;
+            color:#ffffff;
         }
     </style>
 </head>
 
 <body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <ul class="nav navbar-nav ml-auto">
+                <div id="DATE"></div>
+            </ul>
+        </nav>
+    </div>
 </body>
+<script>
+    $(document).ready(function () {
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        var d = new Date();
+        var day = days[d.getDay()];
+        var hr = d.getHours();
+        var min = d.getMinutes();
+        if (min < 10) {
+            min = "0" + min;
+        }
+        var ampm = "pm";
+        if (hr < 12) {
+            ampm = "am";
+        }
+        var date = d.getDate();
+        var month = months[d.getMonth()];
+        var year = d.getFullYear();
+        var x = document.getElementById("DATE");
+        x.innerHTML = day + " " + hr + ":" + min + ampm + " " + date + " " + month + " " + year;
+    });   
+</script>
 
 </html>

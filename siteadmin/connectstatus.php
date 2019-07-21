@@ -30,7 +30,7 @@ if (!$_SESSION["cus_id"]) {
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span><span style="color:blue">|</span><?php print_r($_SESSION["cus_name"]); ?></a></strong>
+                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span>&nbsp;<?php print_r($_SESSION["cus_name"]); ?></a></strong>
                         </span>
                         <span class="user-role">ผู้ดูแล</span>
                         <span class="user-status">
@@ -60,8 +60,8 @@ if (!$_SESSION["cus_id"]) {
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-                <a href="#" data-toggle="modal" data-target="#logoutModalCenter">
-                    <i class="fa fa-power-off">ออกจากระบบ</i>
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
                 </a>
             </div>
         </nav>
@@ -80,19 +80,19 @@ if (!$_SESSION["cus_id"]) {
                         </button>
                         <a href="connectstatus.php"><img src="../img/refresh.png" width="20" title="Refresh"></a>
                         <br /><br />
-                        <table id="connectstatus" class="table table-striped table-hover display responsive nowrap" style="width:100%">
-                            <thead class="bg-info">
+                        <table id="connectstatus" class="table table-striped table-hover table-bordered table-sm  display responsive nowrap" style="width:100%">
+                            <thead class="aa">
                                 <tr>
-                                    <th width="1%"></th>
+                                    <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label></th>
                                     <th width="1%">#</th>
                                     <th width="5%">IP Address/Port</th>
                                     <th width="5%">Username</th>
                                     <th width="5%">Site Name</th>
-                                    <th width="1%">ซีพียู</th>
-                                    <th width="1%">แรม</th>
-                                    <th width="1%">ฮาร์ดดิส</th>
+                                    <th width="1%">CPU Load</th>
+                                    <th width="1%">RAM</th>
+                                    <th width="1%">Hardisk</th>
                                     <th width="2%">Connect Status</th>
-                                    <th width="4%">Manage</th>
+                                    <th width="4%">Options</th>
                                 </tr>
                             </thead>
                         </table>
@@ -169,8 +169,9 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="submit" class="btn btn-primary" id="addSiteBtn">บันทึก</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                            <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
+                            <button type="submit" class="btn btn-success" id="addSiteBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                         </div>
                     </form>
                 </div>
@@ -243,8 +244,9 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="submit" class="btn btn-primary" id="editSiteBtn">บันทึก</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                            <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
+                            <button type="submit" class="btn btn-success" id="editSiteBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                         </div>
                     </form>
                 </div>
@@ -263,8 +265,8 @@ if (!$_SESSION["cus_id"]) {
                     <p>คุณต้องการลบไซต์ที่เลือก ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary" id="removeAllSiteBtn">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="button" class="btn btn-success" id="removeAllSiteBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                 </div>
             </div>
         </div>
@@ -281,8 +283,8 @@ if (!$_SESSION["cus_id"]) {
                     <p>คุณต้องการลบไซต์ ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary" id="removeSiteBtn">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                    <button type="button" class="btn btn-success" id="removeSiteBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                 </div>
             </div>
         </div>

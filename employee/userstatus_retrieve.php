@@ -24,8 +24,11 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
         for ($i = 1; $i < $num; $i++) {
 
 
-            $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="users_checkbox custom-control-input" name="users_name[]" value="' . $ARRAY[$i]["name"] . '"><span class="custom-control-indicator"></span></label>';
-            $manage = '<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editUserModal"  onclick="editUser(\'' . $ARRAY[$i]["name"] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+            $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="users_name[]" value="' . $ARRAY[$i]["name"] . '"><span class="custom-control-indicator"></span></label>';
+
+
+            $manage = '<a href="print.php?user&id='.$ARRAY[$i]["name"].'"><button type="button" class="btn btn-success"><span title="Print คูปอง" class="glyphicon glyphicon-print"></span></button></a>
+            <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editUserModal"  onclick="editUser(\'' . $ARRAY[$i]["name"] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
             <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeUserModal"  onclick="removeUser(\'' . $ARRAY[$i]["name"] . '\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
 
             $output['success'] = true;
