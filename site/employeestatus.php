@@ -283,5 +283,5 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <script src="employeestatus.js"></script>
+    <script src="../js/employeestatus.js"></script>
 <?php } ?>

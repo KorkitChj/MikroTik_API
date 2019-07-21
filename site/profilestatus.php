@@ -323,5 +323,5 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <script src="profilestatus.js"></script>
+    <script src="../js/profilestatus.js"></script>
 <?php } ?>

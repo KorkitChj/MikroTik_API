@@ -268,5 +268,5 @@ if (!$_SESSION["emp_id"]) {
         <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
-    <script src="logout.js"></script>
+    <script src="../js/logout.js"></script>
 <?php } ?>

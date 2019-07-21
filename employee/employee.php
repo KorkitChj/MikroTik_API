@@ -155,5 +155,5 @@ if (!$_SESSION["emp_id"]) {
             })
         });
     </script>
-    <script src="logout.js"></script>
+    <script src="../js/logout.js"></script>
 <?php } ?>

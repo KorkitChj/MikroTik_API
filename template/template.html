@@ -16,15 +16,18 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script src="../js/sidebar.js"></script>
+    <script src="../js/plugins/jquery-validation/jquery.validate.min.js"></script>
+	<!-- <script src="../js/app.js"></script> -->
     <!--dropdown-->
 
     <link rel="stylesheet" href="../css/sweetalert.css" type="text/css" />
+    <link href="../css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
         integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-    <link href="../glyphicons/css/bootstrap-glyphicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/glyphicons/css/bootstrap-glyphicons.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/sidebar.css">
 
 
@@ -72,11 +75,6 @@
             font-family: 'Kanit', sans-serif;
         }
 
-        .aa {
-            background: rgb(228, 228, 228);
-            background: linear-gradient(180deg, rgba(228, 228, 228, 1) 0%, rgba(255, 251, 251, 1) 100%);
-        }
-
         h2 {
             color: #fff;
             font-family: 'Kanit', sans-serif;
@@ -105,10 +103,6 @@
             font-size: 2em;
         }
 
-        /* table.dataTable thead th {
-            border-bottom: 0;
-        } */
-
         .pad-a {
             background-color:#ff751a;
             box-shadow: 0px -1px 5px #f1f1f1;
@@ -127,21 +121,11 @@
             margin-right: 4em;
         }
 
-        .dropdown:hover>.dropdown-menu {
-            display: block;
-        }
-
-        .dropdown>a {
-            text-decoration: none;
-        }
-
-        .fa-key {
+            
+       .fa-key {
             color: tomato;
         }
 
-        .modal-body {
-            border-bottom: #858585 3px solid;
-        }
 
         .modal-body>p {
             font-size: 20px;
@@ -264,7 +248,6 @@
             background-color:#f1f1f1;
             padding: 1em;
             margin: 1em;
-            border-bottom: gray solid 5px;
         }
         .navbar-light{
             background-color: #4da6ff !important;

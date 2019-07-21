@@ -289,5 +289,5 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <script src="connectstatus.js"></script>
+    <script src="../js/connectstatus.js"></script>
 <?php } ?>

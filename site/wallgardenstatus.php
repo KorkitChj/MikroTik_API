@@ -266,5 +266,5 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <script src="wallgardenstatus.js"></script>
+    <script src="../js/wallgardenstatus.js"></script>
 <?php } ?>

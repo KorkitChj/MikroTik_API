@@ -178,5 +178,5 @@ if (!$_SESSION["admin_id"]) {
             </div>
         </div>
     </div>
-    <script src="checkpayment_del.js"></script>
+    <script src="../js/checkpayment_del.js"></script>
 <?php } ?>

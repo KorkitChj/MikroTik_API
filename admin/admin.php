@@ -147,5 +147,5 @@ if (!$_SESSION["admin_id"]) {
             </div>
         </div>
     </div>
-    <script src="admin_del.js"></script>
+    <script src="../js/admin_del.js"></script>
 <?php } ?>

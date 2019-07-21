@@ -629,6 +629,6 @@ if (!$_SESSION["emp_id"]) {
             </div>
         </div>
     </div>
-    <script src="userstatus.js"></script>
-    <script src="logout.js"></script>
+    <script src="../js/userstatus.js"></script>
+    <script src="../js/logout.js"></script>
 <?php } ?>
