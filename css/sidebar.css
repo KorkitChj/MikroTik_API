@@ -406,7 +406,7 @@
   /*-----------------------------chiller-theme-------------------------------------------------*/
   
   .chiller-theme .sidebar-wrapper {
-    background:#4da6ff;
+    background:#404040;
   }
   
   .chiller-theme .sidebar-wrapper .sidebar-header,
@@ -467,7 +467,7 @@
   }
   
   .chiller-theme .sidebar-footer {
-      background: #1a8cff;
+      background: #404040;
       box-shadow: 0px -1px 5px #a7a7a7;
       border-top: 1px solid #0080ff;
       padding: 5px;

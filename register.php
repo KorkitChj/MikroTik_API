@@ -2,128 +2,233 @@
 session_start();
 ?>
 <?php
-require('template/template_customer.html');
+require('template/template_login&register.html');
 if (!$_SESSION["order"]) {
     Header("Location:products.php");
 } else { ?>
-<title>Register</title>
-<link rel="stylesheet" href="css/style.css">
-<style>
-    html {
-        height: 100%;
-        border-top: red 0.25em solid;
-    }
-
-    body {
-        /* background-image: linear-gradient(to top, #99CC66 0%, #FFFFCC 100%); */
-        margin-top: 1em;
-        margin-bottom: 4em;
-        background-image: url('img/16948.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        /* background: rgb(255,255,255);
-        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(227,227,227,1) 100%, rgba(186,186,186,1) 100%, rgba(181,181,181,1) 100%, rgba(175,238,255,1) 100%); */
-    }
-
-    .container-fluid {
-        /* background-color: white; */
-        /* padding: 2px; */
-    }
-
-    #border-login {
-        /* background: #e3e3e3; */
-        /* background: url('img/3.jpg');
-        background-color: rgba(255, 0, 0, 0.4); */
-        background:#ccffff;
-        background-repeat: no-repeat;
-        background-size: cover;
-        padding: 1.5em;
-        border-radius: 5px;
-        border-left:#0099ff 5px solid;
-        /* box-shadow: 0px 0px 8px 4px rgb(0, 0, 0); */
-    }
-    p {
-        color:red;
-        font-weight: bold;
-        font-size:2em;
-    }
-
-    p:hover {
-        color:black;
-    }
-    .btn-danger,.btn-primary,.btn-warning{
-        background-color:white;
-        color:black;
-    }
-    input[type="text"],
-    [type="password"] {
-        border: 0;
-        border-bottom: 1px solid red;
-        outline: 0;
-    }
-</style>
-<body>
-    <div class="container-fluid">
+    <title>Register</title>
+    <div class="container" style="width:100%; max-width:800px">
         <div class="row ">
-            <div class="col d-flex justify-content-center">
-                <div id="border-login">
-                    <form action="s_register.php" method="post">
-                        <div class="col d-flex justify-content-center">
-                            <p>
-                                สมัครสมาชิก
-                            </p>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputusername" class="col-sm-1 col-form-label"><i class="far fa-user"></i></label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control " name="inputusername" placeholder="ชื่อผู้ใช้งาน" required>
+            <div class="col">
+                <div class="card text-white bg-info border-danger">
+                    <div class="card-header">
+                        <p align="center">Register</p>
+                    </div>
+                    <div class="card-body">
+                        <form id="register" action="" method="">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="username" class="control-label col-sm">Username:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="far fa-user"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="password" class="control-label col-sm">Password:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-key"></i>
+                                            </div>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+                                    </div>
+                                </div>
                             </div>
-                            <label for="inputpassword" class="col-sm-1 col-form-label"><i class="fas fa-key"></i></label>
-                            <div class="col-sm-5">
-                                <input type="password" class="form-control" name="inputpassword" placeholder="รหัสผ่าน" required>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="fullname" class="control-label col-sm">ชื่อ-สกุล:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-id-badge"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="ชื่อ-สกุล">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="email" class="control-label col-sm">E-mail Address:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-envelope-square"></i>
+                                            </div>
+                                        </div>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputfullname" class="col-sm-1 col-form-label"><i class="fas fa-id-badge"></i></label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="inputfullname" placeholder="ชื่อ-สกุล" required>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="number" class="control-label col-sm">หมายเลขโทรศัพท์:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-phone-square"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="number" name="number" placeholder="หมายเลขโทรศัพท์">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="site" class="control-label col-sm">ชื่อสถานที่ตั้ง:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-location-arrow"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="site" name="site" placeholder="ชื่อสถานที่ตั้ง">
+                                    </div>
+                                </div>
                             </div>
-                            <label for="inputemail" class="col-sm-1 col-form-label"><i class="fas fa-envelope-square"></i></label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="inputemail" placeholder="อีเมล" required>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="address" class="control-label col-sm">ที่อยู่:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-at"></i>
+                                            </div>
+                                        </div>
+                                        <textarea id="address" name="address" class="form-control" placeholder="ที่อยู่"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputphonenumber" class="col-sm-1 col-form-label"><i class="fas fa-phone-square"></i></label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="inputphonenumber" placeholder="หมายเลขโทรศัพท์" required>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="col-sm-12">
+                                        <hr />
+                                        <button type="submit" id="registerBtn" name="registerBtn" class="btn btn-primary">สมัครสมาชิก</button>
+                                        <button type="reset" name="reset" class="btn btn-warning">รีเซ็ต</button>
+                                        <button type="bottom" class="btn btn-danger" onclick="window.history.back()">ยกเลิก</button>
+                                    </div>
+                                </div>
                             </div>
-                            <label for="inputworkingsite" class="col-sm-1 col-form-label"><i class="fas fa-location-arrow"></i></label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="inputworkingsite" placeholder="ชื่อสถานที่ตั้ง" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputemail" class="col-sm-1 col-form-label"><i class="fas fa-address-card"></i></label>
-                            <div class="col-sm-11">
-                                <textarea name="address" class="form-control" placeholder="ที่อยู่"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="b" class="col-sm-1 col-form-label"></label>
-                            <div class="col-sm-11">
-                                <button type="submit" name="MM_insert" class="btn btn-primary">สมัครสมาชิก</button>
-                                <button type="reset" name="reset" class="btn btn-warning">รีเซ็ต</button>
-                                <button type="bottom" class="btn btn-danger" onclick="window.history.back()">ยกเลิก</button>
-                            </div>
-                        </div>
-                        <div class="col d-flex justify-content-center">
-                            <b>***คุณจะต้องลงทะเบียนก่อนทำการสั่งซื้อสินค้า***</b>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
+    <script>
+        $.validation = {
+            messages: {}
+        };
+
+        $.extend($.validation.messages, {
+            required: '<i class="fa fa-exclamation-circle"></i> required.'
+        });
+
+        $(document).ready(function() {
+            validateSignupForm();
+        });
+
+        var validateSignupForm = function() {
+            var register = $('#register');
+
+            register.validate({
+                rules: {
+                    username: {
+                        required: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    },
+                    fullname: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    number: {
+                        required: true
+                    },
+                    site: {
+                        required: true
+                    },
+                    address: {
+                        required: true
+                    }
+                },
+                messages: {
+                    username: {
+                        required: $.validation.messages.required
+                    },
+                    password: {
+                        required: $.validation.messages.required
+                    },
+                    fullname: {
+                        required: $.validation.messages.required
+                    },
+                    email: {
+                        required: $.validation.messages.required
+                    },
+                    number: {
+                        required: $.validation.messages.required
+                    },
+                    site: {
+                        required: $.validation.messages.required
+                    },
+                    address: {
+                        required: $.validation.messages.required
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    error.insertAfter(element);
+
+                    $(window).resize(function() {
+                        error.remove();
+                    });
+                },
+                invalidHandler: function(event, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {} else {}
+                }
+            });
+
+            register.on('submit', function(e) {
+                if (register.valid()) {
+                    var form = $(this);
+                    var ajaxRequest = $.ajax({
+                        url: 's_register.php',
+                        type: 'POST',
+                        data: form.serialize(),
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success == true) {
+                                swal({
+                                        title: "สำเร็จ?",
+                                        text: response.messages,
+                                        type: "success",
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "OK",
+                                        closeOnConfirm: false
+                                    },
+                                    function(isConfirm) {
+                                        if (isConfirm) {
+                                            window.location.href = 'payment.php';
+                                        }
+                                    }
+                                );
+                            } else {
+                                swal("ผิดพลาด", response.messages, "error");
+                            }
+                        },
+                        beforeSend: function() {}
+                    });
+                }
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        }
+    </script>
 <?php } ?>

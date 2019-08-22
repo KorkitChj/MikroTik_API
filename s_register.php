@@ -3,8 +3,11 @@ session_start();
 ?>
 <?php
 require('include/connect_db.php');
-if (isset($_POST["MM_insert"])) {
-	$username = $_POST["inputusername"];
+
+$output = array('success' => false, 'messages' => array());
+
+if (isset($_POST["username"])) {
+	$username = $_POST["username"];
 	$sql1 = "SELECT *FROM siteadmin WHERE username = :username";
 	$query1 = $conn->prepare($sql1);
 	$query1->bindparam(':username', $username);
@@ -12,13 +15,13 @@ if (isset($_POST["MM_insert"])) {
 	$num_rows = $query1->fetchColumn(); 
 
 	if ($num_rows == 0) {
-		$password = MD5($_POST["inputpassword"]);
-		$fullname = $_POST["inputfullname"];
-		$email  = $_POST["inputemail"];
-		$phonenumber  = $_POST["inputphonenumber"];
-		$site = $_POST["inputworkingsite"];
+		$password = MD5($_POST["password"]);
+		$fullname = $_POST["fullname"];
+		$email  = $_POST["email"];
+		$phonenumber  = $_POST["number"];
+		$site = $_POST["site"];
 		$address = $_POST["address"];
-		$_SESSION["cus_name"] = $_POST["inputusername"];
+		$_SESSION["register"] = $_POST["username"];
 
 		$sql = "INSERT INTO siteadmin 
                             values('',:username,:password,:address,:phonenumber
@@ -34,18 +37,13 @@ if (isset($_POST["MM_insert"])) {
 		$query->bindparam(':fullname', $fullname);
         
 		if ($query->execute()) {
-			echo "<script>";
-			echo "alert(\"ข้อมูลของคุณบันทึกเรียบร้อยแล้ว\");";
-			echo "window.location='payment.php'";
-			echo "</script>";
-			exit;
+			$output['success'] = true;
+        	$output['messages'] = "ข้อมูลของคุณบันทึกเรียบร้อยแล้ว"; 
 		}
 	} else {
-		echo "<script>";
-		echo "alert(\"เพิ่มข้อมูลไม่ได้\");";
-		echo "window.history.back()";
-		echo "</script>";
+		$output['success'] = false;
+        $output['messages'] = "กรุณาเปลี่ยน Username"; 
 	}
-	$conn->null;
 }
+echo json_encode($output);
 ?>

@@ -1,20 +1,34 @@
+<?php
+session_start();
+?>
 <?php 
-
+error_reporting(0);
+include('function.php');
 include ('../include/connect_db.php');
 
-$emp_id = $_POST['emp_id'];
+$emp_name = $_POST['emp_name'];
+$name = $_POST['name'];
 
-$output = array('full_name' => array(), 'pass_w' => array(),'username' => array(),'location_id' => array(),'emp_id' => array());
-$sql = "SELECT * FROM employee WHERE emp_id = :emp_id";
+$location_id = $_SESSION['location_id'];
+$cus_id = $_SESSION['cus_id'];
+
+list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+
+if($API->connect($ip.":".$port,$user,$pass)){
+    $ARRAY = $API->comm("/user/print",array("?.id" => $emp_name));
+}
+
+$output = array('full_name' => array(), 'pass_w' => array(),'username' => array(),'group' => array(),'comment' => array(),'id' => array());
+$sql = "SELECT * FROM employee WHERE username = :name";
 $query = $conn->prepare($sql);
-$query->bindParam(':emp_id',$emp_id);
+$query->bindParam(':name',$name);
 $query->execute();
 $result = $query->fetch(PDO::FETCH_ASSOC);
     $output['full_name'] = $result['full_name'];
     $output['pass_w'] = $result['pass_w'];
     $output['username'] = $result['username'];
-    $output['location_id'] = $result['location_id'];
-    $output['emp_id'] = $result['emp_id'];
-    
+    $output['group'] = $ARRAY[0]['group'];
+    $output['comment'] = $ARRAY[0]['comment'];
+    $output['id'] = $ARRAY[0]['.id'];
 echo json_encode($output);
 ?>

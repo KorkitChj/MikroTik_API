@@ -2,6 +2,7 @@
 session_start();
 ?>
 <?php
+error_reporting(0);
 if($_POST){
     $profile = $_POST["editprofile_name"];
     $profilename = $_POST['editprofilename'];
@@ -10,7 +11,8 @@ if($_POST){
     $shared = $_POST['editshared'];
     $mac = $_POST['editmac'];
     $limit = $_POST['editlimit'];
-
+    $refresh = $_POST['editautorefresh'];
+    $pool = $_POST['editadpool'];
     include ('function.php');
 
     $location_id = $_SESSION['location_id'];
@@ -28,7 +30,9 @@ if($_POST){
             "shared-users" => $shared,
             "mac-cookie-timeout" => $mac,
             "rate-limit" => $limit,
+            "status-autorefresh" => $refresh,
             "numbers" => $profile,
+            "address-pool" => $pool
         ));
             $output['success'] = true;
             $output['messages'] = "แก้ไขข้อมูลแล้ว";

@@ -9,51 +9,55 @@ include('function.php');
 
 $output = array('success' => false, 'messages' => array());
 
-list($ip,$port,$user,$pass,$site,$conn,$API) = fatchuser($cus_id,$location_id);
+list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
 
 if ($API->connect($ip . ":" . $port, $user, $pass)) {
-    if(isset($_POST['type'])){
-        if ($_POST['type'] == 'one')  {
+    if (isset($_POST['type'])) {
+        if ($_POST['type'] == 'one') {
             $emp_id = $_POST['emp_id'];
+            $username = $_POST['name'];
             $ARRAY = $API->comm("/user/print");
             $num = count($ARRAY);
             if ($num == '0') {
                 $output['success'] = false;
                 $output['messages'] = "Default profile can not be removed.";
-        
             } else {
-                $sql = "SELECT pass_router FROM employee WHERE emp_id = :emp_id";
-                $query = $conn->prepare($sql);
-                $query->bindparam(':emp_id',$emp_id);
-                if ($query->execute()) {
-                    $result = $query->fetch(PDO::FETCH_ASSOC);
-                    $pass_router = $result['pass_router'];
-                    $ARRAY = $API->comm("/user/remove", array(
-                        "numbers" => $pass_router,
-                    ));
-                    $sql = "DELETE FROM employee WHERE emp_id = :emp_id";
-                    $query = $conn->prepare($sql);
-                    $query->bindparam(':emp_id',$emp_id);
-                    $query->execute();
-                    $output['success'] = true;
-                    $output['messages'] = "ทำการลบพนักงานเรียบร้อยแล้ว";
-                }
-            }
-        } elseif ($_POST['type'] == 'many') {
-            $emp_id = implode(", ",$_POST['emp_id']);
-            $result1 = $conn->query("SELECT pass_router FROM employee WHERE emp_id IN('".implode("','", $_POST['emp_id'])."')");
-            while ($result = $result1->fetch(PDO::FETCH_ASSOC)) {
-                $pass_router = $result['pass_router'];
                 $ARRAY = $API->comm("/user/remove", array(
-                    "numbers" => $pass_router,
+                    ".id" => $emp_id,
                 ));
+                $sql = "DELETE FROM employee WHERE username = :username";
+                $query = $conn->prepare($sql);
+                $query->bindparam(':username', $username);
+                $query->execute();
+                $output['success'] = true;
+                $output['messages'] = "ทำการลบพนักงานเรียบร้อยแล้ว";
             }
-            $sql = "DELETE FROM employee WHERE emp_id IN($emp_id)";
-            $query = $conn->prepare($sql);
-            $query->execute();
-            $output['success'] = true;
-            $output['messages'] = "ทำการลบพนักงานที่เลือกเรียบร้อยแล้ว";
         }
+    } elseif ($_POST['type'] == 'many') {
+        $username5 = array();
+        $username6 = array();
+        $aa = array();
+        $aa = $_POST['emp_id'];
+        foreach ($aa as $bb) {
+            $username2 = explode(",", $bb);
+            $username5[] = $username2[0];
+            $username6[] = $username2[1];
+        }
+
+        $id = implode(",", $username6);
+        $ARRAY = $API->comm("/user/remove", array(".id" => $id));
+
+        foreach ($username5 as $rm) {
+            $sql = "DELETE FROM employee WHERE username = :username";
+            $query = $conn->prepare($sql);
+            $query->execute(
+                array(
+                    'username' => $rm
+                )
+            );
+        }
+        $output['success'] = true;
+        $output['messages'] = "ทำการลบพนักงานที่เลือกเรียบร้อยแล้ว";
     }
 } else {
     $output['success'] = false;

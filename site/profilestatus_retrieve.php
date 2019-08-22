@@ -5,6 +5,7 @@ session_start();
 $location_id = $_SESSION['location_id'];
 $cus_id = $_SESSION['cus_id'];
 
+error_reporting(0);
 include('function.php');
 
 list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
@@ -27,8 +28,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
         }
 
         $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="profile_checkbox custom-control-input" name="Profile_id[]" value="' . $ARRAY[$i]["name"] . '"><span class="custom-control-indicator"></span></label>';
-        $manage = '<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editProfileModal"  onclick="editProfile(\''.$ARRAY[$i]["name"].'\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeProfileModal"  onclick="removeProfile(\''.$ARRAY[$i]["name"].'\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
+        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editProfileModal"  onclick="editProfile(\''.$ARRAY[$i]["name"].'\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeProfileModal"  onclick="removeProfile(\''.$ARRAY[$i]["name"].'\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
 
         $output['success'] = true;
         $output['data'][] = array(

@@ -7,58 +7,66 @@ if (isset($_POST['username'])) {
     $username = $_POST['username'];
     $password = MD5($_POST['password']);
 
-    $sql = "SELECT * FROM admin WHERE  
-            username = :username AND pass_w = :password";
-    $query = $conn->prepare($sql);
-    $query->bindparam(':username', $username);
-    $query->bindparam(':password', $password);
-    $sql2 = "SELECT * FROM employee WHERE  
-                username = :username AND pass_w = :password";
-    $query2 = $conn->prepare($sql2);
-    $query2->bindparam(':username', $username);
-    $query2->bindparam(':password', $password);
-    $sql3 = "SELECT * FROM siteadmin WHERE  
-                        username = :username AND pass_w = :password";
-    $query3 = $conn->prepare($sql3);
-    $query3->bindparam(':username', $username);
-    $query3->bindparam(':password', $password);
-    $sql4 = "SELECT b.cus_id FROM siteadmin AS a 
-    INNER JOIN orderpd AS b ON
-    a.cus_id = b.cus_id 
-    INNER JOIN payment AS c ON b.order_id = c.order_id
-     WHERE username = '$username' AND pass_w = '$password' AND paid = 1";
-    $query4 = $conn->prepare($sql4);
-    $query4->bindparam(':username', $username);
-    $query4->bindparam(':password', $password);
-    
+    $sql = '';
+
+    $sql .= "SELECT * FROM ";
+
+    $output = array('success' => false, 'messages' => array());
+
     if ($username) {
-        if ($query->execute()) {
+        $admin = "admin";
+        $sql1 = "WHERE username = :username AND pass_w = :password";
+        $sql .= "$admin $sql1";
+            $query = $conn->prepare($sql);
+        if ($query->execute(array(
+                ':username' =>  $username,
+                ':password' => $password)
+                )) {
             if ($query->rowCount() == 1) {
                 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                     $_SESSION["admin_id"] = $row["admin_id"];
                     $_SESSION["admin_name"] = $row["username"];
                 }
-                Header("Location:admin/admin.php");
-                exit(0);
+                $output['success'] = true;
+                $output['messages'] = "admin";
             } else {
-                if ($query2->execute()) {
-                    if ($query2->rowCount() == 1) {
-                        while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
+                $sql = '';
+
+                $sql .= "SELECT * FROM ";
+
+                $employee = "employee";
+                $sql .= "$employee $sql1";
+                $query = $conn->prepare($sql);
+                if ($query->execute(
+                    array(
+                        ':username' =>  $username,
+                        ':password' => $password)
+                        )) {
+                    if ($query->rowCount() == 1) {
+                        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                             $_SESSION["emp_id"] = $row["emp_id"];
                             $_SESSION["emp_name"] = $row["username"];
                         }
-                        Header("Location:employee/employee.php");
-                        exit(0);
+                        $output['success'] = true;
+                        $output['messages'] = "employee";                      
                     } else {
-                        if ($query3->execute()) {
-                            if ($query3->rowCount() != 1) {
-                                echo "<script>";
-                                echo "alert(\"Username หรือ Password ไม่ถูกต้อง\");";
-                                echo "window.history.back()";
-                                echo "</script>";
-                                exit(0);
+                        $sql2 = '';
+
+                        $sql2 .= "SELECT * FROM ";
+
+                        $siteadmin = "siteadmin";
+                        $sql2 .= "$siteadmin $sql1";
+                        $query = $conn->prepare($sql2);
+                        if ($query->execute(
+                            array(
+                                ':username' =>  $username,
+                                ':password' => $password)
+                                )) {
+                            if ($query->rowCount() != 1) {
+                                $output['success'] = false;
+                                $output['messages'] = "Username หรือ Password ไม่ถูกต้อง";  
                             } else {
-                                while ($row = $query3->fetch(PDO::FETCH_ASSOC)) {
+                                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                                     $insert_query = "INSERT INTO login_details(last_activity,cus_id) VALUES (:last_activity,:cus_id)";
                                     $statement = $conn->prepare($insert_query);
                                     $dateTime = date("Y-m-d H:i:sa");
@@ -72,19 +80,33 @@ if (isset($_POST['username'])) {
                                         $_SESSION["login_id"] = $login_id;
                                     }
                                 }
-                                if ($query4->execute()) {
-                                    if ($query4->rowCount() != 1) {
-                                        echo "<script>";
-                                        echo "alert(\"กรุณารอการยืนยันการชำระเงินจากAdmin หรือคุณยังไม่ยืนยันชำระเงิน\");";
-                                        echo "window.history.back()";
-                                        echo "</script>";
-                                        exit(0);
+                                $sql3 = "SELECT b.cus_id,b.product_id FROM siteadmin AS a 
+                                INNER JOIN orderpd AS b ON
+                                a.cus_id = b.cus_id 
+                                INNER JOIN payment AS c ON
+                                b.order_id = c.order_id
+                                WHERE username = :username AND pass_w = :password AND paid = 1";
+                                $query = $conn->prepare($sql3);
+                                if ($query->execute(
+                                    array(
+                                        ':username' =>  $username,
+                                        ':password' => $password)
+                                    )) {
+                                    if ($query->rowCount() != 1) {
+                                        $output['success'] = true;
+                                        $output['messages'] = "กรุณารอการยืนยันการชำระเงินจากAdmin หรือคุณยังไม่ยืนยันชำระเงิน";   
                                     } else {
-                                        echo "<script>";
-                                        echo "alert(\"ยินดีต้อนรับสมาชิก\");";
-                                        echo "window.location.href='siteadmin/connectstatus.php'";
-                                        echo "</script>";
-                                        exit(0);
+                                        $result = $query->fetch(PDO::FETCH_ASSOC);
+                                        if($result['product_id'] == 1)
+                                        {
+                                            $output['success'] = true;
+                                            $output['messages'] = "service1"; 
+                                        }
+                                        else
+                                        {
+                                            $output['success'] = true;
+                                            $output['messages'] = "service2"; 
+                                        }
                                     }
                                 }
                             }
@@ -97,6 +119,7 @@ if (isset($_POST['username'])) {
 } else {
     Header("Location:login.php");
 }
+echo json_encode($output);
 ?>
 
 

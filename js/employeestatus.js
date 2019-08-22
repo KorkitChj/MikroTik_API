@@ -7,7 +7,7 @@ $(document).ready(function () {
             type: "POST"
         },
         "columnDefs": [{
-            "targets": [0, 5],
+            "targets": [0,10],
             "orderable": false,
         }],
     });
@@ -19,7 +19,8 @@ $(document).ready(function () {
             var username = $("#username").val();
             var password = $("#password").val();
             var site = $("#site").val();
-            if (name && username && password && site) {
+            var group = $("#group").val();
+            if (name && username && password && site && group) {
                 $.ajax({
                     url: '../site/addemployee.php',
                     type: 'POST',
@@ -42,13 +43,15 @@ $(document).ready(function () {
     });
 });
 
-function removeMember(id = null) {
+function removeMember(id = null,name = null) {
     if (id) {
         $("#removeMemberBtn").unbind('click').bind('click', function () {
+            /*console.log(id,name);
+            return false;*/
             $.ajax({
                 url: '../site/employeestatus_del.php',
                 type: 'POST',
-                data: { 'emp_id': id, 'type': 'one' },
+                data: { 'emp_id': id,'name': name,'type': 'one' },
                 dataType: 'json',
                 success: function (response) {
                     if (response.success == true) {
@@ -73,6 +76,8 @@ $('#removeAllMemberBtn').click(function () {
     $('.checkitem:checked').each(function (i) {
         emp_id[i] = $(this).val();
     });
+    //console.log(emp_id);
+    //return false;
     if (emp_id.length === 0) {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
@@ -95,21 +100,23 @@ $('#removeAllMemberBtn').click(function () {
         });
     }
 });
-function editMember(id = null) {
+function editMember(id = null,name = null) {
     if (id) {
+        console.log(id,name);
         $.ajax({
             url: '../site/getSelectedMember.php',
             type: 'POST',
             data: {
-                emp_id: id
+                'emp_name': id,'name' : name
             },
             dataType: 'json',
             success: function (response) {
                 $("#editname").val(response.full_name);
                 $("#editusername").val(response.username);
                 $("#editpassword").val(response.pass_w);
-                $("#editsite").val(response.location_id);
-                $("#editMember").append('<input type="hidden" name="editemp_id" id="editemp_id" value="' + response.emp_id + '"/>');
+                $("#editcomment").val(response.comment);
+                $("#editgroup").val(response.group);
+                $("#editMember").append('<input type="hidden" name="editemp_name" id="editemp_name" value="'+response.id+'"/>');
                 $("#editMember").unbind('submit').bind('submit', function () {
                     var form = $(this);
                     var editname = $("#editname").val();
@@ -138,6 +145,50 @@ function editMember(id = null) {
         });
     } else {
         alert("Error : Refresh the page again");
+    }
+}
+
+function time() {
+    return timea = new Date().toLocaleString(); 
+}
+
+function enableEmp(id = null) {
+    if (id) {
+        console.log(id);
+
+        $.ajax({
+            url: '../site/disable_enable_emp.php',
+            type: 'POST',
+            data: {
+                'id': id,
+                'type': 'enable'
+            },
+            dataType: 'json',
+            success: function(data) {
+                employeestatus.ajax.reload();
+                $("#ss").append("<b>Employee " + data.id + " เปิดแล้ว</b>  "+ time() +"<br>");
+            }
+        });
+    }
+}
+
+function disableEmp(id = null) {
+    if (id) {
+        console.log(id);
+
+        $.ajax({
+            url: '../site/disable_enable_emp.php',
+            type: 'POST',
+            data: {
+                'id': id,
+                'type': 'disable'
+            },
+            dataType: 'json',
+            success: function(data) {
+                employeestatus.ajax.reload();
+                $("#ss").append("<b>Employee " + data.id + " ปิดแล้ว</b> "+ time() +"<br>");
+            }
+        });
     }
 }
 

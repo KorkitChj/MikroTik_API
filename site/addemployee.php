@@ -2,6 +2,7 @@
 session_start();
 ?>
   <?php
+  error_reporting(0);
     if ($_POST) {
         
         $location_id = $_SESSION['location_id'];
@@ -16,7 +17,8 @@ session_start();
         $username = $_POST["username"];
         $password = MD5($_POST["password"]);
         $site = $_POST["site"];
-
+        $group = $_POST["group"];
+        $comment = $_POST["comment"];
         
 
         $sql = "SELECT * FROM employee WHERE username = :username";
@@ -30,8 +32,8 @@ session_start();
             $min = 11111;
             $max = 99999;
             $pass_router = rand($min, $max);
-            $employee = "$pass_router";
-            $group = "full";
+            //$employee = "$pass_router";
+            //$group = "full";
                        
             if ($API->connect($ip . ":" . $port, $user, $pass)) {
                 $ARRAY = $API->comm("/user/print");
@@ -49,7 +51,7 @@ session_start();
                 $ARRAY = $API->comm("/user/add", array(
                     "name" => $username,
                     "password" => $pass_router,
-                    "comment" => $employee,
+                    "comment" => $comment,
                     "group" => $group,
                 ));
                 $sql = "INSERT INTO  employee VALUES

@@ -1,5 +1,5 @@
 <?php
-require('template/template_customer.html');
+require('template/template_transfer.html');
 ?>
 <?php
 require('include/connect_db.php');
@@ -104,106 +104,87 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
     }
 }
 ?>
-<link rel="stylesheet" href="css/style.css">
 <title>Transfer</title>
-<style>
-    html {
-        height: 100%;
-        border-top: red 0.25em solid;
-    }
-
-    body {
-        background-image: url('img/16948.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #border-login {
-        background: #ccffff;
-        background-repeat: no-repeat;
-        background-size: cover;
-        padding: 1.5em;
-        border-radius: 5px;
-        border-left:#0099ff 5px solid;
-        margin: 2em 2em;
-    }
-
-    label {
-        color: black;
-        font-weight: bold;
-    }
-    p {
-        color:red;
-        font-weight: bold;
-        font-size:2em;
-    }
-
-    p:hover {
-        color:black;
-    }
-    .btn-danger,.btn-primary,.btn-warning{
-        background-color:white;
-        color:black;
-    }
-    input[type="text"],[type="datetime-local"],[type="number"],[type="file"],[type="file"]
-    {
-        border: 0;
-        border-bottom: 1px solid red;
-        outline: 0;
-    }
-</style>
-<div class="container-fluid">
+<div class="container" style="width:100%; max-width:600px">
     <div class="row">
-        <div class="col d-flex justify-content-center">
-            <div id="border-login">
-                <p align="center">แจ้งโอนเงิน</p>
-                <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
-                    <div class="form-group row">
-                        <label for="inputusername" class="col-sm-1 col-form-label"><i class="far fa-user"></i></label>
-                        <div class="col-sm-11">
-                            <input type="text" class="form-control " name="username" placeholder="ชื่อผู้ใช้งาน" required>
+        <div class="col">
+            <div class="card text-white bg-info border-danger">
+                <div class="card-header">
+                    <p align="center">แจ้งโอนเงิน</p>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="" enctype="multipart/form-data" name="form1" id="form1">
+                        <div class="form-group row">
+                            <label for="username" class="control-label col-sm">Username:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="far fa-user"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="bank_info" class="col-sm-1 col-form-label"><i class="fas fa-university"></i></label>
-                        <div class="col-sm-11">
-                            <select name="bank" id="bank" class="form-control bank_info" required>
-                                <option value="">----- เลือกธนาคาร-----</option>
-                                <option value="1">ธนาคารไทยพาญิชย์</option>
-                                <option value="2">ธนาคารกรุงไทย</option>
-                                <option value="3">ธนาคารกสิกรไทย</option>
-                                <option value="4">ธนาคารกรุงเทพ</option>
-                            </select>
+                        <div class="form-group row">
+                            <label for="bank_info" class="control-label col-sm">ธนาคาร:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                </div>
+                                <select name="bank" id="bank" class="form-control bank_info" required>
+                                    <option value="">----- เลือกธนาคาร-----</option>
+                                    <option value="1">ธนาคารไทยพาญิชย์</option>
+                                    <option value="2">ธนาคารกรุงไทย</option>
+                                    <option value="3">ธนาคารกสิกรไทย</option>
+                                    <option value="4">ธนาคารกรุงเทพ</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="time" class="col-sm-1 col-form-label"><i class="fas fa-clock"></i></label>
-                        <div class="col-sm-11">
-                            <input type="datetime-local" name="date" class="form-control" id="note" required />
+                        <div class="form-group row">
+                            <label for="date" class="control-label col-sm">เวลาชำระ:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="datetime-local" name="date" class="form-control" id="date" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="money" class="col-sm-1 col-form-label"><i class="fas fa-money-check-alt"></i></label>
-                        <div class="col-sm-11">
-                            <input type="number" name="money" placeholder="จำนวนเงิน" class="form-control" id="money" required />
+                        <div class="form-group row">
+                            <label for="money" class="control-label col-sm">จำนวนเงิน:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-money-check-alt"></i>
+                                    </div>
+                                </div>
+                                <input type="number" name="money" placeholder="จำนวนเงิน" class="form-control" id="money" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="slips" class="col-sm-1 col-form-label"><i class="fas fa-image"></i></label>
-                        <div class="col-sm-11">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760">
-                            <input class="btn btn-primary" name="file" type="file" id="image_name" accept="image/*" required />
+                        <div class="form-group row">
+                            <label for="file" class="control-label col-sm">File:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="10485760">
+                                <input class="btn" name="file" type="file" id="file" accept="image/*" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="b" class="col-sm-1 col-form-label"></label>
-                        <div class="col-sm-11">
-                            <button type="submit" name="MM_insert" value="form1" class="btn btn-primary">ยืนยัน</button>
-                            <button type="reset" name="reset" class="btn btn-warning">รีเซ็ต</button>
-                            <button type="bottom" class="btn btn-danger" onclick="window.history.back()">ยกเลิก</button>
+                        <div class="form-group row">
+                            <label for="" class="col col-form-label"></label>
+                            <div class="col-12">
+                                <button type="bottom" class="btn btn-danger btn-lg btn-block" onclick="window.history.back()">ยกเลิก</button>                
+                                <button type="submit" value="form1" class="btn btn-success btn-lg btn-block"><i class="fas fa-sign-in-alt"></i>&nbsp;OK</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

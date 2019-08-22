@@ -7,7 +7,7 @@ $(document).ready(function () {
             type: "POST"
         },
         "columnDefs": [{
-            "targets": [0, 3, 6, 7],
+            "targets": [0, 5, 6],
             "orderable": false,
         }],
     });

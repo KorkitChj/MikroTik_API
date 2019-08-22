@@ -13,26 +13,23 @@ foreach ($result as $row) {
 
     $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="cus_id[]" value="'.$row["cus_id"].'"><span class="custom-control-indicator"></span></label>'; 
 
-    $download = '<a  data-toggle="modal" data-target="#displayimgMemberModal" href="" id="'.$row["slip_name"].'" class="displayimg"><img class="img-thumbnail" src="'.$src.'" style="width:100px;height:120px;"></a>
-            <a href="download.php?id='.$row["slip_name"].'" target="iframe"><button type="button" id="dl" class="update btn btn-warning">
-            <span title="ดาวน์โหลด" class="glyphicon glyphicon-cloud-download"></span></button></a>';
+    $download = '<a  data-toggle="modal" data-target="#displayimgMemberModal" href="" id="'.$row["slip_name"].'" class="displayimg"><img class="img-thumbnail" src="'.$src.'" style="width:100px;height:120px;"></a>';
 
             // $download = '<a href="view.php?id='.$row["slip_name"].'" target="_blank"><img class="img-thumbnail" src="'.$src.'" style="width:100px;height:120px;"></a>
             // <a href="download.php?id='.$row["slip_name"].'" target="iframe"><button type="button" id="dl" class="update btn btn-warning">
             // <span title="ดาวน์โหลด" class="glyphicon glyphicon-cloud-download"></span></button></a>';
-    $confirm = '<button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmMemberModal" onclick="confirmMember('.$row['order_id'].')"><span title="ยืนยัน" class="glyphicon glyphicon-check"></span></button>';
-    $remove = '<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeMember('.$row['cus_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
+    $confirm = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button type="button" id="dl" class="update btn btn-warning" onclick="window.location.href=\'download.php?id='.$row["slip_name"].'\'" target="iframe"><span title="ดาวน์โหลด" class="glyphicon glyphicon-cloud-download"></span></button>
+    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#confirmMemberModal" onclick="confirmMember('.$row['order_id'].')"><span title="ยืนยัน" class="glyphicon glyphicon-check"></span></button>
+    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeMember('.$row['cus_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
         
     $output['data'][] = array(
         $checkbox,
         $row["username"],
         $row["order_id"],
-        $download,
         $row["transfer_date"],
         $row["appointment"],
-        $confirm,
-        $remove
-        
+        $download,
+        $confirm        
     );
 }
 echo json_encode($output);

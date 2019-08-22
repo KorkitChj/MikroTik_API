@@ -51,9 +51,66 @@ if (!$_SESSION["cus_id"]) {
                                 &nbsp;Dashboard</a>
                         </li>
                         <li>
-                            <a href="employeestatus.php">
+                            <a href="interfacemonitor.php">
+                                <i class="glyphicon glyphicon-signal"></i>
+                                &nbsp;Interface Monitor</a>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
                                 <i class="glyphicon glyphicon-user"></i>
                                 &nbsp;รายการพนักงานดูแล</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="employeestatus.php" id="addemployee">
+                                            <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;เพิ่มพนักงาน
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="employeeactive.php" id="employeeactive">
+                                            <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;พนักงานออนไลน์
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-flag"></i>
+                                &nbsp;Address List</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="addresslist.php" id="addresslistBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Address List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="pool.php" id="addPoolBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Address Pool
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-wrench"></i>
+                                &nbsp;Hotspot Setup</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="addserverprofile.php" id="addserverprofileBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Server Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="addserver.php" id="addserverBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Server
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li>
                             <a href="profilestatus.php">
@@ -88,12 +145,12 @@ if (!$_SESSION["cus_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <button class="btn btn-primary pull pull-right" data-toggle="modal" data-target="#addWallModal" id="addWallModalBtn">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary pull pull-right" data-toggle="modal" data-target="#addWallModal" id="addWallModalBtn">
                             <span class="glyphicon glyphicon-plus "></span>เพิ่ม Bypass
                         </button>
                         <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllWallModal" id="removeAllWallModalBtn">
                             <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
-                        </button>
+                        </button></div>
                         <br /><br />
                         <table id="wallstatus" class="table table-striped table-hover table-bordered table-sm display responsive nowrap" style="width:100%">
                             <thead class="aa">

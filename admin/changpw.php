@@ -9,7 +9,7 @@
             <form id="changpw" name="contact" role="form">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="inputoldpassword" class="control-label col-sm">รหัสผ่านเก่า:&nbsp;</label>
+                        <label for="inputoldpassword" class="control-label col-sm">รหัสผ่านเก่า: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                         <div class="col-sm-12 input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputnewpassword" class="control-label col-sm">รหัสผ่านใหม่:&nbsp;</label>
+                        <label for="inputnewpassword" class="control-label col-sm">รหัสผ่านใหม่: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                         <div class="col-sm-12 input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputrenewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:&nbsp;</label>
+                        <label for="inputrenewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                         <div class="col-sm-12 input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">

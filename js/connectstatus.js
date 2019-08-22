@@ -17,10 +17,10 @@ $(document).ready(function () {
             var form = $(this);
             var ipaddress = $("#ipaddress").val();
             var username = $("#username").val();
-            var password = $("#password").val();
-            var portapi = $("#portapi").val();
+            //var password = $("#password").val();
+            //var portapi = $("#portapi").val();
             var namesite = $("#namesite").val();
-            if (ipaddress && username && password && portapi && namesite) {
+            if (ipaddress && username && namesite) {
                 $.ajax({
                     url: '../siteadmin/addconnect.php',
                     type: 'POST',
@@ -40,9 +40,31 @@ $(document).ready(function () {
             }
             return false;
         });
-    });   
+    });
 });
+function enableSite(ip_address = null) {
+    if (ip_address) {
+        console.log(ip_address);
 
+        $.ajax({
+            url: '../siteadmin/disable_enable_site.php',
+            type: 'POST',
+            data: { 'ipaddress': ip_address,'type':'enable' },
+        });
+    }
+}
+
+function disableSite(ip_address = null) {
+    if (ip_address) {
+        console.log(ip_address);
+
+        $.ajax({
+            url: '../siteadmin/disable_enable_site.php',
+            type: 'POST',
+            data: { 'ipaddress': ip_address,'type':'disable' },
+        });
+    }
+}
 function removeSite(id = null) {
     if (id) {
 
@@ -67,7 +89,7 @@ function removeSite(id = null) {
         alert('Error: Refresh the page again');
     }
 }
-$('#checkall').click(function(){
+$('#checkall').click(function () {
     $('.checkitem').prop("checked", $(this).prop("checked"))
 })
 $('#removeAllSiteBtn').click(function () {
@@ -118,11 +140,11 @@ function editSite(id = null) {
                     var form = $(this);
                     var editipaddress = $("#editipaddress").val();
                     var editusername = $("#editusername").val();
-                    var editpassword = $("#editpassword").val();
-                    var editportapi = $("#editportapi").val();
+                    //var editpassword = $("#editpassword").val();
+                    //var editportapi = $("#editportapi").val();
                     var editnamesite = $("#editnamesite").val();
 
-                    if (editipaddress && editusername && editpassword && editportapi && editnamesite) {
+                    if (editipaddress && editusername && editnamesite) {
                         $.ajax({
                             url: '../siteadmin/connectstatus_update.php',
                             type: 'POST',

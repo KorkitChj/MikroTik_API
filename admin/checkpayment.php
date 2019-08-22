@@ -96,11 +96,10 @@ if (!$_SESSION["admin_id"]) {
                                     <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label></th>
                                     <th width="10%">เจ้าของไซต์</th>
                                     <th width="2%">ใบสั่งซื้อ</th>
-                                    <th width="7%">หลักฐาน</th>
                                     <th width="5%">วันที่ยืนยันการชำระเงิน</th>
                                     <th width="5%">วันนัดชำระ</th>
-                                    <th width="2%">ยืนยัน</th>
-                                    <th width="2%">ลบ</th>
+                                    <th width="7%">หลักฐาน</th>
+                                    <th width="2%">Option</th>
                                 </tr>
                             </thead>
                         </table>

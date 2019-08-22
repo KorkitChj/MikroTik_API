@@ -11,6 +11,19 @@ if (!$_SESSION["cus_id"]) {
     include('../siteadmin/expired.php');
     include('../siteadmin/useronlinejs.php');
     include('../siteadmin/changpwsite.php');
+
+    include('function.php');
+
+    $location_id = $_SESSION['location_id'];
+    $cus_id = $_SESSION['cus_id'];
+
+    include('service_fetch.php');
+
+    list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+
+    if ($API->connect($ip . ":" . $port, $user, $pass)) {
+        $ARRAY = $API->comm("/ip/pool/print");
+    }
     ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -51,9 +64,66 @@ if (!$_SESSION["cus_id"]) {
                                 &nbsp;Dashboard</a>
                         </li>
                         <li>
-                            <a href="employeestatus.php">
+                            <a href="interfacemonitor.php">
+                                <i class="glyphicon glyphicon-signal"></i>
+                                &nbsp;Interface Monitor</a>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
                                 <i class="glyphicon glyphicon-user"></i>
                                 &nbsp;รายการพนักงานดูแล</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="employeestatus.php" id="addemployee">
+                                            <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;เพิ่มพนักงาน
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="employeeactive.php" id="employeeactive">
+                                            <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;พนักงานออนไลน์
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-flag"></i>
+                                &nbsp;Address List</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="addresslist.php" id="addresslistBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Address List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="pool.php" id="addPoolBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Address Pool
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-wrench"></i>
+                                &nbsp;Hotspot Setup</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="addserverprofile.php" id="addserverprofileBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Server Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="addserver.php" id="addserverBtn">
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Server
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="pad-a bor-orange">
                             <a href="#">
@@ -88,12 +158,12 @@ if (!$_SESSION["cus_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <button class="btn btn-primary pull pull-right" data-toggle="modal" data-target="#addProfileModal" id="addProfileModalBtn">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary pull pull-right" data-toggle="modal" data-target="#addProfileModal" id="addProfileModalBtn">
                             <span class="glyphicon glyphicon-plus "></span>เพิ่ม Profile
                         </button>
                         <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllProfileModal" id="removeAllProfileModalBtn">
                             <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
-                        </button>
+                        </button></div>
                         <br /><br />
                         <table id="profilestatus" class="table table-striped table-hover table-bordered table-sm display responsive nowrap" style="width:100%">
                             <thead class="aa">
@@ -126,47 +196,78 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form action="" id="addProfile" method="post">
                         <div class="form-group">
-                            <label for="profilename" class="col-sm control-label">Profile Name::&nbsp;</label>
+                            <label for="profilename" class="col-sm control-label">Profile Name:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-credit-card"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="profilename" id="profilename" placeholder="ชื่อ Profile" required>
+                                <input type="text" class="form-control" name="profilename" id="profilename" placeholder="uprof1" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="idle" class="col-sm control-label">IdleTimeout:&nbsp;</label>
+                            <label for="adpool" class="col-sm control-label">Address Pool:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-credit-card"></i>
+                                    </div>
+                                </div>
+                                <select class="form-control" name="adpool" size="1" id="adpool">
+                                    <?php
+                                    $num = count($ARRAY);
+                                    echo '<option value="none">none</option>';
+                                    for ($i = 0; $i < $num; $i++) {
+                                        $seleceted = ($i == 0) ? 'selected="selected"' : '';
+                                        echo '<option value="' . $ARRAY[$i]['name'] . $selected . '">' . $ARRAY[$i]['name'] .": ".$ARRAY2[$i]['addresses'].  '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="idle" class="col-sm control-label">Idle Timeout:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-signal"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="idle" id="idle" placeholder="เวลาตัดการเชื่อมต่อเมื่อ User ไม่ Active Pattern 00:00:00" required>
+                                <input type="text" class="form-control" name="idle" id="idle" placeholder="none" value="00:00:00">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="session" class="col-sm control-label">SessionTimeout:&nbsp;</label>
+                            <label for="session" class="col-sm control-label">Session Timeout:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-tasks"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="session" id="session" placeholder="เวลาเชื่อมต่อนานที่สุด" required>
+                                <input type="text" class="form-control" name="session" id="session" placeholder="00:00:00" value="00:00:00">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shared" class="col-sm control-label">Shared:&nbsp;</label>
+                            <label for="autorefresh" class="col-sm control-label">Auto Refresh:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-tasks"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="autorefresh" id="autorefresh" placeholder="00:01:00" value="00:01:00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shared" class="col-sm control-label">Shared Users:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="shared" id="shared" placeholder="จำนวนผู้ใช้งาน" required>
+                                <input type="text" class="form-control" name="shared" id="shared" placeholder="1" value="1">
                             </div>
                         </div>
                         <div class="form-group">
@@ -177,7 +278,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-wrench"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="mac" id="mac" placeholder="ระยะเวลา Login โดยใช้ Mac Cookie Pattern 00:00:00" required>
+                                <input type="text" class="form-control" name="mac" id="mac" placeholder="3d 00:00:00" value="3d 00:00:00">
                             </div>
                         </div>
                         <div class="form-group">
@@ -188,7 +289,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-stats"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="limit" id="limit" placeholder="อัตราการอัพโหลดดาวน์โหลด Pattern 0M/0M" required>
+                                <input type="text" class="form-control" name="limit" id="limit" placeholder="" value="0m/0m">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -212,7 +313,7 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form action="" id="editProfile" method="post">
                         <div class="form-group">
-                            <label for="editprofilename" class="col-sm control-label">Profile Name::&nbsp;</label>
+                            <label for="editprofilename" class="col-sm control-label">Profile Name:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -223,36 +324,67 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editidle" class="col-sm control-label">IdleTimeout:&nbsp;</label>
+                            <label for="editadpool" class="col-sm control-label">Address Pool:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-credit-card"></i>
+                                    </div>
+                                </div>
+                                <select class="form-control" name="editadpool" size="1" id="editadpool">
+                                    <?php
+                                    $num = count($ARRAY);
+                                    echo '<option value="none">none</option>';
+                                    for ($i = 0; $i < $num; $i++) {
+                                        $seleceted = ($i == 0) ? 'selected="selected"' : '';
+                                        echo '<option value="' . $ARRAY[$i]['name'] . $selected . '">' . $ARRAY[$i]['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editidle" class="col-sm control-label">Idle Timeout:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-signal"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editidle" id="editidle" placeholder="เวลาตัดการเชื่อมต่อเมื่อ User ไม่ Active Pattern 00:00:00" required>
+                                <input type="text" class="form-control" name="editidle" id="editidle" placeholder="เวลาตัดการเชื่อมต่อเมื่อ User ไม่ Active Pattern 00:00:00">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editsession" class="col-sm control-label">SessionTimeout:&nbsp;</label>
+                            <label for="editsession" class="col-sm control-label">Session Timeout:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-tasks"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editsession" id="editsession" placeholder="เวลาเชื่อมต่อนานที่สุด" required>
+                                <input type="text" class="form-control" name="editsession" id="editsession">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editshared" class="col-sm control-label">Shared:&nbsp;</label>
+                            <label for="editautorefresh" class="col-sm control-label">Auto Refresh:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-tasks"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="editautorefresh" id="editautorefresh" placeholder="00:01:00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editshared" class="col-sm control-label">Shared Users:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editshared" id="editshared" placeholder="จำนวนผู้ใช้งาน" required>
+                                <input type="text" class="form-control" name="editshared" id="editshared" placeholder="จำนวนผู้ใช้งาน">
                             </div>
                         </div>
                         <div class="form-group">
@@ -263,7 +395,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-wrench"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editmac" id="editmac" placeholder="ระยะเวลา Login โดยใช้ Mac Cookie Pattern 00:00:00" required>
+                                <input type="text" class="form-control" name="editmac" id="editmac" placeholder="3d 00:00:00">
                             </div>
                         </div>
                         <div class="form-group">
@@ -274,7 +406,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-stats"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editlimit" id="editlimit" placeholder="อัตราการอัพโหลดดาวน์โหลด Pattern 0M/0M" required>
+                                <input type="text" class="form-control" name="editlimit" id="editlimit" placeholder="">
                             </div>
                         </div>
                         <div class="modal-footer">

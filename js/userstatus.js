@@ -5,13 +5,10 @@ $(document).ready(function () {
         "ajax": {
             url: "../employee/userstatus_retrieve.php",
             type: "POST",
+            error: function (error) {
+            },
             dataSrc: function (response) {
-                if (response.success == false) {
-                    swal("Error", response.messages, "error");
-                }
-                else {
-                    return response.data;
-                }
+                return response.data
             }
         },
         "columnDefs": [{

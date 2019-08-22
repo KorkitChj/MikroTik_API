@@ -50,8 +50,12 @@ if (!$_SESSION["cus_id"]) {
                                 <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
                         </li>
                         <li>
+                            <a href="invoice.php">
+                                <i class="glyphicon glyphicon-paperclip"></i>&nbsp;Invoice</a>
+                        </li>
+                        <li>
                             <a href="" data-toggle="modal" data-target="#changpwModal">
-                                <i class="glyphicon glyphicon-edit"></i>&nbsp;
+                                <i class="glyphicon glyphicon-edit"></i>
                                 เปลี่ยนรหัสผ่าน</a>
                         </li>
                     </ul>
@@ -72,30 +76,33 @@ if (!$_SESSION["cus_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <button class="btn btn-primary pull pull-right" data-toggle="modal" data-target="#addSiteModal" id="addSiteModalBtn">
-                            <span class="glyphicon glyphicon-plus "></span>เพิ่มสถานบริการ
-                        </button>
-                        <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllSiteModal" id="removeAllSiteModalBtn">
-                            <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
-                        </button>
-                        <a href="connectstatus.php"><img src="../img/refresh.png" width="20" title="Refresh"></a>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary" data-toggle="modal" data-target="#addSiteModal" id="addSiteModalBtn">
+                                <span class="glyphicon glyphicon-plus "></span>&nbsp;&nbsp;เพิ่มสถานบริการ
+                            </button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#removeAllSiteModal" id="removeAllSiteModalBtn">
+                                <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
+                            </button>
+                            <button type="button" class="btn btn-warning" onclick="window.location.href='connectstatus.php'"><img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                        </div>
                         <br /><br />
-                        <table id="connectstatus" class="table table-striped table-hover table-bordered table-sm  display responsive nowrap" style="width:100%">
-                            <thead class="aa">
-                                <tr>
-                                    <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label></th>
-                                    <th width="1%">#</th>
-                                    <th width="5%">IP Address/Port</th>
-                                    <th width="5%">Username</th>
-                                    <th width="5%">Site Name</th>
-                                    <th width="1%">CPU Load</th>
-                                    <th width="1%">RAM</th>
-                                    <th width="1%">Hardisk</th>
-                                    <th width="2%">Connect Status</th>
-                                    <th width="4%">Options</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="connectstatus" class="table table-striped table-hover table-bordered table-sm" style="width:100%">
+                                <thead class="aa">
+                                    <tr>
+                                        <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall" /><span class="custom-control-indicator"></span></label></th>
+                                        <th>#</th>
+                                        <th>IP Address/Port</th>
+                                        <th>Username</th>
+                                        <th>Site Name</th>
+                                        <th>Interface</th>
+                                        <th>Status</th>
+                                        <th>Expires-After</th>
+                                        <th>Connect Status</th>
+                                        <th>Options</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,7 +150,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-lock"></i>
                                     </div>
                                 </div>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="รหัสผ่าน" required>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="รหัสผ่าน">
                             </div>
                         </div>
                         <div class="form-group">
@@ -154,7 +161,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-link"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="portapi" id="portapi" placeholder="พอร์ตเอพีไอ" required>
+                                <input type="text" class="form-control" name="portapi" id="portapi" placeholder="พอร์ตเอพีไอ">
                             </div>
                         </div>
                         <div class="form-group">
@@ -218,7 +225,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-lock"></i>
                                     </div>
                                 </div>
-                                <input type="password" class="form-control" name="editpassword" id="editpassword" placeholder="รหัสผ่าน" required>
+                                <input type="password" class="form-control" name="editpassword" id="editpassword" placeholder="รหัสผ่าน">
                             </div>
                         </div>
                         <div class="form-group">
@@ -229,7 +236,7 @@ if (!$_SESSION["cus_id"]) {
                                         <i class="glyphicon glyphicon-link"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editportapi" id="editportapi" placeholder="พอร์ตเอพีไอ" required>
+                                <input type="text" class="form-control" name="editportapi" id="editportapi" placeholder="พอร์ตเอพีไอ">
                             </div>
                         </div>
                         <div class="form-group">

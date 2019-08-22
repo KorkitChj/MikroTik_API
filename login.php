@@ -1,118 +1,134 @@
 <?php
-require('template/template_customer.html');
+include('template/template_login&register.html');
+error_reporting(0);
 ?>
 <title>Login|Register</title>
-<style>
-    #border-login {
-        background: #ccffff;
-        background-size: cover;
-        padding: 1.5em;
-        border-radius: 5px;
-        border-left: #0099ff 5px solid;
-        margin-top: -1.5em;
-        margin-bottom: 1.5em;
-    }
-
-    p {
-        color: red;
-        font-weight: bold;
-        font-size: 2em;
-    }
-
-    p:hover {
-        color: black;
-    }
-
-    body {
-        background-color:#fff;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    a {
-        font-weight: bold;
-    }
-
-    a:hover {
-        color: red;
-        text-decoration: none;
-    }
-
-    .btn-danger,
-    .btn-success {
-        background-color: white;
-        color: black;
-    }
-
-    #d {
-        text-decoration: none;
-    }
-
-    .far,
-    .fas {
-        color: black;
-    }
-
-    html {
-        border-top: red 0.25em solid;
-        height: 100%;
-    }
-
-    input[type="text"],
-    [type="password"] {
-        border: 0;
-        border-bottom: 1px solid red;
-        outline: 0;
-    }
-    .errspan {
-        float: right;
-        margin-right: 6px;
-        margin-top: -30px;
-        position: relative;
-        z-index: 2;
-        color: red;
-    }
-</style>
-
-<body>
-    <div class="container-fluid">
-        <div class="row ">
-            <div class="col">
-                <div class="rounded d-flex align-items-center flex-column justify-content-center h-100 bg-transparent text-white" id="header" style="margin-top:1em">
-                    <div id="border-login">
-                        <p align="center">Sign in to MikroTik API</p>
-                        <form method="post" action="rlogin.php">
-                            <div class="form-group row has-success has-feedback">
-                                <label for="" class="col col-form-label"></label>
-                                <div class="col-12">
-                                    <input class="form-control form-control-lg" name="username" placeholder="Username" type="text"  required>
-                                    <span class="far fa-user errspan"></span>
+<div class="container" style="width:100%; max-width:600px">
+    <div class="row">
+        <div class="col">
+            <div class="card text-white bg-info border-danger">
+                <div class="card-header">
+                    <p align="center">Sign in to MikroTik API</p>
+                </div>
+                <div class="card-body">
+                    <form id="login" method="" action="">
+                        <div class="form-group row">
+                            <label for="username" class="control-label col-sm">Username:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="far fa-user"></i>
+                                    </div>
                                 </div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                             </div>
-                            <div class="form-group row">
-                                <label for="" class="col col-form-label"></label>
-                                <div class="col-12">
-                                    <input class="form-control form-control-lg" name="password" placeholder="Password" type="password" required>
-                                    <span class="fas fa-key errspan"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="control-label col-sm">Password:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-key"></i>
+                                    </div>
                                 </div>
+                                <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                             </div>
-                            <div class="form-group row">
-                                <label for="" class="col col-form-label"></label>
-                                <div class="col-12">
-                                    <a href="register.php" id="d" onclick="return confirm('คุณต้องการลงทะเบียน?');"><button type="button" class="btn btn-danger btn-lg btn-block">Register</button></a>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col col-form-label"></label>
+                            <div class="col-12">
+                                <a href="register.php" id="d" onclick="return confirm('คุณต้องการลงทะเบียน?');"><button type="button" class="btn btn-danger btn-lg btn-block">Register</button></a>
                             </div>
-                            <div class="form-group row">
-                                <label for="" class="col col-form-label"></label>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-success btn-lg btn-block">Sign In</button>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col col-form-label"></label>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-lg btn-block"><i class="fas fa-sign-in-alt"></i>&nbsp;SignIn</button>
                             </div>
-                        </form>
+                        </div>
                         <a href="index.php">Back to Home</a>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</body>
+    <script>
+        $.validation = {
+            messages: {}
+        };
+
+        $.extend($.validation.messages, {
+            required: '<i class="fa fa-exclamation-circle"></i> required.'
+        });
+
+        $(document).ready(function() {
+            validateSignupForm();
+        });
+
+        var validateSignupForm = function() {
+            var login = $('#login');
+
+            login.validate({
+                rules: {
+                    username: {
+                        required: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    }
+                },
+                messages: {
+                    username: {
+                        required: $.validation.messages.required
+                    },
+                    password: {
+                        required: $.validation.messages.required
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    error.insertAfter(element);
+
+                    $(window).resize(function() {
+                        error.remove();
+                    });
+                },
+                invalidHandler: function(event, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {} else {}
+                }
+            });
+
+            login.on('submit', function(e) {
+                if (login.valid()) {
+                    var form = $(this);
+                    var ajaxRequest = $.ajax({
+                        url: 'rlogin.php',
+                        type: 'POST',
+                        data: form.serialize(),
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success == true) {
+                                if (response.messages == "admin") {
+                                    window.location.href = 'admin/admin.php';
+                                } else if (response.messages == "employee") {
+                                    window.location.href = 'employee/employee.php';
+                                } else if (response.messages == "service1") {
+                                    window.location.href = 'siteadmin/connectstatus.php';
+                                } else if(response.messages == "service2"){
+                                    window.location.href = 'siteadmin/connectstatus.php';
+                                }else {
+                                    swal("รอการยืนยัน", response.messages, "warning");
+                                }
+                            } else {
+                                swal("ผิดพลาด", response.messages, "error");
+                            }
+                        },
+                        beforeSend: function() {}
+                    });
+                }
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        }
+    </script>

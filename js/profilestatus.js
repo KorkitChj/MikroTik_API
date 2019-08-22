@@ -23,12 +23,14 @@ $(document).ready(function () {
         $("#addProfile").unbind('submit').bind('submit', function () {
             var form = $(this);
             var profilename = $("#profilename").val();
-            var idle = $("#idle").val();
-            var session = $("#session").val();
-            var shared = $("#shared").val();
-            var mac = $("#mac").val();
-            var limit = $("#limit").val();
-            if (profilename && idle && session && shared && mac && limit) {
+            //var autorefresh = $("#autorefresh").val();
+            //var adpool = $("#adpool").val();
+            //var idle = $("#idle").val();
+            //var session = $("#session").val();
+            //var shared = $("#shared").val();
+            //var mac = $("#mac").val();
+            //var limit = $("#limit").val();
+            if (profilename) {
                 $.ajax({
                     url: '../site/addprofile.php',
                     type: 'POST',
@@ -117,17 +119,19 @@ function editProfile(Profile_name) {
                 $("#editshared").val(response.shared);
                 $("#editmac").val(response.mac);
                 $("#editlimit").val(response.limit);
+                $("#editautorefresh").val(response.refresh);
+                $("#editadpool").val(response.pool);
                 $("#editProfile").append('<input type="hidden" name="editprofile_name" id="editprofile_name" value="' + response.name + '"/>');
                 $("#editProfile").unbind('submit').bind('submit', function () {
                     var form = $(this);
                     var editprofilename = $("#editprofilename").val();
-                    var editsession = $("#editsession").val();
-                    var editidle = $("#editidle").val();
-                    var editshared = $("#editshared").val();
-                    var editmac = $("#editmac").val();
-                    var editlimit = $("#editlimit").val();
+                    //var editsession = $("#editsession").val();
+                    //var editidle = $("#editidle").val();
+                    //var editshared = $("#editshared").val();
+                    //var editmac = $("#editmac").val();
+                    //var editlimit = $("#editlimit").val();
 
-                    if (editprofilename && editsession && editidle && editshared && editmac && editlimit) {
+                    if (editprofilename) {
                         $.ajax({
                             url: '../site/profilestatus_update.php',
                             type: 'POST',

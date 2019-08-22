@@ -2,6 +2,7 @@
 session_start();
 ?>
 <?php
+error_reporting(0);
 require('../include/connect_db.php');
 require('../config/routeros_api.class.php');
 $API = new routeros_api();
@@ -20,27 +21,45 @@ foreach ($result as $row) {
     $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="location_id[]" value="' . $row["location_id"] . '"><span class="custom-control-indicator"></span></label>';
     if ($API->connect($row['ip_address'].":".$port,$row['username'],$row['password'])) {
         $ARRAY = $API->comm("/system/resource/print");
-        $ram =    $ARRAY['0']['free-memory'] / 1048576;
-        $hdd =    $ARRAY['0']['free-hdd-space'] / 1048576;
-        $cpu = $ARRAY['0']['cpu-load']."%";
-        $ram = round($ram, 1)."MB";
-        $hdd = round($hdd, 1)."MB";
+
+        $ARRAY2 = $API->comm("/ip/dhcp-client/print");
+
+        foreach($ARRAY2 as $row2){
+            $add = array();
+            $add = explode("/",$row2['address']);
+            $result = $add[0];
+            if($result == $row['ip_address']){
+                //$ress = $row2['address'];
+                $inter = $row2['interface'];
+                $status = $row2['status'];
+                $expires = $row2['expires-after'];
+                break;
+            }
+        }
+
         $connect = '<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>CONNECT</button>';
         $connz = "connect";       
-        $manage = '<a class="btn btn-info" href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\'><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></a>
+        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <button type="button" class="btn btn-info" onclick="window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
         <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editSiteModal"  onclick="editSite('.$row['location_id'].')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeSiteModal"  onclick="removeSite('.$row['location_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
-        // $manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeSiteModal"  onclick="removeSite('.$row['location_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
+        /*$manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
+        <button class="btn btn-success" type="button" onclick="enableSite(\''.$ress.'\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
+        <button class="btn btn-danger" type="button"  onclick="disableSite(\''.$ress.'\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>*/
     } else {
-        $cpu = "-%";
-        $ram = "-MB";
-        $hdd = "-MB";
+        $inter = "-";
+        $status = "-";
+        $expires = "-";
         $connect = '<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>DISCONNECT</button>';
         $connz = "disconnect";
-        $manage = '<a class="btn btn-info" href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\'><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></a>
+        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <button type="button" class="btn btn-info" onclick="window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
         <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editSiteModal"  onclick="editSite('.$row['location_id'].')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeSiteModal"  onclick="removeSite('.$row['location_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
-        // $manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeSiteModal"  onclick="removeSite('.$row['location_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
+        /*$manage = '<button class="btn btn-info" type="button" onclick="if (confirm(\'เข้าจัดการไซต์งาน?\')) window.location.href=\'../site/site_conn.php?id='.$row['location_id'].'&conn='.$connz.'\';"><span title="เข้าบริหารจัดการ" class="glyphicon glyphicon-new-window"></span></button>
+        <button class="btn btn-success" type="button"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
+        <button class="btn btn-danger" type="button"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
+        */
     }
     $output['data'][]  = array(
         $checkbox,
@@ -48,9 +67,9 @@ foreach ($result as $row) {
         $row['ip_address'].":".$port,
         $row['username'],
         $row['working_site'],
-        $cpu,
-        $ram,
-        $hdd,
+        $inter,
+        $status,
+        $expires,
         $connect,
         $manage
     );

@@ -73,6 +73,11 @@ if (!$_SESSION["emp_id"]) {
                                 &nbsp;รายการ Users</a>
                             <div class="sidebar-submenu">
                                 <ul>
+                                    <!-- <li>
+                                        <a href="useronline.php" id="useronline">
+                                            <span class="fas fa-users "></span>&nbsp;User Online
+                                        </a>
+                                    </li> -->
                                     <li>
                                         <a href="#" data-toggle="modal" data-target="#addUserModal" id="addUserModalBtn">
                                             <span class="fas fa-user "></span>&nbsp;เพิ่ม User ครั้งละ 1 คน
@@ -114,23 +119,23 @@ if (!$_SESSION["emp_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllUsersModal" id="removeAllUsersModalBtn">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllUsersModal" id="removeAllUsersModalBtn">
                             <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
                         </button>
-                        <button id="print" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-print"></i>&nbsp;Print คูปอง&nbsp;</button>
+                        <button id="print" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-print"></i>&nbsp;Print คูปอง&nbsp;</button></div>
                         <!-- <button id="check" class="btn btn-info" type="submit"><i class="glyphicon glyphicon-print"></i>&nbsp;Print คูปอง ทั้งหมด</button> -->
                         <!-- <button id="check" class="btn btn-info" type="submit"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label>Print คูปอง ทั้งหมด</button> -->
                         <br /><br />
                         <table id="userstatus" class="table table-striped table-hover table-bordered table-sm display responsive nowrap" style="width:100%">
                             <thead class="aa">
                                 <tr>
-                                    <th width="1%"></th>
+                                    <th width="0.5%"></th>
                                     <th width="1%">#</th>
-                                    <th width="3%">Name</th>
-                                    <th width="3%">Profile</th>
-                                    <th width="3%">Limit-UpTime</th>
-                                    <th width="3%">UpTime</th>
-                                    <th width="3%">Options</th>
+                                    <th width="1%">Name</th>
+                                    <th width="1%">Profile</th>
+                                    <th width="1%">Limit-UpTime</th>
+                                    <th width="1%">UpTime</th>
+                                    <th width="1%">Options</th>
                                 </tr>
                             </thead>
                         </table>
