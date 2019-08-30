@@ -11,6 +11,7 @@ if (!$_SESSION["cus_id"]) {
   require('../template/template.html');
   include('useronlinejs.php');
   include('changpwsite.php');
+  include('function.php');
   ?>
   <div class="page-wrapper chiller-theme toggled">
     <a id="show-sidebar" class="btn btn-sm btn-light" href="#">
@@ -26,7 +27,7 @@ if (!$_SESSION["cus_id"]) {
         </div>
         <div class="sidebar-header">
           <div class="user-pic">
-            <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+            <?php echo fetchimage($_SESSION["cus_id"]);?>
           </div>
           <div class="user-info">
             <span class="user-name">

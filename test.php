@@ -46,8 +46,8 @@ if ($API->connect($ip.":".$port,$user,$pass)) {
     //       ".id" => 2)
     //     );
     
-    // $ARRAY = $API->comm("/ip/hotspot/print");
-    $ARRAY = $API->comm("/ip/hotspot/print",array('?disabled' => "true"));
+    $ARRAY = $API->comm("/interface/print");
+    //$ARRAY = $API->comm("/ip/hotspot/print",array('?disabled' => "true"));
 
     //$ARRAY1 = $API->comm("/ip/address/print",array("where" => $aa));
     /*$ARRAY = $API->comm("/ip/address/print

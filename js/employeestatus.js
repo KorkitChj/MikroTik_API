@@ -42,8 +42,7 @@ $(document).ready(function () {
         });
     });
 });
-
-function removeMember(id = null,name = null) {
+function removeMember(id,name) {
     if (id) {
         $("#removeMemberBtn").unbind('click').bind('click', function () {
             /*console.log(id,name);
@@ -100,7 +99,7 @@ $('#removeAllMemberBtn').click(function () {
         });
     }
 });
-function editMember(id = null,name = null) {
+function editMember(id,name) {
     if (id) {
         console.log(id,name);
         $.ajax({
@@ -147,12 +146,10 @@ function editMember(id = null,name = null) {
         alert("Error : Refresh the page again");
     }
 }
-
 function time() {
     return timea = new Date().toLocaleString(); 
 }
-
-function enableEmp(id = null) {
+function enableEmp(id) {
     if (id) {
         console.log(id);
 
@@ -171,8 +168,7 @@ function enableEmp(id = null) {
         });
     }
 }
-
-function disableEmp(id = null) {
+function disableEmp(id) {
     if (id) {
         console.log(id);
 

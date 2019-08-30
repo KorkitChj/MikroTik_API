@@ -99,7 +99,7 @@ $('#removeAllAddressBtn').click(function () {
         });
     }
 });
-function editIp(id = null) {
+function editIp(id) {
     if (id) {
         console.log(id);
         $.ajax({
@@ -152,7 +152,7 @@ function time() {
     return timea = new Date().toLocaleString(); 
 }
 
-function enableAddress(id = null) {
+function enableAddress(id) {
     if (id) {
         console.log(id);
 
@@ -172,7 +172,7 @@ function enableAddress(id = null) {
     }
 }
 
-function disableAddress(id = null) {
+function disableAddress(id) {
     if (id) {
         console.log(id);
 

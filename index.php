@@ -19,7 +19,7 @@ require('template/template_index.html');
                     </li>
                     <li class="nav-item">
                         <a href="products.php" class="nav-link z"><span class="badge badge-success"><i class="fab fa-product-hunt"></i></span>
-                            สินค้า</a>
+                            สินค้าชนิด</a>
                     </li>
                     <li class="nav-item">
                         <a href="payment.php" class="nav-link z"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i></span>

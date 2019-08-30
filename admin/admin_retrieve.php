@@ -2,22 +2,29 @@
 require('../include/connect_db.php');
 require('function.php');
 $output = array();
+$column = array("","","A.cus_id", "A.username", "A.site_name", "A.work_phone", "A.e_mail");
 $query = '';
-$query .= "SELECT * FROM siteadmin ";
-if (isset($_POST["search"]["value"])) //ไว้ search ข้อมูล
+$query .= "SELECT * FROM siteadmin A ";
+$query .= " WHERE ";
+if(isset($_POST["is_category"]))
 {
-	$query .= 'WHERE cus_id LIKE "'.$_POST["search"]["value"]. '%" ';
-	$query .= 'OR username LIKE "'.$_POST["search"]["value"]. '%" ';
-	$query .= 'OR site_name LIKE "'.$_POST["search"]["value"]. '%" ';
-	$query .= 'OR work_phone LIKE "'.$_POST["search"]["value"]. '%" ';
-	$query .= 'OR e_mail LIKE "'.$_POST["search"]["value"] . '%" ';
+ $query .= "A.site_name = '".$_POST["is_category"]."' AND ";
+}
+if (isset($_POST["search"]["value"]))
+{
+	$query .= '(A.cus_id LIKE "'.$_POST["search"]["value"]. '%" ';
+	$query .= 'OR A.username LIKE "'.$_POST["search"]["value"]. '%" ';
+	$query .= 'OR A.site_name LIKE "'.$_POST["search"]["value"]. '%" ';
+	$query .= 'OR A.work_phone LIKE "'.$_POST["search"]["value"]. '%" ';
+	$query .= 'OR A.e_mail LIKE "'.$_POST["search"]["value"] . '%") ';
 }
 if (isset($_POST["order"])) {
-	$query .= 'ORDER BY ' . $_POST['order'][0]['column']. ' ' . $_POST['order'][0]['dir'] . ' ';
-} else {										//aa
-	$query .= 'ORDER BY cus_id DESC '; //เรียงจากมากไปหาน้อย
+	//$aa = $_POST["order"];
+	$query .= 'ORDER BY ' . $column[$_POST['order'][0]['column']]. ' ' . $_POST['order'][0]['dir'] . ' ';
+} else {								
+	$query .= 'ORDER BY A.cus_id DESC ';
 }
-if ($_POST["length"] != -1) {									//aa
+if ($_POST["length"] != -1) {								
 	$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
 }
 $statement = $conn->prepare($query);
@@ -25,10 +32,12 @@ $statement->execute();
 $result = $statement->fetchAll();
 $data = array();
 $filtered_rows = $statement->rowCount();
+
 $statement1 = $conn->prepare("SELECT * FROM siteadmin WHERE cus_id NOT IN (SELECT cus_id FROM orderpd)");
 $statement1->execute();
 $result1 = $statement1->fetchAll();
 $filtered_rows = $statement1->rowCount();
+
 foreach ($result as $row=>$val) 
 {
 	$status = '<i class="fas fa-check-circle"></i>';

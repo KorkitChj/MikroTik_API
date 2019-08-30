@@ -11,6 +11,11 @@ if (!$_SESSION["cus_id"]) {
     include('../siteadmin/expired.php');
     include('../siteadmin/useronlinejs.php');
     include('../siteadmin/changpwsite.php');
+
+    include('function.php');
+
+    $cus_id = $_SESSION['cus_id'];
+    
     ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -26,7 +31,7 @@ if (!$_SESSION["cus_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+                        <?php echo fetchimage($cus_id);?>
                     </div>
                     <div class="user-info">
                         <span class="user-name">

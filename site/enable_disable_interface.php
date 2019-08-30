@@ -12,7 +12,7 @@ $cus_id = $_SESSION['cus_id'];
 
 
 $output = array("data"=> array());
-list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
 if ($API->connect($ip . ":" . $port, $user, $pass)) {
 

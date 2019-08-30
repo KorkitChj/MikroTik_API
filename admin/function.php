@@ -37,11 +37,11 @@ function get_total_all_records()
 
 function admin_image_profile($admin_image){  
 	if($admin_image == "kao"){
-		return'<a href="#" class="img-responsive img-rounded img-thumbnail"><img src="../img/korkit.jpg" style="width:60px;height:70px"></a>';
+		return'<img src="../img/korkit.jpg" style="width:60px;height:70px">';
 	}elseif($admin_image == "noon"){
-		return'<a href="#" class="img-responsive img-rounded img-thumbnail"><img src="../img/nnnn.jpg"></a>';
+		return'<img src="../img/nnnn.jpg">';
 	}else{
-		return '<a href="#" class="img-responsive img-rounded img-thumbnail"><img src="../img/bbbb.jpg"></a>';
+		return '<img src="../img/bbbb.jpg">';
 	}
 }
 ?>

@@ -11,7 +11,7 @@ $type = $_POST['type'];
 
 $output = array('id' => array());
 
-list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
 if ($API->connect($ip . ":" . $port, $user, $pass)) {
 

@@ -7,7 +7,7 @@ $(document).ready(function () {
             type: "POST"
         },
         "columnDefs": [{
-            "targets": [0, 8, 9],
+            "targets": [0, 8, 10],
             "orderable": false,
         }],
     });
@@ -15,16 +15,26 @@ $(document).ready(function () {
         $("#addsite")[0].reset();
         $("#addsite").unbind('submit').bind('submit', function () {
             var form = $(this);
+            var extension = $('#site_image').val().split('.').pop().toLowerCase();
+            if (extension != '') {
+                if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
+                    swal("ผิดพลาด", "Invalid Image File", "error");
+                    $('#site_image').val('');
+                    return false;
+                }
+            }
             var ipaddress = $("#ipaddress").val();
             var username = $("#username").val();
-            //var password = $("#password").val();
-            //var portapi = $("#portapi").val();
+            var password = $("#password").val();
+            var portapi = $("#portapi").val();
             var namesite = $("#namesite").val();
-            if (ipaddress && username && namesite) {
+            if (ipaddress && username && namesite && password && portapi && extension) {
                 $.ajax({
                     url: '../siteadmin/addconnect.php',
                     type: 'POST',
-                    data: form.serialize(),
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
                     dataType: 'json',
                     success: function (response) {
                         if (response.success == true) {
@@ -41,33 +51,44 @@ $(document).ready(function () {
             return false;
         });
     });
+    $("#addImageModalBtn").on('click', function () {
+        $("#formimage")[0].reset();
+        $("#formimage").unbind('submit').bind('submit', function () {
+            var form = $(this);
+            var extension = $('#image').val().split('.').pop().toLowerCase();
+            if (extension != '') {
+                if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
+                    swal("ผิดพลาด", "Invalid Image File", "error");
+                    $('#image').val('');
+                    return false;
+                }
+            }
+            var image = $("#image").val();
+            //console.log(image);
+            //return false;
+            if (image) {
+                $.ajax({
+                    url: '../siteadmin/addimage.php',
+                    type: 'POST',
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: function (response) {
+                        if(response.success == true){
+                            $("#formimage")[0].reset();
+                            $("#load").load(location.href + " #load>*", "");
+                            $("#addImageModal").modal('hide');
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
 });
-function enableSite(ip_address = null) {
-    if (ip_address) {
-        console.log(ip_address);
-
-        $.ajax({
-            url: '../siteadmin/disable_enable_site.php',
-            type: 'POST',
-            data: { 'ipaddress': ip_address,'type':'enable' },
-        });
-    }
-}
-
-function disableSite(ip_address = null) {
-    if (ip_address) {
-        console.log(ip_address);
-
-        $.ajax({
-            url: '../siteadmin/disable_enable_site.php',
-            type: 'POST',
-            data: { 'ipaddress': ip_address,'type':'disable' },
-        });
-    }
-}
-function removeSite(id = null) {
+function removeSite(id) {
     if (id) {
-
         $("#removeSiteBtn").unbind('click').bind('click', function () {
             $.ajax({
                 url: '../siteadmin/connectstatus_del.php',
@@ -94,12 +115,14 @@ $('#checkall').click(function () {
 })
 $('#removeAllSiteBtn').click(function () {
     var location_id = [];
-    $(':checkbox:checked').each(function (i) {
+    $('.checkitem:checked').each(function (i) {
         location_id[i] = $(this).val();
     });
     if (location_id.length === 0) {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
+        //console.log(location_id);
+        //return false;
         $.ajax({
             url: '../siteadmin/connectstatus_del.php',
             method: 'POST',
@@ -119,7 +142,7 @@ $('#removeAllSiteBtn').click(function () {
         });
     }
 });
-function editSite(id = null) {
+function editSite(id) {
     if (id) {
         $.ajax({
             url: '../siteadmin/getSelectedSite.php',
@@ -134,21 +157,24 @@ function editSite(id = null) {
                 $("#editpassword").val(response.password);
                 $("#editportapi").val(response.api_port);
                 $("#editnamesite").val(response.working_site);
+                $('#site_uploaded_image').html(response.site_image);
                 $("#editSite").append('<input type="hidden" name="editlocation_id" id="editlocation_id" value="' + response.location_id + '"/>');
                 console.log(response.location_id);
                 $("#editSite").unbind('submit').bind('submit', function () {
                     var form = $(this);
                     var editipaddress = $("#editipaddress").val();
                     var editusername = $("#editusername").val();
-                    //var editpassword = $("#editpassword").val();
-                    //var editportapi = $("#editportapi").val();
+                    var editpassword = $("#editpassword").val();
+                    var editportapi = $("#editportapi").val();
                     var editnamesite = $("#editnamesite").val();
 
-                    if (editipaddress && editusername && editnamesite) {
+                    if (editipaddress && editusername && editnamesite && editpassword && editportapi) {
                         $.ajax({
                             url: '../siteadmin/connectstatus_update.php',
                             type: 'POST',
-                            data: form.serialize(),
+                            data: new FormData(this),
+                            contentType: false,
+                            processData: false,
                             dataType: 'json',
                             success: function (response) {
                                 if (response.success == true) {
@@ -169,6 +195,5 @@ function editSite(id = null) {
         alert("Error : Refresh the page again");
     }
 }
-
 
 

@@ -8,7 +8,7 @@ $location_id = $_SESSION['location_id'];
 $cus_id = $_SESSION['cus_id'];
 
 $output = array('success' => false,'messages' => array());
-list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 $pool = $_POST['name'];
 $ranges = $_POST['ranges'];
 $nextpool = $_POST['nextpool'];

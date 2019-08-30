@@ -12,7 +12,7 @@ $(document).ready(function () {
         }],
     });
 });
-function removeMember(id = null) {
+function removeMember(id) {
     if (id) {
         // click on remove button
         $("#removeBtn").unbind('click').bind('click', function () {
@@ -75,7 +75,7 @@ $('#removeAllBtn').click(function () {
         });
     }
 });
-function confirmMember(id = null) {
+function confirmMember(id) {
     if (id) {
         // click on remove button
         $("#confirmBtn").unbind('click').bind('click', function () {

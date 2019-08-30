@@ -17,7 +17,7 @@ if (!$_SESSION["cus_id"]) {
 
     include('service_fetch.php');
 
-    list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+    list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
     if ($API->connect($ip . ":" . $port, $user, $pass)) {
         $ARRAY = $API->comm("/system/resource/print");
@@ -42,7 +42,7 @@ if (!$_SESSION["cus_id"]) {
             </div>
             <div class="sidebar-header">
                 <div class="user-pic">
-                    <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+                    <?php echo fetchimage($cus_id);?>
                 </div>
                 <div class="user-info">
                     <span class="user-name">

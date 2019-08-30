@@ -101,7 +101,7 @@ $('#removeAllServerBtn').click(function () {
         });
     }
 });
-function editServer(id = null) {
+function editServer(id) {
     if (id) {
         console.log(id);
         $.ajax({
@@ -150,7 +150,7 @@ function editServer(id = null) {
 function time() {
     return timea = new Date().toLocaleString(); 
 }
-function enableServer(id = null) {
+function enableServer(id) {
     if (id) {
         console.log(id);
 
@@ -170,7 +170,7 @@ function enableServer(id = null) {
     }
 }
 
-function disableServer(id = null) {
+function disableServer(id) {
     if (id) {
         console.log(id);
 

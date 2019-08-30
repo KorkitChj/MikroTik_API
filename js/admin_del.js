@@ -1,20 +1,36 @@
 var site_manage;
 $(document).ready(function () {
-    site_manage = $("#site_manage").DataTable({
-        "processing": true,
-        "serverSide": true,
-        "order": [],
-        "ajax": {
-            url: "../admin/admin_retrieve.php",
-            type: "POST"
-        },
-        "columnDefs": [{
-            "targets": [0, 1, 4, 5, 6, 7],
-            "orderable": false,
-        }],
+    load_data();
+    function load_data(is_category) {
+        site_manage = $("#site_manage").DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                url: "../admin/admin_retrieve.php",
+                type: "POST",
+                data:{is_category:is_category}
+            },
+            "columnDefs": [{
+                "targets": [0, 1, 4, 7],
+                "orderable": false,
+            }],
+        });
+    }
+    $(document).on('change', '#category', function () {
+        var category = $(this).val();
+        //console.log(category);
+        //return false;
+        $('#site_manage').DataTable().destroy();
+        if (category != '') {
+            load_data(category);
+        }
+        else {
+            load_data();
+        }
     });
 });
-function removeMember(id = null) {
+function removeMember(id) {
     if (id) {
         // click on remove button
         $("#removeBtn").unbind('click').bind('click', function () {
@@ -42,7 +58,7 @@ function removeMember(id = null) {
         alert('Error: Refresh the page again');
     }
 }
-$('#checkall').click(function(){
+$('#checkall').click(function () {
     $('.checkitem').prop("checked", $(this).prop("checked"))
 })
 $('#removeAllBtn').click(function () {
@@ -50,8 +66,7 @@ $('#removeAllBtn').click(function () {
     $('.checkitem:checked').each(function (i) {
         cus_id[i] = $(this).val();
     });
-    if (cus_id.length === 0)
-    {
+    if (cus_id.length === 0) {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
         $.ajax({

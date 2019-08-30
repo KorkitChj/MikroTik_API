@@ -157,7 +157,6 @@ $(document).ready(function () {
         }
     });
 });
-
 function removeUser(user_name) {
     if (user_name) {
         $("#removeUserBtn").unbind('click').bind('click', function () {

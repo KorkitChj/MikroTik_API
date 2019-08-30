@@ -15,7 +15,7 @@ session_start();
 
     include("function.php");
 
-    list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
+    list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
     
     
 	$value = $_GET['users_name'];
@@ -33,7 +33,7 @@ session_start();
            
 			$intRows++;
             echo '<td class="th" width=100px>';
-            echo '<img src="../img/api-logo1.png" width="100px" height="100px">';
+            echo '<img src="sitelogo/'.fetchlogo($emp_id)[1].'" width="100px" height="100px">';
 			echo '</td>';
 			echo '<td width=200px>'; 
 			

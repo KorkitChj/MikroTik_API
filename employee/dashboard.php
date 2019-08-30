@@ -14,7 +14,7 @@ if (!$_SESSION["emp_id"]) {
     $emp_id = $_SESSION['emp_id'];
 
 
-    list($ip,$port,$user,$pass,$site,$conn,$API) = fatchuser($emp_id);
+    list($ip,$port,$user,$pass,$site,$conn,$API) = fetchuser($emp_id);
 
     ?>
     <div class="page-wrapper chiller-theme toggled">
@@ -31,7 +31,7 @@ if (!$_SESSION["emp_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+                        <?php echo fetchlogo($emp_id)[0];?>
                     </div>
                     <div class="user-info">
                         <span class="user-name">

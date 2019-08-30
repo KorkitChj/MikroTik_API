@@ -9,7 +9,7 @@ $cus_id = $_SESSION['cus_id'];
 
 $output = array('success' => false,'messages' => array());
 
-list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
 $name = $_POST['name'];
 $interface = $_POST['interface'];

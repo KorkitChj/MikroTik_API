@@ -7,7 +7,7 @@ include ('function.php');
 
 $emp_id = $_SESSION['emp_id'];
 
-list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
+list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
 $user_name = $_POST['user_name'];
 

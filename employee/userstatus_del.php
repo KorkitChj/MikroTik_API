@@ -9,7 +9,7 @@ include('function.php');
 
 $output = array('success' => false, 'messages' => array());
 
-list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
+list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
 if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
 

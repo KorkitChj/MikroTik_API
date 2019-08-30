@@ -8,6 +8,11 @@ if (!$_SESSION["emp_id"]) {
     <title>Chang Password Employee</title>
     <?php
     require('../template/template.html');
+
+    include('function.php');
+
+    $emp_id = $_SESSION['emp_id'];
+    
     ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -23,7 +28,7 @@ if (!$_SESSION["emp_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+                        <?php echo fetchlogo($emp_id)[0];?>
                     </div>
                     <div class="user-info">
                         <span class="user-name">

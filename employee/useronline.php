@@ -13,7 +13,7 @@ if (!$_SESSION["emp_id"]) {
 
     include('function.php');
 
-    list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
+    list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
     if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
         $ARRAY3 = $API->comm("/ip/hotspot/user/print");

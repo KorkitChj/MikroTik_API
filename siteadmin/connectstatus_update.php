@@ -4,10 +4,18 @@ session_start();
 <?php
 if ($_POST) {
     include('../include/connect_db.php');
+    include('function.php');
     $output = array('success' => false, 'messages' => array());
 
     if (isset($_POST["editlocation_id"])) {
         $location_id = $_POST["editlocation_id"];
+    }
+    $image = '';
+    if ($_FILES["editsite_image"]["name"] != '') {
+        $image = upload_image();
+        unlink('../employee/sitelogo/'.$_POST["hidden_site_image"].'');
+    } else {
+        $image = $_POST["hidden_site_image"];
     }
     $ipaddress = $_POST["editipaddress"];
     $username = $_POST["editusername"];
@@ -23,13 +31,14 @@ if ($_POST) {
     if ($result['ip_address'] == $ipaddress) {
         try {
             $sql = "UPDATE location SET ip_address = :ipaddress,username= :username
-            ,password= :password ,api_port= :portapi,working_site= :namesite WHERE location_id = :location_id";
+            ,password= :password ,api_port= :portapi,working_site= :namesite,image_site =:image_site WHERE location_id = :location_id";
             $query = $conn->prepare($sql);
             $query->bindparam(':ipaddress', $ipaddress);
             $query->bindparam(':username', $username);
             $query->bindparam(':password', $password);
             $query->bindparam(':namesite', $namesite);
             $query->bindparam(':portapi', $portapi);
+            $query->bindparam(':image_site', $image);
             $query->bindparam(':location_id', $location_id);
             $query->execute();
         } catch (PDOException $e) {
@@ -40,16 +49,17 @@ if ($_POST) {
             $output['success'] = true;
             $output['messages'] = "แก้ไขข้อมูลแล้ว";
         }
-    }else {
+    } else {
         try {
             $sql = "UPDATE location SET ip_address= :ipaddress,username= :username
-            ,password= :password ,api_port= :portapi,working_site= :namesite WHERE location_id = :location_id";
+            ,password= :password ,api_port= :portapi,working_site= :namesite,image_site =:image_site WHERE location_id = :location_id";
             $query = $conn->prepare($sql);
             $query->bindparam(':username', $username);
             $query->bindparam(':password', $password);
             $query->bindparam(':namesite', $namesite);
             $query->bindparam(':portapi', $portapi);
             $query->bindparam(':ipaddress', $ipaddress);
+            $query->bindparam(':image_site', $image);
             $query->bindparam(':location_id', $location_id);
             $query->execute();
         } catch (PDOException $e) {

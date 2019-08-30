@@ -99,7 +99,7 @@ $('#removeAllServerPBtn').click(function () {
         });
     }
 });
-function editServerProfile(id = null) {
+function editServerProfile(id) {
     if (id) {
         console.log(id);
         $.ajax({

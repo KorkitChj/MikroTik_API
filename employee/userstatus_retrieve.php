@@ -7,7 +7,7 @@ $emp_id = $_SESSION['emp_id'];
 
 include('function.php');
 
-list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
+list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
 $output = array('data' => array(), 'success' => false, 'messages' => array());
 

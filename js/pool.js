@@ -101,7 +101,7 @@ $('#removeAllPoolBtn').click(function () {
         });
     }
 });
-function editIppool(id = null) {
+function editIppool(id) {
     if (id) {
         console.log(id);
         $.ajax({

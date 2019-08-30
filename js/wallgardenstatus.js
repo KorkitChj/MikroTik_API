@@ -47,7 +47,6 @@ $(document).ready(function () {
         });
     });
 });
-
 function removeWall(Wall_id) {
     if (Wall_id) {
         $("#removeWallBtn").unbind('click').bind('click', function () {

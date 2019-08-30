@@ -39,33 +39,5 @@ if (isset($_POST['oldpassword'])) {
         }
     }
 }
-// (isset($_SESSION["emp_id"])) {
-//     $emp_name = ($_SESSION["emp_name"]);
-//     if ($newpasswordr1 != $newpasswordr2) {
-//         $output['success'] = false;
-//         $output['messages'] = 'รหัสผ่านใหม่ไม่ตรงกัน กรุณาใส่อีกครั้ง';
-//     } elseif ($newpasswordr1 === $newpasswordr2) {
-//         $sqlsel = "SELECT pass_w FROM employee WHERE username = :emp_name";
-//         $result = $conn->prepare($sqlsel);
-//         $result->bindParam(':emp_name', $emp_name);
-//         $result->execute();
-//         $row = $result->fetch(PDO::FETCH_ASSOC);
-//         $passdb = $row["pass_w"];
-//         if ($oldpassword1 != $passdb) {
-//             $output['success'] = false;
-//             $output['messages'] = 'รหัสผ่านเก่าไม่ถูกต้อง';
-//         } elseif ($oldpassword1 === $passdb) {
-//             $sql = "UPDATE employee set pass_w = :newpasswordr1 where username = :emp_name";
-//             $result = $conn->prepare($sql);
-//             $result->bindParam(':emp_name', $emp_name);
-//             $result->execute();
-//             if (!empty($result)) {
-//                 $output['success'] = false;
-//                 $output['messages'] = 'เปลี่ยนแปลงรหัสผ่านเรียบร้อยแล้ว';
-//             }
-//         }
-//     }
-// }
-
 echo json_encode($output);
 ?>

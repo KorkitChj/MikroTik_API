@@ -15,7 +15,7 @@ $emp_id = $_SESSION['emp_id'];
 
 include("function.php");
 
-list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
+list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
 echo '<body onload="window.print();">';
 
@@ -25,7 +25,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
 
 	echo '<table id="coupong" border="1"  cellspacing="0" cellpadding="0"><tr>';
 	echo '<td class="th" width=100px>';
-	echo '<img src="../img/api-logo1.png" width="100px" height="100px">';
+	echo '<img src="sitelogo/'.fetchlogo($emp_id)[1].'" width="100px" height="100px">';
 	echo '</td>';
 	echo '<td width=200px>';
 	echo '<center>Login Internet Wifi</center></div><hr>';

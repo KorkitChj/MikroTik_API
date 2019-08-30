@@ -46,6 +46,10 @@ if (!$_SESSION["admin_id"]) {
                             <span>ทั่วไป</span>
                         </li>
                         <li>
+                            <a href="dashboard.php">
+                                <i class="fas fa-tachometer-alt"></i>&nbsp;dashboard</a>
+                        </li>
+                        <li>
                             <a href="admin.php">
                                 <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
                         </li>

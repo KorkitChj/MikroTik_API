@@ -12,7 +12,7 @@ $(document).ready(function () {
         }],
     });
 });
-function removeMember(id = null) {
+function removeMember(id) {
     if (id) {
         // click on remove button
         $("#removeBtn").unbind('click').bind('click', function () {

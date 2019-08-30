@@ -18,7 +18,7 @@ if (!$_SESSION["cus_id"]) {
 
     include('service_fetch.php');
 
-    list($ip, $port, $user, $pass, $site, $conn, $API) = fatchuser($cus_id, $location_id);
+    list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
     ?>
     <div class="page-wrapper chiller-theme toggled">
@@ -35,7 +35,7 @@ if (!$_SESSION["cus_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img src="../img/iconuser.jpg" alt="user" style="height:70px;width:60px">
+                        <?php echo fetchimage($cus_id);?>
                     </div>
                     <div class="user-info">
                         <span class="user-name">
@@ -211,7 +211,7 @@ if (!$_SESSION["cus_id"]) {
         function time() {
             return timea = new Date().toLocaleString(); 
         }
-        function enableInterface(id = null){
+        function enableInterface(id){
             if(id){
                 $.ajax({
                     url: "enable_disable_interface.php",
@@ -224,7 +224,7 @@ if (!$_SESSION["cus_id"]) {
                 });
             }
         }
-        function disableInterface(id = null){
+        function disableInterface(id){
             if(id){
                 $.ajax({
                     url: "enable_disable_interface.php",

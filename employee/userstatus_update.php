@@ -14,7 +14,7 @@ if($_POST){
 
     $emp_id = $_SESSION['emp_id'];
 
-    list($ip, $port, $user, $pass_r, $site, $conn, $API) = fatchuser($emp_id);
+    list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
     $output = array('success' => false, 'messages' => array());
 
