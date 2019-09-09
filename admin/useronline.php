@@ -26,7 +26,7 @@ if (!$_SESSION["admin_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <?php echo admin_image_profile($admin_name); ?>
+                        <div id="load"><?php echo admin_image_profile($_SESSION["admin_id"]); ?></div>
                     </div>
                     <div class="user-info">
                         <span class="user-name">

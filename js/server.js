@@ -16,40 +16,40 @@ $(document).ready(function() {
             "orderable": false,
         }],
     });
-    $("#addServerModalBtn").on('click', function () {
-        $("#add_server")[0].reset();
-        $("#add_server").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var name = $("#name").val();
-            var interface = $("#interface").val();
-            //console.log(name);
-            //console.log(interface);
-            //return false;
-            if (name,interface) {
-                $.ajax({
-                    url: '../site/add_server.php',
-                    type: 'POST',
-                    data: form.serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success == true) {
-                            swal("สำเร็จ", response.messages, "success");
-                            $("#add_server")[0].reset();
-                            addserver.ajax.reload(null, false);
-                            $("#addServerModal").modal('hide');
-                        } else {
-                            swal("ผิดพลาด", response.messages, "error");
-                        }
+});
+$("#addServerModalBtn").on('click', function () {
+    $("#add_server")[0].reset();
+    $("#add_server").off('submit').on('submit', function () {
+        var form = $(this);
+        var name = $("#name").val();
+        var interface = $("#interface").val();
+        //console.log(name);
+        //console.log(interface);
+        //return false;
+        if (name,interface) {
+            $.ajax({
+                url: '../site/add_server.php',
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        $("#add_server")[0].reset();
+                        addserver.ajax.reload(null, false);
+                        $("#addServerModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
 });
 function removeServer(Server_id) {
     if (Server_id) {
-        $("#removeServerBtn").unbind('click').bind('click', function () {
+        $("#removeServerBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../site/addserver_del.php',
                 type: 'POST',
@@ -118,7 +118,7 @@ function editServer(id) {
                 $("#editprofile").val(response.profile);
                 console.log(response.name);
                 $("#edit_server").append('<input type="hidden" name="edit_sv" id="edit_sv" value="' + response.id + '"/>');
-                $("#edit_server").unbind('submit').bind('submit', function() {
+                $("#edit_server").off('submit').on('submit', function() {
                     var form = $(this);
                     var editname = $("#editname").val();
                     var editinterface = $("#editinterface").val();
@@ -153,7 +153,6 @@ function time() {
 function enableServer(id) {
     if (id) {
         console.log(id);
-
         $.ajax({
             url: '../site/disable_enable_server.php',
             type: 'POST',
@@ -169,11 +168,9 @@ function enableServer(id) {
         });
     }
 }
-
 function disableServer(id) {
     if (id) {
         console.log(id);
-
         $.ajax({
             url: '../site/disable_enable_server.php',
             type: 'POST',

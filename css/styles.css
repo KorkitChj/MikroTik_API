@@ -1,4 +1,150 @@
-﻿label.error {
+﻿@import url('https://fonts.googleapis.com/css?family=Prompt&display=swap');
+table {
+    width: 100%;
+    background-color: rgb(248, 248, 248);
+}
+th,td {
+    text-align: center !important;
+}
+th {
+    color:#585858 !important;
+}
+body{
+    background: #dddddd !important;
+    font-family: 'Prompt', sans-serif !important;
+}
+h2 {
+    color: #fff;
+    text-shadow: 3px 5px 10px #000;
+}
+#DATE{
+    color:black !important;
+    font-weight: bold;
+}
+.box {
+    padding: 20px;
+    background-color: #fff;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 15px;
+        -webkit-box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);
+        -moz-box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);
+        box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);
+}
+.box-1 {
+    padding: 10px;
+    background-color: rgb(236, 236, 236);
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 10px;
+        -webkit-box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);
+        -moz-box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);
+        box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);
+}
+.aa{
+    background-color:#99ccff;
+}
+.pad-a {
+    background-color:#ff9100;
+    box-shadow: 0px -1px 5px #0084ff;
+}
+.modal-body>p {
+    font-size: 20px;
+    font-style: italic;
+}
+label {
+    color: black;
+}
+p {
+    color: black;
+}
+.custom-checkbox {
+    min-height: 1rem;
+    padding-left: 0;
+    margin-right: 0;
+    cursor: pointer;
+}
+.custom-checkbox .custom-control-indicator {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    background-color: #818181;
+    border-radius: 15px;
+    margin-right: 10px;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+    box-shadow: none;
+}
+        .custom-checkbox .custom-control-indicator:after {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-color: #f1f1f1;
+            border-radius: 21px;
+            box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+            left: -2px;
+            top: -4px;
+            -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+            transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+        }
+        .custom-checkbox .custom-control-input:checked~.custom-control-indicator {
+            background-color: #4d94ff;
+            background-image: none;
+            box-shadow: none !important;
+        }
+        .custom-checkbox .custom-control-input:checked~.custom-control-indicator:after {
+            background-color:#0066ff;
+            left: 15px;
+        }
+        .custom-checkbox .custom-control-input:focus~.custom-control-indicator {
+            box-shadow: none !important;
+        }
+        .order-card {
+            color: #fff;
+        }
+        .bg-c-blue {
+            background: linear-gradient(45deg, #4099ff, #73b4ff);
+        }
+        .bg-c-green {
+            background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+        }
+        .bg-c-yellow {
+            background: linear-gradient(45deg, #FFB64D, #ffcb80);
+        }
+        .bg-c-pink {
+            background: linear-gradient(45deg, #FF5370, #ff869a);
+        }
+        .card {
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+            box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+            border: none;
+            margin-bottom: 30px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+        .card .card-block {
+            padding: 25px;
+        }
+        .order-card i {
+            font-size: 26px;
+        }
+        .f-left {
+            float: left;
+        }
+        .f-right {
+            float: right;
+        }
+        #changpw {
+            background-color:#f1f1f1;
+        }
+label.error {
     position: absolute;
     background: #ee0101;
     background: rgba(238, 1, 1, 0.80);
@@ -13,11 +159,11 @@
     z-index: 5;
 }
 
-    label.error:before {
+label.error:before {
         content: "";
         border: 4px solid transparent;
         border-top: 4px solid #ee0101;
         border-top: 4px solid rgba(238, 1, 1, 0.80);
         position: absolute;
         bottom: -8px;
-    }
+}

@@ -1,21 +1,22 @@
 var managemember;
 $(document).ready(function () {
     managemember = $("#managemember").DataTable({
-        "order": [],
+        "processing": true,
+        "serverSide": true,
+        "order": [[1, "desc"]],
         "ajax": {
             url: "../admin/manage_retrieve.php",
             type: "POST"
         },
         "columnDefs": [{
-            "targets": [0, 6],
+            "targets": [0,5, 6],
             "orderable": false,
         }],
     });
 });
 function removeMember(id) {
     if (id) {
-        // click on remove button
-        $("#removeBtn").unbind('click').bind('click', function () {
+        $("#removeBtn").off('click').on('click', function (){
             $.ajax({
                 url: '../admin/admin_del.php',
                 type: 'post',
@@ -26,16 +27,14 @@ function removeMember(id) {
                 success: function (response) {
                     if (response.success == true) {
                         swal("สำเร็จ", response.messages, "success");
-                        // refresh the table
                         managemember.ajax.reload(null, false);
-                        // close the modal
                         $("#removeMemberModal").modal('hide');
                     } else {
                         swal("ผิดพลาด", response.messages, "error");
                     }
                 }
             });
-        }); // click remove btn
+        });
     } else {
         alert('Error: Refresh the page again');
     }
@@ -48,7 +47,7 @@ $('#removeAllBtn').click(function () {
     $('.checkitem:checked').each(function (i) {
         cus_id[i] = $(this).val();
     });
-    if (cus_id.length === 0) //tell you if the array is empty
+    if (cus_id.length === 0)
     {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
@@ -62,9 +61,7 @@ $('#removeAllBtn').click(function () {
             success: function (response) {
                 if (response.success == true) {
                     swal("สำเร็จ", response.messages, "success");
-                    // refresh the table
                     managemember.ajax.reload(null, false);
-                    // close the modal
                     $("#removeAllMemberModal").modal('hide');
                 } else {
                     swal("ผิดพลาด", response.messages, "error");

@@ -7,11 +7,11 @@ if (!$_SESSION["admin_id"]) {
 } else { ?>
     <title>Manage</title>
     <?php
-    $admin_name = $_SESSION["admin_name"];
-    require('../template/template.html');
-    require('function.php');
-    include('changpw.php');
-    ?>
+        $admin_name = $_SESSION["admin_name"];
+        require('../template/template.html');
+        require('function.php');
+        include('changpw.php');
+        ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
@@ -26,7 +26,7 @@ if (!$_SESSION["admin_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <?php echo admin_image_profile($admin_name); ?>
+                        <div id="load"><?php echo admin_image_profile($_SESSION["admin_id"]); ?></div>
                     </div>
                     <div class="user-info">
                         <span class="user-name">
@@ -46,8 +46,8 @@ if (!$_SESSION["admin_id"]) {
                             <span>ทั่วไป</span>
                         </li>
                         <li>
-                        <a href="dashboard.php">
-                            <i class="fas fa-tachometer-alt"></i>&nbsp;dashboard</a>
+                            <a href="dashboard.php">
+                                <i class="fas fa-tachometer-alt"></i>&nbsp;dashboard</a>
                         </li>
                         <li>
                             <a href="admin.php">
@@ -91,22 +91,31 @@ if (!$_SESSION["admin_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
-                            <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
-                        </button><br /><br />
-                        <table id="managemember" class="table table-sm table-bordered table-striped table-hover display responsive nowrap" style="width:100%">
-                            <thead class="aa">
-                                <tr>
-                                    <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label></th>
-                                    <th width="5%">เจ้าของไซต์</th>
-                                    <th width="5%">สถานบริการ</th>
-                                    <th width="2%">ราคา</th>
-                                    <th width="3%">วันที่ชำระเงิน</th>
-                                    <th width="3%">วันหมดอายุ</th>
-                                    <th width="1%">ลบ</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
+                                <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='manage.php'">
+                                <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                        </div>
+                        <br /><br />
+                        <div class="box">
+                            <div class="table-responsive">
+                                <table id="managemember" class="table table-sm table-striped table-hover " style="width:100%">
+                                    <thead class="aa">
+                                        <tr>
+                                            <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall" /><span class="custom-control-indicator"></span></label></th>
+                                            <th width="5%">เจ้าของไซต์</th>
+                                            <th width="5%">สถานบริการ</th>
+                                            <th width="2%">ราคา</th>
+                                            <th width="3%">วันที่ชำระเงิน</th>
+                                            <th width="3%">วันหมดอายุ</th>
+                                            <th width="1%">ลบ</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,5 +159,5 @@ if (!$_SESSION["admin_id"]) {
             </div>
         </div>
     </div>
-    <script src="../js/manage_del.js"></script>
+    <script src="../js/manage.js"></script>
 <?php } ?>

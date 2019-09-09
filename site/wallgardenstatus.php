@@ -7,16 +7,16 @@ if (!$_SESSION["cus_id"]) {
 } else { ?>
     <title>Wall Garden Status</title>
     <?php
-    require('../template/template.html');
-    include('../siteadmin/expired.php');
-    include('../siteadmin/useronlinejs.php');
-    include('../siteadmin/changpwsite.php');
+        require('../template/template.html');
+        include('../siteadmin/expired.php');
+        include('../siteadmin/useronlinejs.php');
+        include('../siteadmin/changpwsite.php');
 
-    include('function.php');
+        include('function.php');
 
-    $cus_id = $_SESSION['cus_id'];
-    
-    ?>
+        $cus_id = $_SESSION['cus_id'];
+
+        ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
@@ -31,7 +31,7 @@ if (!$_SESSION["cus_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <?php echo fetchimage($cus_id);?>
+                        <?php echo fetchimage($cus_id); ?>
                     </div>
                     <div class="user-info">
                         <span class="user-name">
@@ -150,25 +150,30 @@ if (!$_SESSION["cus_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary pull pull-right" data-toggle="modal" data-target="#addWallModal" id="addWallModalBtn">
-                            <span class="glyphicon glyphicon-plus "></span>เพิ่ม Bypass
-                        </button>
-                        <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllWallModal" id="removeAllWallModalBtn">
-                            <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
-                        </button></div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addWallModal" id="addWallModalBtn">
+                                <span class="glyphicon glyphicon-plus "></span>เพิ่ม Bypass
+                            </button>
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllWallModal" id="removeAllWallModalBtn">
+                                <span class="glyphicon glyphicon-trash "></span>ลบข้อมูลแถวที่เลือก
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='wallgardenstatus.php'">
+                                <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                        </div>
                         <br /><br />
-                        <table id="wallstatus" class="table table-striped table-hover table-bordered table-sm display responsive nowrap" style="width:100%">
-                            <thead class="aa">
-                                <tr>
-                                    <th width="1%"></th>
-                                    <th width="1%">#</th>
-                                    <th width="3%">Domain Name</th>
-                                    <th width="3%">Action</th>
-                                    <th width="3%">Comment</th>
-                                    <th width="3%">Options</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="box">
+                            <table id="wallstatus" class="table table-striped table-hover table-sm display responsive nowrap" style="width:100%">
+                                <thead class="aa">
+                                    <tr>
+                                        <th width="1%"></th>
+                                        <th width="1%">#</th>
+                                        <th width="3%">Domain Name</th>
+                                        <th width="3%">Action</th>
+                                        <th width="3%">Comment</th>
+                                        <th width="3%">Options</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

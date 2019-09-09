@@ -17,39 +17,39 @@ $(document).ready(function () {
             "orderable": false,
         }],
     });
-    $("#addIppoolModalBtn").on('click', function () {
-        $("#add_ippool")[0].reset();
-        $("#add_ippool").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var name = $("#name").val();
-            var ranges = $("#ranges").val();
-            //console.log(name);
-            //return false;
-            if (name && ranges) {
-                $.ajax({
-                    url: '../site/addpool.php',
-                    type: 'POST',
-                    data: form.serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success == true) {
-                            swal("สำเร็จ", response.messages, "success");
-                            $("#add_ippool")[0].reset();
-                            ip_pool.ajax.reload(null, false);
-                            $("#addIppoolModal").modal('hide');
-                        } else {
-                            swal("ผิดพลาด", response.messages, "error");
-                        }
+});
+$("#addIppoolModalBtn").on('click', function () {
+    $("#add_ippool")[0].reset();
+    $("#add_ippool").off('submit').on('submit', function () {
+        var form = $(this);
+        var name = $("#name").val();
+        var ranges = $("#ranges").val();
+        //console.log(name);
+        //return false;
+        if (name && ranges) {
+            $.ajax({
+                url: '../site/addpool.php',
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        $("#add_ippool")[0].reset();
+                        ip_pool.ajax.reload(null, false);
+                        $("#addIppoolModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
 });
 function removePool(Pool_id) {
     if (Pool_id) {
-        $("#removePoolBtn").unbind('click').bind('click', function () {
+        $("#removePoolBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../site/addpool_del.php',
                 type: 'POST',
@@ -116,7 +116,7 @@ function editIppool(id) {
                 $("#editranges").val(response.ranges);
                 $("#editnextpool").val(response.nextpool);
                 $("#edit_pool").append('<input type="hidden" name="edit_ippool" id="edit_ippool" value="' + response.id + '"/>');
-                $("#edit_pool").unbind('submit').bind('submit', function () {
+                $("#edit_pool").off('submit').on('submit', function () {
                     var form = $(this);
                     var editname = $("#editname").val();
                     var editranges = $("#editranges").val();

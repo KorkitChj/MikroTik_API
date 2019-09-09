@@ -50,7 +50,7 @@ session_start();
 				echo'</tr>';
 			}
 			
-			if(($intRows)%21==0){
+			if(($intRows)%10==0){
 				echo'</tr></table><table border="1"  cellspacing="1" cellpadding="1" style="page-break-before: always">';
 			}
 		}

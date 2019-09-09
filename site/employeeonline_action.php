@@ -24,11 +24,12 @@ if(isset($_POST["action"]))
   }
 
   $output .= '
+  <div class="box">
   <div class="table-responsive">
    <div align="right">
     '.$count.' Record Online
    </div>
-   <table class="table table-sm table-bordered table-striped display responsive nowrap">
+   <table class="table table-sm table-striped display responsive nowrap">
    <thead class="aa">
     <tr>
         <th>No.</th>
@@ -55,7 +56,7 @@ if(isset($_POST["action"]))
    </tr>
    ';
   }
-  $output .= '</table></div>';
+  $output .= '</table></div></div>';
   echo $output;
  }
 }

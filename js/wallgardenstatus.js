@@ -18,38 +18,38 @@ $(document).ready(function () {
             "orderable": false,
         }],
     });
-    $("#addWallModalBtn").on('click', function () {
-        $("#addWall")[0].reset();
-        $("#addWall").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var domainname = $("#domainname").val();
-            var action = $("#action").val();
-            var comment = $("#comment").val();
-            if (domainname && action && comment) {
-                $.ajax({
-                    url: '../site/addwallgarden.php',
-                    type: 'POST',
-                    data: form.serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success == true) {
-                            swal("สำเร็จ", response.messages, "success");
-                            $("#addWall")[0].reset();
-                            wallstatus.ajax.reload(null, false);
-                            $("#addWallModal").modal('hide');
-                        } else {
-                            swal("ผิดพลาด", response.messages, "error");
-                        }
+});
+$("#addWallModalBtn").on('click', function () {
+    $("#addWall")[0].reset();
+    $("#addWall").off('submit').on('submit', function () {
+        var form = $(this);
+        var domainname = $("#domainname").val();
+        var action = $("#action").val();
+        var comment = $("#comment").val();
+        if (domainname && action && comment) {
+            $.ajax({
+                url: '../site/addwallgarden.php',
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        $("#addWall")[0].reset();
+                        wallstatus.ajax.reload(null, false);
+                        $("#addWallModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
 });
 function removeWall(Wall_id) {
     if (Wall_id) {
-        $("#removeWallBtn").unbind('click').bind('click', function () {
+        $("#removeWallBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../site/wallgardenstatus_del.php',
                 type: 'POST',
@@ -111,7 +111,7 @@ function editWall(Comment) {
                 $("#editaction").val(response.action);
                 $("#editcomment").val(response.comment);
                 $("#editWall").append('<input type="hidden" name="edit_comment" id="edit_comment" value="' + response.comment + '"/>');
-                $("#editWall").unbind('submit').bind('submit', function () {
+                $("#editWall").off('submit').on('submit', function () {
                     var form = $(this);
                     var editdomainname = $("#editdomainname").val();
                     var editaction = $("#editaction").val();

@@ -26,19 +26,19 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
 
         $action = '';
         if($ARRAY[$i]['action'] == "accept"){
-            $action = '<button class="btn btn-success" type="button">ACCEPT</button>';
+            $action = '<button class="btn btn-success btn-sm" type="button">ACCEPT</button>';
         }
         elseif($ARRAY[$i]['action'] == "drop")
         {
-            $action = '<button class="btn btn-danger" type="button">DROP</button>';
+            $action = '<button class="btn btn-danger btn-sm" type="button">DROP</button>';
         }
         else
         {
-            $action = '<button class="btn btn-warning" type="button">REJECT</button>';
+            $action = '<button class="btn btn-warning btn-sm" type="button">REJECT</button>';
         }
         $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="profile_checkbox custom-control-input" name="wall_id[]" value="' . $ARRAY[$i]["comment"] . '"><span class="custom-control-indicator"></span></label>';
-        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editWallModal"  onclick="editWall(\'' . $ARRAY[$i]["comment"] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeWallModal"  onclick="removeWall(\'' . $ARRAY[$i]["comment"] . '\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
+        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editWallModal"  onclick="editWall(\'' . $ARRAY[$i]["comment"] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+        <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeWallModal"  onclick="removeWall(\'' . $ARRAY[$i]["comment"] . '\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
 
         $output['success'] = true;
         $output['data'][] = array(

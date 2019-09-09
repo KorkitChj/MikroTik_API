@@ -1,21 +1,22 @@
 var MemberTable;
 $(document).ready(function () {
     MemberTable = $("#MemberTable").DataTable({
-        "order": [],
+        "processing": true,
+        "serverSide": true,
+        "order": [[2, "desc"]],
         "ajax": {
             url: "../admin/checkpayment_retrieve.php",
             type: "POST"
         },
         "columnDefs": [{
-            "targets": [0, 5, 6],
+            "targets": [0, 6, 7],
             "orderable": false,
         }],
     });
 });
 function removeMember(id) {
     if (id) {
-        // click on remove button
-        $("#removeBtn").unbind('click').bind('click', function () {
+        $("#removeBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../admin/admin_del.php',
                 type: 'post',
@@ -26,16 +27,14 @@ function removeMember(id) {
                 success: function (response) {
                     if (response.success == true) {
                         swal("สำเร็จ", response.messages, "success");
-                        // refresh the table
                         MemberTable.ajax.reload(null, false);
-                        // close the modal
                         $("#removeMemberModal").modal('hide');
                     } else {
                         swal("ผิดพลาด", response.messages, "error");
                     }
                 }
             });
-        }); // click remove btn
+        });
     } else {
         alert('Error: Refresh the page again');
     }
@@ -52,8 +51,6 @@ $('#removeAllBtn').click(function () {
     {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
-        //console.log(cus_id);
-        //return false;
         $.ajax({
             url: '../admin/admin_del_check.php',
             method: 'POST',
@@ -63,13 +60,13 @@ $('#removeAllBtn').click(function () {
             dataType: 'json',
             success: function (response) {
                 if (response.success == true) {
-                    // refresh the table
                     swal("สำเร็จ", response.messages, "success");
                     MemberTable.ajax.reload(null, false);
-                    // close the modal
                     $("#removeAllMemberModal").modal('hide');
+                    $("#checkall").prop("checked",false);
                 } else {
                     swal("ผิดพลาด", response.messages, "error");
+                    $("#checkall").prop("checked",false);
                 }
             }
         });
@@ -77,8 +74,7 @@ $('#removeAllBtn').click(function () {
 });
 function confirmMember(id) {
     if (id) {
-        // click on remove button
-        $("#confirmBtn").unbind('click').bind('click', function () {
+        $("#confirmBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../admin/admin_confirm.php',
                 type: 'post',
@@ -89,16 +85,14 @@ function confirmMember(id) {
                 success: function (response) {
                     if (response.success == true) {
                         swal("สำเร็จ",response.messages, "success");
-                        // refresh the table
                         MemberTable.ajax.reload(null, false);
-                        // close the modal
                         $("#confirmMemberModal").modal('hide');
                     } else {
                         swal("ผิดพลาด",response.messages, "error");
                     }
                 }
             });
-        }); // click remove btn
+        });
     } else {
         alert('Error: Refresh the page again');
     }

@@ -32,8 +32,6 @@ session_start();
             $min = 11111;
             $max = 99999;
             $pass_router = rand($min, $max);
-            //$employee = "$pass_router";
-            //$group = "full";
                        
             if ($API->connect($ip . ":" . $port, $user, $pass)) {
                 $ARRAY = $API->comm("/user/print");

@@ -11,85 +11,83 @@ $(document).ready(function () {
             "orderable": false,
         }],
     });
-    $("#addSiteModalBtn").on('click', function () {
-        $("#addsite")[0].reset();
-        $("#addsite").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var extension = $('#site_image').val().split('.').pop().toLowerCase();
-            if (extension != '') {
-                if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
-                    swal("ผิดพลาด", "Invalid Image File", "error");
-                    $('#site_image').val('');
-                    return false;
-                }
+});
+$("#addSiteModalBtn").click(function () {
+    $("#addsite")[0].reset();
+    $("#addsite").off('submit').on('submit', function () {
+        var form = $(this);
+        var extension = $('#site_image').val().split('.').pop().toLowerCase();
+        if (extension != '') {
+            if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
+                swal("ผิดพลาด", "Invalid Image File", "error");
+                $('#site_image').val('');
+                return false;
             }
-            var ipaddress = $("#ipaddress").val();
-            var username = $("#username").val();
-            var password = $("#password").val();
-            var portapi = $("#portapi").val();
-            var namesite = $("#namesite").val();
-            if (ipaddress && username && namesite && password && portapi && extension) {
-                $.ajax({
-                    url: '../siteadmin/addconnect.php',
-                    type: 'POST',
-                    data: new FormData(this),
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success == true) {
-                            swal("สำเร็จ", response.messages, "success");
-                            $("#addsite")[0].reset();
-                            connectstatus.ajax.reload(null, false);
-                            $("#addSiteModal").modal('hide');
-                        } else {
-                            swal("ผิดพลาด", response.messages, "error");
-                        }
+        }
+        var ipaddress = $("#ipaddress").val();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var portapi = $("#portapi").val();
+        var namesite = $("#namesite").val();
+        if (ipaddress && username && namesite && password && portapi && extension) {
+            $.ajax({
+                url: '../siteadmin/addconnect.php',
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        $("#addsite")[0].reset();
+                        connectstatus.ajax.reload(null, false);
+                        $("#addSiteModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
-    $("#addImageModalBtn").on('click', function () {
-        $("#formimage")[0].reset();
-        $("#formimage").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var extension = $('#image').val().split('.').pop().toLowerCase();
-            if (extension != '') {
-                if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
-                    swal("ผิดพลาด", "Invalid Image File", "error");
-                    $('#image').val('');
-                    return false;
-                }
+});
+$("#addImageModalBtn").click(function () {
+    $("#formimage")[0].reset();
+    $("#formimage").off('submit').on('submit', function () {
+        var form = $(this);
+        var extension = $('#image').val().split('.').pop().toLowerCase();
+        if (extension != '') {
+            if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
+                swal("ผิดพลาด", "Invalid Image File", "error");
+                $('#image').val('');
+                return false;
             }
-            var image = $("#image").val();
-            //console.log(image);
-            //return false;
-            if (image) {
-                $.ajax({
-                    url: '../siteadmin/addimage.php',
-                    type: 'POST',
-                    data: new FormData(this),
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: function (response) {
-                        if(response.success == true){
-                            $("#formimage")[0].reset();
-                            $("#load").load(location.href + " #load>*", "");
-                            $("#addImageModal").modal('hide');
-                        }
+        }
+        var image = $("#image").val();
+        if (image) {
+            $.ajax({
+                url: '../siteadmin/addimage.php',
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (response) {
+                    if(response.success == true){
+                        $("#formimage")[0].reset();
+                        $("#load").load(location.href + " #load>*", "");
+                        $("#addImageModal").modal('hide');
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
 });
 function removeSite(id) {
     if (id) {
-        $("#removeSiteBtn").unbind('click').bind('click', function () {
+        $("#removeSiteBtn").off('click').on('click', function (){
             $.ajax({
                 url: '../siteadmin/connectstatus_del.php',
                 type: 'POST',
@@ -121,8 +119,6 @@ $('#removeAllSiteBtn').click(function () {
     if (location_id.length === 0) {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
-        //console.log(location_id);
-        //return false;
         $.ajax({
             url: '../siteadmin/connectstatus_del.php',
             method: 'POST',
@@ -135,8 +131,10 @@ $('#removeAllSiteBtn').click(function () {
                     swal("สำเร็จ", response.messages, "success");
                     connectstatus.ajax.reload(null, false);
                     $("#removeAllSiteModal").modal('hide');
+                    $("#checkall").prop("checked",false);
                 } else {
                     swal("ผิดพลาด", response.messages, "error");
+                    $("#checkall").prop("checked",false);
                 }
             }
         });
@@ -160,7 +158,7 @@ function editSite(id) {
                 $('#site_uploaded_image').html(response.site_image);
                 $("#editSite").append('<input type="hidden" name="editlocation_id" id="editlocation_id" value="' + response.location_id + '"/>');
                 console.log(response.location_id);
-                $("#editSite").unbind('submit').bind('submit', function () {
+                $("#editSite").off('submit').on('submit', function () {
                     var form = $(this);
                     var editipaddress = $("#editipaddress").val();
                     var editusername = $("#editusername").val();

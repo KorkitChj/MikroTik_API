@@ -26,13 +26,13 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
             if($row2['.id'] == $row['.id']){
                 $checkbox = '';
                 $addresst = $row2['address'];
-                $idtk = '<button title="dynamic" class="btn btn-success">D</button>';
+                $idtk = '<button title="dynamic" class="btn btn-success btn-sm">D</button>';
                 $manage = '
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <button class="btn btn-success disabled" type="button"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
-            <button class="btn btn-danger disabled" type="button"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
-            <button type="button" class="btn btn-warning disabled"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-            <button type="button" class="btn btn-danger disabled"><span class="glyphicon glyphicon-trash"></span></button></div>';
+            <button class="btn btn-success disabled btn-sm" type="button"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-danger disabled btn-sm" type="button"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
+            <button type="button" class="btn btn-warning disabled btn-sm"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+            <button type="button" class="btn btn-danger disabled btn-sm"><span class="glyphicon glyphicon-trash"></span></button></div>';
                 break;
             }
         }
@@ -44,10 +44,10 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                 $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="address_id[]" value="'.$row['.id'].'"><span class="custom-control-indicator"></span></label>';
                 $manage = '
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <button class="btn btn-success" type="button" onclick="enableAddress(\''.$row['.id'].'\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
-            <button class="btn btn-danger" type="button"  onclick="disableAddress(\''.$row['.id'].'\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
-            <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editIpModal" onclick="editIp(\'' . $row['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeAddressModal" onclick="removeAddress(\'' . $row['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
+            <button class="btn btn-success btn-sm" type="button" onclick="enableAddress(\''.$row['.id'].'\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-danger btn-sm" type="button"  onclick="disableAddress(\''.$row['.id'].'\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
+            <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editIpModal" onclick="editIp(\'' . $row['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+            <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeAddressModal" onclick="removeAddress(\'' . $row['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
                 break;
             }
         }
@@ -57,10 +57,10 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
             $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="address_id[]" value="'.$row['.id'].'"><span class="custom-control-indicator"></span></label>';
             $manage = '
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <button class="btn btn-success" type="button" onclick="enableAddress(\''.$row['.id'].'\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
-            <button class="btn btn-danger" type="button"  onclick="disableAddress(\''.$row['.id'].'\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
-            <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editIpModal" onclick="editIp(\'' . $row['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeAddressModal" onclick="removeAddress(\'' . $row['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
+            <button class="btn btn-success btn-sm" type="button" onclick="enableAddress(\''.$row['.id'].'\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-danger btn-sm" type="button"  onclick="disableAddress(\''.$row['.id'].'\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
+            <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editIpModal" onclick="editIp(\'' . $row['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+            <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeAddressModal" onclick="removeAddress(\'' . $row['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
         }
         
         $output['success'] = true;

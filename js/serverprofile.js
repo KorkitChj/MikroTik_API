@@ -16,38 +16,38 @@ $(document).ready(function() {
             "orderable": false,
         }],
     });
-    $("#addServerProfileModalBtn").on('click', function () {
-        $("#add_serverprofile")[0].reset();
-        $("#add_serverprofile").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var name = $("#name").val();
-            //console.log(name);
-            //return false;
-            if (name) {
-                $.ajax({
-                    url: '../site/add_serverprofile.php',
-                    type: 'POST',
-                    data: form.serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success == true) {
-                            swal("สำเร็จ", response.messages, "success");
-                            $("#add_serverprofile")[0].reset();
-                            serverprofile.ajax.reload(null, false);
-                            $("#addServerProfileModal").modal('hide');
-                        } else {
-                            swal("ผิดพลาด", response.messages, "error");
-                        }
+});
+$("#addServerProfileModalBtn").on('click', function () {
+    $("#add_serverprofile")[0].reset();
+    $("#add_serverprofile").off('submit').on('submit', function () {
+        var form = $(this);
+        var name = $("#name").val();
+        //console.log(name);
+        //return false;
+        if (name) {
+            $.ajax({
+                url: '../site/add_serverprofile.php',
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        $("#add_serverprofile")[0].reset();
+                        serverprofile.ajax.reload(null, false);
+                        $("#addServerProfileModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
 });
 function removeServerProfile(ServerP_id) {
     if (ServerP_id) {
-        $("#removeServerPBtn").unbind('click').bind('click', function () {
+        $("#removeServerPBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../site/addserverprofile_del.php',
                 type: 'POST',
@@ -116,7 +116,7 @@ function editServerProfile(id) {
                 $("#editrate").val(response.rate);
                 console.log(response.name);
                 $("#edit_serverprofile").append('<input type="hidden" name="edit_sp" id="edit_sp" value="' + response.id + '"/>');
-                $("#edit_serverprofile").unbind('submit').bind('submit', function() {
+                $("#edit_serverprofile").off('submit').on('submit', function() {
                     var form = $(this);
                     var editname = $("#editname").val();
                     if (editname) {

@@ -7,13 +7,13 @@ if (!$_SESSION["emp_id"]) {
 } else { ?>
     <title>Chang Password Employee</title>
     <?php
-    require('../template/template.html');
+        require('../template/template.html');
 
-    include('function.php');
+        include('function.php');
 
-    $emp_id = $_SESSION['emp_id'];
-    
-    ?>
+        $emp_id = $_SESSION['emp_id'];
+
+        ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
@@ -28,7 +28,7 @@ if (!$_SESSION["emp_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <?php echo fetchlogo($emp_id)[0];?>
+                        <?php echo fetchlogo($emp_id)[0]; ?>
                     </div>
                     <div class="user-info">
                         <span class="user-name">
@@ -74,49 +74,51 @@ if (!$_SESSION["emp_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <form id="changpw" action="" method="post">
-                            <div class="form-group">
-                                <label for="oldpassword" class="control-label col-sm">รหัสผ่านเก่า:&nbsp;</label>
-                                <div class="col-sm-12 input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="glyphicon glyphicon-lock"></i>
+                        <div class="box">
+                            <form id="changpw" action="" method="post">
+                                <div class="form-group">
+                                    <label for="oldpassword" class="control-label col-sm">รหัสผ่านเก่า:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="glyphicon glyphicon-lock"></i>
+                                            </div>
                                         </div>
+                                        <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="รหัสผ่านเก่า">
                                     </div>
-                                    <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="รหัสผ่านเก่า">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="newpassword" class="control-label col-sm">รหัสผ่านใหม่:&nbsp;</label>
-                                <div class="col-sm-12 input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="glyphicon glyphicon-lock"></i>
+                                <div class="form-group">
+                                    <label for="newpassword" class="control-label col-sm">รหัสผ่านใหม่:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="glyphicon glyphicon-lock"></i>
+                                            </div>
                                         </div>
+                                        <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="รหัสผ่านใหม่">
                                     </div>
-                                    <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="รหัสผ่านใหม่">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="renewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:&nbsp;</label>
-                                <div class="col-sm-12 input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="glyphicon glyphicon-lock"></i>
+                                <div class="form-group">
+                                    <label for="renewpassword" class="control-label col-sm">ยืนยันรหัสผ่านใหม่:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="glyphicon glyphicon-lock"></i>
+                                            </div>
                                         </div>
+                                        <input type="password" class="form-control" name="renewpassword" id="renewpassword" placeholder="ยืนยันรหัสผ่านใหม่">
                                     </div>
-                                    <input type="password" class="form-control" name="renewpassword" id="renewpassword" placeholder="ยืนยันรหัสผ่านใหม่">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="control-label col-sm"></label>
-                                <div class="col-sm-12 input-group">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="history.back();"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
-                                    <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
-                                    <button type="submit" class="btn btn-success" id="submit"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
+                                <div class="form-group">
+                                    <label for="" class="control-label col-sm"></label>
+                                    <div class="col-sm-12 input-group">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="history.back();"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>&nbsp;
+                                        <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>&nbsp;
+                                        <button type="submit" class="btn btn-success" id="submit"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -148,11 +150,11 @@ if (!$_SESSION["emp_id"]) {
                     },
                     newpassword: {
                         required: true,
-                        minlength:8
+                        minlength: 8
                     },
                     renewpassword: {
                         required: true,
-                        minlength:8,
+                        minlength: 8,
                         equalTo: '#newpassword'
                     }
                 },

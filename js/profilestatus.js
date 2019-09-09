@@ -18,44 +18,43 @@ $(document).ready(function () {
             "orderable": false,
         }],
     });
-    $("#addProfileModalBtn").on('click', function () {
-        $("#addProfile")[0].reset();
-        $("#addProfile").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var profilename = $("#profilename").val();
-            //var autorefresh = $("#autorefresh").val();
-            //var adpool = $("#adpool").val();
-            //var idle = $("#idle").val();
-            //var session = $("#session").val();
-            //var shared = $("#shared").val();
-            //var mac = $("#mac").val();
-            //var limit = $("#limit").val();
-            if (profilename) {
-                $.ajax({
-                    url: '../site/addprofile.php',
-                    type: 'POST',
-                    data: form.serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success == true) {
-                            swal("สำเร็จ", response.messages, "success");
-                            $("#addProfile")[0].reset();
-                            profilestatus.ajax.reload(null, false);
-                            $("#addProfileModal").modal('hide');
-                        } else {
-                            swal("ผิดพลาด", response.messages, "error");
-                        }
+});
+$("#addProfileModalBtn").on('click', function () {
+    $("#addProfile")[0].reset();
+    $("#addProfile").off('submit').on('submit', function () {
+        var form = $(this);
+        var profilename = $("#profilename").val();
+        //var autorefresh = $("#autorefresh").val();
+        //var adpool = $("#adpool").val();
+        //var idle = $("#idle").val();
+        //var session = $("#session").val();
+        //var shared = $("#shared").val();
+        //var mac = $("#mac").val();
+        //var limit = $("#limit").val();
+        if (profilename) {
+            $.ajax({
+                url: '../site/addprofile.php',
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        $("#addProfile")[0].reset();
+                        profilestatus.ajax.reload(null, false);
+                        $("#addProfileModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
 });
-
 function removeProfile(Profile_name) {
     if (Profile_name) {
-        $("#removeProfileBtn").unbind('click').bind('click', function () {
+        $("#removeProfileBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../site/profilestatus_del.php',
                 type: 'POST',
@@ -122,7 +121,7 @@ function editProfile(Profile_name) {
                 $("#editautorefresh").val(response.refresh);
                 $("#editadpool").val(response.pool);
                 $("#editProfile").append('<input type="hidden" name="editprofile_name" id="editprofile_name" value="' + response.name + '"/>');
-                $("#editProfile").unbind('submit').bind('submit', function () {
+                $("#editProfile").off('submit').on('submit', function () {
                     var form = $(this);
                     var editprofilename = $("#editprofilename").val();
                     //var editsession = $("#editsession").val();

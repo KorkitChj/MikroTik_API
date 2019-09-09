@@ -32,32 +32,32 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                 $output['success'] = true;
                 $output['messages'] = "ทำการลบพนักงานเรียบร้อยแล้ว";
             }
-        }
-    } elseif ($_POST['type'] == 'many') {
-        $username5 = array();
-        $username6 = array();
-        $aa = array();
-        $aa = $_POST['emp_id'];
-        foreach ($aa as $bb) {
-            $username2 = explode(",", $bb);
-            $username5[] = $username2[0];
-            $username6[] = $username2[1];
-        }
+        } elseif ($_POST['type'] == 'many') {
+            $username5 = array();
+            $username6 = array();
+            $aa = array();
+            $aa = $_POST['emp_id'];
+            foreach ($aa as $bb) {
+                $username2 = explode(",", $bb);
+                $username5[] = $username2[0];
+                $username6[] = $username2[1];
+            }
 
-        $id = implode(",", $username6);
-        $ARRAY = $API->comm("/user/remove", array(".id" => $id));
+            $id = implode(",", $username6);
+            $ARRAY = $API->comm("/user/remove", array(".id" => $id));
 
-        foreach ($username5 as $rm) {
-            $sql = "DELETE FROM employee WHERE username = :username";
-            $query = $conn->prepare($sql);
-            $query->execute(
-                array(
-                    'username' => $rm
-                )
-            );
+            foreach ($username5 as $rm) {
+                $sql = "DELETE FROM employee WHERE username = :username";
+                $query = $conn->prepare($sql);
+                $query->execute(
+                    array(
+                        'username' => $rm
+                    )
+                );
+            }
+            $output['success'] = true;
+            $output['messages'] = "ทำการลบพนักงานที่เลือกเรียบร้อยแล้ว";
         }
-        $output['success'] = true;
-        $output['messages'] = "ทำการลบพนักงานที่เลือกเรียบร้อยแล้ว";
     }
 } else {
     $output['success'] = false;

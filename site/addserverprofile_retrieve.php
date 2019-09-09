@@ -25,16 +25,16 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                 $server = $value['.id'];
                     $m = " * ";
                     $checkbox = '';
-                    $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-                    <button  type="button" class="btn btn-danger disabled"><span class="glyphicon glyphicon-trash"></span></button></div>';
+                    $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+                    <button  type="button" class="btn btn-danger disabled btn-sm"><span class="glyphicon glyphicon-trash"></span></button></div>';
                 break;
             }
         }
         if($server == ''){
             $m = '';
             $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="ServerP_id[]" value="' . $ARRAY[$i][".id"] . '"><span class="custom-control-indicator"></span></label>';
-            $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-            <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeServerProfileModal" onclick="removeServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
+            $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+            <button  type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeServerProfileModal" onclick="removeServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
         }
         
 

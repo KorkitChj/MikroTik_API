@@ -32,6 +32,7 @@ if(isset($_POST["action"]))
   $result = $statement->fetchAll();
   $count = $statement->rowCount();
   $output .= '
+  <div class="box">
   <div class="table-responsive">
    <div align="right">
     '.$count.' Users Online
@@ -61,7 +62,7 @@ if(isset($_POST["action"]))
    </tr>
    ';
   }
-  $output .= '</table></div>';
+  $output .= '</table></div></div>';
   echo $output;
  }
 }

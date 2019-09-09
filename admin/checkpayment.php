@@ -7,11 +7,11 @@ if (!$_SESSION["admin_id"]) {
 } else { ?>
     <title>Check Payment</title>
     <?php
-    $admin_name = $_SESSION["admin_name"];
-    require('../template/template.html');
-    require('function.php');
-    include('changpw.php');
-    ?>
+        $admin_name = $_SESSION["admin_name"];
+        require('../template/template.html');
+        require('function.php');
+        include('changpw.php');
+        ?>
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
@@ -26,7 +26,7 @@ if (!$_SESSION["admin_id"]) {
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <?php echo admin_image_profile($admin_name); ?>
+                        <div id="load"><?php echo admin_image_profile($_SESSION["admin_id"]); ?></div>
                     </div>
                     <div class="user-info">
                         <span class="user-name">
@@ -91,22 +91,32 @@ if (!$_SESSION["admin_id"]) {
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <button class="btn btn-danger pull pull-right" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
-                            <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
-                        </button><br /><br />
-                        <table id="MemberTable" class="table table-striped table-hover table-sm table-bordered display responsive nowrap" style="width:100%">
-                            <thead class="aa">
-                                <tr>
-                                    <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall"/><span class="custom-control-indicator"></span></label></th>
-                                    <th width="10%">เจ้าของไซต์</th>
-                                    <th width="2%">ใบสั่งซื้อ</th>
-                                    <th width="5%">วันที่ยืนยันการชำระเงิน</th>
-                                    <th width="5%">วันนัดชำระ</th>
-                                    <th width="7%">หลักฐาน</th>
-                                    <th width="2%">Option</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
+                                <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='checkpayment.php'">
+                                <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                        </div>
+                        <br /><br />
+                        <div class="box">
+                            <div class="table-responsive">
+                                <table id="MemberTable" class="table table-striped table-hover table-sm" style="width:100%">
+                                    <thead class="aa">
+                                        <tr>
+                                            <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall" /><span class="custom-control-indicator"></span></label></th>
+                                            <th width="10%">เจ้าของไซต์</th>
+                                            <th width="2%">ใบสั่งซื้อ</th>
+                                            <th width="5%">วันที่ยืนยันการชำระเงิน</th>
+                                            <th width="5%">วันนัดชำระ</th>
+                                            <th width="5%">จำนวนเงิน</th>
+                                            <th width="7%">หลักฐาน</th>
+                                            <th width="2%">Option</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,5 +191,5 @@ if (!$_SESSION["admin_id"]) {
             </div>
         </div>
     </div>
-    <script src="../js/checkpayment_del.js"></script>
+    <script src="../js/checkpayment.js"></script>
 <?php } ?>

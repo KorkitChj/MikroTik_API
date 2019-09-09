@@ -28,8 +28,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
         }
 
         $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="profile_checkbox custom-control-input" name="Profile_id[]" value="' . $ARRAY[$i]["name"] . '"><span class="custom-control-indicator"></span></label>';
-        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editProfileModal"  onclick="editProfile(\''.$ARRAY[$i]["name"].'\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
-        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#removeProfileModal"  onclick="removeProfile(\''.$ARRAY[$i]["name"].'\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
+        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editProfileModal"  onclick="editProfile(\''.$ARRAY[$i]["name"].'\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+        <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeProfileModal"  onclick="removeProfile(\''.$ARRAY[$i]["name"].'\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
 
         $output['success'] = true;
         $output['data'][] = array(

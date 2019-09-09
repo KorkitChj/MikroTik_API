@@ -24,11 +24,12 @@ if(isset($_POST["action"]))
   }
 
   $output .= '
+  <div class="box">
   <div class="table-responsive">
    <div align="right">
     '.$count.' Interface
    </div>
-   <table class="table table-sm table-bordered table-striped display responsive nowrap">
+   <table class="table table-sm table-striped display responsive nowrap">
    <thead class="aa">
     <tr>
         <th>No.</th>
@@ -50,10 +51,10 @@ if(isset($_POST["action"]))
   foreach($ARRAY as $row)
   {
       if($row["running"] == "true"){
-         $running = '<button title="running" type="button" class="btn btn-success">R</button>';
+         $running = '<button title="running" type="button" class="btn btn-success btn-sm">R</button>';
       }
       else if($row["disabled"] == "true"){
-        $running = '<button title="disable" type="button" class="btn btn-warning">D</button>';
+        $running = '<button title="disable" type="button" class="btn btn-warning btn-sm">D</button>';
      }
     //   $tx = $row["tx"] / 1048576;
     //   $rx = $row["rx"] / 1048576;
@@ -76,13 +77,13 @@ if(isset($_POST["action"]))
         <td>'.$row["last-link-up-time"].'</td>
         <td>'.$row["link-downs"].'</td>
         <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <button class="btn btn-success btn-sm" type="button" onclick="enableInterface(\''.$row['.id'].'\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span>&nbsp;เปิด</button>
-        <button class="btn btn-danger btn-sm" type="button"  onclick="disableInterface(\''.$row['.id'].'\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span>&nbsp;ปิด</button>
+        <button class="btn btn-success btn-sm" type="button" onclick="enableInterface(\''.$row['.id'].'\')">เปิด</button>
+        <button class="btn btn-danger btn-sm" type="button"  onclick="disableInterface(\''.$row['.id'].'\')">ปิด</button>
         </div></td>
    </tr>
    ';
   }
-  $output .= '</table></div>';
+  $output .= '</table></div></div>';
   echo $output;
  }
 }

@@ -1,6 +1,6 @@
 <?php
 
-function upload_image()
+/*function upload_image()
 {
 	if(isset($_FILES["user_image"]))
 	{
@@ -10,7 +10,7 @@ function upload_image()
 		move_uploaded_file($_FILES['user_image']['tmp_name'], $destination);
 		return $new_name;
 	}
-}
+}*/
 
 function get_image_name($cus_id)
 {
@@ -26,22 +26,56 @@ function get_image_name($cus_id)
 	}
 }
 
-function get_total_all_records()
+function get_total_all_records($data)
 {
 	include('../include/connect_db.php');
-	$statement = $conn->prepare("SELECT * FROM siteadmin");
-	$statement->execute();
-	$result = $statement->fetchAll();
-	return $statement->rowCount();
+	if($data == "admin"){
+		$statement = $conn->prepare("SELECT * FROM siteadmin");
+		$statement->execute();
+		return $statement->rowCount();
+	}elseif($data == "payment"){
+		$statement = $conn->prepare("SELECT a.cus_id,username,b.order_id,total_cash,
+		slip_name,transfer_date,appointment
+		FROM siteadmin AS a INNER JOIN orderpd AS b ON
+		a.cus_id = b.cus_id INNER JOIN payment AS c ON
+		b.order_id = c.order_id WHERE c.paid = 0 ");
+		$statement->execute();
+		return $statement->rowCount();
+	}else{
+		$statement = $conn->prepare("SELECT a.cus_id,username,site_name,total_cash,paid,
+		slip_name,transfer_date,appointment
+		FROM siteadmin AS a INNER JOIN orderpd AS b ON
+		a.cus_id = b.cus_id INNER JOIN payment AS c ON
+		b.order_id = c.order_id WHERE c.paid = 1");
+		$statement->execute();
+		return $statement->rowCount();
+	}
 }
 
 function admin_image_profile($admin_image){  
-	if($admin_image == "kao"){
-		return'<img src="../img/korkit.jpg" style="width:60px;height:70px">';
-	}elseif($admin_image == "noon"){
-		return'<img src="../img/nnnn.jpg">';
-	}else{
-		return '<img src="../img/bbbb.jpg">';
+	require('../include/connect_db.php');
+
+    $query = $conn->prepare("SELECT image FROM admin  WHERE admin_id = :admin_id");
+    $query->bindparam(':admin_id', $admin_image);
+    $query->execute();
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+    $image = '';
+    if ($row["image"] != '') {
+        $image = '<img src="image/' . $row["image"] . '"  style="height:70px;width:60px"/>';
+    } else {
+        $image = '<img src="image/iconuser.jpg" alt="user" style="height:70px;width:60px">';
+    }
+    return $image;
+}
+function upload_imageadmin()
+{
+	if(isset($_FILES["image"]))
+	{
+		$extension = explode('.', $_FILES['image']['name']);
+		$new_name = rand() . '.' . $extension[1];
+		$destination = 'image/' . $new_name;
+		move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+		return $new_name;
 	}
 }
 ?>

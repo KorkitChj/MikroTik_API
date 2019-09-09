@@ -169,7 +169,7 @@ if (!$_SESSION["cus_id"]) {
                 <div class="row">
                     <div class="form-group col-md-12">
                         <div class="panel panel-default">
-                        <button type="button" style="margin-bottom:20px" class="btn btn-warning" onclick="window.location.href='interfacemonitor.php'"><img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                        <button type="button" style="margin-bottom:20px" class="btn btn-warning btn-sm" onclick="window.location.href='interfacemonitor.php'"><img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                             <div class="panel-heading">รายการ Interface</div>
                             <div id="interface_status" class="panel-body">
 

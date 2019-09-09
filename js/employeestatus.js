@@ -11,42 +11,40 @@ $(document).ready(function () {
             "orderable": false,
         }],
     });
-    $("#addMemberModalBtn").on('click', function () {
-        $("#addMember")[0].reset();
-        $("#addMember").unbind('submit').bind('submit', function () {
-            var form = $(this);
-            var name = $("#name").val();
-            var username = $("#username").val();
-            var password = $("#password").val();
-            var site = $("#site").val();
-            var group = $("#group").val();
-            if (name && username && password && site && group) {
-                $.ajax({
-                    url: '../site/addemployee.php',
-                    type: 'POST',
-                    data: form.serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success == true) {
-                            swal("สำเร็จ", response.messages, "success");
-                            $("#addMember")[0].reset();
-                            employeestatus.ajax.reload(null, false);
-                            $("#addMemberModal").modal('hide');
-                        } else {
-                            swal("ผิดพลาด", response.messages, "error");
-                        }
+});
+$("#addMemberModalBtn").click(function () {
+    $("#addMember")[0].reset();
+    $("#addMember").off('submit').on('submit', function () {
+        var form = $(this);
+        var name = $("#name").val();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var site = $("#site").val();
+        var group = $("#group").val();
+        if (name && username && password && site && group) {
+            $.ajax({
+                url: '../site/addemployee.php',
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        swal("สำเร็จ", response.messages, "success");
+                        $("#addMember")[0].reset();
+                        employeestatus.ajax.reload(null, false);
+                        $("#addMemberModal").modal('hide');
+                    } else {
+                        swal("ผิดพลาด", response.messages, "error");
                     }
-                });
-            }
-            return false;
-        });
+                }
+            });
+        }
+        return false;
     });
 });
 function removeMember(id,name) {
     if (id) {
-        $("#removeMemberBtn").unbind('click').bind('click', function () {
-            /*console.log(id,name);
-            return false;*/
+        $("#removeMemberBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../site/employeestatus_del.php',
                 type: 'POST',
@@ -75,8 +73,6 @@ $('#removeAllMemberBtn').click(function () {
     $('.checkitem:checked').each(function (i) {
         emp_id[i] = $(this).val();
     });
-    //console.log(emp_id);
-    //return false;
     if (emp_id.length === 0) {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
@@ -91,6 +87,7 @@ $('#removeAllMemberBtn').click(function () {
                 if (response.success == true) {
                     swal("สำเร็จ", response.messages, "success");
                     employeestatus.ajax.reload(null, false);
+                    $("#checkall").prop("checked",false);
                     $("#removeAllMemberModal").modal('hide');
                 } else {
                     swal("ผิดพลาด", response.messages, "error");
@@ -116,7 +113,7 @@ function editMember(id,name) {
                 $("#editcomment").val(response.comment);
                 $("#editgroup").val(response.group);
                 $("#editMember").append('<input type="hidden" name="editemp_name" id="editemp_name" value="'+response.id+'"/>');
-                $("#editMember").unbind('submit').bind('submit', function () {
+                $("#editMember").off('submit').on('submit', function () {
                     var form = $(this);
                     var editname = $("#editname").val();
                     var editpassword = $("#editpassword").val();
@@ -183,6 +180,24 @@ function disableEmp(id) {
             success: function(data) {
                 employeestatus.ajax.reload();
                 $("#ss").append("<b>Employee " + data.id + " ปิดแล้ว</b> "+ time() +"<br>");
+            }
+        });
+    }
+}
+function viewMessage(Message){
+    //console.log(Message);
+    if(Message){
+        $.ajax({
+            url: '../site/message.php',
+            type: 'POST',
+            data: {
+                'id': Message
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                $("#message").html("<h4>"+data+"</h4>");
+                $("#messageMemberModal").modal('show');
             }
         });
     }
