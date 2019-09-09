@@ -78,4 +78,20 @@ function upload_imageadmin()
 		return $new_name;
 	}
 }
+function fetchsiteimage($cus_id)
+{
+    require('../include/connect_db.php');
+
+    $query = $conn->prepare("SELECT image FROM siteadmin  WHERE cus_id = :cus_id");
+    $query->bindparam(':cus_id', $cus_id);
+    $query->execute();
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+    $image = '';
+    if ($row["image"] != '') {
+        $image = '<img src="../siteadmin/image/' . $row["image"] . '"  style="height:70px;width:60px"/>';
+    } else {
+        $image = '<img src="../siteadmin/image/iconuser.jpg" alt="user" style="height:70px;width:60px">';
+    }
+    return $image;
+}
 ?>

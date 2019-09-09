@@ -3,6 +3,7 @@ session_start();
 ?>
 <?php
 //action.php
+include('function.php');
 include('../include/connect_db.php');
 if(isset($_POST["action"]))
 {
@@ -51,13 +52,14 @@ if(isset($_POST["action"]))
   $i = 0;
   foreach($result as $row)
   {
+    $image = fetchsiteimage($row["cus_id"]);
    $i = $i + 1;
    $output .= '
    <tr> 
     <td>'.$i.'</td>
     <td>'.$row["username"].'</td>
     <td>'.$row["e_mail"].'</td>
-    <td><img src="../img/iconuser.jpg" class="img-thumbnail" width="50" /></td>
+    <td>'.$image.'</td>
     <td>'.$row["cus_id"].'</td>
    </tr>
    ';

@@ -43,4 +43,24 @@ function upload_imageadmin()
 		return $new_name;
 	}
 }
+function upload_imagepacket()
+{
+	if(isset($_FILES["fileslip"]))
+	{
+		$extension = explode('.', $_FILES['fileslip']['name']);
+		$new_name = rand() . '.' . $extension[1];
+		$destination = '../slips/' . $new_name;
+		move_uploaded_file($_FILES['fileslip']['tmp_name'], $destination);
+		return $new_name;
+	}
+}
+function fetch_packet()
+{
+	include('../include/connect_db.php');
+	$query = $conn->prepare("SELECT product_id FROM orderpd AS a INNER JOIN siteadmin AS b
+        on a.cus_id = b.cus_id WHERE a.cus_id = :cus_id ");
+        $query->execute(array(":cus_id" => $_SESSION["cus_id"]));
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+		return $result['product_id'];
+}
 ?>

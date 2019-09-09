@@ -59,6 +59,11 @@ if (!$_SESSION["cus_id"]) {
                                 <i class="glyphicon glyphicon-edit"></i>
                                 เปลี่ยนรหัสผ่าน</a>
                         </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
+                                <i class="fab fa-get-pocket"></i>&nbsp;
+                                แจ้งอัพเดท Packet</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
@@ -348,6 +353,86 @@ if (!$_SESSION["cus_id"]) {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
                         <button type="submit" class="btn btn-success" id="addImageBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="packet_form" action="" enctype="multipart/form-data" name="form1" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">แจ้งอัพเดท Packet</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 style="color:red">Packet ที่ใช้งานอยู่คือ <?php echo fetch_packet() == 1 ? 'ราคา 500' : 'ราคา 1000' ?></h4>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" value="2" name="customRadioInline1" class="custom-control-input" required>
+                            <label class="custom-control-label" for="customRadioInline1">เปลี่ยน Packet เป็นราคา 1000 บาท</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" value="1" name="customRadioInline1" class="custom-control-input" required>
+                            <label class="custom-control-label" for="customRadioInline2">เปลี่ยน Packet เป็นราคา 500 บาท</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="bank_info" class="control-label col-sm">ธนาคาร:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                </div>
+                                <select name="bank" id="bank" class="form-control bank_info" required>
+                                    <option value="">----- เลือกธนาคาร-----</option>
+                                    <option value="1">ธนาคารไทยพาญิชย์</option>
+                                    <option value="2">ธนาคารกรุงไทย</option>
+                                    <option value="3">ธนาคารกสิกรไทย</option>
+                                    <option value="4">ธนาคารกรุงเทพ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="control-label col-sm">เวลาชำระ:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="datetime-local" class="form-control" id="date" name="date" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="money" class="control-label col-sm">จำนวนเงิน:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-money-check-alt"></i>
+                                    </div>
+                                </div>
+                                <input type="number" name="money" placeholder="จำนวนเงิน" class="form-control" id="money" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fileslip" class="col-sm control-label">File:&nbsp;</label>
+                            <div class="col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="far fa-file-image"></i>
+                                    </div>
+                                </div>
+                                <input type="file" name="fileslip" id="fileslip">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                        <button type="submit" id="updatepacket" class="btn btn-primary">บันทึก</button>
                     </div>
                 </form>
             </div>
