@@ -1,5 +1,5 @@
 <?php
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 require('function.php');
 $output = array();
 $column = array("","username","b.order_id","transfer_date","appointment","total_cash");
@@ -36,12 +36,19 @@ foreach ($result as $row) {
     $src = '../slips/'.$row["slip_name"].'';
 
     $sub_array = array();
-    $sub_array[]  = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="cus_id[]" value="'.$row["cus_id"].'"><span class="custom-control-indicator"></span></label>'; 
+    $sub_array[] = '
+<label class="checkbox">
+		<input type="checkbox" class="checkitem" name="cus_id[]" value="'.$row["cus_id"].'">
+        <span class="danger"></span>
+</label>
+';
+    $transfer_date = DateThai($row["transfer_date"]);
+    $appointment = DateThai($row["appointment"]);
     $sub_array[] = $row["username"];
     $sub_array[] = $row["order_id"];
-    $sub_array[] = $row["transfer_date"];
-    $sub_array[] = $row["appointment"];
-    $sub_array[] = $row["total_cash"];
+    $sub_array[] = $transfer_date;
+    $sub_array[] = $appointment;
+    $sub_array[] = $row["total_cash"]." บาท";
     $sub_array[] = '<a  data-toggle="modal" data-target="#displayimgMemberModal" href="" id="'.$row["slip_name"].'" class="displayimg"><img class="img-thumbnail" src="'.$src.'" style="width:100px;height:120px;"></a>';
     $sub_array[] = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button type="button" id="dl" class="update btn btn-warning btn-sm" onclick="window.location.href=\'download.php?id='.$row["slip_name"].'\'" target="iframe"><span title="ดาวน์โหลด" class="glyphicon glyphicon-cloud-download"></span></button>
     <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#confirmMemberModal" onclick="confirmMember('.$row['order_id'].')"><span title="ยืนยัน" class="glyphicon glyphicon-check"></span></button>

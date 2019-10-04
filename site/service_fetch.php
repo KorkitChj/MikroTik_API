@@ -1,6 +1,6 @@
 <?php
 
-include('../include/connect_db.php');
+include('../includes/connect_db.php');
 
 //$_SESSION['cus_id'] ? $cus_id = $_SESSION['cus_id'] : '';
 

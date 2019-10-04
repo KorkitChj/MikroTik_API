@@ -3,7 +3,7 @@ session_start();
 ?>
 <?php
 if ($_POST) {
-    include('../include/connect_db.php');
+    include('../includes/connect_db.php');
     include('function.php');
     $cus_id = $_SESSION['cus_id'];
     $output = array('success' => false, 'messages' => array());

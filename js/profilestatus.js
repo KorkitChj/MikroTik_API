@@ -14,7 +14,7 @@ $(document).ready(function () {
             }
         },
         "columnDefs": [{
-            "targets": [0, 6],
+            "targets": [0,6],
             "orderable": false,
         }],
     });
@@ -24,13 +24,6 @@ $("#addProfileModalBtn").on('click', function () {
     $("#addProfile").off('submit').on('submit', function () {
         var form = $(this);
         var profilename = $("#profilename").val();
-        //var autorefresh = $("#autorefresh").val();
-        //var adpool = $("#adpool").val();
-        //var idle = $("#idle").val();
-        //var session = $("#session").val();
-        //var shared = $("#shared").val();
-        //var mac = $("#mac").val();
-        //var limit = $("#limit").val();
         if (profilename) {
             $.ajax({
                 url: '../site/addprofile.php',
@@ -114,22 +107,13 @@ function editProfile(Profile_name) {
             success: function (response) {
                 $("#editprofilename").val(response.name);
                 $("#editsession").val(response.session);
-                $("#editidle").val(response.idle);
                 $("#editshared").val(response.shared);
-                $("#editmac").val(response.mac);
                 $("#editlimit").val(response.limit);
-                $("#editautorefresh").val(response.refresh);
-                $("#editadpool").val(response.pool);
+                $("#editdatelimit").val(response.daytouse);
                 $("#editProfile").append('<input type="hidden" name="editprofile_name" id="editprofile_name" value="' + response.name + '"/>');
                 $("#editProfile").off('submit').on('submit', function () {
                     var form = $(this);
                     var editprofilename = $("#editprofilename").val();
-                    //var editsession = $("#editsession").val();
-                    //var editidle = $("#editidle").val();
-                    //var editshared = $("#editshared").val();
-                    //var editmac = $("#editmac").val();
-                    //var editlimit = $("#editlimit").val();
-
                     if (editprofilename) {
                         $.ajax({
                             url: '../site/profilestatus_update.php',

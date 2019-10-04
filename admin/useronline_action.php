@@ -4,7 +4,7 @@ session_start();
 <?php
 //action.php
 include('function.php');
-include('../include/connect_db.php');
+include('../includes/connect_db.php');
 if(isset($_POST["action"]))
 {
  if($_POST["action"] == "update_time")

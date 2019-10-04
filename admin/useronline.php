@@ -1,90 +1,25 @@
 <?php
 session_start();
-?>
-<?php
+include("../includes/template_backend/admin/a_config.php");
+$admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
-    Header("Location:../login.php");
-} else { ?>
-    <title>User Online</title>
-    <?php
-    $admin_name = $_SESSION["admin_name"];
-    require('../template/template.html');
-    require('function.php');
-    include('changpw.php');
-    ?>
+    Header("Location:../index.php");
+}
+include('function.php');
+
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+</head>
+
+<body>
+    <?php include("../includes/template_backend/admin/bar_top.php"); ?>
     <div class="page-wrapper chiller-theme toggled">
-        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-            <i class="fas fa-bars"></i>
-        </a>
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <a href="#">Web API MikroTik</a>
-                    <div id="close-sidebar">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <div id="load"><?php echo admin_image_profile($_SESSION["admin_id"]); ?></div>
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span>&nbsp;<?php print_r($_SESSION["admin_name"]); ?></a></strong>
-                        </span>
-                        <span class="user-role">ผู้ดูแล</span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
-                    </div>
-                </div>
-                <!-- sidebar-header  -->
-                <div class="sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>ทั่วไป</span>
-                        </li>
-                        <li>
-                        <a href="dashboard.php">
-                            <i class="fas fa-tachometer-alt"></i>&nbsp;dashboard</a>
-                        </li>
-                        <li>
-                            <a href="admin.php">
-                                <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
-                        </li>
-                        <li>
-                            <a href="checkpayment.php">
-                                <i class="glyphicon glyphicon-check"></i>&nbsp;
-                                ยืนยันการชำระเงิน</a>
-                        </li>
-                        <li>
-                            <a href="manage.php">
-                                <i class="glyphicon glyphicon-list"></i>&nbsp;
-                                จัดการเจ้าของไซต์</a>
-                        </li>
-                        <li class="pad-a bor-red">
-                            <a href="#">
-                                <i class="glyphicon glyphicon-globe"></i>&nbsp;
-                                User Online</a>
-                        </li>
-                        <li>
-                            <a href="" data-toggle="modal" data-target="#changpwModal">
-                                <i class="glyphicon glyphicon-edit"></i>&nbsp;
-                                เปลี่ยนรหัสผ่าน</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-            <div class="sidebar-footer">
-                <a href="#" class="logout">
-                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-                </a>
-            </div>
-        </nav>
-        <!-- sidebar-wrapper  -->
+        <?php include("../includes/template_backend/admin/navigation.php"); ?>
+        <?php include('changpw.php'); ?>
         <main class="page-content">
             <div class="container-fluid">
                 <h2>User Online</h2>
@@ -100,10 +35,9 @@ if (!$_SESSION["admin_id"]) {
                     </div>
                 </div>
             </div>
+            <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
-        <!-- page-content" -->
     </div>
-    <!-- page-wrapper -->
     <script>
         $(document).ready(function() {
             <?php
@@ -126,8 +60,11 @@ if (!$_SESSION["admin_id"]) {
                             $('#user_login_status').html(data);
                         }
                     });
-                } <?php
+                }
+            <?php
             } ?>
         });
     </script>
-<?php } ?>
+</body>
+
+</html>

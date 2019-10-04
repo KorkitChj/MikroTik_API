@@ -12,8 +12,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
 
 $profile_name = $_POST['profile_name'];
 
-$output = array('name' => array(),
- 'idle' => array(),'session' => array(),'shared' => array(),'mac' => array(),'limit' => array(),'refresh' => array(),'pool' => array());
+$output = array('name' => array(),'session' => array(),'shared' => array(),'limit' => array(),'daytouse' => array());
 
 if ($API->connect($ip . ":" . $port, $user, $pass)) {
     $ARRAY = $API->comm("/ip/hotspot/user/profile/print", array("from" => $profile_name,));
@@ -28,14 +27,18 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
     }else{
         $bb = "none";
     }
+    if(!empty($ARRAY[0]['on-login'])){
+        $string = explode(";",$ARRAY[0]['on-login']);
+        $string2 = explode(" ",$string[2]);
+        $daytouse = $string2[2];
+    }else{
+        $daytouse = '';
+    }
     $output['name'] = $ARRAY[0]['name'];
     $output['session'] = $aa;
-    $output['idle'] = $ARRAY[0]['idle-timeout'];
     $output['shared'] = $ARRAY[0]['shared-users'];
-    $output['mac'] = $ARRAY[0]['mac-cookie-timeout'];
     $output['limit'] = $ARRAY[0]['rate-limit'];
-    $output['refresh'] = $ARRAY[0]['status-autorefresh'];
-    $output['pool'] = $bb;
+    $output['daytouse'] = $daytouse;
 }
 
 echo json_encode($output);

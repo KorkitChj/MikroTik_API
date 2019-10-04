@@ -3,7 +3,7 @@ session_start();
 ?>
 <?php
 if ($_POST) {
-    include('../include/connect_db.php');
+    include('../includes/connect_db.php');
     $output = array('success' => false, 'messages' => array());
     if (isset($_POST['type'])) {
         if ($_POST['type'] == 'one') {

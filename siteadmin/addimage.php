@@ -3,7 +3,7 @@ session_start();
 ?>
 <?php
 if ($_FILES["image"]["name"]) {
-    include('../include/connect_db.php');
+    include('../includes/connect_db.php');
     include('function.php');
     $output = array('success' => false);
     $cus_id = $_SESSION['cus_id'];

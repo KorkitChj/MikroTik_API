@@ -10,15 +10,14 @@ session_start();
 	}
 </style>
 <?php
-
+error_reporting(0);
 $emp_id = $_SESSION['emp_id'];
 
 include("function.php");
 
 list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
-echo '<body onload="window.print();">';
-
+echo'<body onload="window.print();">';
 
 if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
 	$ARRAY = $API->comm("/ip/hotspot/user/print", array("from" => $_GET['id'],));
@@ -36,4 +35,6 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
 	echo '</td>';
 	echo '</tr></table>';
 }
-?>		
+?>	
+
+

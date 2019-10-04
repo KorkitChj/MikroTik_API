@@ -7,7 +7,7 @@ if($_POST){
     $password = $_POST['editpassword'];
     $profile = $_POST['editprofile'];
     $limituptime = $_POST['editlimituptime'];
-    $comment = $_POST['editcomment'];
+    //$comment = $_POST['editcomment'];
     $username = $_POST['edituser_name'];
 
     include ('function.php');
@@ -22,10 +22,9 @@ if($_POST){
         $ARRAY = $API->comm("/ip/hotspot/user/set",array(
             "name" => $name,
             "password" => $password,
-            "profile" => $profile,
             "limit-uptime" => $limituptime,
-            "comment" => $comment,
-            "numbers" => $username,
+            "profile" => $profile,
+            "numbers" => $username
         ));
             $output['success'] = true;
             $output['messages'] = "แก้ไขข้อมูลแล้ว";

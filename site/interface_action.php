@@ -35,14 +35,9 @@ if(isset($_POST["action"]))
         <th>No.</th>
         <th>Status</th>
         <th>Name</th>
-        <th>Type</th>
-        <th>Actual MTU</th>
-        <th>L2 MTU</th>
         <th>MAC-Address</th>
         <th>TX-Packet</th>
         <th>RX-Packet</th>
-        <th>Last Link Up Time</th>
-        <th>Link Downs</th>
         <th>Options</th>
     </tr>
     </thead>
@@ -54,7 +49,7 @@ if(isset($_POST["action"]))
          $running = '<button title="running" type="button" class="btn btn-success btn-sm">R</button>';
       }
       else if($row["disabled"] == "true"){
-        $running = '<button title="disable" type="button" class="btn btn-warning btn-sm">D</button>';
+        $running = '<button title="disable" type="button" class="btn btn-light btn-sm">D</button>';
      }
     //   $tx = $row["tx"] / 1048576;
     //   $rx = $row["rx"] / 1048576;
@@ -68,14 +63,9 @@ if(isset($_POST["action"]))
         <td>'.$i.'</td>
         <td>'.$running.'</td>
         <td>'.$row["name"].'</td>
-        <td>'.$row["type"].'</td>
-        <td>'.$row["actual-mtu"].'</td>
-        <td>'.$row["l2mtu"].'</td>
         <td>'.$row["mac-address"].'</td>
         <td>'.$tx.' Kbps</td>
         <td>'.$rx.' Kbps</td>
-        <td>'.$row["last-link-up-time"].'</td>
-        <td>'.$row["link-downs"].'</td>
         <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
         <button class="btn btn-success btn-sm" type="button" onclick="enableInterface(\''.$row['.id'].'\')">เปิด</button>
         <button class="btn btn-danger btn-sm" type="button"  onclick="disableInterface(\''.$row['.id'].'\')">ปิด</button>

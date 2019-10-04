@@ -11,21 +11,28 @@ $(document).ready(function () {
                 return response.data
             }
         },
-        "columnDefs": [{
-            "targets": [0, 6],
+        "columnDefs": [
+        {
+            "targets": [0, 7],
             "orderable": false,
-        }],
+        }
+    ],
+    "createdRow": function (row, data, dataIndex) {
+        if (data[6] != '') {
+            $(row).css({ "color": "black","background-color":"#ff8080" });
+        }
+    }
     });
     $("#addUserModalBtn").on('click', function () {
         $("#addUser")[0].reset();
-        $("#addUser").unbind('submit').bind('submit', function () {
+        $("#addUser").off('submit').on('submit', function () {
             var form = $(this);
             var name = $("#name").val();
             var password = $("#password").val();
             var profile = $("#profile").val();
             var limituptime = $("#limituptime").val();
-            var comment = $("#comment").val();
-            if (name && password && profile && limituptime && comment) {
+            //var comment = $("#comment").val();
+            if (name && password && profile && limituptime) {
                 $.ajax({
                     url: '../employee/adduser.php',
                     method: 'POST',
@@ -48,7 +55,7 @@ $(document).ready(function () {
     });
     $("#addUsersNumModalBtn").on('click', function () {
         $("#addUsersNum")[0].reset();
-        $("#addUsersNum").unbind('submit').bind('submit', function () {
+        $("#addUsersNum").off('submit').on('submit', function () {
             var form = $(this);
             var prefix = $("#prefix").val();
             var total = $("#total").val();
@@ -56,8 +63,8 @@ $(document).ready(function () {
             var passwordnum = $("#passwordnum").val();
             var profiles = $("#profiles").val();
             var limituptimes = $("#limituptimes").val();
-            var comments = $("#comments").val();
-            if (prefix && total && username && passwordnum && profiles && limituptimes && comments) {
+            //var comments = $("#comments").val();
+            if (prefix && total && username && passwordnum && profiles && limituptimes) {
                 $.ajax({
                     url: '../employee/addusersnum.php',
                     method: 'POST',
@@ -80,7 +87,7 @@ $(document).ready(function () {
     });
     $("#addUsersStringModalBtn").on('click', function () {
         $("#addUsersString")[0].reset();
-        $("#addUsersString").unbind('submit').bind('submit', function () {
+        $("#addUsersString").off('submit').on('submit', function () {
             var form = $(this);
             var prefixst = $("#prefixst").val();
             var totalst = $("#totalst").val();
@@ -88,8 +95,8 @@ $(document).ready(function () {
             var passwordst = $("#passwordst").val();
             var profilest = $("#profilest").val();
             var limituptimest = $("#limituptimest").val();
-            var commentst = $("#commentst").val();
-            if (prefixst && totalst && usernamest && passwordst && profilest && limituptimest && commentst) {
+            //var commentst = $("#commentst").val();
+            if (prefixst && totalst && usernamest && passwordst && profilest && limituptimest) {
                 $.ajax({
                     url: '../employee/addusersstring.php',
                     method: 'POST',
@@ -135,6 +142,7 @@ $(document).ready(function () {
                     if (response.success == true) {
                         swal("สำเร็จ", response.messages, "success");
                         userstatus.ajax.reload(null, false);
+                        $('#checkall').prop("checked", false)
                         $("#removeAllUsersModal").modal('hide');
                     } else {
                         swal("ผิดพลาด", response.messages, "error");
@@ -159,7 +167,7 @@ $(document).ready(function () {
 });
 function removeUser(user_name) {
     if (user_name) {
-        $("#removeUserBtn").unbind('click').bind('click', function () {
+        $("#removeUserBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../employee/userstatus_del.php',
                 type: 'POST',
@@ -194,18 +202,18 @@ function editUser(User_name) {
                 $("#editpassword").val(response.password);
                 $("#editprofile").val(response.profile);
                 $("#editlimituptime").val(response.limituptime);
-                $("#editcomment").val(response.comment);
+                //$("#editcomment").val(response.comment);
                 $("#editUser").append('<input type="hidden" name="edituser_name" id="edituser_name" value="' + response.name + '"/>');
-                $("#editUser").unbind('submit').bind('submit', function () {
+                $("#editUser").off('submit').on('submit', function () {
                     var form = $(this);
                     var editname = $("#editname").val();
                     var editpassword = $("#editpassword").val();
                     var editprofile = $("#editprofile").val();
                     var editlimituptime = $("#editlimituptime").val();
-                    var editcomment = $("#editcomment").val();
+                    //var editcomment = $("#editcomment").val();
 
 
-                    if (editname && editpassword && editprofile && editlimituptime && editcomment) {
+                    if (editname && editpassword && editprofile && editlimituptime) {
                         $.ajax({
                             url: 'userstatus_update.php',
                             type: 'POST',

@@ -29,22 +29,34 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                 if ($vv['name'] == $ARRAY[$i]['name']) {
                     $aa = $ARRAY[$i]['name'];
                     $idtk = '<button title="disable" class="btn btn-warning btn-sm">D</button>';
-                    $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="Server_id[]" value="' . $ARRAY[$i]['.id'] . '"><span class="custom-control-indicator"></span></label>';
+                    $checkbox = '
+            <label class="checkbox">
+                    <input type="checkbox" class="checkitem" name="Server_id[]" value="' . $ARRAY[$i]['.id'] . '">
+                    <span class="danger"></span>
+            </label>
+            ';
+                    //$checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="Server_id[]" value="' . $ARRAY[$i]['.id'] . '"><span class="custom-control-indicator"></span></label>';
                     $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <button class="btn btn-success btn-sm" type="button" onclick="enableServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
-                                <button class="btn btn-danger btn-sm" type="button"  onclick="disableServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
-                                <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editServerModal" onclick="editServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+                                <button class="btn btn-warning btn-sm" type="button"  onclick="disableServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
+                                <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#editServerModal" onclick="editServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeServerModal" onclick="removeServer(\'' . $ARRAY[$i]['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
                                 break;
                 }
             }
             if ($aa == "") {
                 $idtk = '';
-                $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="Server_id[]" value="' . $ARRAY[$i]['.id'] . '"><span class="custom-control-indicator"></span></label>';
+                $checkbox = '
+            <label class="checkbox">
+                    <input type="checkbox" class="checkitem" name="Server_id[]" value="' . $ARRAY[$i]['.id'] . '">
+                    <span class="danger"></span>
+            </label>
+            ';
+                //$checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="Server_id[]" value="' . $ARRAY[$i]['.id'] . '"><span class="custom-control-indicator"></span></label>';
                 $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <button class="btn btn-success btn-sm" type="button" onclick="enableServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
-                <button class="btn btn-danger btn-sm" type="button"  onclick="disableServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
-                <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editServerModal" onclick="editServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+                <button class="btn btn-warning btn-sm" type="button"  onclick="disableServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
+                <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#editServerModal" onclick="editServer(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeServerModal" onclick="removeServer(\'' . $ARRAY[$i]['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
             }
 

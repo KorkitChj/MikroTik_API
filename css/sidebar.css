@@ -93,7 +93,7 @@
   #show-sidebar {
     position: fixed;
     left: 0;
-    top: 10px;
+    top: 5px;
     border-radius: 0 4px 4px 0px;
     width: 35px;
     transition-delay: 0.3s;
@@ -139,9 +139,10 @@
   /*--------------------sidebar-brand----------------------*/
   
   .sidebar-wrapper .sidebar-brand {
-    padding: 10px 20px;
+    padding: 4px 20px;
     display: flex;
     align-items: center;
+    border-bottom:1px solid #fff;
   }
   
   .sidebar-wrapper .sidebar-brand > a {
@@ -355,11 +356,11 @@
     display: inline-block;
     width: 100%;
     padding-left: 0px;
-    padding-top: 20px;
+    padding-top: 10px;
   }
   
   .page-wrapper .page-content > div {
-    padding: 20px 40px;
+    padding: 15px 15px;
   }
   
   .page-wrapper .page-content {
@@ -406,11 +407,9 @@
   /*-----------------------------chiller-theme-------------------------------------------------*/
   
   .chiller-theme .sidebar-wrapper {
-    background:#404040;
+    background:#2a2a2a;
   }
   
-  .chiller-theme .sidebar-wrapper .sidebar-header,
-  .chiller-theme .sidebar-wrapper .sidebar-search,
   .chiller-theme .sidebar-wrapper .sidebar-menu {
       border-top: 1px solid #ffffff;
   }
@@ -436,22 +435,22 @@
   .chiller-theme .sidebar-wrapper .sidebar-header .user-info,
   .chiller-theme .sidebar-wrapper .sidebar-brand>a:hover,
   .chiller-theme .sidebar-footer>a:hover i {
-      color: #ff9823;
+      color: #9b9b9b;
   }
   
   .page-wrapper.chiller-theme.toggled #close-sidebar {
-      color: #2a93fd;
+      color: #ffffff;
   }
   
   .page-wrapper.chiller-theme.toggled #close-sidebar:hover {
-      color: #f58b00;
+      color: #d4d4d4;
   }
   
   .chiller-theme .sidebar-wrapper ul li:hover a i,
   .chiller-theme .sidebar-wrapper .sidebar-dropdown .sidebar-submenu li a:hover:before,
   .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu:focus+span,
   .chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active a i {
-      color: #fb9117;
+      color: #cacaca;
       text-shadow:0px 0px 10px rgba(255, 115, 22, 0.5);
   }
   
@@ -467,7 +466,7 @@
   }
   
   .chiller-theme .sidebar-footer {
-      background: #404040;
+      background: #2a2a2a;
       box-shadow: 0px -1px 5px #a7a7a7;
       border-top: 1px solid #0080ff;
       padding: 5px;

@@ -168,9 +168,18 @@ if (!$_SESSION["cus_id"]) {
             <div class="container-fluid">
                 <h2>รายการ Server</h2>
                 <hr>
-                <div style="margin-bottom:20px">
-                    <h5><a href="../siteadmin/connectstatus.php">หน้าหลัก</a>><a href="#" style="color:black;text-decoration:underline">Server</a></h5>
+                <div class="row">
+                    <div class="col-md">
+                    <a href="../siteadmin/connectstatus.php">หน้าหลัก</a>><a href="#" style="color:black;text-decoration:underline">Server</a>
+                    </div>
+                    <div class="ml-auto">
+                        <div class="col-md">
+                            <div id="disconnect">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <br />
                 <div class="row">
                     <div class="form-group col-md-12">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -183,13 +192,22 @@ if (!$_SESSION["cus_id"]) {
                             <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='addserver.php'">
                                 <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                         </div>
+                        <div class="float-right">
+                            <span class="badge-pill badge-success">เปิดใช้งาน</span>
+                            <span class="badge-pill badge-warning">ปิดใช้งาน</span>
+                            <span class="badge-pill badge-info">แก้ไข</span>
+                            <span class="badge-pill badge-danger">ลบ</span>
+                        </div>
                         <br><br>
                         <div class="box">
                             <div class="table-responsive">
                                 <table id="addserver" class="table table-striped table-hover table-sm" width="100%">
                                     <thead>
                                         <tr>
-                                            <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall" /><span class="custom-control-indicator"></span></label></th>
+                                        <th width="1%"><label class="checkbox">
+                                                    <input type="checkbox" id="checkall" />
+                                                    <span class="danger"></span>
+                                            </label></th>
                                             <th width="1%">#</th>
                                             <th width="1%"></th>
                                             <th width="1%">Name</th>
@@ -221,7 +239,7 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form id="add_server" action="" method="post">
                         <div class="form-group">
-                            <label for="name" class="col-sm control-label">Name Server: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="name" class="col-sm control-label">ชื่อ Server: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -232,14 +250,14 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="interface" class="col-sm control-label">Interface: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="interface" class="col-sm control-label">อินเตอร์เฟซ: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-globe"></i>
                                     </div>
                                 </div>
-                                <select class="form-control" name="interface" size="1" id="interface">
+                                <select class="form-control" name="interface" size="1" id="interface" required>
                                     <?php
                                         $num = count($kk);
                                         $num2 = count($cc);
@@ -268,14 +286,14 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="pool" class="col-sm control-label">IP Pool:&nbsp;</label>
+                            <label for="pool" class="col-sm control-label">หมายเลขไอพี Pool: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                     </div>
                                 </div>
-                                <select class="form-control" name="pool" size="1" id="pool">
+                                <select class="form-control" name="pool" size="1" id="pool" required>
                                     <?php
                                         echo '<option value="none">none</option>';
                                         $num = count($ARRAY2);
@@ -287,14 +305,14 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="profile" class="col-sm control-label">Profile:&nbsp;</label>
+                            <label for="profile" class="col-sm control-label">ชื่อ Server Profile: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                     </div>
                                 </div>
-                                <select class="form-control" name="profile" size="1" id="profile">
+                                <select class="form-control" name="profile" size="1" id="profile" required>
                                     <?php
                                         $num = count($ARRAY);
                                         for ($i = 0; $i < $num; $i++) {
@@ -329,7 +347,7 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form id="edit_server" action="" method="post">
                         <div class="form-group">
-                            <label for="editname" class="col-sm control-label">Name Server:&nbsp;</label>
+                            <label for="editname" class="col-sm control-label">ชื่อ Server:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -340,7 +358,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editinterface" class="col-sm control-label">Interface:&nbsp;</label>
+                            <label for="editinterface" class="col-sm control-label">อินเตอร์เฟซ:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -376,7 +394,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editpool" class="col-sm control-label">IP Pool:&nbsp;</label>
+                            <label for="editpool" class="col-sm control-label">หมายเลขไอพี Pool:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -395,7 +413,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editprofile" class="col-sm control-label">Profile:&nbsp;</label>
+                            <label for="editprofile" class="col-sm control-label">ชื่อ Server Profile:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -459,4 +477,5 @@ if (!$_SESSION["cus_id"]) {
         </div>
     </div>
     <script src="../js/server.js"></script>
+    <script src="../js/alert_disconnect.js"></script>
 <?php } ?>

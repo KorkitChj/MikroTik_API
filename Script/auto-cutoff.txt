@@ -1,0 +1,41 @@
+{
+   :global datetime 
+   :global expiredate 
+   :global datenum 
+   :global expirenum 
+   :local montharray ( "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec" ) 
+   :local date [ /system clock get date ] 
+   :local day [ :pick $date 4 6 ] 
+   :local monthtext [ :pick $date 0 3 ] 
+   :local month ( [ :find $montharray $monthtext ] + 1) 
+   :local year [ :pick $date 7 11 ] 
+   :if ($month < 10) do={:set month ("0" . $month);}; 
+   :local timetext [ /system clock get time ] 
+   :local hour [ :pick $timetext 0 2 ] 
+   :local minute [ pick $timetext 3 5 ] 
+   :local second [ pick $timetext 6 8 ] 
+   :set datetime ( $year . $month . $day . $time . $hour . $minute . $second ) 
+   :set datenum [ :tonum $datetime ] 
+   :foreach i in [ /ip hotspot user find where disabled=no ] do={ 
+      :local usercomment [ /ip hotspot user get $i comment ] 
+      :local username [ /ip hotspot user get $i name ] 
+      :if ( [ :find $usercomment "expire" ] = 0 ) do={ 
+         :local expire [ :pick $usercomment 7 26 ] 
+         :local expireyear [ :pick $expire 0 4 ] 
+         :local expiremonth [ :pick $expire 5 7 ] 
+         :local expireday [ :pick $expire 8 10 ] 
+         :local expirehour [ :pick $expire 11 13 ] 
+         :local expireminute [ :pick $expire 14 16 ] 
+         :local expiresecond [ :pick $expire 17 19 ] 
+         :set expiredate ( $expireyear . $expiremonth . $expireday . $expirehour . $expireminute . $expiresecond ) 
+         :set expirenum [ :tonum $expiredate ] 
+         :if ( $datenum > $expirenum ) do={ 
+            :log info "HOTSPOT EXPIRE SCRIPT: Disabling Hotspot user $name first logged in $date" 
+            :local expirecomment ("This user expire @" . $expireyear . "-" . $expiremonth . "-" . $expireday . " " . $expirehour . ":" .$expireminute . ":" . $expiresecond ) 
+            [ /ip hotspot user disable $i ] 
+            [ /ip hotspot user set $i comment=$expirecomment ] 
+            [ /ip hotspot active remove [ find where user=$username] ] 
+         } 
+      } 
+   } 
+} 

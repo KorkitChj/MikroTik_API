@@ -154,9 +154,18 @@ if (!$_SESSION["cus_id"]) {
             <div class="container-fluid">
                 <h2>รายการ IP Pool</h2>
                 <hr>
-                <div style="margin-bottom:20px">
-                    <h5><a href="../siteadmin/connectstatus.php">หน้าหลัก</a>><a href="#" style="color:black;text-decoration:underline">Pool</a></h5>
+                <div class="row">
+                    <div class="col-md">
+                    <a href="../siteadmin/connectstatus.php">หน้าหลัก</a>><a href="#" style="color:black;text-decoration:underline">Pool</a>
+                    </div>
+                    <div class="ml-auto">
+                        <div class="col-md">
+                            <div id="disconnect">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <br />
                 <div class="row">
                     <div class="form-group col-md-12">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -169,13 +178,20 @@ if (!$_SESSION["cus_id"]) {
                             <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='pool.php'">
                                 <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                         </div>
+                        <div class="float-right">
+                            <span class="badge-pill badge-info">แก้ไข</span>
+                            <span class="badge-pill badge-danger">ลบ</span>
+                        </div>
                         <br><br>
                         <div class="box">
                             <div class="table-responsive">
                                 <table id="ip_pool" class="table table-striped table-hover table-sm" width="100%">
                                     <thead>
                                         <tr>
-                                            <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall" /><span class="custom-control-indicator"></span></label></th>
+                                        <th width="1%"><label class="checkbox">
+                                                    <input type="checkbox" id="checkall" />
+                                                    <span class="danger"></span>
+                                            </label></th>
                                             <th width="1%">#</th>
                                             <th width="1%">Name</th>
                                             <th width="1%">Address Ranges</th>
@@ -204,29 +220,29 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form id="add_ippool" action="" method="post">
                         <div class="form-group">
-                            <label for="name" class="col-sm control-label">Name Pool: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="name" class="col-sm control-label">ชื่อ Pool: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-globe"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="กรุณากรอกชื่อ Pool" required>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="ชื่อ Pool" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ranges" class="col-sm control-label">Addresses: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="ranges" class="col-sm control-label">ช่วงหมายเลขไอพี: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-globe"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="ranges" id="ranges" placeholder="172.16.0.2-172.16.0.254" required>
+                                <input type="text" class="form-control" name="ranges" id="ranges" placeholder="Ex:192.168.1.2-192.168.1.254" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nextpool" class="col-sm control-label">Next Pool:&nbsp;</label>
+                            <label for="nextpool" class="col-sm control-label">Pool ต่อไป:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -356,3 +372,4 @@ if (!$_SESSION["cus_id"]) {
     </div>
 <?php } ?>
 <script src="../js/pool.js"></script>
+<script src="../js/alert_disconnect.js"></script>

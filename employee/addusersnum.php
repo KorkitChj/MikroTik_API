@@ -12,10 +12,10 @@ if ($_POST) {
     $num = $_POST['total'];
     $profiles = $_POST['profiles'];
     $limituptimes = $_POST['limituptimes'];
-    $comments = $_POST['comments'];
+    //$comments = $_POST['comments'];
 
     $service = service($emp_id);
-    function adduser($API, $ip, $port, $user, $pass_r,$profiles, $limituptimes, $comments, $service, $num)
+    function adduser($API, $ip, $port, $user, $pass_r,$profiles, $limituptimes,$service, $num)
     {
         $output = array('success' => false, 'messages' => array());
         if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
@@ -44,8 +44,7 @@ if ($_POST) {
                             "name" => $username,
                             "password" => $password,
                             "profile" => $profiles,
-                            "limit-uptime" => $limituptimes,
-                            "comment" => $comments,
+                            "limit-uptime" => $limituptimes
                         ));
                         $i++;
                     } while ($i <= $num);
@@ -72,8 +71,7 @@ if ($_POST) {
                         "name" => $username,
                         "password" => $password,
                         "profile" => $profiles,
-                        "limit-uptime" => $limituptimes,
-                        "comment" => $comments,
+                        "limit-uptime" => $limituptimes
                     ));
                     $i++;
                 } while ($i <= $num);
@@ -87,7 +85,7 @@ if ($_POST) {
             return $output;
         }
     }
-    $output = adduser($API, $ip, $port, $user, $pass_r,$profiles, $limituptimes, $comments, $service, $num);
+    $output = adduser($API, $ip, $port, $user, $pass_r,$profiles, $limituptimes,$service, $num);
 }
 echo json_encode($output);
 ?>

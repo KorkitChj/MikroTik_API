@@ -4,7 +4,7 @@ session_start();
 <?php
 //error_reporting(0);
 include('function.php');
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 //require('../config/pusher/src/Pusher.php');
 $cus_id = $_SESSION['cus_id'];
 $location_id = $_SESSION['location_id'];

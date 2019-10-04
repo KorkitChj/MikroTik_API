@@ -3,7 +3,7 @@
 function fetchuser($cus_id,$location_id){
    
     include('../config/routeros_api.class.php');
-    require('../include/connect_db.php');
+    require('../includes/connect_db.php');
 
     $API = new routeros_api();
     $API->debug = false;
@@ -21,7 +21,7 @@ function fetchuser($cus_id,$location_id){
 }
 function fetchimage($cus_id)
 {
-    require('../include/connect_db.php');
+    require('../includes/connect_db.php');
 
     $query = $conn->prepare("SELECT image FROM siteadmin  WHERE cus_id = :cus_id");
     $query->bindparam(':cus_id', $cus_id);
@@ -29,9 +29,9 @@ function fetchimage($cus_id)
     $row = $query->fetch(PDO::FETCH_ASSOC);
     $image = '';
     if ($row["image"] != '') {
-        $image = '<img src="../siteadmin/image/' . $row["image"] . '"  style="height:70px;width:60px"/>';
+        $image = '<img src="../siteadmin/image/' . $row["image"] . '"  style="border-radius:50%"/>';
     } else {
-        $image = '<img src="../siteadmin/image/iconuser.jpg" alt="user" style="height:70px;width:60px">';
+        $image = '<img src="../siteadmin/image/iconuser.jpg" alt="user" style="border-radius:50%">';
     }
     return $image;
 }

@@ -6,15 +6,12 @@ error_reporting(0);
 if($_POST){
     $profile = $_POST["editprofile_name"];
     $profilename = $_POST['editprofilename'];
-    $idle = $_POST['editidle'];
     $session = $_POST['editsession'];
     $shared = $_POST['editshared'];
-    $mac = $_POST['editmac'];
     $limit = $_POST['editlimit'];
-    $refresh = $_POST['editautorefresh'];
-    $pool = $_POST['editadpool'];
+    $datelimit = $_POST['editdatelimit'];
     include ('function.php');
-
+    include ('script.php');
     $location_id = $_SESSION['location_id'];
     $cus_id = $_SESSION['cus_id'];
 
@@ -26,13 +23,10 @@ if($_POST){
         $ARRAY = $API->comm("/ip/hotspot/user/profile/set",array(
             "name" => $profilename,
             "session-timeout" => $session,
-            "idle-timeout" => $idle,
             "shared-users" => $shared,
-            "mac-cookie-timeout" => $mac,
             "rate-limit" => $limit,
-            "status-autorefresh" => $refresh,
             "numbers" => $profile,
-            "address-pool" => $pool
+            "on-login" => $profile_Script
         ));
             $output['success'] = true;
             $output['messages'] = "แก้ไขข้อมูลแล้ว";

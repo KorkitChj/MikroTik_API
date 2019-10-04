@@ -23,17 +23,23 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
         foreach($ARRAY2 as $value){
             if($value['.id'] == $ARRAY[$i]['.id']){
                 $server = $value['.id'];
-                    $m = " * ";
+                    //$m = " * ";
                     $checkbox = '';
-                    $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+                    $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
                     <button  type="button" class="btn btn-danger disabled btn-sm"><span class="glyphicon glyphicon-trash"></span></button></div>';
                 break;
             }
         }
         if($server == ''){
-            $m = '';
-            $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="ServerP_id[]" value="' . $ARRAY[$i][".id"] . '"><span class="custom-control-indicator"></span></label>';
-            $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+            //$m = '';
+            $checkbox = '
+            <label class="checkbox">
+                    <input type="checkbox" class="checkitem" name="ServerP_id[]" value="' . $ARRAY[$i]['.id'] . '">
+                    <span class="danger"></span>
+            </label>
+            ';
+            //$checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="ServerP_id[]" value="' . $ARRAY[$i][".id"] . '"><span class="custom-control-indicator"></span></label>';
+            $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#editServerProfileModal" onclick="editServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
             <button  type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeServerProfileModal" onclick="removeServerProfile(\'' . $ARRAY[$i]['.id'] . '\')"><span class="glyphicon glyphicon-trash"></span></button></div>';
         }
         
@@ -42,11 +48,9 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
         $output['data'][] = array(
             $checkbox,
             $no,
-            $m,
             $ARRAY[$i]['name'],
             $ARRAY[$i]['hotspot-address'],
             $ARRAY[$i]['dns-name'],
-            $ARRAY[$i]['rate-limit'],
             $manage
         );
         $server = '';

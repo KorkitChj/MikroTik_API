@@ -1,121 +1,55 @@
 <?php
 session_start();
-?>
-<?php
+include("../includes/template_backend/admin/a_config.php");
+$admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
-    Header("Location:../login.php");
-} else { ?>
-    <title>Dashboard</title>
-    <?php
-        $admin_name = $_SESSION["admin_name"];
-        require('../include/connect_db.php');
-        require('../template/template.html');
-        require('function.php');
-        include('changpw.php');
+    Header("Location:../index.php");
+}
+include('../includes/connect_db.php');
+include('function.php');
 
-        $query = $conn->prepare("SELECT * FROM siteadmin");
-        $query->execute();
-        $numrow = $query->rowCount();
-        $result = $query->fetchAll();
+$query = $conn->prepare("SELECT * FROM siteadmin");
+$query->execute();
+$numrow = $query->rowCount();
+$result = $query->fetchAll();
 
-        $result =  $conn->prepare("SELECT*
+$result =  $conn->prepare("SELECT*
 FROM siteadmin AS a INNER JOIN orderpd AS b ON
 a.cus_id = b.cus_id INNER JOIN payment AS c ON
 b.order_id = c.order_id WHERE c.paid = 0");
-        $result->execute();
-        $numrow2 = $result->rowCount();
+$result->execute();
+$numrow2 = $result->rowCount();
 
-        $result2 =  $conn->query("SELECT*
+$result2 =  $conn->query("SELECT*
     FROM siteadmin AS a INNER JOIN orderpd AS b ON
     a.cus_id = b.cus_id INNER JOIN payment AS c ON
     b.order_id = c.order_id WHERE c.paid = 1");
-        $result2->execute();
-        $numrow3 = $result2->rowCount();
+$result2->execute();
+$numrow3 = $result2->rowCount();
 
-        $query2 = "SELECT* FROM login_details 
+$query2 = "SELECT* FROM login_details 
     INNER JOIN siteadmin 
     ON login_details.cus_id = siteadmin.cus_id WHERE last_activity > DATE_SUB(NOW(),INTERVAL 5 SECOND)";
-        $statement = $conn->prepare($query2);
-        $statement->execute();
-        $count = $statement->rowCount();
-        ?>
+$statement = $conn->prepare($query2);
+$statement->execute();
+$count = $statement->rowCount();
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+</head>
+
+<body>
+<?php include("../includes/template_backend/admin/bar_top.php"); ?>
     <div class="page-wrapper chiller-theme toggled">
-        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-            <i class="fas fa-bars"></i>
-        </a>
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <a href="#">Web API MikroTik</a>
-                    <div id="close-sidebar">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <div id="load"><?php echo admin_image_profile($_SESSION["admin_id"]); ?></div>
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span>&nbsp;<?php print_r($_SESSION["admin_name"]); ?></a></strong>
-                        </span>
-                        <span class="user-role">ผู้ดูแล</span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
-                    </div>
-                </div>
-                <!-- sidebar-header  -->
-                <div class="sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>ทั่วไป</span>
-                        </li>
-                        <li class="pad-a bor-red">
-                            <a href="#">
-                                <i class="fas fa-tachometer-alt"></i>&nbsp;dashboard</a>
-                        </li>
-                        <li>
-                            <a href="admin.php">
-                                <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
-                        </li>
-                        <li>
-                            <a href="checkpayment.php">
-                                <i class="glyphicon glyphicon-check"></i>&nbsp;
-                                ยืนยันการชำระเงิน</a>
-                        </li>
-                        <li>
-                            <a href="manage.php">
-                                <i class="glyphicon glyphicon-list"></i>&nbsp;
-                                จัดการเจ้าของไซต์</a>
-                        </li>
-                        <li>
-                            <a href="useronline.php">
-                                <i class="glyphicon glyphicon-globe"></i>&nbsp;
-                                User Online</a>
-                        </li>
-                        <li>
-                            <a href="" data-toggle="modal" data-target="#changpwModal">
-                                <i class="glyphicon glyphicon-edit"></i>&nbsp;
-                                เปลี่ยนรหัสผ่าน</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-            <div class="sidebar-footer">
-                <a href="#" class="logout">
-                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-                </a>
-            </div>
-        </nav>
-        <!-- sidebar-wrapper  -->
+    <?php include("../includes/template_backend/admin/navigation.php"); ?>
+    <?php include('changpw.php');?>
         <main class="page-content">
             <div class="container-fluid">
-                <h2>ข้อมูลการใช้บริการระบบ</h2>
-                <hr>
+                <!-- <h2>ข้อมูลการใช้บริการระบบ</h2>
+                <hr> -->
                 <!-- <div class="box-1">
                     <div class="row">
                         <div class="col-md-4 col-xl-3">
@@ -219,8 +153,8 @@ b.order_id = c.order_id WHERE c.paid = 0");
                     });
                 </script>
             </div>
+            <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
-        <!-- page-content" -->
     </div>
-    <!-- page-wrapper -->
-<?php } ?>
+</body>
+</html>

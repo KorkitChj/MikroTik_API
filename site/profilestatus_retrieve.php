@@ -26,9 +26,23 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
         } else {
             $rate = $ARRAY[$i]['rate-limit'];
         }
+        if(!empty($ARRAY[$i]['on-login'])){
+            $string = explode(";",$ARRAY[$i]['on-login']);
+            $string2 = explode(" ",$string[2]);
+            $daytouse = $string2[2];
+        }else{
+            $daytouse = '';
+        }
+        
 
-        $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="profile_checkbox custom-control-input" name="Profile_id[]" value="' . $ARRAY[$i]["name"] . '"><span class="custom-control-indicator"></span></label>';
-        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editProfileModal"  onclick="editProfile(\''.$ARRAY[$i]["name"].'\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+        //$checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="profile_checkbox custom-control-input" name="Profile_id[]" value="' . $ARRAY[$i]["name"] . '"><span class="custom-control-indicator"></span></label>';
+        $checkbox = '
+        <label class="checkbox">
+                <input type="checkbox" class="profile_checkbox " name="Profile_id[]" value="' . $ARRAY[$i]["name"] . '">
+                <span class="danger"></span>
+        </label>
+        ';
+        $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#editProfileModal"  onclick="editProfile(\''.$ARRAY[$i]["name"].'\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
         <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeProfileModal"  onclick="removeProfile(\''.$ARRAY[$i]["name"].'\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
 
         $output['success'] = true;
@@ -38,7 +52,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
             $ARRAY[$i]['name'],
             $rate,
             $ARRAY[$i]['shared-users'],
-            $ARRAY[$i]['mac-cookie-timeout'],
+            $daytouse,
             $manage
         );
     }

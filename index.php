@@ -1,45 +1,17 @@
-<?php
-require('template/template_index.html');
-?>
-<title>index</title>
+<?php include("includes/template_frontend/a_config.php"); ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <?php include("includes/template_frontend/head-tag-contents.php"); ?>
+</head>
 
 <body>
+
+    <?php include("includes/template_frontend/template_top.php"); ?>
+    <?php include("includes/template_frontend/navigation.php"); ?>
+
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img style="width:50px;height:50px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <!--navbar-->
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a href="index.php" class="nav-link active z"><span class="badge badge-primary"><i class="fas fa-home"></i></span>
-                            หน้าหลัก</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="products.php" class="nav-link z"><span class="badge badge-success"><i class="fab fa-product-hunt"></i></span>
-                            สินค้าชนิด</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="payment.php" class="nav-link z"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i></span>
-                            สั่งซื้อ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="transfer.php" class="nav-link z"><span class="badge badge-danger"><i class="fas fa-clipboard-check"></i></span>
-                            แจ้งโอนเงิน</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="login.php" class="nav-link"><span class="badge badge-info"><i class="fas fa-sign-in-alt"></i></span>
-                            เข้าสู่ระบบ/สมัครสมาชิก</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="container-fluid ">
         <div class="row">
             <div class="col">
                 <h1>ยินดีต้อนรับสู่เว็บไซต์ของเรา</h1>
@@ -69,29 +41,9 @@ require('template/template_index.html');
             </div>
         </div>
     </div>
+
+    <?php include("includes/template_frontend/footer.php"); ?>
+
 </body>
-<footer>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                <h2><a href="products.php">สินค้า</a></h2>
-            </div>
-            <div class="col-md-2">
-                <h2><a href="payment.php">สั่งซื้อ</a></h2>
-            </div>
-            <div class="col-md-2">
-                <h2><a href="transfer.php">ยืนยัน</a></h2>
-            </div>
-            <div class="col-md-2">
-                <h2><a href="login.php">เข้าสู่ระบบ/สมัครสมาชิก</a></h2>
-            </div>
-            <div class="col-md-2">
-                <p class="social"><a href="#" onclick='window.open("https://web.facebook.com/kokig.choojum.9");return false;'><i class="fa fa-facebook-square"></i></a></p>
-            </div>
-            <hr>
-            <div class="col-md-12">
-                <p>Mikrotik API 2019. All Rights Reserved</p>
-            </div>
-        </div>
-    </div>
-</footer>
+
+</html>

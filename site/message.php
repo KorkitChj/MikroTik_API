@@ -1,5 +1,5 @@
 <?php
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 if(isset($_POST['id'])){
     $query = $conn->prepare("SELECT * FROM packet_update AS a INNER JOIN employee AS b
     on a.emp_id = b.emp_id WHERE b.username = :username");

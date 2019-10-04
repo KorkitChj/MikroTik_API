@@ -14,11 +14,11 @@ if ($_POST) {
     $password = $_POST['password'];
     $profile = $_POST['profile'];
     $limituptime = $_POST['limituptime'];
-    $comment = $_POST['comment'];
+    //$comment = $_POST['comment'];
     
     $service = service($emp_id);
 
-    function adduser($API,$ip,$port,$user,$pass_r,$name,$password,$profile,$limituptime,$comment,$service){
+    function adduser($API,$ip,$port,$user,$pass_r,$name,$password,$profile,$limituptime,$service){
         $output = array('success' => false, 'messages' => array());
         if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
             $ARRAY = $API->comm("/ip/hotspot/user/print");
@@ -41,8 +41,7 @@ if ($_POST) {
                         "name" => $name,
                         "password" => $password,
                         "profile" => $profile,
-                        "limit-uptime" => $limituptime,
-                        "comment" => $comment,
+                        "limit-uptime" => $limituptime
                     ));
                     $output['success'] = true;
                     $output['messages'] = "บันทึกข้อมูลแล้ว";
@@ -62,8 +61,7 @@ if ($_POST) {
                     "name" => $name,
                     "password" => $password,
                     "profile" => $profile,
-                    "limit-uptime" => $limituptime,
-                    "comment" => $comment,
+                    "limit-uptime" => $limituptime
                 ));
                 $output['success'] = true;
                 $output['messages'] = "บันทึกข้อมูลแล้ว";
@@ -77,7 +75,7 @@ if ($_POST) {
             return $output;
         }
     }
-    $output = adduser($API,$ip,$port,$user,$pass_r,$name,$password,$profile,$limituptime,$comment,$service);
+    $output = adduser($API,$ip,$port,$user,$pass_r,$name,$password,$profile,$limituptime,$service);
 }
 echo json_encode($output);
 ?>

@@ -10,7 +10,7 @@ session_start();
 	}
 </style>
 <?php
-
+	error_reporting(0);
     $emp_id = $_SESSION['emp_id'];
 
     include("function.php");

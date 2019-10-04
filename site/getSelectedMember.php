@@ -4,7 +4,7 @@ session_start();
 <?php 
 error_reporting(0);
 include('function.php');
-include ('../include/connect_db.php');
+include ('../includes/connect_db.php');
 
 $emp_name = $_POST['emp_name'];
 $name = $_POST['name'];

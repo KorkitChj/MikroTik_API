@@ -3,7 +3,7 @@ session_start();
 ?>
 <?php
 if ($_POST) {
-    include('../include/connect_db.php');
+    include('../includes/connect_db.php');
     include('function.php');
     $output = array('messages' => array(),'success' => false);
     $banka = $_POST["bank"];
@@ -19,7 +19,10 @@ if ($_POST) {
     } else {
         $bank = "กรุงเทพ";
     }
-    if (fetch_packet() != $packet) {
+    $value = fetch_packet();
+    $new_value = explode(" ",$value);
+    $new_value2 = $new_value[4];
+    if ($new_value2 != $packet) {
         $cus_id = $_SESSION['cus_id'];
         $query = $conn->prepare("SELECT * FROM siteadmin AS a 
         INNER JOIN orderpd AS b on a.cus_id = b.cus_id

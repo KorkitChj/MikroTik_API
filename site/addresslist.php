@@ -155,9 +155,18 @@ if (!$_SESSION["cus_id"]) {
             <div class="container-fluid">
                 <h2>รายการ IP Address</h2>
                 <hr>
-                <div style="margin-bottom:20px">
-                    <h5><a href="../siteadmin/connectstatus.php">หน้าหลัก</a>><a href="#" style="color:black;text-decoration:underline">Address List</a></h5>
+                <div class="row">
+                    <div class="col-md">
+                    <a href="../siteadmin/connectstatus.php">หน้าหลัก</a>><a href="#" style="color:black;text-decoration:underline">Address List</a>
+                    </div>
+                    <div class="ml-auto">
+                        <div class="col-md">
+                            <div id="disconnect">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <br />
                 <div class="row">
                     <div class="form-group col-md-12">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -169,13 +178,22 @@ if (!$_SESSION["cus_id"]) {
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='addresslist.php'">
                                 <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button></div>
+                        <div class="float-right">
+                            <span class="badge-pill badge-success">เปิดใช้งาน</span>
+                            <span class="badge-pill badge-warning">ปิดใช้งาน</span>
+                            <span class="badge-pill badge-info">แก้ไข</span>
+                            <span class="badge-pill badge-danger">ลบ</span>
+                        </div>
                         <br><br>
                         <div class="box">
                             <div class="table-responsive">
                                 <table id="ip_table" class="table table-striped table-hover table-sm" width="100%">
                                     <thead>
                                         <tr>
-                                            <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall" /><span class="custom-control-indicator"></span></label></th>
+                                        <th width="1%"><label class="checkbox">
+                                                    <input type="checkbox" id="checkall" />
+                                                    <span class="danger"></span>
+                                            </label></th>
                                             <th width="1%">#</th>
                                             <th width="1%"></th>
                                             <th width="1%">Address</th>
@@ -207,29 +225,29 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form id="add_address" action="" method="post">
                         <div class="form-group">
-                            <label for="address" class="col-sm control-label">Address: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="address" class="col-sm control-label">หมายเลขไอพี: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-globe"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="address" id="address" placeholder="Ex: 172.16.0.0/23" required>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="Ex: 192.168.10.1/24" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="network" class="col-sm control-label">Network: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="network" class="col-sm control-label">หมายเลขเครือข่าย: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-globe"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="network" id="network" placeholder="Ex:172.16.0.0" required>
+                                <input type="text" class="form-control" name="network" id="network" placeholder="Ex: 192.168.10.0" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="comment" class="col-sm control-label">Comment:&nbsp;</label>
+                            <label for="comment" class="col-sm control-label">แสดงความคิดเห็น:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -240,7 +258,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="interface" class="col-sm control-label">Interface: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="interface" class="col-sm control-label">อินเตอร์เฟส: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -279,7 +297,7 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form id="edit_address" action="" method="post">
                         <div class="form-group">
-                            <label for="editaddress" class="col-sm control-label">Address:&nbsp;</label>
+                            <label for="editaddress" class="col-sm control-label">หมายเลขไอพี:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -290,7 +308,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editnetwork" class="col-sm control-label">Network:&nbsp;</label>
+                            <label for="editnetwork" class="col-sm control-label">หมายเลขเครือข่าย:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -301,7 +319,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editcomment" class="col-sm control-label">Comment:&nbsp;</label>
+                            <label for="editcomment" class="col-sm control-label">แสดงความคิดเห็น:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -312,7 +330,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editinterface" class="col-sm control-label">Interface:&nbsp;</label>
+                            <label for="editinterface" class="col-sm control-label">อินเตอร์เฟส:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -378,3 +396,4 @@ if (!$_SESSION["cus_id"]) {
     </div>
 <?php } ?>
 <script src="../js/address.js"></script>
+<script src="../js/alert_disconnect.js"></script>

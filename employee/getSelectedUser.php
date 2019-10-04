@@ -4,7 +4,7 @@ session_start();
 <?php
 
 include ('function.php');
-
+error_reporting(0);
 $emp_id = $_SESSION['emp_id'];
 
 list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
@@ -21,7 +21,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
     $output['password'] = $ARRAY[0]['password'];
     $output['profile'] = $ARRAY[0]['profile'];
     $output['limituptime'] = $ARRAY[0]['limit-uptime'];
-    $output['comment'] = $ARRAY[0]['comment'];
+    $output['comment'] = DateThai($ARRAY[0]['comment']);
 }
 
 echo json_encode($output);

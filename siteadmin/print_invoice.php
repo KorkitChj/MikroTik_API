@@ -1,7 +1,7 @@
 <?php
 
 require('../FPDF/fpdf.php');
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -78,4 +78,11 @@ $pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': ' . $row['total_cash'] . ' บา
 //$pdf->Cell(50, 5, ': Signature', 0, 1, 'C');
 
 
-$pdf->Output();
+$mypdf = $pdf->Output();
+
+header('Content-type: application/pdf');
+header('Content-Disposition:attachment; filename="' . $mypdf . '"');
+header('Content-Transfer-Encoding: binary');
+header('Content-Length: ' . filesize($mypdf));
+header('Accept-Ranges: bytes');
+@readfile($mypdf);

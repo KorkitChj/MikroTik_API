@@ -1,5 +1,5 @@
 <?php
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 
 $id = $_SESSION['cus_id'];
     $sql = "SELECT * FROM siteadmin WHERE cus_id = :id";

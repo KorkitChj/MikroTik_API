@@ -2,12 +2,12 @@
 session_start();
 ?>
 <?php
-require('include/connect_db.php');
+require('includes/connect_db.php');
 
 $output = array('success' => false, 'messages' => array());
 
-if (isset($_POST["username"])) {
-	$username = $_POST["username"];
+if (isset($_POST["username_register"])) {
+	$username = $_POST["username_register"];
 	$sql1 = "SELECT *FROM siteadmin WHERE username = :username";
 	$query1 = $conn->prepare($sql1);
 	$query1->bindparam(':username', $username);
@@ -15,17 +15,18 @@ if (isset($_POST["username"])) {
 	$num_rows = $query1->fetchColumn(); 
 
 	if ($num_rows == 0) {
-		$password = MD5($_POST["password"]);
+		$password = MD5($_POST["password_register"]);
 		$fullname = $_POST["fullname"];
 		$email  = $_POST["email"];
 		$phonenumber  = $_POST["number"];
 		$site = $_POST["site"];
 		$address = $_POST["address"];
-		$_SESSION["register"] = $_POST["username"];
+		$_SESSION["user_register"] = $_POST["username_register"];
+		$today = date('Y-m-d H:i:sa');
 
 		$sql = "INSERT INTO siteadmin 
                             values('',:username,:password,:address,:phonenumber
-							,:email,:site,:fullname)";
+							,:email,:site,:fullname,'',:regis_date)";
 		$query = $conn->prepare($sql);
 
         $query->bindparam(':username', $username);
@@ -35,6 +36,7 @@ if (isset($_POST["username"])) {
         $query->bindparam(':email', $email);
 		$query->bindparam(':site', $site);
 		$query->bindparam(':fullname', $fullname);
+		$query->bindparam(':regis_date', $today);
         
 		if ($query->execute()) {
 			$output['success'] = true;

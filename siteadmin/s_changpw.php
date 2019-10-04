@@ -2,7 +2,7 @@
 session_start();
 ?>
 <?php
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 $output = array('success' => false, 'messages' => array());
 if (isset($_POST['oldpassword'])) {
 

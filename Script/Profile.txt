@@ -1,0 +1,24 @@
+:global datetime 
+:global expiredatetime 
+:local shiftDay 1
+:local shiftDate [ :parse [ /system script get func_shiftDate source ] ] 
+:local montharray ( "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec" ) 
+:local date [ /system clock get date ] 
+:local date [ $shiftDate date=$date days=$shiftDay ]
+:local day [ :pick $date 4 6 ]
+:set day ($day) 
+:local monthtext [ :pick $date 0 3 ]
+:local month ( [ :find $montharray $monthtext ] + 1)
+:local year [ :pick $date 7 11 ]
+:if ($month < 10) do={:set month ("0" . $month);}; 
+:local timetext [ /system clock get time ] 
+:local hour [ :pick $timetext 0 2 ]
+:local minute [ pick $timetext 3 5 ]
+:local second [ pick $timetext 6 8 ]
+:set datetime ( $year . $month . $day . $time . $hour . $minute . $second ) 
+:set expiredatetime ( $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":" . $second )
+:local i [ /ip hotspot user find name=$user] 
+:local usercomment [ /ip hotspot user get $i comment ] 
+:if ( [ :find $usercomment "expire" ] != 0 ) do={ 
+   [ /ip hotspot user set $i comment=("expire=" . $expiredatetime) ] 
+} 

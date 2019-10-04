@@ -1,211 +1,89 @@
 <?php
 session_start();
-?>
-<?php
+include("../includes/template_backend/site_admin/a_config.php");
 if (!$_SESSION["cus_id"]) {
-    Header("Location:../login.php");
-} else { ?>
-    <title>Employee Status</title>
-    <?php
-        require('../template/template.html');
-        include('../siteadmin/expired.php');
-        include('../siteadmin/useronlinejs.php');
-        include('../siteadmin/changpwsite.php');
-        include('function.php');
+    Header("Location:../index.php");
+}
+include('../siteadmin/expired.php');
+include('function.php');
+error_reporting(0);
+$cus_id = $_SESSION['cus_id'];
+$location_id = $_SESSION['location_id'];
 
-        $location_id = $_SESSION['location_id'];
-        $cus_id = $_SESSION['cus_id'];
+list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
-        list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
+if ($API->connect($ip . ":" . $port, $user, $pass)) {
+    $ARRAY = $API->comm("/user/group/print");
+}
 
-        if ($API->connect($ip . ":" . $port, $user, $pass)) {
-            $ARRAY = $API->comm("/user/group/print");
-        }
-        ?>
+//include('service_fetch.php');
+
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <?php include_once("../includes/template_backend/admin/head-tag-contents.php"); ?>
+</head>
+
+<body>
+    <?php include("../includes/template_backend/site_admin/bar_top.php"); ?>
     <div class="page-wrapper chiller-theme toggled">
-        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-            <i class="fas fa-bars"></i>
-        </a>
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <a href="#">Web API MikroTik</a>
-                    <div id="close-sidebar">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <?php echo fetchimage($cus_id); ?>
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Admin</span>&nbsp;<?php print_r($_SESSION["cus_name"]); ?></a></strong>
-                        </span>
-                        <span class="user-role">ผู้ดูแล</span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
-                    </div>
-                </div>
-                <!-- sidebar-header  -->
-                <div class="sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>ทั่วไป</span>
-                        </li>
-                        <li>
-                            <a href="dashboard.php">
-                                <i class="glyphicon glyphicon-dashboard"></i>
-                                &nbsp;Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="interfacemonitor.php">
-                                <i class="glyphicon glyphicon-signal"></i>
-                                &nbsp;Interface Monitor</a>
-                        </li>
-                        <li class="sidebar-dropdown pad-a bor-yellow">
-                            <a href="#">
-                                <i class="glyphicon glyphicon-user"></i>
-                                &nbsp;รายการพนักงานดูแล</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li class="pad-a bor-yellow">
-                                        <a href="#" id="addemployee">
-                                            <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;เพิ่มพนักงาน
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="employeeactive.php" id="employeeactive">
-                                            <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;พนักงานออนไลน์
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="glyphicon glyphicon-flag"></i>
-                                &nbsp;Address List</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="addresslist.php" id="addresslistBtn">
-                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Address List
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="pool.php" id="addPoolBtn">
-                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Address Pool
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="glyphicon glyphicon-wrench"></i>
-                                &nbsp;Hotspot Setup</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="addserverprofile.php" id="addserverprofileBtn">
-                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Server Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="addserver.php" id="addserverBtn">
-                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;Add Server
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="profilestatus.php">
-                                <i class="glyphicon glyphicon-th-list"></i>
-                                &nbsp;รายการ Profile</a>
-                        </li>
-                        <li>
-                            <a href="wallgardenstatus.php">
-                                <i class="glyphicon glyphicon-menu-hamburger"></i>
-                                &nbsp;รายการ ByPass</a>
-                        </li>
-                        <li>
-                            <a href="../siteadmin/connectstatus.php">
-                                <i class="glyphicon glyphicon-log-out"></i>&nbsp;
-                                กลับหน้าหลัก</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-            <div class="sidebar-footer">
-                <a href="#" class="logout">
-                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-                </a>
-            </div>
-        </nav>
-        <!-- sidebar-wrapper  -->
+        <?php include("../includes/template_backend/site_admin/navigation_site.php"); ?>
+        <?php include('../siteadmin/changpwsite.php'); ?>
         <main class="page-content">
-            <div class="container-fluid">
-                <h2>รายการพนักงาน</h2>
-                <hr>
-                <div style="margin-bottom:20px">
-                    <h5><a href="../siteadmin/connectstatus.php">หน้าหลัก</a>><a href="#" style="color:black;text-decoration:underline">รายการพนักงาน</a></h5>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <?php
-                            //$date = new \DateTime();
-                            //echo date_format($date, 'G:i:s');
-                            ?>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addMemberModal" id="addMemberModalBtn">
-                                <span class="glyphicon glyphicon-plus "></span>&nbsp;&nbsp;เพิ่มพนักงาน
-                            </button>
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="removeAllMemberModalBtn">
-                                <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
-                            </button>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#manageUserGroup" id="manageUserGroupModalBtn">
-                                <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;เพิ่มกลุ่มพนักงาน
-                            </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='employeestatus.php'">
-                                <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
-                        </div>
-                        <br /><br />
-                        <div class="box">
-                            <div class="table-responsive">
-                                <table id="employeestatus" class="table table-striped table-hover table-sm " style="width:100%">
-                                    <thead class="aa">
-                                        <tr>
-                                            <th width="1%"><label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="checkall" /><span class="custom-control-indicator"></span></label></th>
-                                            <th width="2%">Message</th>
-                                            <th width="1%">#</th>
-                                            <th width="1%"></th>
-                                            <th width="2%">ไซต์</th>
-                                            <th width="2%">ชื่อ</th>
-                                            <th width="2%">Username</th>
-                                            <!-- <th width="2%">Address</th> -->
-                                            <th width="2%">Group</th>
-                                            <th width="2%">last-logged-in</th>
-                                            <th width="2%">Comment</th>
-                                            <th width="3%">Options</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+            <div class="form-group col-md-12">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-md" style=" margin-bottom:20px">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addMemberModal" id="addMemberModalBtn">
+                                    <span class="glyphicon glyphicon-plus "></span>&nbsp;&nbsp;เพิ่มพนักงาน
+                                </button>
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="removeAllMemberModalBtn">
+                                    <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
+                                </button>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#manageUserGroup" id="manageUserGroupModalBtn">
+                                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;เพิ่มกลุ่มพนักงาน
+                                </button>
+                                <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='employeestatus.php'">
+                                    <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                             </div>
                         </div>
-                        <div id="ss"></div>
+                        <div class="col-md ">
+                            <div class="float-right">
+                                <span class="badge-pill badge-success">เปิดใช้งาน</span>
+                                <span class="badge-pill badge-warning">ปิดใช้งาน</span>
+                                <span class="badge-pill badge-info">แก้ไข</span>
+                                <span class="badge-pill badge-danger">ลบ</span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="table-responsive">
+                        <table id="employeestatus" class="table table-striped table-hover table-sm " style="width:100%">
+                            <thead class="aa">
+                                <tr>
+                                    <th width="1%"><label class="checkbox">
+                                            <input type="checkbox" id="checkall" />
+                                            <span class="danger"></span>
+                                        </label></th>
+                                    <th width="2%">Message</th>
+                                    <th width="1%">#</th>
+                                    <th width="1%"></th>
+                                    <th width="2%">Username</th>
+                                    <th width="2%">Group</th>
+                                    <th width="2%">last-logged-in</th>
+                                    <th width="3%">Options</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
+            <div id="ss"></div>
+            <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
-        <!-- page-content" -->
     </div>
-    <!-- page-wrapper -->
-    <!-- manage user group -->
     <div class="modal fade" tabindex="-1" role="dialog" id="manageUserGroup">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -216,7 +94,7 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form action="addgroup.php" id="addGroup" method="post">
                         <div class="form-group">
-                            <label for="namegroup" class="col-sm control-label">Name: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="namegroup" class="col-sm control-label">ชื่อกลุ่ม: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -227,7 +105,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="polici" class="col-sm control-label">Policies: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="polici" class="col-sm control-label">อนุญาติการใช้งาน: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="inlineCheckbox1" value="write">
@@ -261,7 +139,6 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <!-- addsite modal -->
     <div class="modal fade " tabindex="-1" role="dialog" id="addMemberModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -272,14 +149,14 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form action="" id="addMember" method="post">
                         <div class="form-group">
-                            <label for="name" class="col-sm control-label">Full Name: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="name" class="col-sm control-label">ชื่อ-สกุล: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="ชื่อพนักงาน" required>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="ชื่อ-สกุล" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -294,7 +171,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="password" class="col-sm control-label">Password: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="password" class="col-sm control-label">รหัสผ่าน: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -305,18 +182,18 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="comment" class="col-sm control-label">Comment: &nbsp;</label>
+                            <label for="comment" class="col-sm control-label">แสดงความคิดเห็น: &nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-credit-card"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="comment" id="comment">
+                                <input type="text" class="form-control" name="comment" id="comment" placeholder="แสดงความคิดเห็น">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="group" class="col-sm control-label">Group: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
+                            <label for="group" class="col-sm control-label">สิทธ์การใช้งาน: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -325,17 +202,17 @@ if (!$_SESSION["cus_id"]) {
                                 </div>
                                 <select class="form-control" name="group" size="1" id="group" required>
                                     <?php
-                                        $num = count($ARRAY);
-                                        for ($i = 0; $i < $num; $i++) {
-                                            $seleceted = ($i == 0) ? 'selected="selected"' : '';
-                                            echo '<option value="' . $ARRAY[$i]['name'] . $selected . '">' . $ARRAY[$i]['name'] . '</option>';
-                                        }
-                                        ?>
+                                    $num = count($ARRAY);
+                                    for ($i = 0; $i < $num; $i++) {
+                                        $seleceted = ($i == 0) ? 'selected="selected"' : '';
+                                        echo '<option value="' . $ARRAY[$i]['name'] . $selected . '">' . $ARRAY[$i]['name'] . '</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="site" class="col-sm control-label">Site: &nbsp;</label>
+                            <label for="site" class="col-sm control-label">ชื่อ Site: &nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -355,7 +232,6 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <!-- editsite modal -->
     <div class="modal fade " tabindex="-1" role="dialog" id="editMemberModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -366,14 +242,14 @@ if (!$_SESSION["cus_id"]) {
                 <div class="modal-body">
                     <form action="" id="editMember" method="post">
                         <div class="form-group">
-                            <label for="editname" class="col-sm control-label">Full Name:&nbsp;</label>
+                            <label for="editname" class="col-sm control-label">ชื่อ-สกุล:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editname" id="editname" placeholder="ชื่อพนักงาน" required>
+                                <input type="text" class="form-control" name="editname" id="editname" placeholder="ชื่อ-สกุล" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -388,7 +264,7 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editpassword" class="col-sm control-label">Password:&nbsp;</label>
+                            <label for="editpassword" class="col-sm control-label">รหัสผ่าน:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -399,18 +275,18 @@ if (!$_SESSION["cus_id"]) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editcomment" class="col-sm control-label">Comment: &nbsp;</label>
+                            <label for="editcomment" class="col-sm control-label">แสดงความคิดเห็น: &nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-credit-card"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" name="editcomment" id="editcomment">
+                                <input type="text" class="form-control" name="editcomment" id="editcomment" placehoder="แสดงความคิดเห็น">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editgroup" class="col-sm control-label">Group:&nbsp;</label>
+                            <label for="editgroup" class="col-sm control-label">สิทธ์การใช้งาน:&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -419,17 +295,17 @@ if (!$_SESSION["cus_id"]) {
                                 </div>
                                 <select class="form-control" name="editgroup" size="1" id="editgroup" required>
                                     <?php
-                                        $num = count($ARRAY);
-                                        for ($i = 0; $i < $num; $i++) {
-                                            $seleceted = ($i == 0) ? 'selected="selected"' : '';
-                                            echo '<option value="' . $ARRAY[$i]['name'] . $selected . '">' . $ARRAY[$i]['name'] . '</option>';
-                                        }
-                                        ?>
+                                    $num = count($ARRAY);
+                                    for ($i = 0; $i < $num; $i++) {
+                                        $seleceted = ($i == 0) ? 'selected="selected"' : '';
+                                        echo '<option value="' . $ARRAY[$i]['name'] . $selected . '">' . $ARRAY[$i]['name'] . '</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editsite" class="col-sm control-label">Site: &nbsp;</label>
+                            <label for="editsite" class="col-sm control-label">ชื่อ Site: &nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -449,7 +325,6 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <!-- remove all modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="removeAllMemberModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -467,7 +342,6 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <!-- remove modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -485,7 +359,6 @@ if (!$_SESSION["cus_id"]) {
             </div>
         </div>
     </div>
-    <!-- alert modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="messageMemberModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -503,4 +376,8 @@ if (!$_SESSION["cus_id"]) {
         </div>
     </div>
     <script src="../js/employeestatus.js"></script>
-<?php } ?>
+    <script src="../js/alert_disconnect.js"></script>
+    <?php include('../siteadmin/useronlinejs.php'); ?>
+</body>
+
+</html>

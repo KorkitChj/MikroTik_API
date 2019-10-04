@@ -1,5 +1,5 @@
 <?php
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 require('function.php');
 $output = array();
 $column = array("","","A.cus_id", "A.username", "A.site_name", "A.work_phone", "A.e_mail");
@@ -36,18 +36,31 @@ $statement1 = $conn->prepare("SELECT * FROM siteadmin WHERE cus_id NOT IN (SELEC
 $statement1->execute();
 $result1 = $statement1->fetchAll();
 
+
 foreach ($result as $row=>$val) 
 {
-	$status = '<i class="fas fa-check-circle ssuccess"></i>';
+	$status = "<span class=\"badge-pill badge-success\">สั่งซื้อ</span>";
 	foreach ($result1 as $val2) 
 	{	
 		if($val['cus_id'] == $val2['cus_id']){
-			$status = '<i class="fas fa-ban ffalse"></i>';
+			$today = date('Y-m-d H:i:s');
+			$date = date('Y-m-d H:i:s', strtotime("+3 day", strtotime($val['regis_date'])));
+			if($today > $date){
+				delNoOrder($val['cus_id']);
+			}
+			else{
+				$status = "ลบภายใน ".DateThai($date);
+			}			
 			break;
 		}
 	}
 	$sub_array = array();
-	$sub_array[] = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="cus_id[]" value="'.$val["cus_id"].'"><span class="custom-control-indicator"></span></label>';
+$sub_array[] = '
+<label class="checkbox">
+		<input type="checkbox" class="checkitem" name="cus_id[]" value="'.$val["cus_id"].'">
+        <span class="danger"></span>
+</label>
+';
 	$sub_array[] = $status;
 	$sub_array[] = $val["cus_id"];
 	$sub_array[] = $val["username"];

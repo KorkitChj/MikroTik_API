@@ -1,11 +1,11 @@
 <?php
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 require('function.php');
 $output = array();
 $column = array("","username","site_name","total_cash","transfer_date");
 $query = '';
 $query .= 'SELECT a.cus_id,username,site_name,total_cash,
-transfer_date FROM siteadmin AS a INNER JOIN orderpd AS b ON
+transfer_date,expired_date FROM siteadmin AS a INNER JOIN orderpd AS b ON
 a.cus_id = b.cus_id INNER JOIN payment AS c ON
 b.order_id = c.order_id ';
 $query .= 'WHERE ';
@@ -31,20 +31,20 @@ $result = $statement->fetchAll();
 $data = array();
 $filtered_rows = $statement->rowCount();
 foreach ($result as $row) {
-    if ($row["total_cash"] != 500) {
-        $startdate = $row["transfer_date"];
-        $enddate = strtotime('+365 days', strtotime($startdate));
-    } elseif ($row["total_cash"] == 500) {
-        $startdate = $row["transfer_date"];
-        $enddate = strtotime('+183 days', strtotime($startdate));
-    }
     $sub_array = array();
-    $sub_array[]  = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="cus_id[]" value="'.$row["cus_id"].'"><span class="custom-control-indicator"></span></label>';
+    $sub_array[] = '
+    <label class="checkbox">
+            <input type="checkbox" class="checkitem" name="cus_id[]" value="'.$row["cus_id"].'">
+            <span class="danger"></span>
+    </label>
+    ';
+    $transfer_date = DateThai($row["transfer_date"]);
+    $expired_date = DateThai($row["expired_date"]);
     $sub_array[]  = $row["username"];
     $sub_array[]  = $row["site_name"];
-    $sub_array[]  = $row["total_cash"];
-    $sub_array[]  = $row["transfer_date"];
-    $sub_array[]  = date('Y-m-d', $enddate);
+    $sub_array[]  = $row["total_cash"]." บาท";
+    $sub_array[]  = $transfer_date;
+    $sub_array[]  = $expired_date;
     $sub_array[]  = '<button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeMember('.$row['cus_id'].')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
     $data[] = $sub_array;
 }

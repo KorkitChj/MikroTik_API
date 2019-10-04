@@ -3,7 +3,7 @@
 function fetchuser($emp_id)
 {
     include('../config/routeros_api.class.php');
-    require('../include/connect_db.php');
+    require('../includes/connect_db.php');
     $API = new routeros_api();
     $API->debug = false;
     set_time_limit(160);
@@ -20,7 +20,7 @@ function fetchuser($emp_id)
 }
 function fetchlogo($emp_id)
 {
-    require('../include/connect_db.php');
+    require('../includes/connect_db.php');
     $query = $conn->prepare("SELECT image_site FROM location AS a INNER JOIN employee AS b ON a.location_id = b.location_id WHERE b.emp_id = :emp_id");
     $query->bindparam(':emp_id', $emp_id);
     $query->execute();
@@ -35,7 +35,7 @@ function fetchlogo($emp_id)
 }
 function service($emp_id)
 {
-    require('../include/connect_db.php');
+    require('../includes/connect_db.php');
     $query = $conn->prepare("SELECT product_id FROM orderpd AS a 
     INNER JOIN location AS b ON
     a.cus_id = b.cus_id 
@@ -46,4 +46,16 @@ function service($emp_id)
     $query->execute();
     $row = $query->fetch(PDO::FETCH_ASSOC);
     return $row['product_id'];
+}
+function DateThai($strDate)
+{
+	$strYear = date("Y",strtotime($strDate))+543;
+	$strMonth= date("n",strtotime($strDate));
+	$strDay= date("j",strtotime($strDate));
+	$strHour= date("H",strtotime($strDate));
+	$strMinute= date("i",strtotime($strDate));
+	$strSeconds= date("s",strtotime($strDate));
+	$strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+	$strMonthThai=$strMonthCut[$strMonth];
+	return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
 }

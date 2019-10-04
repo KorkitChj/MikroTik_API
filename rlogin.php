@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('include/connect_db.php');
+require('includes/connect_db.php');
 ?>
 <?php
 if (isset($_POST['username'])) {
@@ -97,15 +97,10 @@ if (isset($_POST['username'])) {
                                         $output['messages'] = "กรุณารอการยืนยันการชำระเงินจากAdmin หรือคุณยังไม่ยืนยันชำระเงิน";   
                                     } else {
                                         $result = $query->fetch(PDO::FETCH_ASSOC);
-                                        if($result['product_id'] == 1)
+                                        if($result['product_id'] != '')
                                         {
                                             $output['success'] = true;
-                                            $output['messages'] = "service1"; 
-                                        }
-                                        else
-                                        {
-                                            $output['success'] = true;
-                                            $output['messages'] = "service2"; 
+                                            $output['messages'] = "service"; 
                                         }
                                     }
                                 }

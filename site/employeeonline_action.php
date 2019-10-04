@@ -32,12 +32,12 @@ if(isset($_POST["action"]))
    <table class="table table-sm table-striped display responsive nowrap">
    <thead class="aa">
     <tr>
-        <th>No.</th>
-        <th>When</th>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Via</th>
-        <th>Group</th>
+        <th>#</th>
+        <th>เข้าใช้งาน</th>
+        <th>ชื่อ</th>
+        <th>หมายเลขไอพี</th>
+        <th>ช่องทาง</th>
+        <th>กลุ่มผู้ใช้</th>
     </tr>
     </thead>
   ';

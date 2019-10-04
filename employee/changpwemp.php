@@ -1,76 +1,28 @@
 <?php
 session_start();
-?>
-<?php
+include("../includes/template_backend/employee/a_config.php");
 if (!$_SESSION["emp_id"]) {
-    Header("Location:../login.php");
-} else { ?>
-    <title>Chang Password Employee</title>
-    <?php
-        require('../template/template.html');
+    Header("Location:../index.php");
+}
+include('function.php');
 
-        include('function.php');
+$emp_id = $_SESSION['emp_id'];
 
-        $emp_id = $_SESSION['emp_id'];
+?>
+<!DOCTYPE html>
+<html>
 
-        ?>
+<head>
+    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+</head>
+
+<body>
+    <?php include("../includes/template_backend/admin/bar_top.php"); ?>
     <div class="page-wrapper chiller-theme toggled">
-        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-            <i class="fas fa-bars"></i>
-        </a>
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <a href="#">Web API MikroTik</a>
-                    <div id="close-sidebar">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <?php echo fetchlogo($emp_id)[0]; ?>
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">
-                            <strong><a class="navbar-brand" href="#"><span style="color:gray">Employee</span>&nbsp;<?php print_r($_SESSION["emp_name"]); ?></a></strong>
-                        </span>
-                        <span class="user-role">พนักงาน</span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
-                    </div>
-                </div>
-                <!-- sidebar-header  -->
-                <div class="sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>ทั่วไป</span>
-                        </li>
-                        <li>
-                            <a href="employee.php">
-                                <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
-                        </li>
-                        <li class="pad-a bor-green">
-                            <a href="">
-                                <i class="glyphicon glyphicon-edit"></i>&nbsp;
-                                เปลี่ยนรหัสผ่าน</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-            <div class="sidebar-footer">
-                <a href="#" class="logout">
-                    <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-                </a>
-            </div>
-        </nav>
-        <!-- sidebar-wrapper  -->
+        <?php include("../includes/template_backend/employee/navigation.php"); ?>
         <main class="page-content">
             <div class="container-fluid">
-                <h2><i class="glyphicon glyphicon-edit"></i> เปลี่ยนรหัสผ่าน</h2>
+            <h5><i class="glyphicon glyphicon-edit"></i> เปลี่ยนรหัสผ่าน</h5>
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -122,10 +74,9 @@ if (!$_SESSION["emp_id"]) {
                     </div>
                 </div>
             </div>
+            <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
-        <!-- page-content" -->
     </div>
-    <!-- page-wrapper -->
     <script>
         $.validation = {
             messages: {}
@@ -207,5 +158,6 @@ if (!$_SESSION["emp_id"]) {
             });
         }
     </script>
-    <script src="../js/logout.js"></script>
-<?php } ?>
+</body>
+
+</html>

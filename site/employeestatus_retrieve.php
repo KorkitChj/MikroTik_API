@@ -3,7 +3,7 @@ session_start();
 ?>
 <?php
 error_reporting(0);
-require('../include/connect_db.php');
+require('../includes/connect_db.php');
 include('function.php');
 
 $location_id = $_SESSION['location_id'];
@@ -61,7 +61,7 @@ foreach ($result as $row) {
             $adddress = $row2['address'];
             $last = $row2['last-logged-in'];
             $comment = $row2['comment'];
-            $message = message($conn);
+            //$message = message($conn);
             foreach($message as $value){
                 if ($value['name'] == $row['username']) {
                         $count = countMessage($message,$row['username']);
@@ -73,7 +73,7 @@ foreach ($result as $row) {
             }
             foreach ($ARRAY2 as $row3) {
                 if ($row3['name'] == $row['username']) {
-                    $idtk = '<button title="disable" class="btn btn-warning btn-sm">D</button>';
+                    $idtk = '<button title="disable" class="btn btn-light btn-sm">D</button>';
                     break;
                 } else {
                     $idtk = '';
@@ -87,12 +87,18 @@ foreach ($result as $row) {
         }
     }
     $no++;
-    $checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="emp_id[]" value="' . $row["username"] . ',' . $row2['.id'] . '"><span class="custom-control-indicator"></span></label>';
+    //$checkbox = '<label class="custom-control custom-checkbox"><input type="checkbox" class="checkitem custom-control-input" name="emp_id[]" value="' . $row["username"] . ',' . $row2['.id'] . '"><span class="custom-control-indicator"></span></label>';
+    $checkbox = '
+            <label class="checkbox">
+                    <input type="checkbox" class="checkitem" name="emp_id[]" value="' . $row["username"] . ',' . $row2['.id'] . '">
+                    <span class="danger"></span>
+            </label>
+            ';
     $manage = '
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <button class="btn btn-success btn-sm" type="button" onclick="enableEmp(\'' . $row2['.id'] . '\')"><span title="เปิด" class="glyphicon glyphicon-ok"></span></button>
-        <button class="btn btn-danger btn-sm" type="button"  onclick="disableEmp(\'' . $row2['.id'] . '\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
-        <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#editMemberModal"  onclick="editMember(\'' . $row2['.id'] . '\',\'' . $row['username'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
+        <button class="btn btn-warning btn-sm" type="button"  onclick="disableEmp(\'' . $row2['.id'] . '\')"><span title="ปิด" class="glyphicon glyphicon-remove"></span></button>
+        <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#editMemberModal"  onclick="editMember(\'' . $row2['.id'] . '\',\'' . $row['username'] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
         <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeMemberModal"  onclick="removeMember(\'' . $row2['.id'] . '\',\'' . $row['username'] . '\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
 
 
@@ -101,12 +107,9 @@ foreach ($result as $row) {
         $messages,
         $no,
         $idtk,
-        $row['working_site'],
-        $row['full_name'],
         $row['username'],
         $group,
         $last,
-        $comment,
         $manage
     );
 }

@@ -4,7 +4,7 @@ session_start();
 <?php
 error_reporting(0);
 if ($_POST) {
-    include('../include/connect_db.php');
+    include('../includes/connect_db.php');
     include('function.php');
 
     $location_id = $_SESSION['location_id'];

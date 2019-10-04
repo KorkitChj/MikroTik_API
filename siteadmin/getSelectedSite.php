@@ -1,6 +1,6 @@
 <?php
 
-include('../include/connect_db.php');
+include('../includes/connect_db.php');
 
 $location_id = $_POST['location_id'];
 

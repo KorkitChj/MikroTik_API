@@ -15,7 +15,7 @@ $name = $_POST['name'];
 $output = array(
     'name' => array(),
     'address' => array(), 'dns' => array(),'rate' => array(),
-    'id' => array()
+    'id' => array(),'cookie'=> array(),'maccookie' => array()
 );
 
 if ($API->connect($ip . ":" . $port, $user, $pass)) {
@@ -28,6 +28,16 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
     $output['dns'] = $ARRAY[0]['dns-name'];
     $output['rate'] = $rate;
     $output['id'] = $ARRAY[0]['.id'];
+    $login_by = explode(",",$ARRAY[0]['login-by']);
+    foreach($login_by as $bb){
+        if($bb == "cookie"){
+            $ck = "cookie";
+        }elseif($bb == "mac-cookie"){
+            $mc = "maccookie";
+        }
+    }
+    $output['cookie'] = $ck;
+    $output['maccookie'] = $mc;
 }
 
 echo json_encode($output);

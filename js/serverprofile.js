@@ -12,7 +12,7 @@ $(document).ready(function() {
             }
         },
         "columnDefs": [{
-            "targets": [0,7],
+            "targets": [0,5],
             "orderable": false,
         }],
     });
@@ -114,7 +114,24 @@ function editServerProfile(id) {
                 $("#edithotadd").val(response.address);
                 $("#editdns").val(response.dns);
                 $("#editrate").val(response.rate);
-                console.log(response.name);
+                var aa = response.cookie;
+                var bb = response.maccookie;
+                console.log(aa);
+                console.log(bb);
+                if(aa != null && bb != null){
+                    $("#editcookie").val(response.cookie).prop('checked',true);
+                    $("#editmaccookie").val(response.maccookie).prop('checked',true);
+                }else if(aa == null && bb == null){
+                    $("#editcookie").val("editcookie").prop('checked',false);
+                    $("#editmaccookie").val("editmaccookie").prop('checked',false);
+                }else if(aa == null && bb != null){
+                    $("#editcookie").val("editcookie").prop('checked',false);
+                    $("#editmaccookie").val(response.maccookie).prop('checked',true);
+                }else if(aa != null && bb == null){
+                    $("#editcookie").val(response.cookie).prop('checked',true);
+                    $("#editmaccookie").val("editmaccookie").prop('checked',false);
+                }                             
+                //console.log(response.name);
                 $("#edit_serverprofile").append('<input type="hidden" name="edit_sp" id="edit_sp" value="' + response.id + '"/>');
                 $("#edit_serverprofile").off('submit').on('submit', function() {
                     var form = $(this);

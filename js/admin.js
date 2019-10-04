@@ -9,19 +9,19 @@ $(document).ready(function () {
             "ajax": {
                 url: "../admin/admin_retrieve.php",
                 type: "POST",
-                data:{is_category:is_category}
+                data: { is_category: is_category }
             },
             "columnDefs": [{
-                "targets": [0, 1,4, 7],
+                "targets": [0,1,4,7],
                 "orderable": false,
             }],
-            "createdRow": function( row, data, dataIndex ) {
-                if ( data[1] == '<i class="fas fa-check-circle ssuccess"></i>') {
-                    $( row ).css({"color":"#0066ff"});
-                }else{
-                    $( row ).css({"background-color":"#ff9999","color":"#000000"});
+            /*"createdRow": function (row, data, dataIndex) {
+                if (data[1] == '<span class=\"badge-pill badge-success\">สั่งซื้อ</span>') {
+                    $(row).css({ "color": "#0066ff" });
+                } else {
+                    $(row).css({ "background-color": "#ff9999", "color": "#000000" });
                 }
-            }
+            }*/
         });
     }
     $(document).on('change', '#category', function () {
@@ -35,42 +35,9 @@ $(document).ready(function () {
         }
     });
 });
-$("#addImageModalBtn").click(function () {
-    $("#formimage")[0].reset();
-    $("#formimage").off('submit').on('submit', function () {
-        var form = $(this);
-        var extension = $('#image').val().split('.').pop().toLowerCase();
-        if (extension != '') {
-            if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
-                swal("ผิดพลาด", "Invalid Image File", "error");
-                $('#image').val('');
-                return false;
-            }
-        }
-        var image = $("#image").val();
-        if (image) {
-            $.ajax({
-                url: '../admin/addimage.php',
-                type: 'POST',
-                data: new FormData(this),
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                success: function (response) {
-                    if(response.success == true){
-                        $("#formimage")[0].reset();
-                        $("#load").load(location.href + " #load>*", "");
-                        $("#addImageModal").modal('hide');
-                    }
-                }
-            });
-        }
-        return false;
-    });
-});
 function removeMember(id) {
     if (id) {
-        $("#removeBtn").off('click').on('click', function (){
+        $("#removeBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../admin/admin_del.php',
                 type: 'post',
@@ -94,8 +61,14 @@ function removeMember(id) {
     }
 }
 $('#checkall').click(function () {
-    $('.checkitem').prop("checked", $(this).prop("checked"))
-})
+    var cus_id = [];
+    $('.checkitem').prop("checked", $(this).prop("checked"));
+    $('.checkitem:checked').each(function (i) {
+        cus_id[i] = $(this).val();
+    });
+    var countCheckedCheckboxes = cus_id.length;
+    $('#count-checked-checkboxes').text(countCheckedCheckboxes);
+});
 $('#removeAllBtn').click(function () {
     var cus_id = [];
     $('.checkitem:checked').each(function (i) {
@@ -116,10 +89,10 @@ $('#removeAllBtn').click(function () {
                     swal("สำเร็จ", response.messages, "success");
                     site_manage.ajax.reload(null, false);
                     $("#removeAllMemberModal").modal('hide');
-                    $("#checkall").prop("checked",false);
+                    $("#checkall").prop("checked", false);
                 } else {
                     swal("ผิดพลาด", response.messages, "error");
-                    $("#checkall").prop("checked",false);
+                    $("#checkall").prop("checked", false);
                 }
             }
         });

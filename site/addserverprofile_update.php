@@ -9,6 +9,8 @@ if($_POST){
     $dns = $_POST['editdns'];
     $rate = $_POST['editrate'];
     $id = $_POST['edit_sp'];
+    $editcookie = $_POST['editcookie'];
+    $editmaccookie = $_POST['editmaccookie'];
 
     include ('function.php');
 
@@ -27,6 +29,27 @@ if($_POST){
             "dns-name" => $dns,
             "rate-limit" => $rate
         ));
+        if($editmaccookie != '' && $editcookie == ''){
+            $API->comm("/ip/hotspot/profile/set", array(
+                ".id" => $id,
+                "login-by"  => "http-pap,mac-cookie"
+            ));
+        }elseif($editmaccookie != '' && $editcookie != ''){
+            $API->comm("/ip/hotspot/profile/set", array(
+                ".id" => $id,
+                "login-by"  => "http-pap,mac-cookie,cookie"
+            ));
+        }elseif($editmaccookie == '' && $editcookie == ''){
+            $API->comm("/ip/hotspot/profile/set", array(
+                ".id" => $id,
+                "login-by"  => "http-pap"
+            ));
+        }elseif($editmaccookie == '' && $editcookie != ''){
+            $API->comm("/ip/hotspot/profile/set", array(
+                ".id" => $id,
+                "login-by"  => "cookie,http-pap"
+            ));
+        }
             $output['success'] = true;
             $output['messages'] = "แก้ไขข้อมูลแล้ว";
     }
