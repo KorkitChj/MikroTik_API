@@ -1,13 +1,13 @@
 <?php
 session_start();
-include('function.php');
-include("includes/template_frontend/a_config.php");
+include('includes/datethai_function.php');
+include("includes/template_frontend/page_link_config.php");
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <?php include("includes/template_frontend/head-tag-contents.php"); ?>
+  <?php include("includes/template_frontend/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -146,7 +146,7 @@ include("includes/template_frontend/a_config.php");
       </div>
     </form>
   </div>
-  <script src="js/payment.js"></script>
+  <script src="js/main_site/payment.js"></script>
   <?php include("includes/template_frontend/footer.php"); ?>
 
 </body>

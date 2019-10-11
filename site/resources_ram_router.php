@@ -2,10 +2,8 @@
 session_start();
 ?>
 <?php
-//error_reporting(0);
+error_reporting(0);
 include('function.php');
-require('../includes/connect_db.php');
-//require('../config/pusher/src/Pusher.php');
 $cus_id = $_SESSION['cus_id'];
 $location_id = $_SESSION['location_id'];
 
@@ -24,10 +22,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
     $boardname =    $ARRAY['0']['board-name'];
     $version =    $ARRAY['0']['version'];
     $uptime =    $ARRAY['0']['uptime'];
-    //$json = [];
-    //$json[] = $ram;
-    //$json[] = $totalram;
-
+    
     $value = array(
         array(
             'name' => 'Free Memory',

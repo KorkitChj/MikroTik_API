@@ -1,18 +1,18 @@
 <?php
 session_start();
-include("../includes/template_backend/admin/a_config.php");
+include("../includes/template_backend/admin/page_link_config.php");
 $admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
     Header("Location:../index.php");
 }
-include('function.php');
+include('../process/admin/function.php');
 
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -22,71 +22,64 @@ include('function.php');
         <?php include('changpw.php'); ?>
         <main class="page-content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="box-2">
-                            <center>
-                                <h5>รายการเจ้าของไซต์</h5>
-                            </center>
+                <div class="box">
+                    <div class="row">
+                        <div class="col-md">
+                            <div id="btn_padding" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
+                                    <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
+                                </button>
+                                <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='manage.php'">
+                                    <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div id="btn_padding" class="btn-group btn-group-toggle box-2" data-toggle="buttons">
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
-                                <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
-                            </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='manage.php'">
-                                <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <form id="date_picker" method="post">
-                            <div class="box-2">
-                                <div class="row">
-                                    <div class="col-md">
-                                        <div class="row">
-                                            <div class="col-md">
-                                                <label for="start_date">วันเริ่มต้น</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="far fa-calendar-alt"></i>
+                        <div class="col-md-5" style="margin:10px 10px">
+                            <form id="date_picker" method="post">
+                                <div class="box-2">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <label for="start_date">วันเริ่มต้น</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <i class="far fa-calendar-alt"></i>
+                                                            </div>
                                                         </div>
+                                                        <input id="start_date" name="start_date" class="datepicker form-control" data-date-format="mm/dd/yyyy" readonly>
                                                     </div>
-                                                    <input id="start_date" name="start_date" class="datepicker form-control" data-date-format="mm/dd/yyyy" readonly>
                                                 </div>
-                                            </div>
-                                            <div class="col-md">
-                                                <label for="start_date">วันหมดอายุ</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="far fa-calendar-times"></i>
+                                                <div class="col-md">
+                                                    <label for="start_date">วันหมดอายุ</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <i class="far fa-calendar-times"></i>
+                                                            </div>
                                                         </div>
+                                                        <input id="end_date" name="end_date" class="datepicker form-control" data-date-format="mm/dd/yyyy" readonly>
                                                     </div>
-                                                    <input id="end_date" name="end_date" class="datepicker form-control" data-date-format="mm/dd/yyyy" readonly>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div style="margin-top:1em" class="col-md">
-                                        <input type="submit" name="export" onclick="datepicker(); return false" value="ดาวโหลดไฟล์ CSV" class="btn-sm btn btn-info" />
+                                    <div class="row">
+                                        <div style="margin-top:1em" class="col-md">
+                                            <input type="submit" name="export" onclick="datepicker(); return false" value="ดาวโหลดไฟล์ CSV" class="btn-sm btn btn-info" />
+                                        </div>
                                     </div>
                                 </div>
+                            </form>
+                        </div>
+                        <div class="col-md">
+                            <div class="float-right">
+                                <span class="badge-pill badge-danger">ลบ</span>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-md">
-                        <div class="float-right">
-                            <span class="badge-pill badge-danger">ลบ</span>
                         </div>
                     </div>
-                </div>
-                <hr>
-                <div class="box">
+                    <hr>
                     <div class="table-responsive">
                         <table id="managemember" class="table table-sm table-striped table-hover " style="width:100%">
                             <thead class="aa">
@@ -140,7 +133,7 @@ include('function.php');
                         </div>
                     </div>
                 </div>
-                <script src="../js/manage.js"></script>
+                <script src="../js/admin/manage.js"></script>
             </div>
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>

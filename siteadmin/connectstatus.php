@@ -1,17 +1,17 @@
 <?php
 session_start();
-include("../includes/template_backend/site_admin/a_config.php");
+include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
     Header("Location:../index.php");
 }
-include('expired.php');
-include('function.php');
+include('../process/site_admin/expired_process.php');
+include('../process/site_admin/function.php');
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include_once("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include_once("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -22,9 +22,6 @@ include('function.php');
         <?php include('changpwsite.php'); ?>
         <main class="page-content">
             <div class="container-fluid">
-                <div class="row"><div class="col-md">
-                <h5>เชื่อมต่อ Site</h5>
-                </div></div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <div class="box">
@@ -278,10 +275,10 @@ include('function.php');
                         </div>
                     </div>
                 </div>
-                <script src="../js/connectstatus.js"></script>
+                <script src="../js/site_admin/connectstatus.js"></script>
             </div>
             <?php include("../includes/template_backend/admin/footer.php"); ?>
-            <?php include('useronlinejs.php'); ?>
+            <?php include('../process/site_admin/useronlinejs_process.php'); ?>
         </main>
     </div>
 </body>

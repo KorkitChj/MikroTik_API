@@ -1,12 +1,12 @@
 <?php
-include("includes/template_frontend/a_config.php");
-include("function.php");
+include("includes/template_frontend/page_link_config.php");
+include("includes/datethai_function.php");
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include("includes/template_frontend/head-tag-contents.php"); ?>
+    <?php include("includes/template_frontend/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -98,7 +98,7 @@ include("function.php");
             </div>
         </div>
     </div>
-    <script src="js/transfer.js"></script>
+    <script src="js/main_site/transfer.js"></script>
     <?php include("includes/template_frontend/footer.php"); ?>
 </body>
 

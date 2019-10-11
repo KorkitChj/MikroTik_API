@@ -32,7 +32,7 @@
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "connectstatus") { ?>pad-a<?php } ?>">
                     <a href="connectstatus.php">
-                        <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
+                        <i class="glyphicon glyphicon-home"></i>&nbsp;เชื่อมต่อ Site</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "invoice") { ?>pad-a<?php } ?>">
                     <a href="invoice.php">
@@ -43,25 +43,25 @@
                         <i class="glyphicon glyphicon-edit"></i>
                         เปลี่ยนรหัสผ่าน</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
                         <i class="fab fa-get-pocket"></i>&nbsp;
                         แจ้งอัพเดท Packet</a>
-                </li>
+                </li> -->
                 <li>
                 <a href="" data-toggle="modal" data-target="#addImageModal" id="addImageModalBtn">
                         <i class="fas fa-user-plus"></i>&nbsp;แก้ไข Profile </a>
+                </li>
+                <li>
+                    <a href="#" class="logout">
+                        <i class="fas fa-sign-out-alt"></i>&nbsp;
+                        Logout</a>
                 </li>
             </ul>
         </div>
         <!-- sidebar-menu  -->
     </div>
     <!-- sidebar-content  -->
-    <div class="sidebar-footer">
-        <a href="#" class="logout">
-            <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-        </a>
-    </div>
 </nav>
 <div class="modal fade" tabindex="-1" role="dialog" id="addImageModal">
     <div class="modal-dialog" role="document">
@@ -92,10 +92,10 @@
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+<!-- <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <!-- <form id="packet_form" action="" enctype="multipart/form-data" name="form1" method="post">
+            <form id="packet_form" action="" enctype="multipart/form-data" name="form1" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">แจ้งอัพเดท Packet</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -103,7 +103,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h4 style="color:red">Packet ที่ใช้งานอยู่คือ <?php echo fetch_packet() ?></h4>
+                        <h4 style="color:red">Packet ที่ใช้งานอยู่คือ </h4>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline3" value="3" name="customRadioInline1" class="custom-control-input" required>
                             <label class="custom-control-label" for="customRadioInline3">เปลี่ยน Packet เป็นราคา 200 บาท</label>
@@ -132,7 +132,7 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                             <button type="submit" id="updatepacket" class="btn btn-primary">บันทึก</button>
                         </div>
-                </form> -->
+                </form>
             <form id="packet_form" action="" enctype="multipart/form-data" name="form1" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">แจ้งอัพเดท Packet</h5>
@@ -141,7 +141,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h4 style="color:red">Packet ที่ใช้งานอยู่คือ <?php echo fetch_packet() == 1 ? 'ราคา 500' : 'ราคา 1000' ?></h4>
+                    <h4 style="color:red">Packet ที่ใช้งานอยู่คือ </h4>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="customRadioInline1" value="2" name="customRadioInline1" class="custom-control-input" required>
                         <label class="custom-control-label" for="customRadioInline1">เปลี่ยน Packet เป็นราคา 1000 บาท</label>
@@ -208,5 +208,5 @@
             </form>
         </div>
     </div>
-</div>
-<script src="../js/site_image.js"></script>
+</div> -->
+<script src="../js/site_admin/site_image.js"></script>

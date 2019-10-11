@@ -1,17 +1,17 @@
 <?php
 session_start();
-include("../includes/template_backend/site_admin/a_config.php");
+include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
   Header("Location:../index.php");
 }
-include('expired.php');
-include('function.php');
+include('../process/site_admin/expired_process.php');
+include('../process/site_admin/function.php');
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <?php include_once("../includes/template_backend/admin/head-tag-contents.php"); ?>
+  <?php include_once("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -24,7 +24,7 @@ include('function.php');
         <h2>ใบ Invoice</h2>
         <div class="row">
           <div class="form-group col-md-12">
-            <a href="<?php echo 'print_invoice.php?id=' . $_SESSION["cus_id"] . '' ?>" class="btn btn-primary pull pull-right" id="invoice">
+            <a href="<?php echo '../process/site_admin/print_invoice_process.php?id=' . $_SESSION["cus_id"] . '' ?>" class="btn btn-primary pull pull-right" id="invoice">
               <span class="glyphicon glyphicon-print"></span>พิมพ์
             </a>
             <br /><br />
@@ -32,7 +32,7 @@ include('function.php');
         </div>
       </div>
       <?php include("../includes/template_backend/admin/footer.php"); ?>
-      <?php include('useronlinejs.php');?>
+      <?php include('../process/site_admin/useronlinejs_process.php'); ?>
     </main>
   </div>
 </body>

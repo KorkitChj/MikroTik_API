@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/template_backend/employee/a_config.php");
+include("../includes/template_backend/employee/page_link_config.php");
 if (!$_SESSION["emp_id"]) {
     Header("Location:../index.php");
 }
@@ -19,7 +19,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
 <html>
 
 <head>
-    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include("../includes/template_backend/admin/head_tag_contents.php"); ?>
     <style>
         #coupong {
             background: #f1f1f1;
@@ -72,8 +72,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                             <th width="3%">#</th>
                                             <th width="3%">Name</th>
                                             <th width="3%">Profile</th>
-                                            <th width="3%">Limit-UpTime</th>
-                                            <th width="3%">UpTime</th>
+                                            <th width="3%">จำนวนวันใช้งาน</th>
                                             <th width="3%">หมดอายุ</th>
                                             <th width="3%">Options</th>
                                         </tr>
@@ -133,7 +132,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="limituptime" class="col-sm control-label">Limit-Uptime:&nbsp;</label>
                                     <div class="col-sm-12 input-group">
                                         <div class="input-group-prepend">
@@ -143,7 +142,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                         </div>
                                         <input type="text" class="form-control" name="limituptime" id="limituptime" placeholder="หมดอายุ เช่น 1d 00:00:00" required>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- <div class="form-group">
                             <label for="comment" class="col-sm control-label">Comment:&nbsp;</label>
                             <div class="col-sm-12 input-group">
@@ -269,7 +268,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="limituptimes">Limit-Uptime:&nbsp;</label>
                                             <div class="input-group">
@@ -281,7 +280,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                                 <input type="text" class="form-control" name="limituptimes" id="limituptimes" placeholder="หมดอายุ เช่น 1d 00:00:00" required>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- <div class="form-row">
                             <div class="col-sm-6">
@@ -412,7 +411,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="limituptimest">Limit-Uptime:&nbsp;</label>
                                             <div class="input-group">
@@ -424,7 +423,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                                 <input type="text" class="form-control" name="limituptimest" id="limituptimest" placeholder="หมดอายุ เช่น 1d 00:00:00" required>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- <div class="form-row">
                             <div class="col-sm-6">
@@ -500,7 +499,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="editlimituptime" class="col-sm control-label">Limit-Uptime:&nbsp;</label>
                                     <div class="col-sm-12 input-group">
                                         <div class="input-group-prepend">
@@ -510,7 +509,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                         </div>
                                         <input type="text" class="form-control" name="editlimituptime" id="editlimituptime" placeholder="หมดอายุ เช่น 1d 00:00:00" required>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- <div class="form-group">
                             <label for="editcomment" class="col-sm control-label">หมดอายุ:&nbsp;</label>
                             <div class="col-sm-12 input-group">
@@ -566,11 +565,52 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                     </div>
                 </div>
             </div>
-            <script src="../js/userstatus.js"></script>
+            <div class="modal fade " tabindex="-1" role="dialog" id="addProfileModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><span class="glyphicon glyphicon-plus"></span>เพิ่ม User Profile</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" id="addProfile" method="post">
+                                <div class="form-group">
+                                    <label for="shared" class="col-sm control-label">จำนวนผู้ใช้งาน:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="glyphicon glyphicon-user"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="shared" id="shared" placeholder="1" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="datelimit" class="col-sm control-label">จำนวนวันที่ใช้งานได้:&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="datelimit" id="datelimit" placeholder="1 วัน" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                                    <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
+                                    <button type="submit" class="btn btn-success" id="addProfileBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="../js/site_emp/userstatus.js"></script>
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
     </div>
-    <script src="../js/alert_disconnect_emp_site.js"></script>
+    <script src="../js/site_emp/alert_disconnect_emp_site.js"></script>
 </body>
 
 </html>

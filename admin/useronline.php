@@ -1,18 +1,18 @@
 <?php
 session_start();
-include("../includes/template_backend/admin/a_config.php");
+include("../includes/template_backend/admin/page_link_config.php");
 $admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
     Header("Location:../index.php");
 }
-include('function.php');
+include('../process/admin/function.php');
 
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -51,7 +51,7 @@ include('function.php');
                 function fetch_user_login_data() {
                     var action = "fetch_data";
                     $.ajax({
-                        url: "useronline_action.php",
+                        url: "../process/admin/useronline_process.php",
                         method: "POST",
                         data: {
                             action: action

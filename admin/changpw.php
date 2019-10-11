@@ -79,7 +79,7 @@
             function(isConfirm) {
                 if (isConfirm) {
                     swal("ออกจากระบบ!", "ออกจากระบบเสร็จสิ้น!", "success");
-                    window.location.href = "admin_logout.php";
+                    window.location.href = "../process/admin/logout_process.php";
                 } else {
                     swal("ยกเลิก", "ยกเลิกออกจากระบบ :)", "error");
                     e.preventDefault();
@@ -136,7 +136,7 @@
             if (changpw.valid()) {
                 var form = $(this);
                 var ajaxRequest = $.ajax({
-                    url: 's_changpw.php',
+                    url: '../process/admin/changpw_process.php',
                     type: 'POST',
                     data: form.serialize(),
                     dataType: 'json',

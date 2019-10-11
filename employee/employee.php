@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/template_backend/employee/a_config.php");
+include("../includes/template_backend/employee/page_link_config.php");
 if (!$_SESSION["emp_id"]) {
     Header("Location:../index.php");
 }
@@ -14,7 +14,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($emp_id);
 <html>
 
 <head>
-    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -59,10 +59,10 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($emp_id);
                                             echo "<td>" . $ARRAY['0']['cpu-load'] . "%</td>";
                                             echo "<td>" . round($ram, 1) . " MB</td>";
                                             echo "<td>" . round($hdd, 1) . " MB</td>";
-                                            echo "<td><button type=\"button\" class=\"btn btn-success btn-sm\"><i class=\"fa fa-check\"></i> CONNECT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></td>";
+                                            echo "<td><button type=\"button\" class=\"btn btn-success btn-sm\"><i class=\"fa fa-check\"></i> CONNECT</button></td>";
                                             $conn = "connect";
                                             echo "<td>                   
-                                <a  href=\"site_conn.php?&conn=" . $conn . "\">
+                                <a  href=\"../process/site_emp/site_conn.php?&conn=" . $conn . "\">
                                 <button type=\"button\" class=\"btn btn-info btn-sm\" title=\"เข้าบริหารจัดการ\">
                                 <i class=\"glyphicon glyphicon-new-window\"></i></button></a>";
                                             echo "</td>";

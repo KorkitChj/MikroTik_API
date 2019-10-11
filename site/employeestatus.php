@@ -1,10 +1,10 @@
 <?php
 session_start();
-include("../includes/template_backend/site_admin/a_config.php");
+include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
     Header("Location:../index.php");
 }
-include('../siteadmin/expired.php');
+include('../process/site_admin/expired_process.php');
 include('function.php');
 error_reporting(0);
 $cus_id = $_SESSION['cus_id'];
@@ -15,15 +15,12 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
 if ($API->connect($ip . ":" . $port, $user, $pass)) {
     $ARRAY = $API->comm("/user/group/print");
 }
-
-//include('service_fetch.php');
-
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include_once("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include_once("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -92,7 +89,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form action="addgroup.php" id="addGroup" method="post">
+                    <form action="../process/site_admin_router/group_add_process.php" id="addGroup" method="post">
                         <div class="form-group">
                             <label for="namegroup" class="col-sm control-label">ชื่อกลุ่ม: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
@@ -375,9 +372,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
             </div>
         </div>
     </div>
-    <script src="../js/employeestatus.js"></script>
-    <script src="../js/alert_disconnect.js"></script>
-    <?php include('../siteadmin/useronlinejs.php'); ?>
+    <script src="../js/site_admin/employeestatus.js"></script>
+    <?php include('../process/site_admin/useronlinejs_process.php'); ?>
 </body>
 
 </html>

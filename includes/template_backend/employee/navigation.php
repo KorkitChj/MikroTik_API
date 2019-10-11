@@ -38,21 +38,21 @@
                         <i class="glyphicon glyphicon-edit"></i>&nbsp;
                         เปลี่ยนรหัสผ่าน</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
                         <i class="fab fa-get-pocket"></i>&nbsp;
                         แจ้งอัพเดท Packet</a>
+                </li> -->
+                <li>
+                    <a href="#" class="logout">
+                        <i class="fas fa-sign-out-alt"></i>&nbsp;
+                        Logout</a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="sidebar-footer">
-        <a href="#" class="logout">
-            <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-        </a>
-    </div>
 </nav>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="packet_form" method="post">
@@ -73,8 +73,8 @@
             </form>
         </div>
     </div>
-</div>
-<script>
+</div> -->
+<!-- <script>
     $(document).on('submit', '#packet_form', function(event) {
         event.preventDefault();
         var comment = $("#comment").val();
@@ -96,5 +96,5 @@
             });
         }
     });
-</script>
-<script src="../js/logout.js"></script>
+</script> -->
+<script src="../js/site_emp/logout.js"></script>

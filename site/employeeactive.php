@@ -1,10 +1,10 @@
 <?php
 session_start();
-include("../includes/template_backend/site_admin/a_config.php");
+include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
     Header("Location:../index.php");
 }
-include('../siteadmin/expired.php');
+include('../process/site_admin/expired_process.php');
 include('function.php');
 error_reporting(0);
 $cus_id = $_SESSION['cus_id'];
@@ -23,7 +23,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
 <html>
 
 <head>
-    <?php include_once("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include_once("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -47,7 +47,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
             <script src="../js/alert_disconnect.js"></script>
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
-        <?php include('../siteadmin/useronlinejs.php'); ?>
+        <?php include('../process/site_admin/useronlinejs_process.php'); ?>
         <script>
             $(document).ready(function() {
                 <?php
@@ -61,7 +61,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                     function fetch_employee_data() {
                         var action = "fetch_data";
                         $.ajax({
-                            url: "employeeonline_action.php",
+                            url: "../process/site_admin_router/employeeonline_action_process.php",
                             method: "POST",
                             data: {
                                 action: action

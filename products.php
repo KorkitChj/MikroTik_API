@@ -1,8 +1,8 @@
 <?php
 session_start();
 $_SESSION['order'] = "order";
-include("includes/template_frontend/a_config.php");
-include('includes/connect_db.php');
+include("includes/template_frontend/page_link_config.php");
+include('includes/db_connect.php');
 $query = $conn->prepare("SELECT * FROM product ORDER BY price ASC");
 $query->execute();
 $result = $query->fetchAll();
@@ -12,7 +12,7 @@ $result = $query->fetchAll();
 <html>
 
 <head>
-    <?php include("includes/template_frontend/head-tag-contents.php"); ?>
+    <?php include("includes/template_frontend/head_tag_contents.php"); ?>
 </head>
 
 <body id="products">

@@ -40,34 +40,39 @@
                         &nbsp;รายการ Users</a>
                 </li>
                 <?php if ($CURRENT_PAGE == "userstatus") { ?>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#addUserModal" id="addUserModalBtn">
-                        <i class="fas fa-user "></i>&nbsp;เพิ่ม User ครั้งละ 1 คน
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#addUsersNumModal" id="addUsersNumModalBtn">
-                        <i class="fas fa-users "></i>&nbsp;เพิ่ม Users แบบกลุ่มตัวเลข 0-9
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#addUsersStringModal" id="addUsersStringModalBtn">
-                        <i class="fas fa-users "></i >&nbsp;เพิ่ม Users แบบกลุ่ม A-Z
-                    </a>
-                </li>
-                <li>
-                    <a href="employee.php">
-                        <i class="glyphicon glyphicon-log-out"></i>&nbsp;
-                        กลับหน้าหลัก</a>
-                </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#addUserModal" id="addUserModalBtn">
+                            <i class="fas fa-user "></i>&nbsp;เพิ่ม User ครั้งละ 1 คน
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#addUsersNumModal" id="addUsersNumModalBtn">
+                            <i class="fas fa-users "></i>&nbsp;เพิ่ม Users แบบกลุ่มตัวเลข 0-9
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#addUsersStringModal" id="addUsersStringModalBtn">
+                            <i class="fas fa-users "></i>&nbsp;เพิ่ม Users แบบกลุ่ม A-Z
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#addProfileModal" id="addProfileModalBtn">
+                            <i class="glyphicon glyphicon-plus "></i>&nbsp;เพิ่ม Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="employee.php">
+                            <i class="glyphicon glyphicon-log-out"></i>&nbsp;
+                            กลับหน้าหลัก</a>
+                    </li>
+                    <li>
+                        <a href="#" class="logout">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;
+                            Logout</a>
+                    </li>
                 <?php } ?>
             </ul>
         </div>
     </div>
-    <div class="sidebar-footer">
-        <a href="#" class="logout">
-            <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-        </a>
-    </div>
 </nav>
-<script src="../js/logout.js"></script>
+<script src="../js/site_emp/logout.js"></script>

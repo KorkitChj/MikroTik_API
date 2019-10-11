@@ -1,14 +1,14 @@
-<?php include("includes/template_frontend/a_config.php"); ?>
+<?php include("includes/template_frontend/page_link_config.php"); ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include("includes/template_frontend/head-tag-contents.php"); ?>
+    <?php include("includes/template_frontend/head_tag_contents.php"); ?>
 </head>
 
 <body>
 
-    <?php include("includes/template_frontend/template_top.php"); ?>
+    <?php include("includes/template_frontend/carousel_slide.php"); ?>
     <?php include("includes/template_frontend/navigation.php"); ?>
 
     <div class="container-fluid">

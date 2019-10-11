@@ -11,7 +11,7 @@
         </div>
         <div class="sidebar-header">
             <div class="user-pic">
-                <div id="load"><?php echo admin_image_profile($_SESSION["admin_id"]); ?></div><button class="btn btn-primary btn-sm" title="Add Image" data-toggle="modal" data-target="#addImageModal" id="addImageModalBtn"><i class="fas fa-user-plus"></i></button>
+                <div id="load"><?php echo admin_image_profile($_SESSION["admin_id"]); ?></div>
             </div>
             <div class="user-info">
                 <span class="user-name">
@@ -62,15 +62,19 @@
                         <i class="glyphicon glyphicon-edit"></i>&nbsp;
                         เปลี่ยนรหัสผ่าน</a>
                 </li>
+                <li>
+                    <a href="" data-toggle="modal" data-target="#addImageModal" id="addImageModalBtn">
+                        <i class="fas fa-user-plus"></i>&nbsp;
+                        แก้ไข Profile</a>
+                </li>
+                <li>
+                    <a href="#" class="logout">
+                        <i class="fas fa-sign-out-alt"></i>&nbsp;
+                        Logout</a>
+                </li>
             </ul>
         </div>
         <!-- sidebar-menu  -->
-    </div>
-    <!-- sidebar-content  -->
-    <div class="sidebar-footer">
-        <a href="#" class="logout">
-            <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-        </a>
     </div>
 </nav>
 <!-- addprofile modal -->
@@ -103,4 +107,4 @@
         </div>
     </div>
 </div>
-<script src="../js/admin_image.js"></script>
+<script src="../js/admin/profile_admin.js"></script>

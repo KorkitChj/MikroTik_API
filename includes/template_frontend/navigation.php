@@ -58,7 +58,7 @@
         </div>
     </nav>
 </div>
-<script src="js/login.js"></script>
+<script src="js/main_site/login.js"></script>
 <script>
     $(document).ready(function() {
         $('.navbar-light .dmenu').hover(function() {

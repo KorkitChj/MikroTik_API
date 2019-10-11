@@ -2,13 +2,13 @@
 session_start();
 if (isset($_GET['user']) == 'user_register')
     $user_register = 'user_register';
-include("includes/template_frontend/a_config.php");
+include("includes/template_frontend/page_link_config.php");
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include("includes/template_frontend/head-tag-contents.php"); ?>
+    <?php include("includes/template_frontend/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -124,7 +124,7 @@ include("includes/template_frontend/a_config.php");
                 </div>
             </div>
         </div>
-        <script src="js/register.js"></script>
+        <script src="js/main_site/register.js"></script>
 
     </div>
     <?php include("includes/template_frontend/footer.php"); ?>

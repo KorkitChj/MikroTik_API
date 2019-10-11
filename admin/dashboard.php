@@ -1,12 +1,12 @@
 <?php
 session_start();
-include("../includes/template_backend/admin/a_config.php");
+include("../includes/template_backend/admin/page_link_config.php");
 $admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
     Header("Location:../index.php");
 }
-include('../includes/connect_db.php');
-include('function.php');
+include('../includes/db_connect.php');
+include('../process/admin/function.php');
 
 $query = $conn->prepare("SELECT * FROM siteadmin");
 $query->execute();
@@ -38,7 +38,7 @@ $count = $statement->rowCount();
 <html>
 
 <head>
-    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>

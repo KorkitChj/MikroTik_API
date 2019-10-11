@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/template_backend/employee/a_config.php");
+include("../includes/template_backend/employee/page_link_config.php");
 if (!$_SESSION["emp_id"]) {
     Header("Location:../index.php");
 }
@@ -14,7 +14,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($emp_id);
 <html>
 
 <head>
-    <?php include_once("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include_once("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -110,7 +110,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($emp_id);
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
     </div>
-    <script src="../js/alert_disconnect_emp_site.js"></script>
+    <script src="../js/site_emp/alert_disconnect_emp_site.js"></script>
 </body>
 
 </html>

@@ -41,4 +41,4 @@
         x.innerHTML = day + " " + date + " " + month + " " + (year + 543) + " " + hr + ":" + min;
     });
 </script>
-<script src="../js/alert_disconnect.js"></script>
+<script src="../js/site_admin/alert_disconnect.js"></script>

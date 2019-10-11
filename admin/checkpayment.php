@@ -1,18 +1,18 @@
 <?php
 session_start();
-include("../includes/template_backend/admin/a_config.php");
+include("../includes/template_backend/admin/page_link_config.php");
 $admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
     Header("Location:../index.php");
 }
-include('function.php');
+include('../process/admin/function.php');
 
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -23,34 +23,29 @@ include('function.php');
         <main class="page-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="box-2">
-                            <center><h5>รายการยืนยันชำระเงิน</h5></center>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="btn-group btn-group-toggle box-2" data-toggle="buttons">
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
-                                <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
-                            </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='checkpayment.php'">
-                                <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="float-right">
-                            <div>
-                                <span class="badge-pill badge-warning">ดาวโหลด</span>
-                                <span class="badge-pill badge-info">ยืนยันการชำระเงิน</span>
-                                <span class="badge-pill badge-danger">ลบ</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="form-group col-md-12">
+                    <div class="col-md-12">
                         <div class="box">
+                            <div class="row">
+                                <div class="col-md" style="margin:10px 10px">
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
+                                            <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='checkpayment.php'">
+                                            <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                                    </div>
+                                </div>
+                                <div class="col-md">
+                                    <div class="float-right">
+                                        <div>
+                                            <span class="badge-pill badge-warning">ดาวโหลด</span>
+                                            <span class="badge-pill badge-info">ยืนยันการชำระเงิน</span>
+                                            <span class="badge-pill badge-danger">ลบ</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="table-responsive">
                                 <table id="MemberTable" class="table table-striped table-hover table-sm" style="width:100%">
                                     <thead class="aa">
@@ -140,7 +135,7 @@ include('function.php');
                         </div>
                     </div>
                 </div>
-                <script src="../js/checkpayment.js"></script>
+                <script src="../js/admin/checkpayment.js"></script>
             </div>
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>

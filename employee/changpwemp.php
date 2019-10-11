@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/template_backend/employee/a_config.php");
+include("../includes/template_backend/employee/page_link_config.php");
 if (!$_SESSION["emp_id"]) {
     Header("Location:../index.php");
 }
@@ -13,7 +13,7 @@ $emp_id = $_SESSION['emp_id'];
 <html>
 
 <head>
-    <?php include("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -138,7 +138,7 @@ $emp_id = $_SESSION['emp_id'];
                 if (changpw.valid()) {
                     var form = $(this);
                     var ajaxRequest = $.ajax({
-                        url: 's_changpw.php',
+                        url: '../process/site_emp/changpw_process.php',
                         type: 'POST',
                         data: form.serialize(),
                         dataType: 'json',

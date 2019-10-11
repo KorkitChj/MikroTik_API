@@ -1,16 +1,14 @@
 <?php
 session_start();
-include("../includes/template_backend/site_admin/a_config.php");
+include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
     Header("Location:../index.php");
 }
-include('../siteadmin/expired.php');
+include('../process/site_admin/expired_process.php');
 include('function.php');
 error_reporting(0);
 $cus_id = $_SESSION['cus_id'];
 $location_id = $_SESSION['location_id'];
-
-//include('service_fetch.php');
 
 list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
@@ -24,7 +22,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
 <html>
 
 <head>
-    <?php include_once("../includes/template_backend/admin/head-tag-contents.php"); ?>
+    <?php include_once("../includes/template_backend/admin/head_tag_contents.php"); ?>
 </head>
 
 <body>
@@ -170,7 +168,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
     </div>
-    <?php include('../siteadmin/useronlinejs.php'); ?>
+    <?php include('../process/site_admin/useronlinejs_process.php'); ?>
 </body>
 
 </html>

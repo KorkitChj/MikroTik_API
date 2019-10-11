@@ -69,12 +69,12 @@
                         <i class="glyphicon glyphicon-log-out"></i>&nbsp;
                         กลับหน้าหลัก</a>
                 </li>
+                <li>
+                    <a href="#" class="logout">
+                        <i class="fas fa-sign-out-alt"></i>&nbsp;
+                        Logout</a>
+                </li>
             </ul>
         </div>
-    </div>
-    <div class="sidebar-footer">
-        <a href="#" class="logout">
-            <i class="fas fa-sign-out-alt">ออกจากระบบ</i>
-        </a>
     </div>
 </nav>
