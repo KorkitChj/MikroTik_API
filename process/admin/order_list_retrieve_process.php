@@ -3,14 +3,17 @@ include('../../includes/db_connect.php');
 include('../../includes/datethai_function.php');
 include('function.php');
 $output = array();
-$column = array("","b.order_id", "c.product_name", "c.price", "b.appointment","a.username");
+$column = array("","b.order_id", "a.username", "c.price", "b.appointment","c.product_name");
 $query = '';
 $query .= "SELECT b.order_id,c.product_name,c.price,b.appointment,a.username 
 FROM siteadmin AS a 
 INNER JOIN orderpd AS b on a.cus_id = b.cus_id 
 INNER JOIN product AS c on c.product_id = b.product_id ";
 $query .= " WHERE ";
-
+if(isset($_POST["is_category"]))
+{
+ $query .= "c.price = '".$_POST["is_category"]."' AND ";
+}
 if (isset($_POST["search"]["value"]))
 {
 	$query .= '(b.order_id LIKE "'.$_POST["search"]["value"]. '%" ';
@@ -58,10 +61,10 @@ $sub_array[] = '
 ';
 	$appointment = DateThai($val["appointment"]);
 	$sub_array[] = $val["order_id"];
-	$sub_array[] = $val["product_name"];
-	$sub_array[] = $val["price"];
-	$sub_array[] = $appointment;
 	$sub_array[] = $val["username"];
+	$sub_array[] = $val["price"]." บาท";
+	$sub_array[] = $appointment;
+	$sub_array[] = $val["product_name"];
 	$sub_array[] = '<button type="button" name="delete" onclick="removeOrder('.$val["order_id"].')" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#removeOrderModal"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button>';
 	$data[] = $sub_array;
 }

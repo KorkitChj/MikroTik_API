@@ -3,9 +3,9 @@ $(document).ready(function () {
     MemberTable = $("#MemberTable").DataTable({
         "processing": true,
         "serverSide": true,
-        "order": [[2, "desc"]],
+        "order": [[1, "desc"]],
         "ajax": {
-            url: "../process/admin/checkpayment_retrieve_process.php",
+            url: "../process/admin/order_upgrade_retrieve_process.php",
             type: "POST"
         },
         "columnDefs": [{
@@ -42,10 +42,10 @@ function removeMember(id) {
     if (id) {
         $("#removeBtn").off('click').on('click', function () {
             $.ajax({
-                url: '../process/admin/del_process.php',
+                url: '../process/admin/order_upgrade_del_process.php',
                 type: 'post',
                 data: {
-                    cus_id: id
+                    pu_id: id
                 },
                 dataType: 'json',
                 success: function (response) {
@@ -76,10 +76,10 @@ $('#removeAllBtn').click(function () {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
         $.ajax({
-            url: '../process/admin/del_check_process.php',
+            url: '../process/admin/order_upgrade_del_check_process.php',
             method: 'POST',
             data: {
-                cus_id: cus_id
+                pu_id: cus_id
             },
             dataType: 'json',
             success: function (response) {
@@ -96,15 +96,26 @@ $('#removeAllBtn').click(function () {
         });
     }
 });
-function confirmMember(id) {
-    if (id) {
+$(document).on('click', '.displayimg', function(){
+    var slip_name = $(this).attr("id");
+    $.ajax({
+        url:"../process/admin/fetch_img_process.php",
+        method:"POST",
+        data:{slip_name:slip_name},
+        dataType:"json",
+        success:function(data)
+        {
+            $('#slip').html(data.user_image);
+        }
+    })
+});
+function confirmMember(puid,cus_id) {
+    if (puid && cus_id) {
         $("#confirmBtn").off('click').on('click', function () {
             $.ajax({
-                url: '../process/admin/confirm_process.php',
+                url: '../process/admin/order_upgrade_confirm_process.php',
                 type: 'post',
-                data: {
-                    order_id: id
-                },
+                data: {puid: puid,cusid:cus_id},
                 dataType: 'json',
                 success: function (response) {
                     if (response.success == true) {
@@ -121,17 +132,4 @@ function confirmMember(id) {
         alert('Error: Refresh the page again');
     }
 }
-$(document).on('click', '.displayimg', function(){
-    var slip_name = $(this).attr("id");
-    $.ajax({
-        url:"../process/admin/fetch_img_process.php",
-        method:"POST",
-        data:{slip_name:slip_name},
-        dataType:"json",
-        success:function(data)
-        {
-            $('#slip').html(data.user_image);
-        }
-    })
-});
 

@@ -3,63 +3,56 @@ session_start();
 ?>
 <?php
 if ($_POST) {
-    include('../includes/connect_db.php');
+    include('../../includes/db_connect.php');
     include('function.php');
-    $output = array('messages' => array(),'success' => false);
+    $output = array('messages' => array(), 'success' => false);
     $banka = $_POST["bank"];
     $date = $_POST["date"];
     $money = $_POST["money"];
-    $packet = $_POST["customRadioInline1"];
+
+
     if ($banka == 1) {
         $bank = "ไทยพาญิชย์";
     } elseif ($banka == 2) {
         $bank = "กรุงไทย";
-    } elseif ($banka == 3) {
-        $bank = "กสิกรไทย";
-    } else {
-        $bank = "กรุงเทพ";
     }
-    $value = fetch_packet();
-    $new_value = explode(" ",$value);
-    $new_value2 = $new_value[4];
-    if ($new_value2 != $packet) {
-        $cus_id = $_SESSION['cus_id'];
-        $query = $conn->prepare("SELECT * FROM siteadmin AS a 
-        INNER JOIN orderpd AS b on a.cus_id = b.cus_id
-        INNER JOIN payment AS c on b.order_id = c.order_id 
-        WHERE a.cus_id = :cus_id");
-        $query->bindparam(':cus_id', $cus_id);
-        $query->execute();
-        $payment_id = '';
-        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-            $payment_id = $result['payment_id'];
-            unlink('../slips/' . $result['slip_name'] . '');
+
+    switch ($money) {
+        case "200":
+            $time_required = 31;
             break;
-        }
-        if ($_FILES["fileslip"]["name"] != '') {
-            $image = upload_imagepacket();
-        }
-        $sql = "UPDATE payment SET payment_at = :bank,transfer_date = :date,amount = :money,
-        slip_name = :image,paid = 0 WHERE payment_id = :payment_id";
-        $query = $conn->prepare($sql);
-        $query->execute(array(
-            ":bank" => $bank,
-            ":date" => $date,
-            ":money" => $money,
-            ":image" => $image,
-            ":payment_id" => $payment_id
-        ));
-        $sql2 = "UPDATE orderpd SET total_cash = :money,product_id = :product_id WHERE cus_id = :cus_id";
-        $query = $conn->prepare($sql2);
-        $query->execute(array(
-            ":money" => $money,
-            ":product_id" => $packet,
-            ":cus_id" => $cus_id
-        ));
-        $output['messages'] = "กรุณายืนยันการ Admin";
+        case "400":
+            $time_required = 62;
+            break;
+        case "600":
+            $time_required = 155;
+            break;
+        case "1000":
+            $time_required = 365;
+            break;
+        case "2000":
+            $time_required = 730;
+    }
+
+    if ($_FILES["fileslip"]["name"] != '') {
+        $image = upload_imagepacket();
+    }
+    $sql = "INSERT INTO packet_update VALUES(:id,:payment_at,:transfer_date,:amount,:slip_name,:time_required,:cus_id)";
+    $query = $conn->prepare($sql);
+    $query->execute(array(
+        ":id" => "",
+        ":payment_at" => $bank,
+        ":transfer_date" => $date,
+        ":amount" => $money,
+        ":slip_name" => $image,
+        ":time_required" => $time_required,
+        ":cus_id" => $_SESSION['cus_id']
+    ));
+    if($query != false){
+        $output['messages'] = "ดำเนินการแล้ว";
         $output['success'] = true;
     }else{
-        $output['messages'] = "กรุณาเลือก Packet ที่ไม่ใด้ใช้อยู่";
+        $output['messages'] = "ผิดพลาด";
         $output['success'] = false;
     }
 }

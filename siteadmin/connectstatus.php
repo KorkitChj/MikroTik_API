@@ -4,7 +4,6 @@ include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
     Header("Location:../index.php");
 }
-include('../process/site_admin/expired_process.php');
 include('../process/site_admin/function.php');
 ?>
 <!DOCTYPE html>
@@ -18,6 +17,7 @@ include('../process/site_admin/function.php');
 
     <div class="page-wrapper chiller-theme toggled">
         <?php include("../includes/template_backend/admin/bar_top.php"); ?>
+        <?php include("../process/site_admin/alert_expired.php");?>
         <?php include("../includes/template_backend/site_admin/navigation.php"); ?>
         <?php include('changpwsite.php'); ?>
         <main class="page-content">

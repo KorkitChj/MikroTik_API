@@ -43,13 +43,12 @@
                         <i class="glyphicon glyphicon-edit"></i>
                         เปลี่ยนรหัสผ่าน</a>
                 </li>
-                <!-- <li>
-                    <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
-                        <i class="fab fa-get-pocket"></i>&nbsp;
-                        แจ้งอัพเดท Packet</a>
-                </li> -->
                 <li>
-                <a href="" data-toggle="modal" data-target="#addImageModal" id="addImageModalBtn">
+                    <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
+                        <i class="fab fa-get-pocket"></i>&nbsp;อัพเดท Packet</a>
+                </li>
+                <li>
+                    <a href="" data-toggle="modal" data-target="#addImageModal" id="addImageModalBtn">
                         <i class="fas fa-user-plus"></i>&nbsp;แก้ไข Profile </a>
                 </li>
                 <li>
@@ -92,63 +91,48 @@
         </div>
     </div>
 </div>
-<!-- <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+<div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="packet_form" action="" enctype="multipart/form-data" name="form1" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">แจ้งอัพเดท Packet</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h4 style="color:red">Packet ที่ใช้งานอยู่คือ </h4>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline3" value="3" name="customRadioInline1" class="custom-control-input" required>
-                            <label class="custom-control-label" for="customRadioInline3">เปลี่ยน Packet เป็นราคา 200 บาท</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline4" value="2" name="customRadioInline1" class="custom-control-input" required>
-                            <label class="custom-control-label" for="customRadioInline4">เปลี่ยน Packet เป็นราคา 300 บาท</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline6" value="3" name="customRadioInline1" class="custom-control-input" required>
-                            <label class="custom-control-label" for="customRadioInline6">เปลี่ยน Packet เป็นราคา 500 บาท</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline9" value="4" name="customRadioInline1" class="custom-control-input" required>
-                            <label class="custom-control-label" for="customRadioInline9">เปลี่ยน Packet เป็นราคา 1000 บาท</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline10" value="5" name="customRadioInline1" class="custom-control-input" required>
-                            <label class="custom-control-label" for="customRadioInline10">เปลี่ยน Packet เป็นราคา 1500 บาท</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline11" value="6" name="customRadioInline1" class="custom-control-input" required>
-                            <label class="custom-control-label" for="customRadioInline11">เปลี่ยน Packet เป็นราคา 2000 บาท</label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                            <button type="submit" id="updatepacket" class="btn btn-primary">บันทึก</button>
-                        </div>
-                </form>
-            <form id="packet_form" action="" enctype="multipart/form-data" name="form1" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งอัพเดท Packet</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">อัพเดท Packet</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h4 style="color:red">Packet ที่ใช้งานอยู่คือ </h4>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline1" value="2" name="customRadioInline1" class="custom-control-input" required>
-                        <label class="custom-control-label" for="customRadioInline1">เปลี่ยน Packet เป็นราคา 1000 บาท</label>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <strong>
+                                <div class="bg-warning">นายก่อกิจ ชูจำ ธ.ไทยพาณิชย์ 123456890 ออมทรัพย์<br>นายก่อกิจ ชูจำ ธ.กรุงไทย 223344556 ออมทรัพย์</div>
+                            </strong>
+                        </div>
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline2" value="1" name="customRadioInline1" class="custom-control-input" required>
-                        <label class="custom-control-label" for="customRadioInline2">เปลี่ยน Packet เป็นราคา 500 บาท</label>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <h6>เวลาที่ต้องการเพิ่ม:&nbsp;</h6>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" value="200" name="days" class="custom-control-input" required>
+                                <label class="custom-control-label" for="customRadioInline1">1 เดือน</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline2" value="400" name="days" class="custom-control-input" required>
+                                <label class="custom-control-label" for="customRadioInline2">2 เดือน</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline3" value="600" name="days" class="custom-control-input" required>
+                                <label class="custom-control-label" for="customRadioInline3">5 เดือน</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline4" value="1000" name="days" class="custom-control-input" required>
+                                <label class="custom-control-label" for="customRadioInline4">1 ปี</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline5" value="1800" name="days" class="custom-control-input" required>
+                                <label class="custom-control-label" for="customRadioInline5">2 ปี</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="bank_info" class="control-label col-sm">ธนาคาร:&nbsp;</label>
@@ -162,8 +146,6 @@
                                 <option value="">----- เลือกธนาคาร-----</option>
                                 <option value="1">ธนาคารไทยพาญิชย์</option>
                                 <option value="2">ธนาคารกรุงไทย</option>
-                                <option value="3">ธนาคารกสิกรไทย</option>
-                                <option value="4">ธนาคารกรุงเทพ</option>
                             </select>
                         </div>
                     </div>
@@ -186,7 +168,7 @@
                                     <i class="fas fa-money-check-alt"></i>
                                 </div>
                             </div>
-                            <input type="number" name="money" placeholder="จำนวนเงิน" class="form-control" id="money" required>
+                            <input type="number" name="money" placeholder="จำนวนเงิน" class="form-control" id="money" value="" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -197,7 +179,8 @@
                                     <i class="far fa-file-image"></i>
                                 </div>
                             </div>
-                            <input type="file" name="fileslip" id="fileslip">
+                            <input type="file" name="fileslip" id="fileslip" onchange="readURL(this);" required>
+                            <img id="blah" src="#" alt="your image" width="400px"/>
                         </div>
                     </div>
                 </div>
@@ -208,5 +191,23 @@
             </form>
         </div>
     </div>
-</div> -->
+</div>
 <script src="../js/site_admin/site_image.js"></script>
+<script>
+    $('input[name=days]').change(function() {
+        var value = $('input[name=days]:checked').val();
+        $('#money').attr('value', value)
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

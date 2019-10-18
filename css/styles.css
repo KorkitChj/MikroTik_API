@@ -10,7 +10,7 @@ tr {
     height: 25px;   
 }
 th {
-    color:#585858 !important;
+    color:#000000 !important;
 }
 body{
     background: rgb(243, 244, 246) !important;
@@ -55,7 +55,7 @@ h2 {
         box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);  
 }
 .aa{
-    background-color:#99ccff;
+    background-color:#ffb006;
 }
 input[type=search]{
     width: 450px !important;
@@ -126,6 +126,10 @@ p {
 }
 #changpw {
     background-color:#f1f1f1;
+}
+.alert {
+    height: 6%;
+    margin-bottom:0 !important;
 }
 label.error {
     position: absolute;

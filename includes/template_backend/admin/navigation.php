@@ -52,6 +52,11 @@
                         <i class="glyphicon glyphicon-ok"></i>&nbsp;
                         ดำเนินการสมบูรณ์</a>
                 </li>
+                <li class="<?php if ($CURRENT_PAGE == "orderupgrade") { ?>pad-a<?php } ?>">
+                    <a href="order_upgrade.php">
+                        <i class="glyphicon glyphicon-repeat"></i>&nbsp;
+                        รายการอัพเกรด</a>
+                </li>
                 <li class="<?php if ($CURRENT_PAGE == "useronline") { ?>pad-a<?php } ?>">
                     <a href="useronline.php">
                         <i class="glyphicon glyphicon-globe"></i>&nbsp;

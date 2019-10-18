@@ -36,7 +36,7 @@ include('../process/admin/function.php');
                         </div>
                         <div class="col-md-5" style="margin:10px 10px">
                             <form id="date_picker" method="post">
-                                <div class="box-2">
+                                <div class="box">
                                     <div class="row">
                                         <div class="col-md">
                                             <div class="row">

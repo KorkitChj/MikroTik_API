@@ -7,9 +7,33 @@ $(document).ready(function () {
             type: "POST"
         },
         "columnDefs": [{
-            "targets": [0,7],
+            "targets": [0,6],
             "orderable": false,
         }],
+        "language": {
+            "sProcessing":    "กำลังดำเนินการ...",
+            "sLengthMenu":    "แสดง _MENU_ แถว",
+            "sZeroRecords":   "ไม่พบค้นหา",
+            "sEmptyTable":    "ไม่มีข้อมูลในตาราง",
+            "sInfo":          "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
+            "sInfoEmpty":     "แสดง 0 ถึง 0 ของ 0 แถว",
+            "sInfoFiltered":  "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoPostFix":   "",
+            "sSearch":        "ค้นหา:",
+            "sUrl":           "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "กำลังโหลดข้อมูล...",
+            "oPaginate": {
+                "sFirst":    "หน้าแรก",
+                "sLast":    "หน้าสุดท้าย",
+                "sNext":    "ถัดไป",
+                "sPrevious": "ก่อนหน้า"
+            },
+            "oAria": {
+                "sSortAscending":  ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+            }
+        }
     });
 });
 $("#addMemberModalBtn").click(function () {
@@ -184,24 +208,7 @@ function disableEmp(id) {
         });
     }
 }
-function viewMessage(Message){
-    //console.log(Message);
-    if(Message){
-        $.ajax({
-            url: '../process/site_admin_router/message_process.php',
-            type: 'POST',
-            data: {
-                'id': Message
-            },
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                $("#message").html("<h4>"+data+"</h4>");
-                $("#messageMemberModal").modal('show');
-            }
-        });
-    }
-}
+
 
                     
             

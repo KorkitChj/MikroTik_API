@@ -27,7 +27,12 @@ function get_total_all_records($data)
 		b.order_id = c.order_id WHERE c.paid = 0 ");
 		$statement->execute();
 		return $statement->rowCount();
-	} else {
+	} elseif($data == "upgrade"){
+		$statement = $conn->prepare("SELECT a.cus_id,a.username,b.payment_at,b.transfer_date,b.amount,b.slip_name,b.time_required
+		FROM siteadmin AS a INNER JOIN packet_update AS b ON a.cus_id = b.cus_id");
+		$statement->execute();
+		return $statement->rowCount();
+	}else {
 		$statement = $conn->prepare("SELECT a.cus_id,username,site_name,total_cash,paid,
 		slip_name,transfer_date,appointment
 		FROM siteadmin AS a INNER JOIN orderpd AS b ON

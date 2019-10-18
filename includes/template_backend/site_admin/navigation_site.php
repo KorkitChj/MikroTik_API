@@ -47,7 +47,7 @@
                 <li class="<?php if ($CURRENT_PAGE == "employeeactive") { ?>pad-a<?php } ?>">
                     <a href="employeeactive.php">
                         <i class="glyphicon glyphicon-user"></i>
-                        &nbsp;พนักงานออลไลน์</a>
+                        &nbsp;พนักงานออนไลน์</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "serverprofile") { ?>pad-a<?php } ?>">
                     <a href="addserverprofile.php">

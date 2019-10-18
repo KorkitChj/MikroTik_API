@@ -4,7 +4,6 @@ include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
     Header("Location:../index.php");
 }
-include('../process/site_admin/expired_process.php');
 include('function.php');
 error_reporting(0);
 $cus_id = $_SESSION['cus_id'];
@@ -44,7 +43,6 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                     </div>
                 </div>
             </div>
-            <script src="../js/alert_disconnect.js"></script>
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>
         <?php include('../process/site_admin/useronlinejs_process.php'); ?>

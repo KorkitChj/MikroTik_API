@@ -92,6 +92,7 @@
   /*----------------show sidebar button----------------*/
   #show-sidebar {
     position: fixed;
+    z-index:1;
     left: 0;
     top: 5px;
     border-radius: 0 4px 4px 0px;
@@ -355,12 +356,12 @@
   .page-wrapper .page-content {
     display: inline-block;
     width: 100%;
-    padding-left: 0px;
+    padding: 0;
     /* padding-top: 5px; */
   }
   
   .page-wrapper .page-content > div {
-    padding: 10px 15px;
+    padding: 5px 15px;
   }
   
   .page-wrapper .page-content {

@@ -3,7 +3,7 @@
 
     nav {
         margin-bottom: 3em;
-        border-bottom: red 0.3em solid;
+        border-bottom: rgb(0, 76, 255) 0.1em solid;
     }
 
     #my-carousel {
@@ -36,9 +36,9 @@
     footer {
         font-family: 'Prompt', sans-serif !important;
         padding-top: 60px;
-        background-color: #bfbfbf;
+        background-color: #494949;
         height: 250px;
-        border-bottom: red 0.5em solid;
+        border-bottom: red 0.1em solid;
     }
 
     h1 {
@@ -143,28 +143,28 @@
 
     input.username_color,
     input.password_color {
-        border: 2px #b0b0b1 solid;
+        border: 1px #b0b0b1 solid;
     }
 
     .active_cus{
         border: none;
         outline: none;
-        padding: 10px 10px;
+        padding: 10px 5px;
         background-color: #ff8a2b;
         cursor: pointer;
     }
     .nav-item:hover {
         border: none;
         outline: none;
-        padding: 10px 10px;
-        background-color:#595959;
+        padding: 10px 5px;
+        background-color:#46a5ff;
         cursor: pointer;
     }
 
     .nav-item {
         border: none;
         outline: none;
-        padding: 10px 10px;
+        padding: 10px 5px;
         cursor: pointer;
     }
 

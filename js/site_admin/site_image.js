@@ -31,7 +31,7 @@ $("#addImageModalBtn").click(function () {
         return false;
     });
 });
-/*$(document).on('submit','#packet_form', function(event) {
+$(document).on('submit','#packet_form', function(event) {
     event.preventDefault();
     var bank = $("#bank").val();
     var date = $("#date").val();
@@ -39,7 +39,7 @@ $("#addImageModalBtn").click(function () {
     var slip = $("#fileslip").val();
     if(bank != '' && date != '' && money != '' && slip != ''){
         $.ajax({
-            url:"../siteadmin/updatepacket_siteadmin.php",
+            url:"../process/site_admin/updatepacket_siteadmin_process.php",
             method:'POST',
             data:new FormData(this),
             contentType:false,
@@ -57,4 +57,4 @@ $("#addImageModalBtn").click(function () {
             }
         });
     }
-});*/
+});

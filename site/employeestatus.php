@@ -4,7 +4,6 @@ include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
     Header("Location:../index.php");
 }
-include('../process/site_admin/expired_process.php');
 include('function.php');
 error_reporting(0);
 $cus_id = $_SESSION['cus_id'];
@@ -64,7 +63,6 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                             <input type="checkbox" id="checkall" />
                                             <span class="danger"></span>
                                         </label></th>
-                                    <th width="2%">Message</th>
                                     <th width="1%">#</th>
                                     <th width="1%"></th>
                                     <th width="2%">Username</th>
@@ -352,22 +350,6 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
                     <button type="button" class="btn btn-success" id="removeMemberBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" tabindex="-1" role="dialog" id="messageMemberModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"><span class="fas fa-inbox"></span>&nbsp;Inbox</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h4 id="message"></h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;ปิด&nbsp;</button>
                 </div>
             </div>
         </div>

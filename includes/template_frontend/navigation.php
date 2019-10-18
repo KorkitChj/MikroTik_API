@@ -1,29 +1,29 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-sm by-0 navbar-expand-lg py-md-0 fixed-top navbar-light bg-light">
+    <a class="navbar-brand" href="#"><img style="width:50px;height:50px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#"><img style="width:50px;height:50px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <!--navbar-->
-            <ul id="myDIV" class="navbar-nav">
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Index") {?>active_cus<?php }?>">
+            <ul id="myDIV" class="navbar-nav mr-auto">
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Index") { ?>active_cus<?php } ?>">
                     <a href="index.php" class="nav-link"><span class="badge badge-primary"><i class="fas fa-home"></i></span>
                         หน้าหลัก</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Products") {?>active_cus<?php }?>">
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Products") { ?>active_cus<?php } ?>">
                     <a href="products.php" class="nav-link"><span class="badge badge-success"><i class="fab fa-product-hunt"></i></span>
                         สินค้า</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Payment") {?>active_cus<?php }?>">
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Payment") { ?>active_cus<?php } ?>">
                     <a href="payment.php" class="nav-link"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i></span>
                         สั่งซื้อ</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Transfer") {?>active_cus<?php }?>">
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Transfer") { ?>active_cus<?php } ?>">
                     <a href="transfer.php" class="nav-link"><span class="badge badge-danger"><i class="fas fa-clipboard-check"></i></span>
                         แจ้งโอนเงิน</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Register") {?>active_cus<?php }?>">
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Register") { ?>active_cus<?php } ?>">
                     <a href="register.php" class="nav-link"><span class="badge badge-info"><i class="fas fa-laugh-wink"></i></span>
                         สมัครสมาชิก</a>
                 </li>

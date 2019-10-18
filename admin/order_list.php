@@ -6,6 +6,11 @@ if (!$_SESSION["admin_id"]) {
     Header("Location:../index.php");
 }
 include('../process/admin/function.php');
+include('../includes/db_connect.php');
+
+$query = $conn->prepare("SELECT * FROM orderpd GROUP BY total_cash ORDER BY order_id DESC");
+$query->execute();
+$result = $query->fetchAll();
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,10 +57,19 @@ include('../process/admin/function.php');
                                                     <span class="danger"></span>
                                                 </label></th>
                                             <th width="2%">เลขสั่งซื้อ</th>
-                                            <th width="1%">ชื่อสินค้า</th>
-                                            <th width="3%">ราคา</th>
+                                            <th width="2%">เจ้าของไซต์</th>
+                                            <th width="2%">
+                                                <select name="category" id="category" class="form-control">
+                                                    <option value="">ราคา</option>
+                                                    <?php
+                                                    foreach ($result as $row) {
+                                                        echo '<option value="' . $row["total_cash"] . '">' . $row["total_cash"] . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </th>
                                             <th width="3%">กำหนดชำระเงิน</th>
-                                            <th width="4%">ชื่อ</th>
+                                            <th width="1%">ชื่อสินค้า</th>
                                             <th width="2%">Option</th>
                                         </tr>
                                     </thead>

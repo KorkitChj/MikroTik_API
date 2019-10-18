@@ -38,11 +38,6 @@
                         <i class="glyphicon glyphicon-edit"></i>&nbsp;
                         เปลี่ยนรหัสผ่าน</a>
                 </li>
-                <!-- <li>
-                    <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
-                        <i class="fab fa-get-pocket"></i>&nbsp;
-                        แจ้งอัพเดท Packet</a>
-                </li> -->
                 <li>
                     <a href="#" class="logout">
                         <i class="fas fa-sign-out-alt"></i>&nbsp;
@@ -52,49 +47,4 @@
         </div>
     </div>
 </nav>
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form id="packet_form" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งอัพเดท Packet</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label for="comment">Comment:</label>
-                    <textarea class="form-control" placeholder="ข้อความ" rows="5" id="comment" required></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                    <button type="submit" id="submit_navigation" class="btn btn-primary">บันทึก</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
-<!-- <script>
-    $(document).on('submit', '#packet_form', function(event) {
-        event.preventDefault();
-        var comment = $("#comment").val();
-        console.log(comment);
-        if (comment != '') {
-            $.ajax({
-                url: "updatepacket.php",
-                method: 'POST',
-                data: {
-                    'data': comment,
-                    'emp_id': <?php echo $_SESSION["emp_id"] ?>
-                },
-                dataType: 'json',
-                success: function(data) {
-                    $("#exampleModal").modal('hide');
-                    $("#packet_form")[0].reset();
-                    swal("สำเร็จ", data.messages, "success");
-                }
-            });
-        }
-    });
-</script> -->
 <script src="../js/site_emp/logout.js"></script>

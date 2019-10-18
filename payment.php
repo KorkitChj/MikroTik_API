@@ -80,27 +80,15 @@ include("includes/template_frontend/page_link_config.php");
                 </thead>
                 <tbody class="table-warning">
                   <tr>
-                    <td> ธ.กรุงเทพ </td>
+                    <td> ธ.ไทยพาณิชย์ </td>
                     <td> นายก่อกิจ ชูจำ</td>
                     <td> 123456890 </td>
                     <td> ออมทรัพย์ </td>
                   </tr>
                   <tr>
-                    <td> ธ.ไทยพาณิชย์ </td>
-                    <td> นายก่อกิจ ชูจำ</td>
-                    <td> 223344556 </td>
-                    <td> ออมทรัพย์ </td>
-                  </tr>
-                  <tr>
                     <td> ธ.กรุงไทย </td>
                     <td> นายก่อกิจ ชูจำ</td>
-                    <td> 0987654321 </td>
-                    <td> ออมทรัพย์ </td>
-                  </tr>
-                  <tr>
-                    <td> ธ.กสิกรไทย </td>
-                    <td> นายก่อกิจ ชูจำ</td>
-                    <td> 5678901234 </td>
+                    <td> 223344556 </td>
                     <td> ออมทรัพย์ </td>
                   </tr>
                 </tbody>

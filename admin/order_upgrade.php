@@ -31,7 +31,7 @@ include('../process/admin/function.php');
                                         <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllMemberModalBtn">
                                             <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
                                         </button>
-                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='checkpayment.php'">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='order_upgrade.php'">
                                             <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                                     </div>
                                 </div>
@@ -55,10 +55,10 @@ include('../process/admin/function.php');
                                                     <span class="danger"></span>
                                                 </label></th>
                                             <th width="2%">เจ้าของไซต์</th>
-                                            <th width="2%">ใบสั่งซื้อ</th>
+                                            <th width="2%">ธนาคาร</th>
                                             <th width="5%">วันที่ยืนยัน</th>
-                                            <th width="5%">วันนัดชำระ</th>
-                                            <th width="5%">จำนวนเงิน</th>
+                                            <th width="5%">ราคา</th>
+                                            <th width="5%">จำนวนวัน</th>
                                             <th width="7%">หลักฐาน</th>
                                             <th width="2%">Option</th>
                                         </tr>
@@ -135,7 +135,7 @@ include('../process/admin/function.php');
                         </div>
                     </div>
                 </div>
-                <script src="../js/admin/checkpayment.js"></script>
+                <script src="../js/admin/order_upgrade.js"></script>
             </div>
             <?php include("../includes/template_backend/admin/footer.php"); ?>
         </main>

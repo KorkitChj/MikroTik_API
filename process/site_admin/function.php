@@ -18,7 +18,7 @@ function upload_image()
 }
 function fetchimage($cus_id)
 {
-    require('../includes/db_connect.php');
+    include('../includes/db_connect.php');
 
     $query = $conn->prepare("SELECT image FROM siteadmin  WHERE cus_id = :cus_id");
     $query->bindparam(':cus_id', $cus_id);
@@ -43,46 +43,76 @@ function upload_imageadmin()
 		return $new_name;
 	}
 }
-/*function upload_imagepacket()
+function alertexpired($cus_id){
+	include('../includes/db_connect.php');
+
+    $query = $conn->prepare("SELECT a.expired_date FROM payment AS a INNER JOIN orderpd AS b on b.order_id = a.order_id WHERE b.cus_id = :cus_id");
+    $query->bindparam(':cus_id', $cus_id);
+    $query->execute();
+	$row = $query->fetch(PDO::FETCH_ASSOC);
+	$todate = date('Y-m-d H:i:s');
+	$date1=date_create($row['expired_date']);
+	$date2=date_create($todate);
+	$diff=date_diff($date1,$date2);
+	$days2 = $diff->format("%a");
+	if($days2 == 0){
+		delsiteadmin($cus_id);
+		return false;
+	}else{
+		return $days = $diff->format(" %a วัน");
+	}
+}
+function get_image_name($cus_id)
+{
+	include('../includes/db_connect.php');
+	$statement = $conn->prepare("SELECT slip_name,image,image_site FROM payment AS a 
+	INNER JOIN orderpd AS b 
+	ON a.order_id = b.order_id 
+	INNER JOIN siteadmin AS c 
+	ON b.cus_id = c.cus_id
+	INNER JOIN location AS d
+	on c.cus_id = d.cus_id 
+	WHERE c.cus_id = :cus_id");
+	$statement->bindparam(':cus_id', $cus_id);
+	$statement->execute();
+	$result = $statement->fetchAll();
+	$i = 0;
+	foreach ($result as $row) {
+		if($i == 0){
+			$a = $row["slip_name"];
+			$b = $row["image"];
+			if(!empty($a && $b)){
+				unlink("../slips/".$a);
+				unlink("../img/site_admin/".$b);
+			}
+		}
+			$c = $row["image_site"];
+			unlink("../img/sitelogo/".$c);
+		$i++;
+	}
+	return false;
+}
+function delsiteadmin($cus_id){
+	include('../includes/db_connect.php');
+	get_image_name($cus_id);
+    $sql = "DELETE FROM siteadmin WHERE cus_id = :cus_id";
+    $query = $conn->prepare($sql);
+    $query->bindparam(':cus_id', $cus_id);
+	$query->execute();
+	unset($cus_id);
+	header('../process/site_admin/expired_page.php');
+}
+
+
+function upload_imagepacket()
 {
 	if(isset($_FILES["fileslip"]))
 	{
 		$extension = explode('.', $_FILES['fileslip']['name']);
 		$new_name = rand() . '.' . $extension[1];
-		$destination = '../slips/' . $new_name;
+		$destination = '../../slips/' . $new_name;
 		move_uploaded_file($_FILES['fileslip']['tmp_name'], $destination);
 		return $new_name;
 	}
 }
-function fetch_packet()
-{
-	include('../includes/db_connect.php');
-	$query = $conn->prepare("SELECT product_id FROM orderpd AS a INNER JOIN siteadmin AS b
-        on a.cus_id = b.cus_id WHERE a.cus_id = :cus_id ");
-        $query->execute(array(":cus_id" => $_SESSION["cus_id"]));
-		$result = $query->fetch(PDO::FETCH_ASSOC);
-		if($result['product_id'] == 1){
-			return "ราคา 500 บาท ID 1";
-		}else if($result['product_id'] == 2){
-			return "ราคา 1000 บาท ID 2";
-		}else if($result['product_id'] == 3){
-			return "ราคา 200 บาท ID 3";
-		}else if($result['product_id'] == 4){
-			return "ราคา 300 บาท ID 4";
-		}else if($result['product_id'] == 5){
-			return "ราคา 400 บาท ID 5";
-		}else if($result['product_id'] == 6){
-			return "ราคา 600 บาท ID 6";
-		}else if($result['product_id'] == 7){
-			return "ราคา 700 บาท ID 7";
-		}else if($result['product_id'] == 8){
-			return "ราคา 800 บาท ID 8";
-		}else if($result['product_id'] == 9){
-			return "ราคา 900 บาท ID 9";
-		}else if($result['product_id'] == 10){
-			return "ราคา 1500 บาท ID 10";
-		}else if($result['product_id'] == 11){
-			return "ราคา 2000 บาท ID 11";
-		}
-}*/
 ?>
