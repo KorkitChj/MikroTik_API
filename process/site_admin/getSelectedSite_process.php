@@ -11,7 +11,7 @@ $query->bindParam(':location_id', $location_id);
 $query->execute();
 $result = $query->fetch(PDO::FETCH_ASSOC);
 if ($result["image_site"] != '') {
-    $output['site_image'] = '<img src="../img/sitelogo/' . $result["image_site"] . '" class="img-thumbnail" width="50" height="35" /><input type="hidden" name="hidden_site_image" value="' . $result["image_site"] . '" />';
+    $output['site_image'] = '<img src="../img/sitelogo/' . $result["image_site"] . '" id="imagesite"  alt="your image" class="img-fluid rounded shadow-lg p-3 mb-5 bg-white" width="300" height="300" /><input type="hidden" name="hidden_site_image" value="' . $result["image_site"] . '" />';
 } else {
     $output['site_image'] = '<input type="hidden" name="hidden_site_image" value="" />';
 }

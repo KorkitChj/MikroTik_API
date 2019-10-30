@@ -5,9 +5,9 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PAGE = "Products";
         $PAGE_TITLE = "Products Us";
         break;
-    case "/web/payment.php":
-        $CURRENT_PAGE = "Payment";
-        $PAGE_TITLE = "Payment Us";
+    case "/web/cart.php":
+        $CURRENT_PAGE = "Cart";
+        $PAGE_TITLE = "Cart";
         break;
     case "/web/transfer.php":
         $CURRENT_PAGE = "Transfer";
@@ -17,8 +17,11 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PAGE = "Register";
         $PAGE_TITLE = "Register Us";
         break;
+    case "/web/login.php":
+        $CURRENT_PAGE = "Login";
+        $PAGE_TITLE = "Login";
+        break;
     default:
         $CURRENT_PAGE = "Index";
         $PAGE_TITLE = "Welcome to my homepage!";
 }
-?>

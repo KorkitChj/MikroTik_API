@@ -3,8 +3,8 @@ session_start();
 ?>
 <?php
 require('../../includes/db_connect.php');
-
-$output = array('success' => false, 'messages' => array());
+error_reporting(0);
+$output = array('success' => false, 'messages' => array(),'link' => array());
 
 if (isset($_POST["username_register"])) {
 	$username = $_POST["username_register"];
@@ -21,8 +21,10 @@ if (isset($_POST["username_register"])) {
 		$phonenumber  = $_POST["number"];
 		$site = $_POST["site"];
 		$address = $_POST["address"];
-		$_SESSION["user_register"] = $_POST["username_register"];
 		$today = date('Y-m-d H:i:sa');
+		$_SESSION["user"] = $_POST["username_register"];
+		$_SESSION["fullname"] = $_POST["fullname"];
+		$_SESSION["phone"] = $_POST["number"];
 
 		$sql = "INSERT INTO siteadmin 
                             values('',:username,:password,:address,:phonenumber
@@ -39,8 +41,22 @@ if (isset($_POST["username_register"])) {
 		$query->bindparam(':regis_date', $today);
         
 		if ($query->execute()) {
-			$output['success'] = true;
-        	$output['messages'] = "ข้อมูลของคุณบันทึกเรียบร้อยแล้ว"; 
+			if($_SESSION['order'] == "false"){
+				$_SESSION['register'] = "true";
+				$output['link'] = "cart.php";
+				$output['success'] = true;
+				$output['messages'] = "ข้อมูลของคุณบันทึกเรียบร้อยแล้ว"; 
+			}elseif($_SESSION['order'] == "true"){
+				$_SESSION['register'] = "true";
+				$output['link'] = "cart.php";
+				$output['success'] = true;
+				$output['messages'] = "ข้อมูลของคุณบันทึกเรียบร้อยแล้ว"; 
+			}else{
+				$_SESSION['register'] = "true";
+				$output['link'] = "cart.php";
+				$output['success'] = true;
+				$output['messages'] = "ข้อมูลของคุณบันทึกเรียบร้อยแล้ว"; 
+			}
 		}
 	} else {
 		$output['success'] = false;

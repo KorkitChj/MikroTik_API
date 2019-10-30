@@ -57,7 +57,7 @@ $result = $query->fetchAll();
                                                     <input type="checkbox" id="checkall" />
                                                     <span class="danger"></span>
                                                 </label></th>
-                                            <th width="1%">รหัส</th>
+                                            <th width="1%">ID</th>
                                             <th width="3%">เจ้าของไซต์</th>
                                             <th width="3%">
                                                 <select name="category" id="category" class="form-control">

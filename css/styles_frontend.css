@@ -2,8 +2,10 @@
     @import url('https://fonts.googleapis.com/css?family=Prompt&display=swap');
 
     nav {
-        margin-bottom: 3em;
-        border-bottom: rgb(0, 76, 255) 0.1em solid;
+        border-bottom: rgb(255, 255, 255) 0.5em solid;
+    }
+    .carousel-custom{
+        margin-top: 5em;
     }
 
     #my-carousel {
@@ -13,17 +15,22 @@
     #products {
         background-color: #f2f2f2;
     }
-
+    nav.bg-light{
+        background-image: linear-gradient(to right, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
+    }
     body {
         font-family: 'Prompt', sans-serif !important;
-        background-color: #ffffff;
+        background-image: linear-gradient(to right, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
+        /* background-color: #ffffff; */
         /* background-image: url('img/animal-dawn-desktop-backgrounds-875858.jpg');
         background-repeat: no-repeat;
         background-size: cover; */
     }
-
+    .navbar-dark .navbar-nav .nav-link {
+        color:#ffffff !important;
+    }
     h3 {
-        color: #0066ff;
+        color: #ffffff;
         text-align: center;
         padding: 0.5em;
         font-weight: bold;
@@ -36,13 +43,13 @@
     footer {
         font-family: 'Prompt', sans-serif !important;
         padding-top: 60px;
-        background-color: #494949;
+        background-color: #1f1d1d;
         height: 250px;
         border-bottom: red 0.1em solid;
     }
 
     h1 {
-        color: #0066ff;
+        color: #ffffff;
         text-align: center;
         padding: 20px;
         font-weight: bold;
@@ -65,7 +72,7 @@
     }
 
     p {
-        color: black;
+        color: rgb(255, 255, 255);
         text-align: center;
     }
     #py{
@@ -98,7 +105,9 @@
         transform: scale(1.1);
         color: #ddd;
     }
-
+    .p-3{
+        margin-top: 1em;
+    }
     @media(max-width: 768px) {
         footer {
             height: auto !important;
@@ -106,6 +115,9 @@
 
         h2 {
             font-size: 30px;
+        }
+        .carousel-custom{
+            margin-top: 6em;
         }
     }
 
@@ -150,8 +162,9 @@
         border: none;
         outline: none;
         padding: 10px 5px;
-        background-color: #ff8a2b;
+        background-color: #00aeff;
         cursor: pointer;
+        box-shadow: 10px 10px rgb(248, 248, 248);
     }
     .nav-item:hover {
         border: none;

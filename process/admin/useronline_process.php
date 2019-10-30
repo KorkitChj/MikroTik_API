@@ -45,7 +45,6 @@ if(isset($_POST["action"]))
      <th>Username</th>
      <th>Email ID</th>
      <th>Image</th>
-     <th>ID</th>
     </tr>
     </thead>
   ';
@@ -60,7 +59,6 @@ if(isset($_POST["action"]))
     <td>'.$row["username"].'</td>
     <td>'.$row["e_mail"].'</td>
     <td>'.$image.'</td>
-    <td>'.$row["cus_id"].'</td>
    </tr>
    ';
   }

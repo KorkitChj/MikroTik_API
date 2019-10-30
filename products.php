@@ -1,6 +1,4 @@
 <?php
-session_start();
-$_SESSION['order'] = "order";
 include("includes/template_frontend/page_link_config.php");
 include('includes/db_connect.php');
 $query = $conn->prepare("SELECT * FROM product ORDER BY price ASC");
@@ -25,18 +23,21 @@ $result = $query->fetchAll();
                 foreach ($result as $a => $b) {
                     echo '<div class="col-sm-4">
                             <div class="card shadow-lg p-3 mb-5">
-                                <img class="card-img-top" src="img/' . $b['image'] . '" alt="Card image cap">
+                                <img class="card-img-top" src="img/products/' . $b['image'] . '" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">' . $b['title'] . '</h5>
                                     <hr>
-                                    <p style="font-weight:bold">ฟังก์ชัน</p>
-                                    <p class="card-text">';
+                                    <b style="font-weight:bold">ฟังก์ชัน</b>
+                                    <b class="card-text">';
                     $result2 = explode("/", $b['function']);
                     foreach ($result2 as $c) {
                         echo '- ' . $c . '<br>';
                     }
-                    echo '</p><hr>';
-                    echo '<a href="payment.php?id=' . $b['product_id'] . '" onclick="return confirm(\'คุณต้องการสั่งซื้อ\');" 
+                    echo '</b>
+                    <b style="font-weight:bold">ราคา</b>
+                        <b class="card-text">'.$b['price'].'</b>
+                    <hr>';
+                    echo '<a href="cart.php?id=' . $b['product_id'] . '&title='. $b['title'] .'&price='.$b['price'].'&img='.$b['image'].'" onclick="return confirm(\'คุณต้องการสั่งซื้อ\');" 
                                     class="btn btn-outline-dark btn-sm">สั่งซื้อ</a>
                                 </div>
                             </div>

@@ -27,12 +27,16 @@ function get_total_all_records($data)
 		b.order_id = c.order_id WHERE c.paid = 0 ");
 		$statement->execute();
 		return $statement->rowCount();
-	} elseif($data == "upgrade"){
+	} elseif ($data == "upgrade") {
 		$statement = $conn->prepare("SELECT a.cus_id,a.username,b.payment_at,b.transfer_date,b.amount,b.slip_name,b.time_required
 		FROM siteadmin AS a INNER JOIN packet_update AS b ON a.cus_id = b.cus_id");
 		$statement->execute();
 		return $statement->rowCount();
-	}else {
+	} elseif ($data == "product") {
+		$statement = $conn->prepare("SELECT * FROM product");
+		$statement->execute();
+		return $statement->rowCount();
+	} else {
 		$statement = $conn->prepare("SELECT a.cus_id,username,site_name,total_cash,paid,
 		slip_name,transfer_date,appointment
 		FROM siteadmin AS a INNER JOIN orderpd AS b ON
@@ -66,6 +70,22 @@ function upload_imageadmin()
 		$new_name = rand() . '.' . $extension[1];
 		$destination = '../../img/img_admin/' . $new_name;
 		move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+		return $new_name;
+	}
+}
+function upload_image_product()
+{
+	if (isset($_FILES["product_image"])) {
+		$extension = explode('.', $_FILES['product_image']['name']);
+		$new_name = rand() . '.' . $extension[1];
+		$destination = '../../img/products/' . $new_name;
+		move_uploaded_file($_FILES['product_image']['tmp_name'], $destination);
+		return $new_name;
+	}elseif(isset($_FILES["editproduct_image"])){
+		$extension = explode('.', $_FILES['editproduct_image']['name']);
+		$new_name = rand() . '.' . $extension[1];
+		$destination = '../../img/products/' . $new_name;
+		move_uploaded_file($_FILES['editproduct_image']['tmp_name'], $destination);
 		return $new_name;
 	}
 }

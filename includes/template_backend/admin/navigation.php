@@ -62,6 +62,11 @@
                         <i class="glyphicon glyphicon-globe"></i>&nbsp;
                         รายการลูกค้าใช้งาน</a>
                 </li>
+                <li class="<?php if ($CURRENT_PAGE == "products") { ?>pad-a<?php } ?>">
+                    <a href="products.php">
+                        <i class="glyphicon glyphicon-heart"></i>&nbsp;
+                        รายการสินค้า</a>
+                </li>
                 <li>
                     <a href="" data-toggle="modal" data-target="#changpwModal">
                         <i class="glyphicon glyphicon-edit"></i>&nbsp;
@@ -84,7 +89,7 @@
 </nav>
 <!-- addprofile modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="addImageModal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-custom" role="document">
         <div class="modal-content">
             <form id="formimage" action="" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
@@ -92,21 +97,30 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="image" class="col-sm control-label">Add Image:&nbsp;</label>
-                        <div class="col-sm-12 input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-user-plus"></i>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="image" class="col-sm control-label">Add Image:&nbsp;</label>
+                                <div class="col-sm-12 input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-user-plus"></i>
+                                        </div>
+                                    </div>
+                                    <input type="file" name="image" id="image">
                                 </div>
                             </div>
-                            <input type="file" name="image" id="image">
+                        </div>
+                        <div class="col-md-6">
+                            <img id="edit_profile" src="#" alt="your image"  class="img-fluid rounded shadow-lg p-3 mb-5 bg-white" alt="Responsive image" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
-                    <button type="submit" class="btn btn-success" id="addImageBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
+                        <button type="submit" class="btn btn-success" id="addImageBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
+                    </div>
                 </div>
             </form>
         </div>

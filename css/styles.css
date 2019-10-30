@@ -55,7 +55,7 @@ h2 {
         box-shadow: 5px 5px 10px 0px rgba(255, 255, 255, 0.66);  
 }
 .aa{
-    background-color:#ffb006;
+    background-color:#ffd27d;
 }
 input[type=search]{
     width: 450px !important;
@@ -67,6 +67,14 @@ input[type=search]{
     font-size: 20px;
     font-style: italic;
 }
+.modal-dialog-custom{
+    max-width: 80% !important;
+}
+@media (min-width: 992px) {
+    .modal-dialog {
+      max-width: 100%;
+    }
+  }
 label {
     color: black;
 }

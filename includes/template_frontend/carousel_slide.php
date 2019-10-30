@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid carousel-custom">
     <div id="my-carousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">

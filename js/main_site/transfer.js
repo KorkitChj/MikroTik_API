@@ -19,14 +19,14 @@ $(document).on('submit', '#transfer', function (event) {
                     $("#transfer")[0].reset();
                     setTimeout(function () {
                         window.location.href = 'index.php';
-                    }, 2000);
-                } else if(data.success == "fail"){
+                    }, 10000);
+                } else if (data.success == "fail") {
                     swal("ผิดพลาด", data.messages, "error");
                     $("#transfer")[0].reset();
                     setTimeout(function () {
                         window.location.href = 'index.php';
-                    }, 2000);
-                }else{
+                    }, 10000);
+                } else {
                     swal("ผิดพลาด", data.messages, "error");
                 }
             }
@@ -35,16 +35,16 @@ $(document).on('submit', '#transfer', function (event) {
 });
 function readURL(input) {
     if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      
-      reader.onload = function(e) {
-        $('#blah').attr('src', e.target.result);
-      }
-      
-      reader.readAsDataURL(input.files[0]);
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
     }
-  }
-  
-  $("#imgInp").change(function() {
+}
+
+$("#imgInp").change(function () {
     readURL(this);
-  });
+});

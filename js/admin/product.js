@@ -1,13 +1,15 @@
-var connectstatus;
+var productstable;
 $(document).ready(function () {
-    connectstatus = $("#connectstatus").DataTable({
+    productstable = $("#productstable").DataTable({
+        "processing": true,
+        "serverSide": true,
         "order": [],
         "ajax": {
-            url: "../process/site_admin/connectstatus_retrieve_process.php",
+            url: "../process/admin/products_retrieve_process.php",
             type: "POST"
         },
         "columnDefs": [{
-            "targets": [0, 5, 7],
+            "targets": [0, 5],
             "orderable": false,
         }],
         "language": {
@@ -36,26 +38,55 @@ $(document).ready(function () {
         }
     });
 });
-$("#addSiteModalBtn").click(function () {
-    $("#addsite")[0].reset();
-    $("#addsite").off('submit').on('submit', function () {
+$(document).on('click', '.displayimg', function () {
+    var product_id = $(this).attr("id");
+    $.ajax({
+        url: "../process/admin/fetch_img_process.php",
+        method: "POST",
+        data: { product_id: product_id },
+        dataType: "json",
+        success: function (data) {
+            $('#product').html(data.product_image);
+        }
+    })
+});
+$(document).on('click', '.displaydetail', function () {
+    var product_id = $(this).attr("id");
+    $.ajax({
+        url: "../process/admin/fetch_product_detail_process.php",
+        method: "POST",
+        data: { product_id: product_id },
+        dataType: "json",
+        success: function (data) {
+            var value = data.data.split('/');
+            for (var i = 0; i < value.length; i++) {
+                $('#productdetail').append('<i class="fas fa-dot-circle"></i> ' + value[i] + "<br>");
+            }
+            $('#displayproductdetailModal').on('hidden.bs.modal', function () {
+                $("#productdetail").html("");
+            })
+        }
+    })
+});
+$("#addProductModalBtn").click(function () {
+    $("#addproduct")[0].reset();
+    $("#addproduct").off('submit').on('submit', function () {
         var form = $(this);
-        var extension = $('#site_image').val().split('.').pop().toLowerCase();
+        var extension = $('#product_image').val().split('.').pop().toLowerCase();
         if (extension != '') {
             if (jQuery.inArray(extension, ['png', 'jpg', 'jpeg']) == -1) {
                 swal("ผิดพลาด", "Invalid Image File", "error");
-                $('#site_image').val('');
+                $('#product_image').val('');
                 return false;
             }
         }
-        var ipaddress = $("#ipaddress").val();
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var portapi = $("#portapi").val();
-        var namesite = $("#namesite").val();
-        if (ipaddress && username && namesite && password && portapi && extension) {
+        var productname = $("#productname").val();
+        var productprice = $("#productprice").val();
+        var producttitle = $("#producttitle").val();
+        var productdetail = $("textarea#productdetail").val();
+        if (productname && productprice && producttitle && productdetail) {
             $.ajax({
-                url: '../process/site_admin/addconnect_process.php',
+                url: '../process/admin/product_add_process.php',
                 type: 'POST',
                 data: new FormData(this),
                 contentType: false,
@@ -64,9 +95,9 @@ $("#addSiteModalBtn").click(function () {
                 success: function (response) {
                     if (response.success == true) {
                         swal("สำเร็จ", response.messages, "success");
-                        $("#addsite")[0].reset();
-                        connectstatus.ajax.reload(null, false);
-                        $("#addSiteModal").modal('hide');
+                        $("#addproduct")[0].reset();
+                        productstable.ajax.reload(null, false);
+                        $("#addProductModal").modal('hide');
                     } else {
                         swal("ผิดพลาด", response.messages, "error");
                     }
@@ -76,19 +107,19 @@ $("#addSiteModalBtn").click(function () {
         return false;
     });
 });
-function removeSite(id) {
+function removeProduct(id) {
     if (id) {
-        $("#removeSiteBtn").off('click').on('click', function () {
+        $("#removeProductBtn").off('click').on('click', function () {
             $.ajax({
-                url: '../process/site_admin/connectstatus_del_process.php',
+                url: '../process/admin/products_del_process.php',
                 type: 'POST',
-                data: { 'location_id': id, 'type': 'one' },
+                data: { 'product_id': id, 'type': 'one' },
                 dataType: 'json',
                 success: function (response) {
                     if (response.success == true) {
                         swal("สำเร็จ", response.messages, "success");
-                        connectstatus.ajax.reload(null, false);
-                        $("#removeSiteModal").modal('hide');
+                        productstable.ajax.reload(null, false);
+                        $("#removeproductModal").modal('hide');
                     } else {
                         swal("ผิดพลาด", response.messages, "error");
                     }
@@ -102,26 +133,26 @@ function removeSite(id) {
 $('#checkall').click(function () {
     $('.checkitem').prop("checked", $(this).prop("checked"))
 })
-$('#removeAllSiteBtn').click(function () {
-    var location_id = [];
+$('#removeAllProductsBtn').click(function () {
+    var product_id = [];
     $('.checkitem:checked').each(function (i) {
-        location_id[i] = $(this).val();
+        product_id[i] = $(this).val();
     });
-    if (location_id.length === 0) {
+    if (product_id.length === 0) {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
         $.ajax({
-            url: '../process/site_admin/connectstatus_del_process.php',
+            url: '../process/admin/products_del_process.php',
             method: 'POST',
             data: {
-                'location_id': location_id, 'type': 'many'
+                'product_id': product_id, 'type': 'many'
             },
             dataType: 'json',
             success: function (response) {
                 if (response.success == true) {
                     swal("สำเร็จ", response.messages, "success");
-                    connectstatus.ajax.reload(null, false);
-                    $("#removeAllSiteModal").modal('hide');
+                    productstable.ajax.reload(null, false);
+                    $("#removeAllMemberModal").modal('hide');
                     $("#checkall").prop("checked", false);
                 } else {
                     swal("ผิดพลาด", response.messages, "error");
@@ -131,35 +162,32 @@ $('#removeAllSiteBtn').click(function () {
         });
     }
 });
-function editSite(id) {
+function editProduct(id) {
     if (id) {
         $.ajax({
-            url: '../process/site_admin/getSelectedSite_process.php',
+            url: '../process/admin/getSelectedProduct_process.php',
             type: 'POST',
             data: {
-                location_id: id
+                product_id: id
             },
             dataType: 'json',
             success: function (response) {
-                $("#editipaddress").val(response.ip_address);
-                $("#editusername").val(response.username);
-                $("#editpassword").val(response.password);
-                $("#editportapi").val(response.api_port);
-                $("#editnamesite").val(response.working_site);
-                $('#site_uploaded_image').html(response.site_image);
-                $("#editSite").append('<input type="hidden" name="editlocation_id" id="editlocation_id" value="' + response.location_id + '"/>');
-                console.log(response.location_id);
-                $("#editSite").off('submit').on('submit', function () {
+                $("#editproductname").val(response.product_name);
+                $("#editproductprice").val(response.price);
+                $("#editproducttitle").val(response.title);
+                $("textarea#editproductdetail").val(response.function);
+                $('#displayproduct_image').html(response.image);
+                $("#editproduct").append('<input type="hidden" name="editproduct_id" id="editproduct_id" value="' + response.product_id + '"/>');
+                $("#editproduct").off('submit').on('submit', function () {
                     var form = $(this);
-                    var editipaddress = $("#editipaddress").val();
-                    var editusername = $("#editusername").val();
-                    var editpassword = $("#editpassword").val();
-                    var editportapi = $("#editportapi").val();
-                    var editnamesite = $("#editnamesite").val();
+                    var editproductname = $("#editproductname").val();
+                    var editproductprice = $("#editproductprice").val();
+                    var editproducttitle = $("#editproducttitle").val();
+                    var editproductdetail = $("textarea#editproductdetail").val();
 
-                    if (editipaddress && editusername && editnamesite && editpassword && editportapi) {
+                    if (editproductname && editproductprice && editproducttitle && editproductdetail) {
                         $.ajax({
-                            url: '../process/site_admin/connectstatus_update_process.php',
+                            url: '../process/admin/product_update_process.php',
                             type: 'POST',
                             data: new FormData(this),
                             contentType: false,
@@ -168,8 +196,8 @@ function editSite(id) {
                             success: function (response) {
                                 if (response.success == true) {
                                     swal("สำเร็จ", response.messages, "success");
-                                    connectstatus.ajax.reload(null, false);
-                                    $("#editSiteModal").modal('hide');
+                                    productstable.ajax.reload(null, false);
+                                    $("#editproductModal").modal('hide');
                                 } else {
                                     swal("ผิดพลาด", response.messages, "error");
                                 }
@@ -184,35 +212,39 @@ function editSite(id) {
         alert("Error : Refresh the page again");
     }
 }
-function readURLEdit(input) {
+
+function readURLedit(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function(e) {
-            $('#imagesite').attr('src', e.target.result);
+            $('#imageproduct').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-$("#editsite_image").change(function() {
-    readURLEdit(this);
+$("#editproduct_image").change(function() {
+    readURLedit(this);
 });
-function readURLAdd(input) {
+function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       
       reader.onload = function(e) {
-        $('#add_connect').attr('src', e.target.result);
+        $('#add_product').attr('src', e.target.result);
       }
       
       reader.readAsDataURL(input.files[0]);
     }
   }
   
-  $("#site_image").change(function() {
-    readURLAdd(this);
+  $("#product_image").change(function() {
+    readURL(this);
   });
+
+
+
 
 

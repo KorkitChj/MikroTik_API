@@ -1,6 +1,8 @@
 <?php
+session_start();
 include("includes/template_frontend/page_link_config.php");
 include("includes/datethai_function.php");
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,9 +16,9 @@ include("includes/datethai_function.php");
     <div class="container margin-top">
         <div class="row">
             <div class="col-md-6 ">
-                <div class="card text-white border-danger shadow-lg p-3 mb-5">
+                <div class="card border-danger shadow-lg p-3 mb-5">
                     <div class="card-header">
-                        <h1 align="center">แจ้งโอนเงิน</h1>
+                        <h2 align="center"><b>แจ้งโอนเงิน</b></h2>
                     </div>
                     <div class="card-body">
                         <form id="transfer" method="post" action="" enctype="multipart/form-data" name="form1">
@@ -28,7 +30,7 @@ include("includes/datethai_function.php");
                                             <i class="far fa-user"></i>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" id="username2" name="username2" placeholder="Username" required>
+                                    <input type="text" class="form-control" id="username2" value="<?php echo $_SESSION['user']; ?>" name="username2" placeholder="Username" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -43,8 +45,6 @@ include("includes/datethai_function.php");
                                         <option value="">----- เลือกธนาคาร-----</option>
                                         <option value="1">ธนาคารไทยพาญิชย์</option>
                                         <option value="2">ธนาคารกรุงไทย</option>
-                                        <option value="3">ธนาคารกสิกรไทย</option>
-                                        <option value="4">ธนาคารกรุงเทพ</option>
                                     </select>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@ include("includes/datethai_function.php");
                                             <i class="fas fa-money-check-alt"></i>
                                         </div>
                                     </div>
-                                    <input type="number" name="money" placeholder="จำนวนเงิน" class="form-control" id="money" required>
+                                    <input type="number" name="money" value="<?php echo $_SESSION['price']; ?>" placeholder="จำนวนเงิน" class="form-control" id="money" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -79,7 +79,7 @@ include("includes/datethai_function.php");
                                         </div>
                                     </div>
                                     <input type="hidden" name="MAX_FILE_SIZE" value="10485760">
-                                    <input name="file" type="file" id="imgInp" accept="image/*" required>
+                                    <input name="file" class="form-control-file" type="file" id="imgInp" accept="image/*" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -94,7 +94,7 @@ include("includes/datethai_function.php");
                 </div>
             </div>
             <div class="col-md-6">
-                    <img id="blah" src="#" alt="your image" style="height:600px;width:400px" class="img-fluid rounded shadow-lg p-3 mb-5 bg-white" alt="Responsive image" />
+                <img id="blah" src="#" alt="your image" style="height:600px;width:400px" class="img-fluid rounded shadow-lg p-3 mb-5 bg-white" alt="Responsive image" />
             </div>
         </div>
     </div>

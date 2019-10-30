@@ -18,7 +18,9 @@ $(document).on('submit', '#register', function (event) {
                 },
                     function (isConfirm) {
                         if (isConfirm) {
-                            window.location.href = 'payment.php';
+                            if(response.link == "cart.php"){
+                                window.location.href = 'cart.php';
+                            }
                         }
                     }
                 );
