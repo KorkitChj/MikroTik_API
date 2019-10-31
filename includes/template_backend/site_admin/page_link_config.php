@@ -9,6 +9,10 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PAGE = "invoice";
         $PAGE_TITLE = "Invoice";
         break;
+    case "/web/siteadmin/order_report.php":
+        $CURRENT_PAGE = "orderreport";
+        $PAGE_TITLE = "Order Report";
+        break;
     case "/web/site/dashboard.php":
         $CURRENT_PAGE = "dashboard";
         $PAGE_TITLE = "Dash Board";

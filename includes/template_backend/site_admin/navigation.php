@@ -36,7 +36,11 @@
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "invoice") { ?>pad-a<?php } ?>">
                     <a href="invoice.php">
-                        <i class="glyphicon glyphicon-paperclip"></i>&nbsp;Invoice</a>
+                        <i class="glyphicon glyphicon-file"></i>&nbsp;ใบเสร็จ</a>
+                </li>
+                <li class="<?php if ($CURRENT_PAGE == "orderreport") { ?>pad-a<?php } ?>">
+                    <a href="order_report.php">
+                        <i class="glyphicon glyphicon-signal"></i>&nbsp;รายงานสั่งซื้อ</a>
                 </li>
                 <li>
                     <a href="" data-toggle="modal" data-target="#changpwModal">
