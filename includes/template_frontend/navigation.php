@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-sm by-0 navbar-expand-lg py-md-0 fixed-top navbar-dark bg-light">
-        <a class="navbar-brand" href="#"><img style="width:90px;height:67px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
+        <a class="navbar-brand" href="index.php"><img style="width:90px;height:67px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,29 +9,39 @@
             <ul id="myDIV" class="navbar-nav mr-auto">
                 <li class="nav-item <?php if ($CURRENT_PAGE == "Index") { ?>active_cus<?php } ?>">
                     <a href="index.php" class="nav-link"><span class="badge badge-primary"><i class="fas fa-home"></i>
-                        หน้าหลัก</a>
+                            หน้าหลัก</a>
                 </li>
                 <li class="nav-item <?php if ($CURRENT_PAGE == "Products") { ?>active_cus<?php } ?>">
                     <a href="products.php" class="nav-link"><span class="badge badge-success"><i class="fab fa-product-hunt"></i>
-                        สินค้า</a>
+                            สินค้า</a>
                 </li>
                 <li class="nav-item <?php if ($CURRENT_PAGE == "Cart") { ?>active_cus<?php } ?>">
                     <a href="cart.php" class="nav-link"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i>
-                        ตระกร้าสินค้า</a>
+                            ตระกร้าสินค้า</a>
                 </li>
                 <li class="nav-item <?php if ($CURRENT_PAGE == "Transfer") { ?>active_cus<?php } ?>">
                     <a href="transfer.php" class="nav-link"><span class="badge badge-light"><i class="fas fa-clipboard-check"></i>
-                        แจ้งโอนเงิน</a>
+                            แจ้งโอนเงิน</a>
                 </li>
                 <li class="nav-item <?php if ($CURRENT_PAGE == "Register") { ?>active_cus<?php } ?>">
                     <a href="register.php" class="nav-link"><span class="badge badge-info"><i class="fas fa-laugh-wink"></i>
-                        สมัครสมาชิก</a>
+                            สมัครสมาชิก</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav topnav ml-auto">
+                <?php if ($CURRENT_PAGE == "Products") { ?>
+                    <li class="nav-item">
+                        <div class="search-container">
+                            <form id="form_search" action="" method="post">
+                                <input type="text" placeholder="ค้นหาสินค้า..." name="search" id="search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </li>
+                <?php } ?>
                 <li class="nav-item">
                     <a href="login.php" class="nav-link"><span class="badge badge-info"><i class="fas fa-sign-in-alt"></i>
-                        เข้าสู่ระบบ</a>
+                            เข้าสู่ระบบ</a>
                 </li>
             </ul>
             <!-- <ul class="navbar-nav ml-auto">
@@ -64,7 +74,7 @@
         </div>
     </nav>
 </div>
-<!-- <script src="js/main_site/login.js"></script> -->
+<script src="js/main_site/products_search.js"></script>
 <script>
     $(document).ready(function() {
         $('.navbar-light .dmenu').hover(function() {

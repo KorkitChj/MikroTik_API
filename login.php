@@ -142,6 +142,7 @@ include("includes/template_frontend/page_link_config.php");
                                         <label for="password">Password</label>
                                     </div>
                                     <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</button>
+                                    <center><a href="index.php">กลับหน้าหลัก</a></center>
                                 </form>
                             </div>
                         </div>

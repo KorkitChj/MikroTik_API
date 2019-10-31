@@ -2,6 +2,10 @@
 session_start();
 include('includes/datethai_function.php');
 include("includes/template_frontend/page_link_config.php");
+//error_reporting(0);
+if(isset($_SESSION['fullname']) == '' && isset($_SESSION['price']) == ''){
+  Header('Location:index.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +55,7 @@ include("includes/template_frontend/page_link_config.php");
               <label for="order_price"><b><i class='fab fa-btc'></i>&nbsp;ยอดรวม: (บาท)</b></label>
               <input class="finalprice form-control" value="<?php echo $_SESSION['price']?>" readonly="readonly" step="any" type="number" name="order_price" id="order_price" />
             </div>
-          </div><br>
+          </div>
           <div class="row">
             <div class="col-md-12">
               <center>
@@ -83,9 +87,10 @@ include("includes/template_frontend/page_link_config.php");
                       </tr>
                     </tbody>
                   </table>
-              </center>
+              <img src="img/SCB.png" alt="scb">
+              <img src="img/KTB.png" alt="KTB"></center>
             </div>
-          </div>
+          </div><br>
           <div class="row d-flex justify-content-center">
             <div class='col-md-6'>
               <center><button type="submit" class="btn btn-primary" name="sm">ยืนยัน</button>
