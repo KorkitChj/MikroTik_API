@@ -122,6 +122,7 @@ function removeProduct(id) {
                         $("#removeproductModal").modal('hide');
                     } else {
                         swal("ผิดพลาด", response.messages, "error");
+                        $("#removeproductModal").modal('hide');
                     }
                 }
             });
@@ -156,7 +157,9 @@ $('#removeAllProductsBtn').click(function () {
                     $("#checkall").prop("checked", false);
                 } else {
                     swal("ผิดพลาด", response.messages, "error");
+                    productstable.ajax.reload(null, false);
                     $("#checkall").prop("checked", false);
+                    $("#removeAllMemberModal").modal('hide');
                 }
             }
         });

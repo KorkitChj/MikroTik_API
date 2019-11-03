@@ -15,7 +15,7 @@ $ARRAY = '';
 if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
     $ARRAY = $API->comm("/ip/hotspot/user/print");
     $ARRAY2 = $API->comm("/ip/hotspot/user/profile/print");
-
+    //$ARRAY3 = $API->comm("/ip/hotspot/user/remove", array("?disabled" => "true"));
     $num = count($ARRAY);
     $num2 = count($ARRAY2);
 
@@ -24,14 +24,24 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
         $output['messages'] = "ไม่มี User";
     } else {
         for ($i = 1; $i < $num; $i++) {
+            if (strpos($ARRAY[$i]['comment'], 'This user expire') !== false) {
+                $API->comm("/ip/hotspot/user/remove", array(".id" => $ARRAY[$i]['.id']));
+            }
             $daytouse = "unlimit";
             for ($j = 0; $j < $num2; $j++) {
                 if ($ARRAY[$i]['profile'] == $ARRAY2[$j]['name']) {
-                    $string = explode(";", $ARRAY2[$j]['on-login']);
-                    $string2 = explode(" ", $string[2]);
-                    $daytouse = $string2[2]." วัน";
+                    $string = explode("_", $ARRAY2[$j]['name']);
+                    $string2 = explode("/", $string[1]);
+                    $daytouse = $string2[0]." วัน";
                     break;
                 }
+            }
+            if($daytouse != 'unlimit'){
+                $dateTime = date("Y-m-d H:i:s");
+                $enddate = strtotime("+{$daytouse} days", strtotime($dateTime));
+                $date2 = date('Y-m-d H:i:s', $enddate);
+            }else{
+                $date2 = "Notexpired";
             }
             $checkbox = '
             <label class="checkbox">
@@ -45,12 +55,28 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
             <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeUserModal"  onclick="removeUser(\'' . $ARRAY[$i]["name"] . '\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
 
 
+            // if ($ARRAY[$i]['comment'] != '') {
+            //     if (($ARRAY[$i]['comment']) == "expire") {
+            //         $expired_date = '';
+            //     } else {
+            //         $value = explode("@", $ARRAY[$i]['comment']);
+            //         $expired_date = DateThai($value[1]);
+            //     }
+            // } else {
+            //     $expired_date = '';
+            // }
+            // $ARRAY = $API->comm("/ip/hotspot/user/remove", array(
+            //     "numbers" => $user_name,
+            // ));
             if ($ARRAY[$i]['comment'] != '') {
-                if (($ARRAY[$i]['comment']) == "expire") {
-                    $expired_date = '';
-                } else {
-                    $value = explode("@", $ARRAY[$i]['comment']);
-                    $expired_date = DateThai($value[1]);
+                if (strpos($ARRAY[$i]['comment'], 'Notexpired') !== false) {
+                    $expired_date = 'Not expired';
+                }else{
+                    if($ARRAY[$i]['comment'] == "expire"){
+                        $expired_date =  "";
+                    }else{
+                        $expired_date =  $ARRAY[$i]['comment'];
+                    }
                 }
             } else {
                 $expired_date = '';

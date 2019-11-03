@@ -27,13 +27,20 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
     }else{
         $bb = "none";
     }
-    if(!empty($ARRAY[0]['on-login'])){
-        $string = explode(";",$ARRAY[0]['on-login']);
-        $string2 = explode(" ",$string[2]);
-        $daytouse = $string2[2];
-    }else{
-        $daytouse = '';
-    }
+    // if(!empty($ARRAY[0]['on-login'])){
+    //     $string = explode(";",$ARRAY[0]['on-login']);
+    //     $string2 = explode(" ",$string[2]);
+    //     $daytouse = $string2[2];
+    // }else{
+    //     $daytouse = '';
+    // }
+    if(!empty($ARRAY[0]['name'])){
+            $string = explode("_",$ARRAY[0]['name']);
+            $string2 = explode("/",$string[1]);
+            $daytouse = $string2[0];
+        }else{
+            $daytouse = '';
+        }
     $output['name'] = $ARRAY[0]['name'];
     $output['session'] = $aa;
     $output['shared'] = $ARRAY[0]['shared-users'];

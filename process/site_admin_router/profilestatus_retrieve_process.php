@@ -26,10 +26,18 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
         } else {
             $rate = $ARRAY[$i]['rate-limit'];
         }
-        if(!empty($ARRAY[$i]['on-login'])){
-            $string = explode(";",$ARRAY[$i]['on-login']);
-            $string2 = explode(" ",$string[2]);
-            $daytouse = $string2[2];
+        // if(!empty($ARRAY[$i]['on-login'])){
+        //     $string = explode(";",$ARRAY[$i]['on-login']);
+        //     $string2 = explode(" ",$string[2]);
+        //     $daytouse = $string2[2];
+        // }else{
+        //     $daytouse = '';
+        // }
+
+        if(!empty($ARRAY[$i]['name'])){
+            $string = explode("_",$ARRAY[$i]['name']);
+            $string2 = explode("/",$string[1]);
+            $daytouse = $string2[0];
         }else{
             $daytouse = '';
         }

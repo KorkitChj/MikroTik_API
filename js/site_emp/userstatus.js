@@ -17,11 +17,11 @@ $(document).ready(function () {
                 "orderable": false,
             }
         ],
-        "createdRow": function (row, data, dataIndex) {
-            if (data[5] != '') {
-                $(row).css({ "color": "black", "background-color": "#ff8080" });
-            }
-        },
+        // "createdRow": function (row, data, dataIndex) {
+        //     if (data[5] != '') {
+        //         $(row).css({ "color": "black", "background-color": "#ff8080" });
+        //     }
+        // },
         "language": {
             "sProcessing": "กำลังดำเนินการ...",
             "sLengthMenu": "แสดง _MENU_ แถว",

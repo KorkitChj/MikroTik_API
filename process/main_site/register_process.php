@@ -21,7 +21,7 @@ if (isset($_POST["username_register"])) {
 		$phonenumber  = $_POST["number"];
 		$site = $_POST["site"];
 		$address = $_POST["address"];
-		$today = date('Y-m-d H:i:sa');
+		$today = date('Y-m-d H:i:s');
 		$_SESSION["user"] = $_POST["username_register"];
 		$_SESSION["fullname"] = $_POST["fullname"];
 		$_SESSION["phone"] = $_POST["number"];

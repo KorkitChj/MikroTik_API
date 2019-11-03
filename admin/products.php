@@ -258,7 +258,6 @@ include('../process/admin/function.php');
                                 <div class="modal-footer">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
-                                        <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
                                         <button type="submit" class="btn btn-success" id="editproductBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                                     </div>
                                 </div>

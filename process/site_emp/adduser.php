@@ -15,8 +15,9 @@ if ($_POST) {
     $profile = $_POST['profile'];
     //$limituptime = $_POST['limituptime'];
     //$comment = $_POST['comment'];
-
-    function adduser($API, $ip, $port, $user, $pass_r, $name, $password, $profile)
+    $date2 = datetime($profile);
+    
+    function adduser($API, $ip, $port, $user, $pass_r, $name, $password, $profile,$date2)
     {
         $output = array('success' => false, 'messages' => array());
         if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
@@ -33,7 +34,8 @@ if ($_POST) {
             $ARRAY = $API->comm("/ip/hotspot/user/add", array(
                 "name" => $name,
                 "password" => $password,
-                "profile" => $profile
+                "profile" => $profile,
+                "comment" => $date2
             ));
             $output['success'] = true;
             $output['messages'] = "บันทึกข้อมูลแล้ว";
@@ -44,7 +46,7 @@ if ($_POST) {
             return $output;
         }
     }
-    $output = adduser($API, $ip, $port, $user, $pass_r, $name, $password, $profile);
+    $output = adduser($API, $ip, $port, $user, $pass_r, $name, $password, $profile,$date2);
 }
 echo json_encode($output);
 ?>

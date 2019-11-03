@@ -4,6 +4,7 @@ session_start();
 <?php
 if ($_POST) {
     include('../../includes/db_connect.php');
+    include('../../config/routeros_api.class.php');
     include('function.php');
     $cus_id = $_SESSION['cus_id'];
     $output = array('success' => false, 'messages' => array());
@@ -14,6 +15,20 @@ if ($_POST) {
     $portapi  = $_POST["portapi"];
     $namesite = $_POST["namesite"];
 
+    $API = new routeros_api();
+    $API->debug = false;
+    set_time_limit(160);
+    if ($API->connect($ipaddress . ":" . $portapi, $username, $password)) {
+        $API->comm("/system/clock/set", array(
+            "time-zone-autodetect" => "yes",
+            "time-zone-name" => "Asia/Bangkok"
+        ));
+        $API->comm("/system/ntp/client/set", array(
+            "enabled" => "yes",
+            "primary-ntp" => "202.28.18.72",
+            "secondary-ntp" => "0.0.0.0"
+        ));
+    }
     $sql3 = "SELECT * FROM location WHERE ip_address = :ipaddress";
     $query3 = $conn->prepare($sql3);
     $query3->bindparam(':ipaddress', $ipaddress);

@@ -3,23 +3,25 @@ session_start();
 ?>
 <?php
 if ($_POST) {
-
     $location_id = $_SESSION['location_id'];
     $cus_id = $_SESSION['cus_id'];
-    $profilename = $_POST['profilename'];
+    //$profilename = $_POST['profilename'];
     $session = $_POST['session'];
     $shared = $_POST['shared'];
     $limit = $_POST['limit'];
     $datelimit = $_POST['datelimit'];
 
     include('function.php');
-    include('script.php');
-    error_reporting(0);
+    include('script2.php');
+    //error_reporting(0);
     if(empty($datelimit)){
         $datelimit = 1;
     }else{
         
     }
+    $rand = rand(1,999);
+    $profilename = "uprof{$rand}_{$datelimit}/day_{$limit}";
+
     list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
     $output = array('success' => false, 'messages' => array());
@@ -36,14 +38,14 @@ if ($_POST) {
             $name_script = $ARRAY2[$j]['name'];
             array_push($a,$name_script);
         }
-        $b = array_search("func_shiftDate",$a);
-        if($b != TRUE){
-            $API->comm("/system/script/add", array(
-                "name" => "func_shiftDate",
-                "policy" => "read,write,test",
-                "source" => $func_shiftDate
-            ));
-        }
+        // $b = array_search("func_shiftDate",$a);
+        // if($b != TRUE){
+        //     $API->comm("/system/script/add", array(
+        //         "name" => "func_shiftDate",
+        //         "policy" => "read,write,test",
+        //         "source" => $func_shiftDate
+        //     ));
+        // }
         $c = array_search("auto-cutoff",$a);
         if($c != TRUE){
             $API->comm("/system/script/add", array(
@@ -79,8 +81,8 @@ if ($_POST) {
             "name" => $profilename,
             "session-timeout" => $session,
             "shared-users" => $shared,
-            "rate-limit" => $limit,
-            "on-login" => $profile_Script
+            "rate-limit" => $limit
+            //"on-login" => $profile_Script
         ));
         $output['success'] = true;
         $output['messages'] = "ทำการเพิ่มแพคเกจเข้าระบบเรียบร้อยแล้ว";

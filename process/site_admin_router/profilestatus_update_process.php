@@ -5,15 +5,28 @@ session_start();
 error_reporting(0);
 if($_POST){
     $profile = $_POST["editprofile_name"];
-    $profilename = $_POST['editprofilename'];
+    //$profilename = $_POST['editprofilename'];
     $session = $_POST['editsession'];
     $shared = $_POST['editshared'];
     $limit = $_POST['editlimit'];
     $datelimit = $_POST['editdatelimit'];
     include ('function.php');
-    include ('script.php');
+    //include ('script2.php');
     $location_id = $_SESSION['location_id'];
     $cus_id = $_SESSION['cus_id'];
+
+    if(!empty($profile)){
+        $string = explode("_",$profile);
+        $string2 = explode("/",$string[1]);
+        $daytouse = $string2[0];
+    }else{
+        $daytouse = '';
+    }
+    if($daytouse != ''){
+        $profilename = str_replace($daytouse,$datelimit,$profile);
+    }else{
+        $profilename = $profile;
+    }
 
     list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
@@ -25,8 +38,8 @@ if($_POST){
             "session-timeout" => $session,
             "shared-users" => $shared,
             "rate-limit" => $limit,
-            "numbers" => $profile,
-            "on-login" => $profile_Script
+            "numbers" => $profile
+            //"on-login" => $profile_Script
         ));
             $output['success'] = true;
             $output['messages'] = "แก้ไขข้อมูลแล้ว";

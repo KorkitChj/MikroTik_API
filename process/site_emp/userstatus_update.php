@@ -13,6 +13,7 @@ if($_POST){
     include ('function.php');
 
     $emp_id = $_SESSION['emp_id'];
+    $date2 = datetime($profile);
 
     list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
 
@@ -23,6 +24,7 @@ if($_POST){
             "name" => $name,
             "password" => $password,
             "profile" => $profile,
+            "comment" => $date2,
             "numbers" => $username
         ));
             $output['success'] = true;

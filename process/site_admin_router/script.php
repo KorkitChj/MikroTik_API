@@ -8,7 +8,7 @@ $profile_Script .= ';:local montharray ( "jan", "feb", "mar", "apr", "may", "jun
 $profile_Script .= ';:local date [ /system clock get date ] ';
 $profile_Script .= ';:local date [ $shiftDate date=$date days=$shiftDay ] ';
 $profile_Script .= ';:local day [ :pick $date 4 6 ] ';
-$profile_Script .= ';:set day ($day) ';
+$profile_Script .= ';:set day ($day) ';     
 $profile_Script .= ';:local monthtext [ :pick $date 0 3 ] ';
 $profile_Script .= ';:local month ( [ :find $montharray $monthtext ] + 1) ';
 $profile_Script .= ';:local year [ :pick $date 7 11 ] ';

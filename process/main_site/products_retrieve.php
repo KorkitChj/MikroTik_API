@@ -21,7 +21,7 @@ if (!empty($result)) {
     $output = '';
     foreach ($result as $a => $b) {
         $output .= '<div class="col-sm-4">
-                <div class="card shadow-lg p-3 mb-5">
+                <div class="card card-custom overflow-auto shadow-lg p-3 mb-5">
                     <img class="card-img-top" src="img/products/' . $b['image'] . '" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">' . $b['title'] . '</h5><hr>

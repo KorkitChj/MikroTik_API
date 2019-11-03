@@ -14,30 +14,30 @@ $(document).ready(function () {
             }
         },
         "columnDefs": [{
-            "targets": [0,6],
+            "targets": [0, 6],
             "orderable": false,
         }],
         "language": {
-            "sProcessing":    "กำลังดำเนินการ...",
-            "sLengthMenu":    "แสดง _MENU_ แถว",
-            "sZeroRecords":   "ไม่พบค้นหา",
-            "sEmptyTable":    "ไม่มีข้อมูลในตาราง",
-            "sInfo":          "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
-            "sInfoEmpty":     "แสดง 0 ถึง 0 ของ 0 แถว",
-            "sInfoFiltered":  "(กรองข้อมูล _MAX_ ทุกแถว)",
-            "sInfoPostFix":   "",
-            "sSearch":        "ค้นหา:",
-            "sUrl":           "",
-            "sInfoThousands":  ",",
+            "sProcessing": "กำลังดำเนินการ...",
+            "sLengthMenu": "แสดง _MENU_ แถว",
+            "sZeroRecords": "ไม่พบค้นหา",
+            "sEmptyTable": "ไม่มีข้อมูลในตาราง",
+            "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
+            "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 แถว",
+            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoPostFix": "",
+            "sSearch": "ค้นหา:",
+            "sUrl": "",
+            "sInfoThousands": ",",
             "sLoadingRecords": "กำลังโหลดข้อมูล...",
             "oPaginate": {
-                "sFirst":    "หน้าแรก",
-                "sLast":    "หน้าสุดท้าย",
-                "sNext":    "ถัดไป",
+                "sFirst": "หน้าแรก",
+                "sLast": "หน้าสุดท้าย",
+                "sNext": "ถัดไป",
                 "sPrevious": "ก่อนหน้า"
             },
             "oAria": {
-                "sSortAscending":  ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
                 "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
             }
         }
@@ -47,8 +47,8 @@ $("#addProfileModalBtn").on('click', function () {
     $("#addProfile")[0].reset();
     $("#addProfile").off('submit').on('submit', function () {
         var form = $(this);
-        var profilename = $("#profilename").val();
-        if (profilename) {
+        var shared = $("#shared").val();
+        if (shared) {
             $.ajax({
                 url: '../process/site_admin_router/profile_add_process.php',
                 type: 'POST',
@@ -69,13 +69,17 @@ $("#addProfileModalBtn").on('click', function () {
         return false;
     });
 });
+
 function removeProfile(Profile_name) {
     if (Profile_name) {
         $("#removeProfileBtn").off('click').on('click', function () {
             $.ajax({
                 url: '../process/site_admin_router/profilestatus_del_process.php',
                 type: 'POST',
-                data: { 'profile_id':Profile_name, 'type': 'one' },
+                data: {
+                    'profile_id': Profile_name,
+                    'type': 'one'
+                },
                 dataType: 'json',
                 success: function (response) {
                     if (response.success == true) {
@@ -104,7 +108,8 @@ $('#removeAllProfileBtn').click(function () {
             url: '../site/profilestatus_del_process.php',
             method: 'POST',
             data: {
-                'profile_id': Profile_id, 'type': 'many'
+                'profile_id': Profile_id,
+                'type': 'many'
             },
             dataType: 'json',
             success: function (response) {
@@ -119,6 +124,7 @@ $('#removeAllProfileBtn').click(function () {
         });
     }
 });
+
 function editProfile(Profile_name) {
     if (Profile_name) {
         $.ajax({
@@ -137,8 +143,8 @@ function editProfile(Profile_name) {
                 $("#editProfile").append('<input type="hidden" name="editprofile_name" id="editprofile_name" value="' + response.name + '"/>');
                 $("#editProfile").off('submit').on('submit', function () {
                     var form = $(this);
-                    var editprofilename = $("#editprofilename").val();
-                    if (editprofilename) {
+                    var editshared = $("#editshared").val();
+                    if (editshared) {
                         $.ajax({
                             url: '../process/site_admin_router/profilestatus_update_process.php',
                             type: 'POST',
@@ -163,6 +169,3 @@ function editProfile(Profile_name) {
         alert("Error : Refresh the page again");
     }
 }
-
-
-

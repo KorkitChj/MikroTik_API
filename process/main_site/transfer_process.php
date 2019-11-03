@@ -98,7 +98,7 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
 
                         $expired = round(($row['total_cash']*$days)/$begin_price);
                         $enddate = strtotime("+{$expired} days", strtotime($date));                
-                        $expired_date = date('Y-m-d H:i:sa', $enddate);
+                        $expired_date = date('Y-m-d H:i:s', $enddate);
                         $sqlp = "INSERT INTO payment VALUES('',:bk,:date,:expired,:money,:newname,0,:orderid)";
                         $query3 = $conn->prepare($sqlp);
                         $query3->bindparam(':bk', $bk);

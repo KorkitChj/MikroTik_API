@@ -9,7 +9,7 @@ if ($_POST) {
     $datelimit = $_POST['datelimit'];
 
     include('function.php');
-    include('../site_admin_router/script.php');
+    include('../site_admin_router/script2.php');
     error_reporting(0);
     if(empty($datelimit)){
         $datelimit = 1;
@@ -32,14 +32,14 @@ if ($_POST) {
             $name_script = $ARRAY2[$j]['name'];
             array_push($a,$name_script);
         }
-        $b = array_search("func_shiftDate",$a);
-        if($b != TRUE){
-            $API->comm("/system/script/add", array(
-                "name" => "func_shiftDate",
-                "policy" => "read,write,test",
-                "source" => $func_shiftDate
-            ));
-        }
+        // $b = array_search("func_shiftDate",$a);
+        // if($b != TRUE){
+        //     $API->comm("/system/script/add", array(
+        //         "name" => "func_shiftDate",
+        //         "policy" => "read,write,test",
+        //         "source" => $func_shiftDate
+        //     ));
+        // }
         $c = array_search("auto-cutoff",$a);
         if($c != TRUE){
             $API->comm("/system/script/add", array(
@@ -62,7 +62,8 @@ if ($_POST) {
                 "on-event" => "auto-cutoff"
             ));
         }
-        $profilename = $datelimit."_date_".$shared."_person";
+        $rand = rand(1,999);
+        $profilename = "uprof{$rand}_{$datelimit}/day_0M/0M";
         for ($i = 0; $i < $count; $i++) {
             $a = $ARRAY[$i]['name'];
             if ($a == $profilename) {
@@ -75,7 +76,8 @@ if ($_POST) {
         $API->comm("/ip/hotspot/user/profile/add", array(
             "name" => $profilename,
             "shared-users" => $shared,
-            "on-login" => $profile_Script
+            "rate-limit" => "0M/0M"
+            //"on-login" => $profile_Script
         ));
         $output['success'] = true;
         $output['messages'] = "ทำการเพิ่มแพคเกจเข้าระบบเรียบร้อยแล้ว";

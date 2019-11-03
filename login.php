@@ -19,7 +19,7 @@ include("includes/template_frontend/page_link_config.php");
         }
 
         .bg-image {
-            background-image: url('img/login_image.png');
+            background-image: url('img/login_image.jpg');
             background-size: cover;
             background-position: center;
         }

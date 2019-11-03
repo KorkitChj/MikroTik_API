@@ -35,9 +35,9 @@ session_start();
 			$daytouse = "unlimit";
             for ($j = 0; $j < $num2; $j++) {
                 if ($row["profile"] == $ARRAY2[$j]['name']) {
-                    $string = explode(";", $ARRAY2[$j]['on-login']);
-                    $string2 = explode(" ", $string[2]);
-                    $daytouse = $string2[2]." วัน";
+                    $string = explode("_", $ARRAY2[$j]['name']);
+                    $string2 = explode("/", $string[1]);
+                    $daytouse = $string2[0]." วัน";
                     break;
                 }
             }

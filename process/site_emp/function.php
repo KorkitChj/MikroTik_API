@@ -32,4 +32,42 @@ function fetchlogo($emp_id)
     }
     return array($image, $row["image_site"]);
 }
-?>
+function datetime($profile){
+
+    if(!empty($profile)){
+        $string = explode("_",$profile);
+        $string2 = explode("/",$string[1]);
+        $daytouse = $string2[0];
+    }else{
+        $daytouse = '';
+    }
+    // function checkTime($i) {
+    //     if ($i < 10) {
+    //         $i = "0$i";
+    //         return $i;
+    //     }else{
+    //         return $i;
+    //     }
+    // }
+    if($daytouse != ''){
+        $dateTime = date("Y-m-d H:i:s");
+        $enddate = strtotime("+{$daytouse} days", strtotime($dateTime));
+        //$date2 = date('Y-m-d H:i:s', $enddate);
+        $year = date("Y",$enddate);
+        $month = date("m",$enddate);
+        $day = date("d",$enddate);
+        $hour = date("H",$enddate);
+        $minute = date("i",$enddate);
+        $second = date("s",$enddate);
+        // $m = checkTime($month);
+        // $d = checkTime($day);
+        // $h = checkTime($hour);
+        // $i = checkTime($minute);
+        // $s = checkTime($second);
+
+        //$date2 = "{$year}-{$m}-{$d} {$h}:{$i}:{$s}";
+        return $date2 = "expire={$year}-{$month}-{$day} {$hour}:{$minute}:{$second}";
+    }else{
+        return $date2 = "Notexpired";
+    }
+}

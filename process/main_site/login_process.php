@@ -1,7 +1,8 @@
 <?php
 session_start();
-require('../../includes/db_connect.php');
+include '../../includes/db_connect.php';
 ?>
+
 <?php
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
@@ -69,7 +70,7 @@ if (isset($_POST['username'])) {
                                 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                                     $insert_query = "INSERT INTO login_details(last_activity,cus_id) VALUES (:last_activity,:cus_id)";
                                     $statement = $conn->prepare($insert_query);
-                                    $dateTime = date("Y-m-d H:i:sa");
+                                    $dateTime = date("Y-m-d H:i:s");
                                     $statement->bindparam(':last_activity', $dateTime);
                                     $statement->bindparam(':cus_id', $row["cus_id"]);
                                     $statement->execute();

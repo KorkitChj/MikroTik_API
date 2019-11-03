@@ -14,8 +14,8 @@ if ($_POST) {
     $profilest = $_POST['profilest'];
     //$limituptimest = $_POST['limituptimest'];
     //$commentst = $_POST['commentst'];
-
-    function adduser($API, $ip, $port, $user, $pass_r, $profilest, $num)
+    $date2 = datetime($profilest);
+    function adduser($API, $ip, $port, $user, $pass_r, $profilest, $num,$date2)
     {
         $output = array('success' => false, 'messages' => array());
         if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
@@ -37,7 +37,8 @@ if ($_POST) {
                 $ARRAY = $API->comm("/ip/hotspot/user/add", array(
                     "name" => $username,
                     "password" => $password,
-                    "profile" => $profilest
+                    "profile" => $profilest,
+                    "comment" => $date2
                 ));
                 $i++;
             } while ($i <= $num);
@@ -50,7 +51,7 @@ if ($_POST) {
             return $output;
         }
     }
-    $output = adduser($API, $ip, $port, $user, $pass_r, $profilest, $num);
+    $output = adduser($API, $ip, $port, $user, $pass_r, $profilest, $num,$date2);
 }
 echo json_encode($output);
 ?>

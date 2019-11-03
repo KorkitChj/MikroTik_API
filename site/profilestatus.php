@@ -75,7 +75,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                         </div>
                         <div class="modal-body">
                             <form action="" id="addProfile" method="post">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="profilename" class="col-sm control-label">ชื่อ Profile: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                                     <div class="col-sm-12 input-group">
                                         <div class="input-group-prepend">
@@ -85,18 +85,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                         </div>
                                         <input type="text" class="form-control" name="profilename" id="profilename" placeholder="uprof1" required>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="session" class="col-sm control-label">Session Timeout:(เวลาตัดการเชื่อมต่อในแต่ละครั้ง)&nbsp;</label>
-                                    <div class="col-sm-12 input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="glyphicon glyphicon-tasks"></i>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" name="session" id="session" placeholder="00:00:00" value="00:00:00">
-                                    </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="shared" class="col-sm control-label">จำนวนผู้ใช้งาน:&nbsp;</label>
                                     <div class="col-sm-12 input-group">
@@ -105,7 +94,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                                 <i class="glyphicon glyphicon-user"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="shared" id="shared" placeholder="1" value="1">
+                                        <input type="text" class="form-control" name="shared" id="shared" placeholder="1"  required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -130,6 +119,17 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                         <input type="text" class="form-control" name="limit" id="limit" placeholder="" value="0m/0m">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="session" class="col-sm control-label">Session Timeout:(เวลาตัดการเชื่อมต่อในแต่ละครั้ง)&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="glyphicon glyphicon-tasks"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="session" id="session" placeholder="00:00:00" value="00:00:00">
+                                    </div>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
                                     <button type="reset" class="btn btn-warning"><i class="fa fa-undo"></i>&nbsp;Reset&nbsp;</button>
@@ -149,7 +149,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                         </div>
                         <div class="modal-body">
                             <form action="" id="editProfile" method="post">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="editprofilename" class="col-sm control-label">ชื่อ Profile:&nbsp;</label>
                                     <div class="col-sm-12 input-group">
                                         <div class="input-group-prepend">
@@ -159,18 +159,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                         </div>
                                         <input type="text" class="form-control" name="editprofilename" id="editprofilename" placeholder="ชื่อ Profile" required>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="editsession" class="col-sm control-label">Session Timeout:(เวลาตัดการเชื่อมต่อในแต่ละครั้ง)&nbsp;</label>
-                                    <div class="col-sm-12 input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="glyphicon glyphicon-tasks"></i>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" name="editsession" id="editsession">
-                                    </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="editshared" class="col-sm control-label">จำนวนผู้ใช้งาน:&nbsp;</label>
                                     <div class="col-sm-12 input-group">
@@ -202,6 +191,17 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                             </div>
                                         </div>
                                         <input type="text" class="form-control" name="editlimit" id="editlimit" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editsession" class="col-sm control-label">Session Timeout:(เวลาตัดการเชื่อมต่อในแต่ละครั้ง)&nbsp;</label>
+                                    <div class="col-sm-12 input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="glyphicon glyphicon-tasks"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="editsession" id="editsession">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
