@@ -21,9 +21,10 @@ session_start();
         $comment = $_POST["comment"];
         
 
-        $sql = "SELECT * FROM employee WHERE username = :username";
+        $sql = "SELECT * FROM employee WHERE username = :username AND location_id = :location_id";
         $query = $conn->prepare($sql);
         $query->bindparam(':username', $username);
+        $query->bindparam(':location_id', $location_id);
         $query->execute();
         if ($query->rowCount() != 0) {
             $output['success'] = false;

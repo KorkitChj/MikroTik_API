@@ -53,7 +53,8 @@ include("includes/template_frontend/page_link_config.php");
                                                 <i class="fas fa-key"></i>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" placeholder="Password" id="password_register" name="password_register" required>
+                                        <input type="password" class="form-control" placeholder="Password" id="password_register" name="password_register" 
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="ต้องมีตัวเลขอย่างน้อยหนึ่งตัวและตัวพิมพ์ใหญ่และตัวพิมพ์เล็กหนึ่งตัวอย่างน้อย 8 ตัวอักษรขึ้นไป" required>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +78,8 @@ include("includes/template_frontend/page_link_config.php");
                                                 <i class="fas fa-envelope-square"></i>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล" 
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                     </div>
                                 </div>
                             </div>

@@ -173,7 +173,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                         <i class="glyphicon glyphicon-lock"></i>
                                     </div>
                                 </div>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="รหัสผ่าน ต้องมีค่ามากกว่าหรือเท่ากับ 8" required>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="รหัสผ่าน ต้องมีค่ามากกว่าหรือเท่ากับ 8"
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="ต้องมีตัวเลขอย่างน้อยหนึ่งตัวและตัวพิมพ์ใหญ่และตัวพิมพ์เล็กหนึ่งตัวอย่างน้อย 8 ตัวอักษรขึ้นไป" required>
                             </div>
                         </div>
                         <div class="form-group">

@@ -33,7 +33,8 @@
                     <li class="nav-item">
                         <div class="search-container">
                             <form id="form_search" action="" method="post">
-                                <input type="text" placeholder="ค้นหารายการสินค้า..." name="search" id="search">
+                                <input type="text" placeholder="ค้นหารายการสินค้า..." name="search" id="search" 
+                                pattern="[^'\x22]+" title="Invalid input">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>

@@ -36,10 +36,10 @@ if(isset($_SESSION['fullname']) == '' && isset($_SESSION['price']) == ''){
           <div class="row d-flex justify-content-center">
             <div class="col-md-6">
               <?php
-              $date = strtotime("+7 day");
+              $date = strtotime("+1 day");
               $datethai = date('Y-m-d H:i:s', $date);
               $datetime = date('Y-m-d H:i:s', $date);
-              echo "<label for=\"date\"><b><i class=\"far fa-calendar-alt\"></i>&nbsp;กำหนดชำระภายใน:</b></label>" . "<input class=\"dl btn form-control\" readonly=\"readonly\" value=\"" . DateThai($datethai) . "  (7 วัน)\" name=\"date\" id=\"date\" />";
+              echo "<label for=\"date\"><b><i class=\"far fa-calendar-alt\"></i>&nbsp;กำหนดชำระภายใน:</b></label>" . "<input class=\"dl btn form-control\" readonly=\"readonly\" value=\"" . DateThai($datethai) . "  (1 วัน)\" name=\"date\" id=\"date\" />";
               ?>
               <input type="hidden" class="form-control" name="datetime" id="datetime" value="<?php echo $datetime ?>">
             </div>

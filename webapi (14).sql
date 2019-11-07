@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2019 at 05:19 PM
+-- Generation Time: Nov 07, 2019 at 06:21 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -64,7 +64,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`emp_id`, `username`, `pass_w`, `pass_router`, `full_name`, `location_id`) VALUES
-(3, 'reception', '25d55ad283aa400af464c76d713c07ad', '70649', 'reception', 5);
+(3, 'reception', '25d55ad283aa400af464c76d713c07ad', '70649', 'reception', 5),
+(7, 'reception', '2a4a3ea4095c1f5453b5463c3a746c99', '44180', 'reception', 6);
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,8 @@ CREATE TABLE `location` (
 --
 
 INSERT INTO `location` (`location_id`, `username`, `password`, `working_site`, `api_port`, `image_site`, `ip_address`, `cus_id`) VALUES
-(5, 'korkit', '12345', 'tranga', 9000, '1080705153.png', '172.20.10.5', 22);
+(5, 'korkit', '12345', 'tranga', 9000, '1080705153.png', '172.20.10.6', 22),
+(6, 'korkit', '12345', 'trang', 9000, '1664097328.jpg', '172.20.10.5', 35);
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,11 @@ CREATE TABLE `login_details` (
 --
 
 INSERT INTO `login_details` (`login_details_id`, `last_activity`, `cus_id`) VALUES
-(1, '2019-11-03 23:19:11', 22);
+(1, '2019-11-07 12:50:15', 35),
+(2, '2019-11-07 12:50:22', 35),
+(3, '2019-11-07 12:54:54', 35),
+(4, '2019-11-07 12:54:56', 35),
+(6, '2019-11-08 00:21:34', 35);
 
 -- --------------------------------------------------------
 
@@ -129,7 +135,7 @@ CREATE TABLE `orderpd` (
 
 INSERT INTO `orderpd` (`order_id`, `total_cash`, `appointment`, `product_id`, `cus_id`) VALUES
 (9, 300, '2019-10-16 20:32:34', 4, 22),
-(12, 1500, '2019-11-06 03:21:04', 10, 34);
+(13, 300, '2019-11-08 06:30:33', 4, 35);
 
 -- --------------------------------------------------------
 
@@ -169,7 +175,8 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`payment_id`, `payment_at`, `transfer_date`, `expired_date`, `amount`, `slip_name`, `paid`, `order_id`) VALUES
-(6, 'ไทยพาญิชย์', '2019-10-10 10:10:00', '2020-01-11 10:10:00', 300, 'IMG_1166.PNG', 1, 9);
+(6, 'ไทยพาญิชย์', '2019-10-10 10:10:00', '2020-01-11 10:10:00', 300, 'IMG_1166.PNG', 1, 9),
+(7, 'ไทยพาญิชย์', '2019-11-07 07:08:00', '2021-02-25 11:39:00', 1000, '1458092521.PNG', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -219,7 +226,7 @@ CREATE TABLE `siteadmin` (
 
 INSERT INTO `siteadmin` (`cus_id`, `username`, `pass_w`, `add_ress`, `work_phone`, `e_mail`, `site_name`, `full_name`, `image`, `regis_date`) VALUES
 (22, 'user7', '25d55ad283aa400af464c76d713c07ad', '443 ', '0123587035', 'test@hotmail.com', 'trang', 'testtest', '89947461.png', '2019-10-10 01:32:33'),
-(34, 'user9', '25d55ad283aa400af464c76d713c07ad', '15/6', '0950244234', 'kokig_kao@hotmail.com', 'กรุงเทพ', 'kolas', '', '2019-10-30 09:12:00');
+(35, 'user10', '2a4a3ea4095c1f5453b5463c3a746c99', '116/4 psu trang ต.ควนปลิง อ.เมือง จ.ตรัง 92000', '0950244234', 'somchai@psu.ac.th', 'psu trang', 'Somchai PP', '', '2019-11-07 12:20:46');
 
 --
 -- Indexes for dumped tables
@@ -237,7 +244,6 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`emp_id`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `emp_id` (`emp_id`),
   ADD KEY `location_id` (`location_id`);
 
@@ -309,32 +315,32 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `emp_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `location_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `location_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `login_details`
 --
 ALTER TABLE `login_details`
-  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `orderpd`
 --
 ALTER TABLE `orderpd`
-  MODIFY `order_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `order_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `packet_update`
 --
 ALTER TABLE `packet_update`
-  MODIFY `puID` int(40) NOT NULL AUTO_INCREMENT;
+  MODIFY `puID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `payment_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -344,7 +350,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `siteadmin`
 --
 ALTER TABLE `siteadmin`
-  MODIFY `cus_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `cus_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- Constraints for dumped tables
 --
