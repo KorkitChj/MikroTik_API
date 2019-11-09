@@ -31,18 +31,40 @@ $("#addImageModalBtn").click(function () {
         return false;
     });
 });
+
 function readURLProfile(input) {
     if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      
-      reader.onload = function(e) {
-        $('#edit_profile').attr('src', e.target.result);
-      }
-      
-      reader.readAsDataURL(input.files[0]);
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#edit_profile').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
     }
-  }
-  
-  $("#image").change(function() {
+}
+
+$("#image").change(function () {
     readURLProfile(this);
-  });
+});
+
+$(document).on('click', '#changeurl', function(event){
+    event.preventDefault()
+    var video = $("#video").val();
+    if(video == ''){
+        alert("กรุณากรอก URL");
+    }else{
+        $.ajax({
+            url: '../process/admin/video_process.php',
+            type: 'POST',
+            data: {data:video},
+            dataType: 'json',
+            success: function (response) {
+                if (response.success == true) {
+                    $("#videopresentation")[0].reset();
+                    $("#showVideoModal").modal('hide');
+                }
+            }
+        });
+    }
+});

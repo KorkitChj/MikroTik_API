@@ -27,6 +27,10 @@
                     <a href="register.php" class="nav-link"><span class="badge badge-info"><i class="fas fa-laugh-wink"></i>
                             สมัครสมาชิก</a>
                 </li>
+                <li class="nav-item <?php if ($CURRENT_PAGE == "service") { ?>active_cus<?php } ?>">
+                    <a href="service_introduction.php" class="nav-link"><span class="badge badge-warning"><i class="fas fa-video-camera"></i>
+                            แนะนำบริการ</a>
+                </li>
             </ul>
             <ul class="navbar-nav topnav ml-auto">
                 <?php if ($CURRENT_PAGE == "Products") { ?>

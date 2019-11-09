@@ -17,7 +17,7 @@ if ($_POST) {
         $bank = "กรุงไทย";
     }
 
-    switch ($money) {
+    /*switch ($money) {
         case "200":
             $time_required = 31;
             break;
@@ -32,7 +32,10 @@ if ($_POST) {
             break;
         case "2000":
             $time_required = 730;
-    }
+    }*/
+    $days = 365;
+    $begin_price = 1000;
+    $time_required = round(($money*$days)/$begin_price);
 
     if ($_FILES["fileslip"]["name"] != '') {
         $image = upload_imagepacket();

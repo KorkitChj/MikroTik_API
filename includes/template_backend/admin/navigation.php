@@ -78,6 +78,11 @@
                         แก้ไข Profile</a>
                 </li>
                 <li>
+                    <a href="" data-toggle="modal" data-target="#showVideoModal" id="showVideoModalBtn">
+                        <i class="fas fa-camera"></i>&nbsp;
+                        แก้ไข Video</a>
+                </li>
+                <li>
                     <a href="#" class="logout">
                         <i class="fas fa-sign-out-alt"></i>&nbsp;
                         Logout</a>
@@ -112,7 +117,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img id="edit_profile" src="#" alt="your image"  class="img-fluid rounded shadow-lg p-3 mb-5 bg-white" alt="Responsive image" />
+                            <img id="edit_profile" src="#" alt="your image" class="img-fluid rounded shadow-lg p-3 mb-5 bg-white" alt="Responsive image" />
                         </div>
                     </div>
                 </div>
@@ -121,6 +126,33 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancel&nbsp;</button>
                         <button type="submit" class="btn btn-success" id="addImageBtn"><i class="fa fa-check"></i>&nbsp;Save&nbsp;</button>
                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- update video Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="showVideoModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="videopresentation" action="" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">แก้ไข Video </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12">
+                            <label for="name"><b><i class='fas fa-link'></i>&nbsp;YOUTUBE VIDEO URL:</b></label>
+                            <input class="form-control"  type="text" name="video" id="video" required />
+                        </div>
+                    </div><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" id="changeurl" class="btn btn-success">Save</button>
                 </div>
             </form>
         </div>

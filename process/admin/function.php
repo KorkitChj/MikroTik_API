@@ -81,7 +81,7 @@ function upload_image_product()
 		$destination = '../../img/products/' . $new_name;
 		move_uploaded_file($_FILES['product_image']['tmp_name'], $destination);
 		return $new_name;
-	}elseif(isset($_FILES["editproduct_image"])){
+	} elseif (isset($_FILES["editproduct_image"])) {
 		$extension = explode('.', $_FILES['editproduct_image']['name']);
 		$new_name = rand() . '.' . $extension[1];
 		$destination = '../../img/products/' . $new_name;
@@ -133,4 +133,18 @@ function delNoOrder($cus_id)
 	} else {
 		$result->execute();
 	}
+}
+function userSuccess()
+{
+	include('../../includes/db_connect.php');
+	$statement2 = $conn->prepare("SELECT * FROM siteadmin A 
+INNER JOIN orderpd B on A.cus_id = B.cus_id 
+INNER JOIN payment C on B.order_id = C.order_id WHERE C.paid = 1");
+	$statement2->execute();
+	$result2 = $statement2->fetchAll();
+	$ool = array();
+	foreach ($result2 as $val3) {
+		$ool[] = $val3['cus_id'];
+	}
+	return $ool;
 }

@@ -1,16 +1,17 @@
 $(document).ready(function () {
-    $(document).on('submit', '#s_payment', function (event) {
+    $(document).on('submit', 'form#s_payment', function (event) {
         event.preventDefault();
+        var form = $(this);
         var name = $("#name").val();
         var date = $("#datetime").val();
         var order_price = $("#order_price").val();
+        //console.log(submit);
+        //return false;
         if (name != '' && date != '' && order_price != '') {
             $.ajax({
-                url: "process/main_site/payment_process.php",
+                url: "process/main_site/payment_process.php?post=confirm",
                 method: 'POST',
-                data: new FormData(this),
-                contentType: false,
-                processData: false,
+                data: form.serialize(),
                 dataType: 'json',
                 success: function (data) {
                     if (data.success == true) {

@@ -246,6 +246,22 @@ function readURL(input) {
   $("#product_image").change(function() {
     readURL(this);
   });
+  $("input#productprice").keypress(function(){
+      var val = $("#productprice").val();
+      var begin_price = 1000;
+      var days = 365;
+      var aa = (val*days*10)/begin_price;
+      var expired = Math.round(aa);
+    $("span#days").text(expired);
+  }); 
+  $("input#productprice").change(function(){
+    var val = $("#productprice").val();
+    var begin_price = 1000;
+    var days = 365;
+    var aa = (val*days)/begin_price;
+    var expired = Math.round(aa);
+    $("span#days").text(expired);
+  });
 
 
 

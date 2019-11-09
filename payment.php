@@ -16,7 +16,7 @@ if(isset($_SESSION['fullname']) == '' && isset($_SESSION['price']) == ''){
 
 <body>
   <div class="container" style="margin-top:10px">
-    <form id="s_payment" action="" method="post">
+    <form id="s_payment" action="" method="POST">
       <div class="row" style="margin:5px">
         <div class="col-lg-12 bg-light shadow-lg p-3 mb-5 rounded border border-danger">
           <h2 style="margin-top:1em" class="text-center very-large-text bg-light"><b>ยืนยันการสั่งซื้อ</b></h2>
@@ -93,10 +93,12 @@ if(isset($_SESSION['fullname']) == '' && isset($_SESSION['price']) == ''){
           </div><br>
           <div class="row d-flex justify-content-center">
             <div class='col-md-6'>
-              <center><button type="submit" class="btn btn-primary" name="sm">ยืนยัน</button>
-                <button type="bottom" class="btn btn-danger" onclick="window.history.back();">ยกเลิก</button></center>
+              <center>
+                <input type="submit" class="btn btn-primary" name="submitBtn" id="submitBtn" value="ยืนยัน">
+                <button type="button" class="btn btn-danger" onclick="window.history.back();">ยกเลิก</button></center>
             </div>
-          </div><br><br>
+          </div>
+          <br><br>
           <div class="row d-flex justify-content-center">
             <div class='col-md-6'>
             <center><i class="fas fa-link"></i><a href="transfer.php">แจ้งโอนเงิน</a></center>

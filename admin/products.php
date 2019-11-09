@@ -133,6 +133,11 @@ include('../process/admin/function.php');
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <div class="col-sm-12 input-group">
+                                                    <p>จำนวนวันใช้งาน: <span id="days"><b>0</b></span></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="producttitle" class="col-sm control-label">หัวข้อสินค้า: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                                                 <div class="col-sm-12 input-group">
                                                     <div class="input-group-prepend">

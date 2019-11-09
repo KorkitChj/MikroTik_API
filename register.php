@@ -79,7 +79,7 @@ include("includes/template_frontend/page_link_config.php");
                                             </div>
                                         </div>
                                         <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล" 
-                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="ใช้ตัวพิมพ์เล็กและรูปแบบที่ถูกต้อง"required>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,12 @@ include("includes/template_frontend/page_link_config.php");
                                 <div class="col-md-6">
                                     <div class="col-sm-12">
                                         <hr />
-                                        <button type="submit" id="registerBtn" name="registerBtn" class="btn btn-primary">สมัครสมาชิก</button>
+                                        <?php
+                                        if(isset($_SESSION['register']) != ''){?>
+                                        <button type="submit" id="registerBtn" name="registerBtn" class="btn btn-primary" disabled>สมัครสมาชิก</button>
+                                        <?php }else{?>
+                                            <button type="submit" id="registerBtn" name="registerBtn" class="btn btn-primary" >สมัครสมาชิก</button>
+                                        <?php }?>
                                         <button type="reset" name="reset" class="btn btn-warning">รีเซ็ต</button>
                                         <button type="bottom" class="btn btn-danger" onclick="window.history.back()">ยกเลิก</button>
                                     </div>

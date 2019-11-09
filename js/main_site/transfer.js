@@ -19,13 +19,13 @@ $(document).on('submit', '#transfer', function (event) {
                     $("#transfer")[0].reset();
                     setTimeout(function () {
                         window.location.href = 'index.php';
-                    }, 10000);
+                    }, 5000);
                 } else if (data.success == "fail") {
                     swal("ผิดพลาด", data.messages, "error");
                     $("#transfer")[0].reset();
                     setTimeout(function () {
                         window.location.href = 'index.php';
-                    }, 10000);
+                    }, 5000);
                 } else {
                     swal("ผิดพลาด", data.messages, "error");
                 }

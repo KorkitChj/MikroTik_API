@@ -64,9 +64,8 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                 $output['messages'] = "คุณได้ยืนยันชำระเงินแล้ว";
             } else {
                 $id = "";
-                while ($row = $query1->fetch(PDO::FETCH_ASSOC)) {
-                    $id = $row['cus_id'];
-                }
+                $row = $query1->fetch(PDO::FETCH_ASSOC);
+                $id = $row['cus_id'];
                 $sqlid = "SELECT a.order_id,a.total_cash
                         FROM orderpd AS a 
                         WHERE a.cus_id = :id";
