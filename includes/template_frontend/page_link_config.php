@@ -21,10 +21,6 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PAGE = "Login";
         $PAGE_TITLE = "Login";
         break;
-    case "/web/service_introduction.php":
-        $CURRENT_PAGE = "service";
-        $PAGE_TITLE = "Service introduction";
-        break;
     default:
         $CURRENT_PAGE = "Index";
         $PAGE_TITLE = "Welcome to my homepage!";
