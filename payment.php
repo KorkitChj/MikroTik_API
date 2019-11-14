@@ -4,7 +4,7 @@ include('includes/datethai_function.php');
 include("includes/template_frontend/page_link_config.php");
 //error_reporting(0);
 if(isset($_SESSION['fullname']) == '' && isset($_SESSION['price']) == ''){
-  Header('Location:index.php');
+  Header('Location:home');
 }
 ?>
 <!DOCTYPE html>

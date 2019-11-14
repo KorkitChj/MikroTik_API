@@ -55,11 +55,11 @@ var validateSignupForm = function () {
                 success: function (response) {
                     if (response.success == true) {
                         if (response.messages == "admin") {
-                            window.location.href = 'admin/dashboard.php';
+                            window.location.href = 'admin/dashboard';
                         } else if (response.messages == "employee") {
-                            window.location.href = 'employee/employee.php';
+                            window.location.href = 'employee/employee_status';
                         } else if (response.messages == "service") {
-                            window.location.href = 'siteadmin/connectstatus.php';
+                            window.location.href = 'siteadmin/connect_status';
                         } else {
                             swal("รอการยืนยัน", response.messages, "warning");
                         }

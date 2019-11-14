@@ -65,7 +65,7 @@
                         &nbsp;รายการ ByPass</a>
                 </li>
                 <li>
-                    <a href="../siteadmin/connectstatus.php">
+                    <a href="../siteadmin/connect_status">
                         <i class="glyphicon glyphicon-log-out"></i>&nbsp;
                         กลับหน้าหลัก</a>
                 </li>

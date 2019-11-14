@@ -31,39 +31,39 @@
                     <span>ทั่วไป</span>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "dashboard") { ?>pad-a<?php } ?>">
-                    <a href="dashboard.php">
+                    <a href="dashboard">
                         <i class="fas fa-tachometer-alt"></i>&nbsp;สถิติ</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "siteregister") { ?>pad-a<?php } ?>">
-                    <a href="site_register.php">
+                    <a href="user_register">
                         <i class="glyphicon glyphicon-registration-mark"></i>&nbsp;รายการลงทะเบียน</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "orderlist") { ?>pad-a<?php } ?>">
-                    <a href="order_list.php">
+                    <a href="order_list">
                         <i class="glyphicon glyphicon-list"></i>&nbsp;รายการสั่งซื้อ</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "checkpayment") { ?>pad-a<?php } ?>">
-                    <a href="checkpayment.php">
+                    <a href="check_payment">
                         <i class="glyphicon glyphicon-check"></i>&nbsp;
                         รายการยืนยันชำระเงิน</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "manage") { ?>pad-a<?php } ?>">
-                    <a href="manage.php">
+                    <a href="user_success">
                         <i class="glyphicon glyphicon-ok"></i>&nbsp;
                         ดำเนินการสมบูรณ์</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "orderupgrade") { ?>pad-a<?php } ?>">
-                    <a href="order_upgrade.php">
+                    <a href="order_upgrade">
                         <i class="glyphicon glyphicon-repeat"></i>&nbsp;
                         รายการอัพเกรด</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "useronline") { ?>pad-a<?php } ?>">
-                    <a href="useronline.php">
+                    <a href="user_online">
                         <i class="glyphicon glyphicon-globe"></i>&nbsp;
                         รายการลูกค้าใช้งาน</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "products") { ?>pad-a<?php } ?>">
-                    <a href="products.php">
+                    <a href="products_list">
                         <i class="glyphicon glyphicon-heart"></i>&nbsp;
                         รายการสินค้า</a>
                 </li>

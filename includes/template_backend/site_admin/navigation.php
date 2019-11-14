@@ -31,15 +31,15 @@
                     <span>ทั่วไป</span>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "connectstatus") { ?>pad-a<?php } ?>">
-                    <a href="connectstatus.php">
+                    <a href="connect_status">
                         <i class="glyphicon glyphicon-home"></i>&nbsp;เชื่อมต่อ Site</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "invoice") { ?>pad-a<?php } ?>">
-                    <a href="invoice.php">
+                    <a href="invoice">
                         <i class="glyphicon glyphicon-file"></i>&nbsp;ใบเสร็จ</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "orderreport") { ?>pad-a<?php } ?>">
-                    <a href="order_report.php">
+                    <a href="order_report">
                         <i class="glyphicon glyphicon-signal"></i>&nbsp;รายงานสั่งซื้อ</a>
                 </li>
                 <li>

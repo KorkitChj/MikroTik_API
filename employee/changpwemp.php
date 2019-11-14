@@ -2,7 +2,7 @@
 session_start();
 include("../includes/template_backend/employee/page_link_config.php");
 if (!$_SESSION["emp_id"]) {
-    Header("Location:../index.php");
+    Header("Location:../home");
 }
 include('function.php');
 

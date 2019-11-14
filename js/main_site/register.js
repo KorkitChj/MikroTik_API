@@ -19,7 +19,7 @@ $(document).on('submit', '#register', function (event) {
                     function (isConfirm) {
                         if (isConfirm) {
                             if(response.link == "cart.php"){
-                                window.location.href = 'cart.php';
+                                window.location.href = 'cart';
                             }
                         }
                     }

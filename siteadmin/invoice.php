@@ -2,7 +2,7 @@
 session_start();
 include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
-  Header("Location:../index.php");
+  Header("Location:../home");
 }
 include('../process/site_admin/function.php');
 ?>

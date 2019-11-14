@@ -61,7 +61,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="employee.php">
+                        <a href="employee_status">
                             <i class="glyphicon glyphicon-log-out"></i>&nbsp;
                             กลับหน้าหลัก</a>
                     </li>

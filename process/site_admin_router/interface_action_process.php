@@ -50,6 +50,8 @@ if(isset($_POST["action"]))
       }
       else if($row["disabled"] == "true"){
         $running = '<button title="disable" type="button" class="btn btn-light btn-sm">D</button>';
+     }else{
+        $running = '<button title="running" type="button" class="btn btn-success btn-sm">R</button>';
      }
     //   $tx = $row["tx"] / 1048576;
     //   $rx = $row["rx"] / 1048576;

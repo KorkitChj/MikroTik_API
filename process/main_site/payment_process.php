@@ -32,7 +32,7 @@ if (isset($_GET["post"]) == "confirm") {
         unset($_SESSION['phone']);
         $output['success'] = true;
         $output['messages'] = "เพิ่มรายการเรียนร้อยแล้ว";
-        $output['link'] = "transfer.php";
+        $output['link'] = "transfer";
     }
 }
 echo json_encode($output);

@@ -2,12 +2,18 @@
 session_start();
 include("includes/template_frontend/page_link_config.php");
 include("includes/datethai_function.php");
-error_reporting(0);
+include("includes/db_connect.php");
+//error_reporting(0);
 if (isset($_GET['id']) != '') {
-    $_SESSION['id'] = $_GET['id'];
-    $_SESSION['title'] = $_GET['title'];
-    $_SESSION['price'] = $_GET['price'];
-    $_SESSION['img'] = $_GET['img'];
+    $_SESSION['id'] = (int)$_GET['id'];
+    $id = (int)$_GET['id'];
+    $query = $conn->prepare("SELECT title,price,image FROM product WHERE product_id = :id");
+    $query->bindParam(":id",$id);
+    $query->execute();
+    $value = $query->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['title'] = $value['title'];
+    $_SESSION['price'] = $value['price'];
+    $_SESSION['img'] = $value['image'];
 }
 if (isset($_GET['sts']) == "dest") {
     unset($_SESSION['id']);
@@ -49,9 +55,9 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price">$0</span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login.php"'>เข้าสู่ระบบ</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="register.php?order=false"'>สมัครสมาชิก</button>
-                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="products.php"'>สั่งซื้อทันที</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="register/false"'>สมัครสมาชิก</button>
+                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="item"'>สั่งซื้อทันที</button>
                                     </div>
                                 </div>
                             <?php } elseif (isset($_SESSION['register']) != '' && isset($_SESSION['id']) == '') { ?>
@@ -66,9 +72,9 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price">$0</span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login.php"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
                                         <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="#"' disabled>สมัครสมาชิก</button>
-                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="products.php"'>สั่งซื้อทันที</button>
+                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="item"'>สั่งซื้อทันที</button>
                                     </div>
                                 </div>
                             <?php } elseif (isset($_SESSION['register']) != '' && isset($_SESSION['id']) != '') { ?>
@@ -91,7 +97,7 @@ if (isset($_GET['sts']) == "dest") {
                                                                 <span><?php echo $_SESSION['price'] ?></span>
                                                             </div>
                                                             <div class="col-md-2 price">
-                                                                <button type="button" class="btn btn-danger" onclick='window.location.href="cart.php?sts=dest"'>ลบ</button>
+                                                                <button type="button" class="btn btn-danger" onclick='window.location.href="cart/product/remove"'>ลบ</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -106,9 +112,9 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login.php"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
                                         <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="#"' disabled>สมัครสมาชิก</button>
-                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="payment.php"'>ดำเนินการต่อ</button>
+                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="checkout"'>ดำเนินการต่อ</button>
                                     </div>
                                 </div>
                             <?php } elseif (isset($_SESSION['register']) == '' && isset($_SESSION['id']) != '') { ?>
@@ -131,7 +137,7 @@ if (isset($_GET['sts']) == "dest") {
                                                                 <span><?php echo $_SESSION['price'] ?></span>
                                                             </div>
                                                             <div class="col-md-2 price">
-                                                                <button type="button" class="btn btn-danger" onclick='window.location.href="cart.php?sts=dest"'>ลบ</button>
+                                                                <button type="button" class="btn btn-danger" onclick='window.location.href="cart/product/remove"'>ลบ</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -146,8 +152,8 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login.php"'>เข้าสู่ระบบ</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="register.php?order=true&regis=fasle"'>สมัครสมาชิก</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="register/true"'>สมัครสมาชิก</button>
                                         <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="#"' disabled>สั่งซื้อทันที</button>
                                     </div>
                                 </div>

@@ -7,25 +7,25 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <!--navbar-->
             <ul id="myDIV" class="navbar-nav mr-auto">
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Index") { ?>active_cus<?php } ?>">
-                    <a href="index.php" class="nav-link"><span class="badge badge-primary"><i class="fas fa-home"></i>
-                            หน้าหลัก</a>
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Index") { ?>shadow active_cus<?php } ?>">
+                    <a href="home" class="nav-link "><i class="fas fa-home"></i>
+                        หน้าหลัก</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Products") { ?>active_cus<?php } ?>">
-                    <a href="products.php" class="nav-link"><span class="badge badge-success"><i class="fab fa-product-hunt"></i>
-                            สินค้า</a>
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Products") { ?>shadow active_cus<?php } ?>">
+                    <a href="item" class="nav-link"><i class="fab fa-product-hunt"></i>
+                        สินค้า</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Cart") { ?>active_cus<?php } ?>">
-                    <a href="cart.php" class="nav-link"><span class="badge badge-danger"><i class="fas fa-shopping-cart"></i>
-                            ตระกร้าสินค้า</a>
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Cart") { ?>shadow active_cus<?php } ?>">
+                    <a href="cart" class="nav-link"><i class="fas fa-shopping-cart"></i>
+                        ตระกร้าสินค้า</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Transfer") { ?>active_cus<?php } ?>">
-                    <a href="transfer.php" class="nav-link"><span class="badge badge-light"><i class="fas fa-clipboard-check"></i>
-                            แจ้งโอนเงิน</a>
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Transfer") { ?>shadow active_cus<?php } ?>">
+                    <a href="transfer" class="nav-link"><i class="fas fa-clipboard-check"></i>
+                        แจ้งโอนเงิน</a>
                 </li>
-                <li class="nav-item <?php if ($CURRENT_PAGE == "Register") { ?>active_cus<?php } ?>">
-                    <a href="register.php" class="nav-link"><span class="badge badge-info"><i class="fas fa-laugh-wink"></i>
-                            สมัครสมาชิก</a>
+                <li class="nav-item <?php if ($CURRENT_PAGE == "Register") { ?>shadow active_cus<?php } ?>">
+                    <a href="register" class="nav-link"><i class="fas fa-laugh-wink"></i>
+                        สมัครสมาชิก</a>
                 </li>
             </ul>
             <ul class="navbar-nav topnav ml-auto">
@@ -33,16 +33,15 @@
                     <li class="nav-item">
                         <div class="search-container">
                             <form id="form_search" action="" method="post">
-                                <input type="text" placeholder="ค้นหารายการสินค้า..." name="search" id="search" 
-                                pattern="[^'\x22]+" title="Invalid input">
+                                <input type="text" placeholder="ค้นหารายการสินค้า..." name="search" id="search" pattern="[^'\x22]+" title="Invalid input">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </li>
                 <?php } ?>
                 <li class="nav-item">
-                    <a href="login.php" class="nav-link"><span class="badge badge-info"><i class="fas fa-sign-in-alt"></i>
-                            เข้าสู่ระบบ</a>
+                    <a href="login" class="nav-link"><i class="fas fa-sign-in-alt"></i>
+                        เข้าสู่ระบบ</a>
                 </li>
             </ul>
             <!-- <ul class="navbar-nav ml-auto">

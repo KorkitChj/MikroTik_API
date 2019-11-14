@@ -30,11 +30,11 @@
                     <span>ทั่วไป</span>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "employee_con") { ?>pad-a<?php } ?>">
-                    <a href="employee.php">
+                    <a href="employee_status">
                         <i class="glyphicon glyphicon-home"></i>&nbsp;หน้าหลัก</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "cpwe") { ?>pad-a<?php } ?>">
-                    <a href="changpwemp.php">
+                    <a href="chang_password">
                         <i class="glyphicon glyphicon-edit"></i>&nbsp;
                         เปลี่ยนรหัสผ่าน</a>
                 </li>

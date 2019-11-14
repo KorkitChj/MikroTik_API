@@ -18,7 +18,7 @@ $(document).on('submit', '#transfer', function (event) {
                     swal("สำเร็จ", data.messages, "success");
                     $("#transfer")[0].reset();
                     setTimeout(function () {
-                        window.location.href = 'index.php';
+                        window.location.href = 'home';
                     }, 5000);
                 } else if (data.success == "fail") {
                     swal("ผิดพลาด", data.messages, "error");
@@ -27,7 +27,7 @@ $(document).on('submit', '#transfer', function (event) {
                         window.location.href = 'index.php';
                     }, 5000);
                 } else {
-                    swal("ผิดพลาด", data.messages, "error");
+                    swal("ผิดพลาด", data.messages, "home");
                 }
             }
         });

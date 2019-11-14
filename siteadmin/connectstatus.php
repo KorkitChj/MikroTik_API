@@ -2,7 +2,7 @@
 session_start();
 include("../includes/template_backend/site_admin/page_link_config.php");
 if (!$_SESSION["cus_id"]) {
-    Header("Location:../index.php");
+    Header("Location:../home");
 }
 include('../process/site_admin/function.php');
 ?>
@@ -33,7 +33,7 @@ include('../process/site_admin/function.php');
                                         <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllSiteModal" id="removeAllSiteModalBtn">
                                             <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
                                         </button>
-                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='connectstatus.php'"><img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='connect_status'"><img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                                     </div>
                                 </div>
                                 <div class="col-md">

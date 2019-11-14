@@ -1,0 +1,34 @@
+RewriteEngine on
+#home
+RewriteRule ^home?$ index.php
+RewriteRule ^item?$ products.php
+RewriteRule ^cart?$ cart.php
+RewriteRule ^transfer?$ transfer.php
+RewriteRule ^register?$ register.php
+RewriteRule ^login?$ login.php
+RewriteRule ^checkout?$ payment.php
+
+RewriteRule ^cart/product/([0-9]+) cart.php?id=$1
+
+RewriteRule ^register/true register.php?order=true&regis=fasle
+
+RewriteRule ^cart/product/remove cart.php?sts=dest
+
+RewriteRule ^register/false register.php?order=false
+
+#siteadmin
+RewriteRule ^admin/dashboard?$ admin/dashboard.php
+RewriteRule ^admin/user_register?$ admin/site_register.php
+RewriteRule ^admin/order_list?$ admin/order_list.php
+RewriteRule ^admin/check_payment?$ admin/checkpayment.php
+RewriteRule ^admin/user_success?$ admin/manage.php
+RewriteRule ^admin/order_upgrade?$ admin/order_upgrade.php
+RewriteRule ^admin/user_online?$ admin/useronline.php
+RewriteRule ^admin/products_list?$ admin/products.php
+
+RewriteRule ^siteadmin/connect_status?$ siteadmin/connectstatus.php
+RewriteRule ^siteadmin/invoice?$ siteadmin/invoice.php
+RewriteRule ^siteadmin/order_report?$ siteadmin/order_report.php
+
+RewriteRule ^employee/employee_status?$ employee/employee.php
+RewriteRule ^employee/chang_password?$ employee/changpwemp.php

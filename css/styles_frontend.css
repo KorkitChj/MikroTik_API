@@ -1,244 +1,260 @@
+@import url('https://fonts.googleapis.com/css?family=Prompt&display=swap');
 
-    @import url('https://fonts.googleapis.com/css?family=Prompt&display=swap');
+nav {
+    border-bottom: rgb(255, 255, 255) 0.5em solid;
+}
 
-    nav {
-        border-bottom: rgb(255, 255, 255) 0.5em solid;
-    }
-    .carousel-custom{
-        margin-top: 5em;
-    }
+.carousel-custom {
+    margin-top: 5em;
+}
 
-    #my-carousel {
-        margin-top: 3em;
-    }
+#my-carousel {
+    margin-top: 3em;
+}
 
-    #products {
-        background-color: #f2f2f2;
-    }
-    nav.bg-light{
-        background-image: linear-gradient(to right, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
-    }
-    body {
-        font-family: 'Prompt', sans-serif !important;
-        background-image: linear-gradient(to right, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
-        /* background-color: #ffffff; */
-        /* background-image: url('img/animal-dawn-desktop-backgrounds-875858.jpg');
+#products {
+    background-color: #f2f2f2;
+}
+
+nav.bg-light {
+    background-image: linear-gradient(to left, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
+}
+
+body {
+    font-family: 'Prompt', sans-serif !important;
+    background-image: linear-gradient(to bottom, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
+    /* background-color: #ffffff; */
+    /* background-image: url('img/animal-dawn-desktop-backgrounds-875858.jpg');
         background-repeat: no-repeat;
         background-size: cover; */
-    }
-    .navbar-dark .navbar-nav .nav-link {
-        color:#ffffff !important;
-    }
-    h3 {
-        color: #ffffff;
-        text-align: center;
-        padding: 0.5em;
-        font-weight: bold;
-    }
+}
 
-    h3:hover {
-        color: #ff6600;
-    }
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
 
+h3 {
+    color: #ffffff;
+    text-align: center;
+    padding: 0.5em;
+    font-weight: bold;
+}
+
+h3:hover {
+    color: #ff6600;
+}
+
+footer {
+    font-family: 'Prompt', sans-serif !important;
+    padding-top: 60px;
+    background-color: #1f1d1d;
+    height: 250px;
+    border-bottom: red 0.1em solid;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+}
+
+h1:hover {
+    color: #ff6600;
+}
+
+h2>a {
+    color: white;
+    text-transform: capitalize;
+    font-size: 24px;
+    float: left;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-decoration: none !important;
+    padding-left: 1em;
+}
+
+p {
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+#py {
+    text-align: left;
+}
+
+hr {
+    border-top: 1px solid rgba(210, 90, 90, 0.1);
+    width: 100%;
+}
+
+.fa {
+    padding-top: 10px;
+    color: #fff;
+    font-size: 20px;
+    display: inline-block;
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.social .fa {
+    padding-top: 20px;
+    font-size: 30px;
+    transition: .9s;
+}
+
+.social .fa:hover {
+    transition: 1s;
+    transform: scale(1.1);
+    color: #ddd;
+}
+
+.p-3 {
+    margin-top: 1em;
+}
+
+.card-custom {
+    height: 37em;
+}
+
+.topnav input[type=text] {
+    padding: 9.3px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}
+
+@media(max-width: 768px) {
     footer {
-        font-family: 'Prompt', sans-serif !important;
-        padding-top: 60px;
-        background-color: #1f1d1d;
-        height: 250px;
-        border-bottom: red 0.1em solid;
+        height: auto !important;
     }
 
-    h1 {
-        color: #ffffff;
-        text-align: center;
-        padding: 20px;
-        font-weight: bold;
-    }
-
-    h1:hover {
-        color: #ff6600;
-    }
-
-    h2>a {
-        color: white;
-        text-transform: capitalize;
-        font-size: 24px;
-        float: left;
-        font-family: 'Open Sans';
-        font-weight: 400;
-        letter-spacing: 1px;
-        text-decoration: none !important;
-        padding-left: 1em;
-    }
-
-    p {
-        color: rgb(255, 255, 255);
-        text-align: center;
-    }
-    #py{
-        text-align: left;
-    }
-
-    hr {
-        border-top: 1px solid rgba(210, 90, 90, 0.1);
-        width: 100%;
-    }
-
-    .fa {
-        padding-top: 10px;
-        color: #fff;
-        font-size: 20px;
-        display: inline-block;
-        text-align: center;
-        display: inline-block;
-        margin: 0 auto;
-    }
-
-    .social .fa {
-        padding-top: 20px;
+    h2 {
         font-size: 30px;
-        transition: .9s;
     }
 
-    .social .fa:hover {
-        transition: 1s;
-        transform: scale(1.1);
-        color: #ddd;
+    .carousel-custom {
+        margin-top: 6em;
     }
-    .p-3{
-        margin-top: 1em;
-    }
-    .card-custom{
-        height: 37em;
-    } 
-    .topnav input[type=text] {
-        padding: 9.3px;
-        margin-top: 8px;
-        font-size: 17px;
-        border: none;
-    }
-      
+
+    .topnav input[type=text],
     .topnav .search-container button {
-        float: right;
-        padding: 6px 10px;
-        margin-top: 8px;
-        margin-right: 16px;
-        background: #ddd;
-        font-size: 17px;
-        border: none;
-        cursor: pointer;
-      }
-      
-    .topnav .search-container button:hover {
-        background: #ccc;
-    }
-    @media(max-width: 768px) {
-        footer {
-            height: auto !important;
-        }
-
-        h2 {
-            font-size: 30px;
-        }
-        .carousel-custom{
-            margin-top: 6em;
-        }
-        .topnav input[type=text], .topnav .search-container button {
-            float: none;
-            display: block;
-            text-align: left;
-            width: 100%;
-            margin: 0;
-            padding: 14px;
-          }
-          .topnav input[type=text] {
-            border: 1px solid #ccc;  
-          }
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
     }
 
-    label.error {
-        position: absolute;
-        background: #ee0101;
-        background: rgba(238, 1, 1, 0.80);
-        padding: 2px 5px;
-        top: -15px;
-        left: 15px;
-        color: #fff;
-        font-size: 11px;
-        font-weight: normal;
-        display: inline-block;
-        box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.6);
-        z-index: 5;
+    .topnav input[type=text] {
+        border: 1px solid #ccc;
     }
+}
 
-    label{
-        color: black;
-    }
-    label.error:before {
-        content: "";
-        border: 4px solid transparent;
-        border-top: 4px solid #ee0101;
-        border-top: 4px solid rgba(238, 1, 1, 0.80);
-        position: absolute;
-        bottom: -8px;
-    }
+label.error {
+    position: absolute;
+    background: #ee0101;
+    background: rgba(238, 1, 1, 0.80);
+    padding: 2px 5px;
+    top: -15px;
+    left: 15px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: normal;
+    display: inline-block;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.6);
+    z-index: 5;
+}
 
-    .bg-info {
-        background-color: #3399ff !important;
-        color: #ffffff !important;
-    }
+label {
+    color: black;
+}
 
-    input.username_color,
-    input.password_color {
-        border: 1px #b0b0b1 solid;
-    }
+label.error:before {
+    content: "";
+    border: 4px solid transparent;
+    border-top: 4px solid #ee0101;
+    border-top: 4px solid rgba(238, 1, 1, 0.80);
+    position: absolute;
+    bottom: -8px;
+}
 
-    .active_cus{
-        border: none;
-        outline: none;
-        padding: 10px 5px;
-        background-color: #00aeff;
-        cursor: pointer;
-        box-shadow: 10px 10px rgb(248, 248, 248);
-    }
-    .nav-item:hover {
-        border: none;
-        outline: none;
-        padding: 10px 5px;
-        background-color:#46a5ff;
-        cursor: pointer;
-    }
+.bg-info {
+    background-color: #3399ff !important;
+    color: #ffffff !important;
+}
 
-    .nav-item {
-        border: none;
-        outline: none;
-        padding: 10px 5px;
-        cursor: pointer;
-    }
+input.username_color,
+input.password_color {
+    border: 1px #b0b0b1 solid;
+}
 
-    .margin-top {
-        margin-top: 5em;
-    }
+.active_cus {
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+    background-color: #409fff;
+    cursor: pointer;
+    
+}
 
-    /* width */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
+.nav-item:hover {
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+    background-color: #46a5ff;
+    cursor: pointer;
+}
 
-    /* Track */
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
+.nav-item {
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+    cursor: pointer;
+}
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
+.margin-top {
+    margin-top: 5em;
+}
 
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    input {
-            color: black;
-    }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+input {
+    color: black;
+}

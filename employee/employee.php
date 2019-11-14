@@ -2,7 +2,7 @@
 session_start();
 include("../includes/template_backend/employee/page_link_config.php");
 if (!$_SESSION["emp_id"]) {
-    Header("Location:../index.php");
+    Header("Location:../home");
 }
 include('function.php');
 
@@ -27,7 +27,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($emp_id);
                 <hr>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='employee.php'">
+                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='employee_status'">
                             <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                         <div class="float-right">
                             <span class="badge-pill badge-info">เข้าจัดการไซต์</span>

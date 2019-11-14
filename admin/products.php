@@ -3,7 +3,7 @@ session_start();
 include("../includes/template_backend/admin/page_link_config.php");
 $admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
-    Header("Location:../index.php");
+    Header("Location:../home");
 }
 include('../process/admin/function.php');
 
@@ -34,7 +34,7 @@ include('../process/admin/function.php');
                                         <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="deleteAllProductsModalBtn">
                                             <span class="glyphicon glyphicon-trash"></span> ลบข้อมูลแถวที่เลือก
                                         </button>
-                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='products.php'">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='products_list'">
                                             <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                                     </div>
                                 </div>

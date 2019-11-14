@@ -3,7 +3,7 @@ session_start();
 include("../includes/template_backend/admin/page_link_config.php");
 $admin_name = $_SESSION["admin_name"];
 if (!$_SESSION["admin_id"]) {
-    Header("Location:../index.php");
+    Header("Location:../home");
 }
 include('../includes/db_connect.php');
 include('../process/admin/function.php');

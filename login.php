@@ -148,7 +148,7 @@ include("includes/template_frontend/page_link_config.php");
                                     <?php }else{?>
                                         <button type="button" class="btn btn-lg btn-info btn-block btn-login text-uppercase font-weight-bold mb-2" onclick='window.location.href="register.php"'><i class="fas fa fa-registered"></i>&nbsp;Register</button>
                                     <?php }?>    
-                                    <center><a href="index.php">กลับหน้าหลัก</a></center>
+                                    <center><a href="home">กลับหน้าหลัก</a></center>
                                 </form>
                             </div>
                         </div>
