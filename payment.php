@@ -3,7 +3,7 @@ session_start();
 include('includes/datethai_function.php');
 include("includes/template_frontend/page_link_config.php");
 //error_reporting(0);
-if(isset($_SESSION['fullname']) == '' && isset($_SESSION['price']) == ''){
+if(isset($_SESSION['fullname']) == ''){
   Header('Location:home');
 }
 ?>
@@ -15,6 +15,7 @@ if(isset($_SESSION['fullname']) == '' && isset($_SESSION['price']) == ''){
 </head>
 
 <body>
+<div class="modalx" style="display: none;"></div>
   <div class="container" style="margin-top:10px">
     <form id="s_payment" action="" method="POST">
       <div class="row" style="margin:5px">

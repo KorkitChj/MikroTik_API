@@ -15,17 +15,36 @@ $(document).on('submit', '#transfer', function (event) {
             dataType: 'json',
             success: function (data) {
                 if (data.success == "success") {
-                    swal("สำเร็จ", data.messages, "success");
-                    $("#transfer")[0].reset();
-                    setTimeout(function () {
-                        window.location.href = 'home';
-                    }, 5000);
+                    swal({
+                            title: "สำเร็จ?",
+                            text: data.messages,
+                            type: "success",
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                $("#transfer")[0].reset();
+                                window.location.href = 'home';
+                            }
+                        }
+                    );
                 } else if (data.success == "fail") {
-                    swal("ผิดพลาด", data.messages, "error");
-                    $("#transfer")[0].reset();
-                    setTimeout(function () {
-                        window.location.href = 'index.php';
-                    }, 5000);
+                    swal({
+                            title: "ไม่สำเร็จ?",
+                            text: data.messages,
+                            type: "error",
+                            confirmButtonColor: "#FF0000",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                $("#transfer")[0].reset();
+                                window.location.href = 'home';
+                            }
+                        });
                 } else {
                     swal("ผิดพลาด", data.messages, "home");
                 }
@@ -33,6 +52,7 @@ $(document).on('submit', '#transfer', function (event) {
         });
     }
 });
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

@@ -34,10 +34,18 @@
                     <a href="connect_status">
                         <i class="glyphicon glyphicon-home"></i>&nbsp;เชื่อมต่อ Site</a>
                 </li>
-                <li class="<?php if ($CURRENT_PAGE == "invoice") { ?>pad-a<?php } ?>">
-                    <a href="invoice">
-                        <i class="glyphicon glyphicon-file"></i>&nbsp;ใบเสร็จ</a>
-                </li>
+                <?php if (isset($_SESSION['service']) == "wait") { ?>
+
+                <?php } else { ?>
+                    <li class="<?php if ($CURRENT_PAGE == "invoice") { ?>pad-a<?php } ?>">
+                        <a href="invoice">
+                            <i class="glyphicon glyphicon-file"></i>&nbsp;ใบเสร็จ</a>
+                    </li>
+                    <li>
+                        <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
+                            <i class="fab fa-get-pocket"></i>&nbsp;อัพเดท Packet</a>
+                    </li>
+                <?php } ?>
                 <li class="<?php if ($CURRENT_PAGE == "orderreport") { ?>pad-a<?php } ?>">
                     <a href="order_report">
                         <i class="glyphicon glyphicon-signal"></i>&nbsp;รายงานสั่งซื้อ</a>
@@ -46,10 +54,6 @@
                     <a href="" data-toggle="modal" data-target="#changpwModal">
                         <i class="glyphicon glyphicon-edit"></i>
                         เปลี่ยนรหัสผ่าน</a>
-                </li>
-                <li>
-                    <a href="" data-toggle="modal" data-target="#exampleModal" id="btnPacket">
-                        <i class="fab fa-get-pocket"></i>&nbsp;อัพเดท Packet</a>
                 </li>
                 <li>
                     <a href="" data-toggle="modal" data-target="#addImageModal" id="addImageModalBtn">

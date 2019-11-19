@@ -17,7 +17,11 @@ include('../process/site_admin/function.php');
 
     <div class="page-wrapper chiller-theme toggled">
         <?php include("../includes/template_backend/admin/bar_top.php"); ?>
-        <?php include("../process/site_admin/alert_expired.php"); ?>
+        <?php if(isset($_SESSION['service']) == "wait"){?>
+        
+        <?php }else{?>
+            <?php include("../process/site_admin/alert_expired.php"); ?>
+        <?php }?> 
         <?php include("../includes/template_backend/site_admin/navigation.php"); ?>
         <?php include('changpwsite.php'); ?>
         <main class="page-content">
@@ -27,7 +31,17 @@ include('../process/site_admin/function.php');
                         <div class="box">
                             <div class="row">
                                 <div class="col-md" style="margin-bottom:20px">
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addSiteModal" id="addSiteModalBtn">
+                                    <?php if(isset($_SESSION['service']) == "wait"){?>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addSiteModal" id="addSiteModalBtn" disabled>
+                                            <span class="glyphicon glyphicon-plus "></span>&nbsp;&nbsp;เพิ่มสถานบริการ
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllSiteModal" id="removeAllSiteModalBtn" disabled>
+                                            <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='connect_status'" disabled><img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
+                                    </div>
+                                    <?php }else{?>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addSiteModal" id="addSiteModalBtn">
                                             <span class="glyphicon glyphicon-plus "></span>&nbsp;&nbsp;เพิ่มสถานบริการ
                                         </button>
                                         <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllSiteModal" id="removeAllSiteModalBtn">
@@ -35,6 +49,7 @@ include('../process/site_admin/function.php');
                                         </button>
                                         <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='connect_status'"><img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                                     </div>
+                                    <?php }?>   
                                 </div>
                                 <div class="col-md">
                                     <div class="float-right">

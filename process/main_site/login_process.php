@@ -94,8 +94,9 @@ if (isset($_POST['username'])) {
                                         ':password' => $password)
                                     )) {
                                     if ($query->rowCount() != 1) {
+                                        $_SESSION["service"] = "wait";
                                         $output['success'] = true;
-                                        $output['messages'] = "กรุณารอการยืนยันการชำระเงินจากAdmin หรือคุณยังไม่ยืนยันชำระเงิน";   
+                                        $output['messages'] = "service";   
                                     } else {
                                         $result = $query->fetch(PDO::FETCH_ASSOC);
                                         if($result['product_id'] != '')

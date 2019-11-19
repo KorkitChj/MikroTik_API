@@ -24,7 +24,7 @@ include('../process/site_admin/function.php');
         <div class="row">
           <div class="form-group col-md-12">
             <a href="../process/site_admin/print_invoice_process.php?id=<?= $_SESSION["cus_id"]?>" class="btn btn-primary pull pull-right" id="invoice">
-              <span class="glyphicon glyphicon-print"></span>พิมพ์
+              <span class="glyphicon glyphicon-print"></span>&nbsp;ดาวน์โหลด
             </a>
             <br /><br />
           </div>

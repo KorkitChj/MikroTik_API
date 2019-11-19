@@ -1,88 +1,80 @@
 <?php
+error_reporting(0);
+require_once '../../mpdf/vendor/autoload.php';
+require_once '../../includes/db_connect.php';
 
-require('../../pdf_library/FPDF/fpdf.php');
-require('../../includes/db_connect.php');
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-}
+$mpdf = new \Mpdf\Mpdf();
+$stylesheet = file_get_contents('../../css/styles_pdf.css');
 
 $statement = $conn->prepare('SELECT * FROM siteadmin AS a 
-INNER JOIN orderpd AS b ON a.cus_id = b.cus_id 
-INNER JOIN payment AS c ON b.order_id = c.order_id WHERE a.cus_id = :id');
+INNER JOIN orderpd AS b ON a.cus_id = b.cus_id
+INNER JOIN payment AS c ON b.order_id = c.order_id
+INNER JOIN product AS d ON d.product_id = b.product_id  
+WHERE a.cus_id = :id');
 $statement->execute(
     array(
-        ':id' => $id
+        ':id' => (int)$_GET['id']
     )
 );
-
 $row = $statement->fetch(PDO::FETCH_ASSOC);
-$pdf = new FPDF();
 
+$content1 = "
+  <body>
+    <header class=\"clearfix\">
+      <div id=\"logo\">
+        <img src=\"../../img/api-logo1.png\" width=\"130px\">
+      </div>
+      <h1 style=\"background: url('../../img/dimension.png');\">INVOICE</h1>
+      <div id=\"company\" class=\"clearfix\">
+        <div>ThaiMikrotikAPI.com</div>
+        <div>15/6 ต.โคกยาง อ.กันตัง จ.ตรัง,<br /> 92110, TRG</div>
+        <div>(+66) 950244234</div>
+        <div><a href=\"mailto:kokig_kao@hotmail.com\">kokig_kao@hotmail.com</a></div>
+      </div>
+      <div id=\"project\">
+        <div><span>ลูกค้า&nbsp;&nbsp;</span>{$row['full_name']}</div>
+        <div><span>ที่อยู่&nbsp;&nbsp;</span>{$row['add_ress']}</div>
+        <div><span>หมายเลขโทรศัพท์&nbsp;&nbsp;</span>{$row['work_phone']}</div>
+        <div><span>อีเมล&nbsp;&nbsp;</span> <a href=\"mailto:{$row['e_mail']}\">{$row['e_mail']}</a></div>
+        <div><span>ไซต์งาน&nbsp;&nbsp;</span>{$row['site_name']}</div>
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class=\"service\">สินค้า</th>
+            <th class=\"desc\">รายละเอียด</th>
+            <th>ราคา</th>
+            <th>จำนวน</th>
+            <th>ราคา</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class=\"service\">{$row['product_name']}</td>
+            <td class=\"desc\">{$row['title']}</td>
+            <td class=\"unit\">{$row['price']}</td>
+            <td class=\"qty\">1</td>
+            <td class=\"total\">{$row['price']}</td>
+          </tr>
+          <tr>
+            <td colspan=\"4\" class=\"grand total\">ราคารวม</td>
+            <td class=\"grand total\">{$row['price']}</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <footer>
+      ขอบคุณที่ใช้บริการของเรา จากเรา ThaiMikrotikAPI.com
+    </footer>
+  </body>
+";
 
-$pdf->AddPage();
+$date = date('Y-m-d H:i:s');
+$mpdf->WriteHTML($stylesheet,1);
+$mpdf->writeHTML($content1,2);
 
-$pdf->Image('../../img/api-logo1.png', 10, 10, -300);
-$pdf->AddFont('angsa', '', 'angsa.php');
-$pdf->SetFont('angsa', '', 20);
-$pdf->Ln(15);
-$pdf->Cell(0, 5, 'www.hotspotmikrotik.com', 0, 1);
-$pdf->Cell(0, 5, iconv('UTF-8', 'TIS-620', '15/6 ต.โคกยาง อ.กันตัง จ.ตรัง 92110'), 0, 1);
-$pdf->Cell(0, 5, 'kokig_kao@hotmail.com', 0, 1);
-$pdf->Cell(0, 5, '(+66) 950244234', 0, 1);
-$pdf->Ln(15);
+$mpdf->Output("Invoice_{$date}.pdf","D");
 
-
-
-$pdf->Line(10, 150, 200, 150);
-$pdf->Cell(0, 5, iconv('UTF-8', 'TIS-620', 'ใบ Invoice'), 0, 1, 'C');
-$pdf->Ln(10);
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'ชื่อ'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': ' . $row['full_name'] . ''), 0, 1);
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'ที่อยู่'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': ' . $row['add_ress'] . ''), 0, 1);
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'เบอร์โทร'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': ' . $row['work_phone'] . ''), 0, 1);
-$pdf->Ln();
-
-$pdf->Line(10, 70, 200, 70);
-
-$pdf->Ln(5);
-$pdf->Cell(55, 5, 'Order ID', 0, 0);
-$pdf->Cell(58, 5, ': ' . $row['order_id'] . '', 0, 0);
-$pdf->Ln();
-$pdf->Cell(55, 5, 'Product ID', 0, 0);
-$pdf->Cell(58, 5, ': ' . $row['product_id'] . '', 0, 1);
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'ราคาสินค้า'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': ' . $row['total_cash'] . ' บาท'), 0, 0);
-$pdf->Ln();
-
-
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'ภาษี'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': 0 บาท'), 0, 1);
-
-
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'บริการ'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': 0 บาท'), 0, 1);
-
-
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'ขนส่ง'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': 0 บาท'), 0, 1);
-
-$pdf->Ln(10);
-$pdf->Cell(55, 5, iconv('UTF-8', 'TIS-620', 'ราคารวม'), 0, 0);
-$pdf->Cell(58, 5, iconv('UTF-8', 'TIS-620', ': ' . $row['total_cash'] . ' บาท'), 0, 1);
-//$pdf->Ln(5);
-//$pdf->Line(155,155, 195, 155);
-//$pdf->Cell(140, 5, '', 0, 0);
-//$pdf->Cell(50, 5, ': Signature', 0, 1, 'C');
-
-
-$mypdf = $pdf->Output();
-
-header('Content-type: application/pdf');
-header('Content-Disposition:attachment; filename="' . $mypdf . '"');
-header('Content-Transfer-Encoding: binary');
-header('Content-Length: ' . filesize($mypdf));
-header('Accept-Ranges: bytes');
-@readfile($mypdf);
+?>

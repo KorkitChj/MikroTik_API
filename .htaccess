@@ -32,3 +32,8 @@ RewriteRule ^siteadmin/order_report?$ siteadmin/order_report.php
 
 RewriteRule ^employee/employee_status?$ employee/employee.php
 RewriteRule ^employee/chang_password?$ employee/changpwemp.php
+
+RewriteRule ^password_reset?$ process/main_site/password_reset.php
+RewriteRule ^password_verified/(.*)/(.*) process/main_site/password_verified.php?user=$1&date=$2
+#RewriteRule ^password_verified/([A-Za-z0-9-_]+) process/main_site/password_verified.php?user=$1
+#RewriteRule ^process/site_admin/print_invoice_process/id/([0-9]+) process/site_admin/print_invoice_process.php?id=$1

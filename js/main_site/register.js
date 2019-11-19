@@ -6,6 +6,12 @@ $(document).on('submit', '#register', function (event) {
         type: 'POST',
         data: form.serialize(),
         dataType: 'json',
+        beforeSend: function() {     
+            $(".modalx").show();
+        },
+        complete: function(){
+            $(".modalx").hide();
+        },
         success: function (response) {
             if (response.success == true) {
                 swal({
@@ -27,7 +33,6 @@ $(document).on('submit', '#register', function (event) {
             } else {
                 swal("ผิดพลาด", response.messages, "error");
             }
-        },
-        beforeSend: function () { }
+        }
     });
 });

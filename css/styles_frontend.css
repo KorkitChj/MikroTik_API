@@ -88,7 +88,18 @@ hr {
     border-top: 1px solid rgba(210, 90, 90, 0.1);
     width: 100%;
 }
-
+.modalx {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8) url('../img/ajax-loader.gif') 50% 50% no-repeat;
+    overflow: hidden;
+    display: block;
+}
 .fa {
     padding-top: 10px;
     color: #fff;

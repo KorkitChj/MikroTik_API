@@ -1,4 +1,5 @@
 <?php
+include('../process/main_site/function.php');
 function upload_image()
 {
 	if(isset($_FILES["site_image"]))
@@ -55,9 +56,14 @@ function alertexpired($cus_id){
 	$date2=date_create($todate);
 	$diff=date_diff($date1,$date2);
 	$days2 = $diff->format("%a");
-	if($days2 == 0){
+	if($days2 == 10){
+		sendmailexpired($cus_id);
+	}elseif($days2 == 5){
+		sendmailexpired($cus_id);
+	}elseif($days2 == 1){	
+		sendmailexpired($cus_id);
+	}elseif($days2 == 0){
 		delsiteadmin($cus_id);
-		return false;
 	}else{
 		return $days = $diff->format(" %a วัน");
 	}
@@ -114,5 +120,23 @@ function upload_imagepacket()
 		move_uploaded_file($_FILES['fileslip']['tmp_name'], $destination);
 		return $new_name;
 	}
+}
+function fetchemail($cus_id){
+	include('../includes/db_connect.php');
+	$statement = $conn->prepare("SELECT e_mail,full_name,site_name FROM siteadmin WHERE cus_id = :cus_id");
+	$statement->bindparam(':cus_id', $cus_id);
+	$statement->execute();
+	$email = $statement->fetch(PDO::FETCH_ASSOC);
+	return array($email['e_mail'],$email['full_name'],$email['site_name']);
+}
+function sendmailexpired($cus_id){
+	list($email,$name,$sitename) = fetchemail($cus_id);
+	$mail = mailConfig($email, $name);
+    $mail->Subject = 'แจ้งเตือน Packet หมดอายุการใช้งาน';
+	$mail->Body    = 'Thai Mikrotik API ยินดีให้บริการ<br><br>
+					เรียนคุณ<strong>  ' . $name . '</strong><br>
+					ไซต์งาน<strong>  ' . $sitename . '</strong>';
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $respone = mailQuery($mail);
 }
 ?>

@@ -6,6 +6,7 @@ if(isset($_SESSION["cus_id"])){
     $statement->bindParam(':cus_id',$_SESSION["cus_id"]);
     $statement->execute();
     unset($_SESSION["cus_id"]);
+    unset($_SESSION["service"]);
         header("Location:../../home");
 }
 ?>
