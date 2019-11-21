@@ -29,6 +29,10 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PAGE = "products";
         $PAGE_TITLE = "Products";
         break;
+    case "/web/admin/report.php":
+        $CURRENT_PAGE = "report";
+        $PAGE_TITLE = "Report";
+        break;
     default:
         $CURRENT_PAGE = "siteregister";
         $PAGE_TITLE = "Site Register";

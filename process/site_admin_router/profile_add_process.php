@@ -19,8 +19,12 @@ if ($_POST) {
     }else{
         
     }
+    if($limit == ''){
+        $limit = "unlimited";
+    }
+    $date = date('Y-m-d');
     $rand = rand(1,999);
-    $profilename = "uprof{$rand}_{$datelimit}/day_{$limit}";
+    $profilename = "uprof{$rand}_{$datelimit}/day_{$limit}_{$date}";
 
     list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $location_id);
 
@@ -77,13 +81,23 @@ if ($_POST) {
                 exit(0);
             }
         }
-        $API->comm("/ip/hotspot/user/profile/add", array(
-            "name" => $profilename,
-            "session-timeout" => $session,
-            "shared-users" => $shared,
-            "rate-limit" => $limit
-            //"on-login" => $profile_Script
-        ));
+        if($limit == "unlimited"){
+            $API->comm("/ip/hotspot/user/profile/add", array(
+                "name" => $profilename,
+                "session-timeout" => $session,
+                "shared-users" => $shared
+                //"on-login" => $profile_Script
+            ));
+        }else{
+            $API->comm("/ip/hotspot/user/profile/add", array(
+                "name" => $profilename,
+                "session-timeout" => $session,
+                "shared-users" => $shared,
+                "rate-limit" => $limit
+                //"on-login" => $profile_Script
+            ));
+        }
+        
         $output['success'] = true;
         $output['messages'] = "ทำการเพิ่มแพคเกจเข้าระบบเรียบร้อยแล้ว";
     } else {

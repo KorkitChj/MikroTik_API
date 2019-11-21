@@ -91,10 +91,9 @@ $cus_id = $_SESSION['cus_id'];
                                             </div>
                                         </div>
                                         <select class="form-control" name="action" id="action" required>
-                                            <option value="" selected disabled>จัดการ</option>
-                                            <option value="accept">Accept</option>
-                                            <option value="drop">Drop</option>
-                                            <option value="reject">Reject</option>
+                                            <option value="accept">อนุญาติให้ใช้งาน</option>
+                                            <option value="drop">ปิดไม่ให้ใช้งาน</option>
+                                            <!-- <option value="reject">Reject</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -148,10 +147,9 @@ $cus_id = $_SESSION['cus_id'];
                                             </div>
                                         </div>
                                         <select class="form-control" name="editaction" id="editaction" required>
-                                            <option value="" selected disabled>จัดการ</option>
-                                            <option value="accept">Accept</option>
-                                            <option value="drop">Drop</option>
-                                            <option value="reject">Reject</option>
+                                            <option value="accept">อนุญาติให้ใช้งาน</option>
+                                            <option value="drop">ปิดไม่ให้ใช้งาน</option>
+                                            <!-- <option value="reject">Reject</option> -->
                                         </select>
                                     </div>
                                 </div>

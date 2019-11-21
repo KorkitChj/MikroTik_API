@@ -30,9 +30,13 @@
                 <li class="header-menu">
                     <span>ทั่วไป</span>
                 </li>
+                <li class="<?php if ($CURRENT_PAGE == "report") { ?>pad-a<?php } ?>">
+                    <a href="report">
+                        <i class="fas fa-chart-line"></i>&nbsp;รายงานการขาย</a>
+                </li>
                 <li class="<?php if ($CURRENT_PAGE == "dashboard") { ?>pad-a<?php } ?>">
                     <a href="dashboard">
-                        <i class="fas fa-tachometer-alt"></i>&nbsp;สถิติ</a>
+                        <i class="fas fa-tachometer-alt"></i>&nbsp;Chart สรุปการใช้งาน</a>
                 </li>
                 <li class="<?php if ($CURRENT_PAGE == "siteregister") { ?>pad-a<?php } ?>">
                     <a href="user_register">

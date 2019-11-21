@@ -4,7 +4,7 @@
   clear: both;
 }
 
-a {
+a.amail {
   font-family: kanit;
   color: #5D6975;
   text-decoration: underline;
@@ -14,7 +14,7 @@ a {
   font-size: 16px; 
 }
 
-body {
+#body {
   font-family: kanit;
   position: relative;
   width: 21cm;  
@@ -64,11 +64,14 @@ h1 {
   color: #5D6975;
   text-align: right;
   width: 52px;
-  margin-right: 10px;
+  margin-right: 50px;
   display: inline-block;
   font-size: 0.8em;
 }
-
+.col-md-12{
+  padding-right: 30px;
+  padding-left: 30px;
+}
 #company {
   float: right;
   text-align: right;
@@ -130,7 +133,7 @@ table td.grand {
   border-top: 1px solid #5D6975;;
 }
 
-footer {
+#foot {
   font-family: kanit;
   color: #5D6975;
   width: 100%;

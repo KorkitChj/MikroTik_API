@@ -19,7 +19,7 @@ $statement->execute(
 $row = $statement->fetch(PDO::FETCH_ASSOC);
 
 $content1 = "
-  <body>
+  <div id=\"body\">
     <header class=\"clearfix\">
       <div id=\"logo\">
         <img src=\"../../img/api-logo1.png\" width=\"130px\">
@@ -29,13 +29,13 @@ $content1 = "
         <div>ThaiMikrotikAPI.com</div>
         <div>15/6 ต.โคกยาง อ.กันตัง จ.ตรัง,<br /> 92110, TRG</div>
         <div>(+66) 950244234</div>
-        <div><a href=\"mailto:kokig_kao@hotmail.com\">kokig_kao@hotmail.com</a></div>
+        <div><a class=\"amail\" href=\"mailto:kokig_kao@hotmail.com\">kokig_kao@hotmail.com</a></div>
       </div>
       <div id=\"project\">
         <div><span>ลูกค้า&nbsp;&nbsp;</span>{$row['full_name']}</div>
         <div><span>ที่อยู่&nbsp;&nbsp;</span>{$row['add_ress']}</div>
         <div><span>หมายเลขโทรศัพท์&nbsp;&nbsp;</span>{$row['work_phone']}</div>
-        <div><span>อีเมล&nbsp;&nbsp;</span> <a href=\"mailto:{$row['e_mail']}\">{$row['e_mail']}</a></div>
+        <div><span>อีเมล&nbsp;&nbsp;</span> <a class=\"amail\" href=\"mailto:{$row['e_mail']}\">{$row['e_mail']}</a></div>
         <div><span>ไซต์งาน&nbsp;&nbsp;</span>{$row['site_name']}</div>
       </div>
     </header>
@@ -65,10 +65,10 @@ $content1 = "
         </tbody>
       </table>
     </main>
-    <footer>
+    <div id=\"foot\">
       ขอบคุณที่ใช้บริการของเรา จากเรา ThaiMikrotikAPI.com
-    </footer>
-  </body>
+    </div>
+  </div>
 ";
 
 $date = date('Y-m-d H:i:s');

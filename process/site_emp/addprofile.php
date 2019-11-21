@@ -62,8 +62,9 @@ if ($_POST) {
                 "on-event" => "auto-cutoff"
             ));
         }
+        $date = date('Y-m-d');
         $rand = rand(1,999);
-        $profilename = "uprof{$rand}_{$datelimit}/day_0M/0M";
+        $profilename = "uprof{$rand}_{$datelimit}/day_unlimited_{$date}";
         for ($i = 0; $i < $count; $i++) {
             $a = $ARRAY[$i]['name'];
             if ($a == $profilename) {
@@ -76,7 +77,7 @@ if ($_POST) {
         $API->comm("/ip/hotspot/user/profile/add", array(
             "name" => $profilename,
             "shared-users" => $shared,
-            "rate-limit" => "0M/0M"
+            "rate-limit" => false
             //"on-login" => $profile_Script
         ));
         $output['success'] = true;

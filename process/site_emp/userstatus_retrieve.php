@@ -27,7 +27,28 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
             if (strpos($ARRAY[$i]['comment'], 'This user expire') !== false) {
                 $API->comm("/ip/hotspot/user/remove", array(".id" => $ARRAY[$i]['.id']));
             }
-            $daytouse = "unlimit";
+
+
+            for ($j = 0; $j < $num2; $j++) {
+                if ($ARRAY[$i]['profile'] == $ARRAY2[$j]['name']) {
+                    $string = explode("_", $ARRAY2[$j]['name']);
+                    $string2 = explode("/", $string[1]);
+                    $daytouse = $string2[0];
+                    $stdate = dateThai($string[3]);
+                    $stdate = explode(",",$stdate);
+                    $stdate = $stdate[0];
+                    $enddate = strtotime("+{$daytouse} days", strtotime($string[3]));
+                    $enddate = date('Y-m-d', $enddate);
+                    $enddate = dateThai($enddate);
+                    $enddate = explode(",",$enddate);
+                    $enddate = $enddate[0];
+                    break;
+                }
+            }
+
+
+
+            /*$daytouse = "unlimit";
             for ($j = 0; $j < $num2; $j++) {
                 if ($ARRAY[$i]['profile'] == $ARRAY2[$j]['name']) {
                     $string = explode("_", $ARRAY2[$j]['name']);
@@ -42,7 +63,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
                 $date2 = date('Y-m-d H:i:s', $enddate);
             }else{
                 $date2 = "Notexpired";
-            }
+            }*/
+
             $checkbox = '
             <label class="checkbox">
                 <input type="checkbox" class="checkitem " name="users_name[]" value="' . $ARRAY[$i]["name"].'">
@@ -50,7 +72,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
         </label>
         ';
 
-            $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button type="button" class="btn btn-success btn-sm" onclick="window.location.href=\'../process/site_emp/print.php?user&id=' . $ARRAY[$i]["name"] . '&day='.$daytouse.'\'"><span title="Print คูปอง" class="glyphicon glyphicon-print"></span></button>
+            $manage = '<div class="btn-group btn-group-toggle" data-toggle="buttons"><button type="button" class="btn btn-success btn-sm" onclick="window.location.href=\'../process/site_emp/print.php?user&id=' . $ARRAY[$i]["name"] . '&stdate='.$stdate.'&endate='.$enddate.'\'"><span title="Print คูปอง" class="glyphicon glyphicon-print"></span></button>
             <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#editUserModal"  onclick="editUser(\'' . $ARRAY[$i]["name"] . '\')"><span title="แก้ไข" class="glyphicon glyphicon-edit"></span></button>
             <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#removeUserModal"  onclick="removeUser(\'' . $ARRAY[$i]["name"] . '\')"><span title="ลบ" class="glyphicon glyphicon-trash"></span></button></div>';
 
@@ -68,7 +90,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
             // $ARRAY = $API->comm("/ip/hotspot/user/remove", array(
             //     "numbers" => $user_name,
             // ));
-            if ($ARRAY[$i]['comment'] != '') {
+
+            /*if ($ARRAY[$i]['comment'] != '') {
                 if (strpos($ARRAY[$i]['comment'], 'Notexpired') !== false) {
                     $expired_date = 'Not expired';
                 }else{
@@ -80,15 +103,16 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
                 }
             } else {
                 $expired_date = '';
-            }
+            }*/
+
             $output['success'] = true;
             $output['data'][] = array(
                 $checkbox,
                 $i,
                 $ARRAY[$i]['name'],
                 $ARRAY[$i]['profile'],
-                $daytouse,
-                $expired_date,
+                $stdate,
+                $enddate,
                 $manage
             );
         }

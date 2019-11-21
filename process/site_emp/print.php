@@ -30,8 +30,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass_r)) {
 	echo '<center>Login Internet Wifi</center></div><hr>';
 	echo '<lift>&nbsp;&nbsp;Username :' . $ARRAY[0]["name"] .'</center><hr>';
 	echo '<lift>&nbsp;&nbsp;Password :' . $ARRAY[0]["password"] . '</center><hr>';
-	echo '<lift>&nbsp;&nbsp;Profile :' . $ARRAY[0]["profile"] . '</center><hr>';
-	echo '<lift>&nbsp;&nbsp;Limit :' . $_GET["day"] . '</center>';
+	echo '<lift>&nbsp;&nbsp;เริ่มใช้งาน :' . $_GET['stdate'] . '</center><hr>';
+	echo '<lift>&nbsp;&nbsp;หมดอายุ :' . $_GET["endate"] . '</center>';
 	echo '</td>';
 	echo '</tr></table>';
 }

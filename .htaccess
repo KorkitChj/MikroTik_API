@@ -25,6 +25,7 @@ RewriteRule ^admin/user_success?$ admin/manage.php
 RewriteRule ^admin/order_upgrade?$ admin/order_upgrade.php
 RewriteRule ^admin/user_online?$ admin/useronline.php
 RewriteRule ^admin/products_list?$ admin/products.php
+RewriteRule ^admin/report?$ admin/report.php
 
 RewriteRule ^siteadmin/connect_status?$ siteadmin/connectstatus.php
 RewriteRule ^siteadmin/invoice?$ siteadmin/invoice.php

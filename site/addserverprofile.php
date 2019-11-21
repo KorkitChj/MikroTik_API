@@ -127,13 +127,13 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="cookie" name="cookie" id="cookie" checked>
                                             <label class="form-check-label" for="cookie">
-                                                Cookie(Login โดยใช้คุกกี้)
+                                                กำหนดให้ user ไม่ต้องเข้าสู่ระบบซ้ำ
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="maccookie" name="maccookie" id="maccookie">
                                             <label class="form-check-label" for="maccookie">
-                                                MAC Cookie(Login โดยการจำ MAC)
+                                                กำหนดให้ user กรณีที่ไม่ต้องการให้ user ใช้ username ซ้ำจากอุปกรณ์เครื่องอื่น
                                             </label>
                                         </div>
                                     </div>
@@ -206,13 +206,13 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="editcookie" name="editcookie" id="editcookie">
                                             <label class="form-check-label" for="editcookie">
-                                                Cookie(Login โดยใช้คุกกี้)
+                                                กำหนดให้ user ไม่ต้องเข้าสู่ระบบซ้ำ
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="editmaccookie" name="editmaccookie" id="editmaccookie">
                                             <label class="form-check-label" for="editmaccookie">
-                                                MAC Cookie(Login โดยการจำ MAC)
+                                                กำหนดให้ user กรณีที่ไม่ต้องการให้ user ใช้ username ซ้ำจากอุปกรณ์เครื่องอื่น
                                             </label>
                                         </div>
                                     </div>

@@ -72,8 +72,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                             <th width="3%">#</th>
                                             <th width="3%">Name</th>
                                             <th width="3%">Profile</th>
-                                            <th width="3%">จำนวนวันใช้งาน</th>
-                                            <th width="3%">หมดอายุ</th>
+                                            <th width="3%">วันเริ่มใช้งาน</th>
+                                            <th width="3%">วันหมดอายุ</th>
                                             <th width="3%">Options</th>
                                         </tr>
                                     </thead>

@@ -105,7 +105,7 @@ $('#removeAllProfileBtn').click(function () {
         swal("ผิดพลาด", "กรุณาเลือก Checkbox!", "error");
     } else {
         $.ajax({
-            url: '../site/profilestatus_del_process.php',
+            url: '../process/site_admin_router/profilestatus_del_process.php',
             method: 'POST',
             data: {
                 'profile_id': Profile_id,

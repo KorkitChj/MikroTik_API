@@ -116,7 +116,7 @@ list($ip, $port, $user, $pass, $site, $conn, $API) = fetchuser($cus_id, $locatio
                                                 <i class="glyphicon glyphicon-stats"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="limit" id="limit" placeholder="" value="0m/0m">
+                                        <input type="text" class="form-control" name="limit" id="limit" placeholder="unlimited" value="unlimited">
                                     </div>
                                 </div>
                                 <div class="form-group">

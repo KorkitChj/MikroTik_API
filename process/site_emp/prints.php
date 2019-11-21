@@ -14,7 +14,7 @@ session_start();
     $emp_id = $_SESSION['emp_id'];
 
     include("function.php");
-
+	include('../../includes/datethai_function.php');
     list($ip, $port, $user, $pass_r, $site, $conn, $API) = fetchuser($emp_id);
     
 	$value = $_GET['users_name'];
@@ -37,22 +37,30 @@ session_start();
                 if ($row["profile"] == $ARRAY2[$j]['name']) {
                     $string = explode("_", $ARRAY2[$j]['name']);
                     $string2 = explode("/", $string[1]);
-                    $daytouse = $string2[0]." วัน";
+                    $daytouse = $string2[0];
+                    $stdate = dateThai($string[3]);
+                    $stdate = explode(",",$stdate);
+                    $stdate = $stdate[0];
+                    $enddate = strtotime("+{$daytouse} days", strtotime($string[3]));
+                    $enddate = date('Y-m-d', $enddate);
+                    $enddate = dateThai($enddate);
+                    $enddate = explode(",",$enddate);
+                    $enddate = $enddate[0];
                     break;
                 }
             }
            
 			$intRows++;
             echo '<td class="th" width=100px>';
-            echo '<img src="../../img/sitelogo/'.fetchlogo($emp_id)[1].'" width="100px" height="100px">';
+            echo '<img src="../../img/sitelogo/'.fetchlogo($emp_id)[1].'" width="100px" height="90px">';
 			echo '</td>';
-			echo '<td width=150px>'; 
+			echo '<td width=200px>'; 
 			
             echo '<center>Login Internet Wifi</center></div><hr>';
             echo '<lift>&nbsp;&nbsp;Username :' . $row["name"] .'</center><hr>';
             echo '<lift>&nbsp;&nbsp;Password :' . $row["password"] . '</center><hr>';
-            echo '<lift>&nbsp;&nbsp;Profile :' . $row["profile"] . '</center><hr>';
-            echo '<lift>&nbsp;&nbsp;Limit :' . $daytouse . '</center>';
+            echo '<lift>&nbsp;&nbsp;เริ่มใช้งาน :' . $stdate . '</center><hr>';
+            echo '<lift>&nbsp;&nbsp;หมดอายุ :' . $enddate . '</center>';
 
 			echo'</td>';
 

@@ -41,10 +41,15 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
         }else{
             $daytouse = '';
         }
+    if($ARRAY[0]['rate-limit'] == ""){
+        $limit = "Unlimited";
+    }else{
+        $limit = $ARRAY[0]['rate-limit'];
+    }
     $output['name'] = $ARRAY[0]['name'];
     $output['session'] = $aa;
     $output['shared'] = $ARRAY[0]['shared-users'];
-    $output['limit'] = $ARRAY[0]['rate-limit'];
+    $output['limit'] = $limit;
     $output['daytouse'] = $daytouse;
 }
 

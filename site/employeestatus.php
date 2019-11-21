@@ -38,9 +38,9 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removeAllMemberModal" id="removeAllMemberModalBtn">
                                     <span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;ลบข้อมูลแถวที่เลือก
                                 </button>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#manageUserGroup" id="manageUserGroupModalBtn">
+                                <!-- <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#manageUserGroup" id="manageUserGroupModalBtn">
                                     <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;เพิ่มกลุ่มพนักงาน
-                                </button>
+                                </button> -->
                                 <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='employeestatus.php'">
                                     <img src="../img/refresh.png" width="20" title="Refresh">&nbsp;&nbsp;Reconnect</button>
                             </div>
@@ -188,7 +188,8 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                 <input type="text" class="form-control" name="comment" id="comment" placeholder="แสดงความคิดเห็น">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <input type="hidden"  name="group" id="group" value="full">
+                        <!-- <div class="form-group">
                             <label for="group" class="col-sm control-label">สิทธ์การใช้งาน: <span class="text-danger glyphicon glyphicon-asterisk"></span>&nbsp;</label>
                             <div class="col-sm-12 input-group">
                                 <div class="input-group-prepend">
@@ -206,7 +207,7 @@ if ($API->connect($ip . ":" . $port, $user, $pass)) {
                                     ?>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="site" class="col-sm control-label">ชื่อ Site: &nbsp;</label>
                             <div class="col-sm-12 input-group">
