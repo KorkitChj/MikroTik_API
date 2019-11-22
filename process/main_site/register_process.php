@@ -18,7 +18,7 @@ if (isset($_POST["username_register"])) {
 
 	$sql2 = "SELECT * FROM siteadmin WHERE e_mail = :email";
 	$query2 = $conn->prepare($sql2);
-	$query2->bindparam(':username',	$email);
+	$query2->bindparam(':email',$email);
 	$query2->execute();
 	$num_rows2 = $query2->fetchColumn();
 
