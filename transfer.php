@@ -16,14 +16,14 @@ error_reporting(0);
     <div class="container margin-top">
         <div class="row">
             <div class="col-md-6 ">
-                <div class="card border-danger shadow-lg p-3 mb-5">
+                <div class="card shadow-lg p-3 mb-5">
                     <div class="card-header">
                         <h2 align="center"><b>แจ้งโอนเงิน</b></h2>
                     </div>
                     <div class="card-body">
                         <form id="transfer" method="post" action="" enctype="multipart/form-data" name="form1">
                             <div class="form-group row">
-                                <label for="username2" class="control-label col-sm">Username:&nbsp;</label>
+                                <!-- <label for="username2" class="control-label col-sm">Username:&nbsp;</label> -->
                                 <div class="col-sm-12 input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -34,7 +34,7 @@ error_reporting(0);
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="bank_info" class="control-label col-sm">ธนาคาร:&nbsp;</label>
+                                <!-- <label for="bank_info" class="control-label col-sm">ธนาคาร:&nbsp;</label> -->
                                 <div class="col-sm-12 input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -49,7 +49,7 @@ error_reporting(0);
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="date" class="control-label col-sm">เวลาชำระ:&nbsp;</label>
+                                <!-- <label for="date" class="control-label col-sm">เวลาชำระ:&nbsp;</label> -->
                                 <div class="col-sm-12 input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -60,7 +60,7 @@ error_reporting(0);
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="money" class="control-label col-sm">จำนวนเงิน:&nbsp;</label>
+                                <!-- <label for="money" class="control-label col-sm">จำนวนเงิน:&nbsp;</label> -->
                                 <div class="col-sm-12 input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -71,7 +71,7 @@ error_reporting(0);
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="file" class="control-label col-sm">File:&nbsp;</label>
+                                <!-- <label for="file" class="control-label col-sm">File:&nbsp;</label> -->
                                 <div class="col-sm-12 input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -85,8 +85,8 @@ error_reporting(0);
                             <div class="form-group row">
                                 <label for="" class="col col-form-label"></label>
                                 <div class="col-12">
-                                    <button type="bottom" class="btn btn-outline-danger btn-lg btn-block" onclick="window.history.back()">ยกเลิก</button>
-                                    <button type="submit" value="form1" class="btn btn-outline-success btn-lg btn-block"><i class="fas fa-sign-in-alt"></i>&nbsp;OK</button>
+                                    <button type="submit" value="form1" class="btn btn-success-cus btn-lg btn-block"><i class="fas fa-sign-in-alt"></i>&nbsp;OK</button>
+                                    <button type="bottom" class="btn btn-danger-cus btn-lg btn-block" onclick="window.history.back()">ยกเลิก</button>
                                 </div>
                             </div>
                         </form>
@@ -100,6 +100,7 @@ error_reporting(0);
     </div>
     <script src="js/main_site/transfer.js"></script>
     <?php include("includes/template_frontend/footer.php"); ?>
+    <script src="js/main_site/backtotop.js"></script>
 </body>
 
 </html>

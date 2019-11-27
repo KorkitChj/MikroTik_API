@@ -1,4 +1,4 @@
-<div class="container-fluid carousel-custom">
+<div class="carousel-custom">
     <div id="my-carousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -10,7 +10,7 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="img/rt.jpg">
+                <img class="d-block w-100" src="img/RT.jpg">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
             </div>

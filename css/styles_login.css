@@ -4,6 +4,7 @@
 }
 html,body{
     height:100%;
+    padding-top: 0px;
 }
 .login,
 .image {

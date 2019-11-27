@@ -1,5 +1,4 @@
 <?php
-include('../process/main_site/function.php');
 function upload_image()
 {
 	if(isset($_FILES["site_image"]))
@@ -56,6 +55,7 @@ function alertexpired($cus_id){
 	$date2=date_create($todate);
 	$diff=date_diff($date1,$date2);
 	$days2 = $diff->format("%a");
+	//$days2 = 10;
 	if($days2 == 10){
 		sendmailexpired($cus_id);
 	}elseif($days2 == 5){
@@ -64,9 +64,8 @@ function alertexpired($cus_id){
 		sendmailexpired($cus_id);
 	}elseif($days2 == 0){
 		delsiteadmin($cus_id);
-	}else{
-		return $days = $diff->format(" %a วัน");
 	}
+	return $days = $days2 ."วัน";
 }
 function get_image_name($cus_id)
 {
@@ -130,8 +129,10 @@ function fetchemail($cus_id){
 	return array($email['e_mail'],$email['full_name'],$email['site_name']);
 }
 function sendmailexpired($cus_id){
+	include('../process/main_site/function.php');
 	list($email,$name,$sitename) = fetchemail($cus_id);
-	$mail = mailConfig($email, $name);
+	$path = "siteadmin";
+	$mail = mailConfig($email, $name,$path);
     $mail->Subject = 'แจ้งเตือน Packet หมดอายุการใช้งาน';
 	$mail->Body    = 'Thai Mikrotik API ยินดีให้บริการ<br><br>
 					เรียนคุณ<strong>  ' . $name . '</strong><br>

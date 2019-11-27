@@ -3,9 +3,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function mailConfig($email, $fullname){
-    require '../../phpmailer/vendor/autoload.php';
-
+function mailConfig($email, $fullname,$path){
+    if($path == "siteadmin"){
+        require '../phpmailer/vendor/autoload.php';
+    }else{
+        require '../../phpmailer/vendor/autoload.php';
+    }
     $mail = new PHPMailer;
     $mail->CharSet = 'UTF-8';
     $mail->IsSMTP();                                      
@@ -32,7 +35,8 @@ function mailQuery($mail){
 }
 function sendMailRegister($email, $fullname, $password)
 {
-    $mail = mailConfig($email, $fullname);
+    $path = "";
+    $mail = mailConfig($email, $fullname,$path);
     $mail->Subject = 'รายการลงทะเบียน';
     $mail->Body    = 'Thai Mikrotik API ยินดีให้บริการ<br><br>รหัสผ่านของคุณคือ<strong>  ' . $password . '</strong>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
@@ -42,7 +46,7 @@ function sendMailRegister($email, $fullname, $password)
 function sendMailOrder($email,$name,$phone,$date_field,$order_name,$order_price)
 {
     include('../../includes/datethai_function.php');
-    $mail = mailConfig($email, $name);
+    $mail = mailConfig($email, $name,$path);
 
     $mail->Subject = 'รายการสั่งซื้อ';
     $mail->Body    = 'Thai Mikrotik API ยินดีให้บริการ<br><br>
@@ -57,7 +61,8 @@ function sendMailOrder($email,$name,$phone,$date_field,$order_name,$order_price)
     return mailQuery($mail);
 }
 function sendMailPasswordReset($email,$name,$link){
-    $mail = mailConfig($email, $name);
+    $path = "";
+    $mail = mailConfig($email, $name,$path);
     $linkreset = "http://localhost/web/password_reset";
     $mail->Subject = 'รีเซ็ตรหัสผ่าน';
     $mail->Body    = 'Thai Mikrotik API ยินดีให้บริการ<br><br>คลิกลิงก์เพื่อรีเซ็ตรหัสผ่าน<br>

@@ -32,12 +32,12 @@ include("includes/template_frontend/page_link_config.php");
                                             <input type="password" class="form-control password_color" placeholder="Password" id="password" name="password" required>
                                             <label for="password">Password</label>
                                         </div>
-                                        <button type="submit" class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</button>
+                                        <button type="submit" class="btn btn-lg btn-dark-cus btn-block btn-login text-uppercase font-weight-bold mb-2"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</button>
                                         <?php
                                         if (isset($_SESSION['register']) != '') { ?>
-                                            <button type="button" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" disabled><i class="fas fa fa-registered"></i>&nbsp;Register</button>
+                                            <button type="button" class="btn btn-lg btn-secondary-cus btn-block btn-login text-uppercase font-weight-bold mb-2" disabled><i class="fas fa fa-registered"></i>&nbsp;Register</button>
                                         <?php } else { ?>
-                                            <button type="button" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" onclick='window.location.href="register.php"'><i class="fas fa fa-registered"></i>&nbsp;Register</button>
+                                            <button type="button" class="btn btn-lg btn-secondary-cus btn-block btn-login text-uppercase font-weight-bold mb-2" onclick='window.location.href="register.php"'><i class="fas fa fa-registered"></i>&nbsp;Register</button>
                                         <?php } ?>
                                         <center><a href="home">กลับหน้าหลัก</a></center>
                                     </form>

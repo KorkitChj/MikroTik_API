@@ -33,8 +33,8 @@ if (!empty($result)) {
         }
         $output .= '<b style="font-weight:bold">ราคา</b>
                     <b class="card-text">' . $b['price'] . '</b><hr>
-                    <a href="cart/product/' . $b['product_id'] . '" 
-                    onclick="return confirm(\'คุณต้องการสั่งซื้อ\');" class="btn btn-outline-dark btn-sm">สั่งซื้อ</a>
+                    <center><a href="cart/product/' . $b['product_id'] . '" 
+                    onclick="return confirm(\'คุณต้องการสั่งซื้อ\');" class="btn  btn-dark-cus btn-sm">สั่งซื้อ</a></center>
         </div>
     </div>
 </div>';

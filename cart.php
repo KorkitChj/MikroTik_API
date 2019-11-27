@@ -55,9 +55,9 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price">$0</span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="register/false"'>สมัครสมาชิก</button>
-                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="item"'>สั่งซื้อทันที</button>
+                                        <button type="button" class="btn btn-dark-cus btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-secondary-cus btn-lg btn-block" onclick='window.location.href="register/false"'>สมัครสมาชิก</button>
+                                        <button type="button" class="btn btn-success-cus btn-lg btn-block" onclick='window.location.href="item"'>สั่งซื้อทันที</button>
                                     </div>
                                 </div>
                             <?php } elseif (isset($_SESSION['register']) != '' && isset($_SESSION['id']) == '') { ?>
@@ -72,9 +72,9 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price">$0</span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="#"' disabled>สมัครสมาชิก</button>
-                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="item"'>สั่งซื้อทันที</button>
+                                        <button type="button" class="btn btn-dark-cus btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-secondary-cus btn-lg btn-block" onclick='window.location.href="#"' disabled>สมัครสมาชิก</button>
+                                        <button type="button" class="btn btn-success-cus btn-lg btn-block" onclick='window.location.href="item"'>สั่งซื้อทันที</button>
                                     </div>
                                 </div>
                             <?php } elseif (isset($_SESSION['register']) != '' && isset($_SESSION['id']) != '') { ?>
@@ -112,9 +112,9 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="#"' disabled>สมัครสมาชิก</button>
-                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="checkout"'>ดำเนินการต่อ</button>
+                                        <button type="button" class="btn btn-dark-cus btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-secondary-cus btn-lg btn-block" onclick='window.location.href="#"' disabled>สมัครสมาชิก</button>
+                                        <button type="button" class="btn btn-success-cus btn-lg btn-block" onclick='window.location.href="checkout"'>ดำเนินการต่อ</button>
                                     </div>
                                 </div>
                             <?php } elseif (isset($_SESSION['register']) == '' && isset($_SESSION['id']) != '') { ?>
@@ -152,9 +152,9 @@ if (isset($_GET['sts']) == "dest") {
                                         <div class="summary-item"><span class="text">ราคา</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
                                         <div class="summary-item"><span class="text">ส่วนลด</span><span class="price">$0</span></div>
                                         <div class="summary-item"><span class="text">ยอดสุทธิ</span><span class="price"><?php echo $_SESSION['price'] ?></span></div>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" onclick='window.location.href="register/true"'>สมัครสมาชิก</button>
-                                        <button type="button" class="btn btn-outline-success btn-lg btn-block" onclick='window.location.href="#"' disabled>สั่งซื้อทันที</button>
+                                        <button type="button" class="btn btn-dark-cus btn-lg btn-block" onclick='window.location.href="login"'>เข้าสู่ระบบ</button>
+                                        <button type="button" class="btn btn-secondary-cus btn-lg btn-block" onclick='window.location.href="register/true"'>สมัครสมาชิก</button>
+                                        <button type="button" class="btn btn-success-cus btn-lg btn-block" onclick='window.location.href="#"' disabled>สั่งซื้อทันที</button>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -165,6 +165,7 @@ if (isset($_GET['sts']) == "dest") {
         </main>
     </div>
     <?php include("includes/template_frontend/footer.php"); ?>
+    <script src="js/main_site/backtotop.js"></script>
 </body>
 
 </html>

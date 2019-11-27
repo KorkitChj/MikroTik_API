@@ -17,9 +17,9 @@ include("includes/template_frontend/page_link_config.php");
                 
             </div>
         </div>
-    </div>
-    <?php include("includes/template_frontend/footer.php");
-    ?>
+    </div>  
+    <?php include("includes/template_frontend/footer.php");?>
+    <script src="js/main_site/backtotop.js"></script>
 </body>
 
 </html>

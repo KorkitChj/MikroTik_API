@@ -1,4 +1,3 @@
-<?php include("includes/template_frontend/page_link_config.php"); ?>
 <?php
 session_start();
 include("includes/template_frontend/page_link_config.php");
@@ -15,15 +14,15 @@ $row = $query3->fetch(PDO::FETCH_ASSOC);
     <?php include("includes/template_frontend/head_tag_contents.php"); ?>
 </head>
 
-<body>
+<body id="indexbg">
 
     <?php include("includes/template_frontend/carousel_slide.php"); ?>
     <?php include("includes/template_frontend/navigation.php"); ?>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                <h1>ยินดีต้อนรับสู่เว็บไซต์ของเรา</h1>
+            <div class="col bgoverlay">
+                <h1 id="h1hd">ยินดีต้อนรับสู่เว็บไซต์ของเรา</h1>
                 <dl>
                     <dt>
                         <h3>เว็บไซต์เราทำอะไร</h3>
@@ -45,11 +44,11 @@ $row = $query3->fetch(PDO::FETCH_ASSOC);
                         <p>ท่านสามารถออกคูปองการใช้งานอินเตอร์เน็ตให้ลูกค้าได้<br>โดยท่านสามารถกำหนด อัตราการดาวห์โหลดการอัพโหลดได้อย่างมีประสิทธิภาพ</p>
                     </dd>
                 </dl>
-                <p style="color:red;font-weight:bold">หากท่านสนใจในบริการของเราท่านสามารถกดสั้งซื้อได้จากปุ่มด้านบน <br>
+                <p id="bgwi">หากท่านสนใจในบริการของเราท่านสามารถกดสั้งซื้อได้จากปุ่มด้านบน <br>
                     หรือหากท่านมีปัญหาการใช้งานหรือข้อสงสัยสามารถติดต่อผู้ดูแลระบบได้ที่ Facebook</p>
             </div>
             <div class="col">
-                <div class="card bg-dark text-light border-danger shadow-lg p-3 mb-5">
+                <div class="card bg-light text-dark border-danger shadow-lg p-3 mb-5">
                     <div class="card-header">
                         <h2 align="center"><b>แนะนำบริการ</b></h2>
                     </div>
@@ -62,9 +61,8 @@ $row = $query3->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
-
     <?php include("includes/template_frontend/footer.php"); ?>
-
+    <script src="js/main_site/backtotop.js"></script>
 </body>
 
 </html>

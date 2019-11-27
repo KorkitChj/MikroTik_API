@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Prompt&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
 nav {
     border-bottom: rgb(255, 255, 255) 0.5em solid;
 }
@@ -22,13 +25,29 @@ nav.bg-light {
 
 body {
     font-family: 'Prompt', sans-serif !important;
-    background-image: linear-gradient(to bottom, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
+    background-color:#ffffff;
+    /*background-image: linear-gradient(to bottom, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;*/
     /* background-color: #ffffff; */
     /* background-image: url('img/animal-dawn-desktop-backgrounds-875858.jpg');
         background-repeat: no-repeat;
         background-size: cover; */
 }
-
+#indexbg{
+    background-image: linear-gradient(to bottom, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
+}
+.bgoverlay{
+    background-color:rgba(17, 17, 17, 0.5);
+}
+#bgwi{
+    color:red;
+    background-color:#ffffff !important;
+    padding: 2em;
+    border-radius: 1em;
+    margin-top: 2em;
+}
+.row>.bgoverlay>#h1hd{
+    color:rgb(255, 145, 0);
+}
 .navbar-dark .navbar-nav .nav-link {
     color: #ffffff !important;
 }
@@ -224,6 +243,7 @@ input.password_color {
     padding: 10px 5px;
     background-color: #409fff;
     cursor: pointer;
+    border-radius: 1em;
     
 }
 
@@ -240,6 +260,7 @@ input.password_color {
     outline: none;
     padding: 10px 5px;
     cursor: pointer;
+    border-radius: 1em;
 }
 
 .margin-top {
@@ -268,4 +289,123 @@ input.password_color {
 
 input {
     color: black;
+}
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color:rgb(231, 231, 231); /* Set a background color */
+    color: red; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+  
+#myBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+    color:#ffffff;
+}
+.iocp{
+    padding: 0.5em;
+}
+
+body {
+    padding-top: 35px;
+}
+  
+nav a {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+  
+nav .navbar-toggle {
+    margin: 13px 15px 13px 0;
+}
+  
+.navbar-brand {
+    font-size: 30px;
+}
+  
+nav.navbar.shrink {
+    min-height: 35px;
+}
+  
+nav.shrink a {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    font-size: 15px;
+}
+  
+nav.shrink .navbar-brand {
+    font-size: 25px;
+    height:auto;
+}
+  
+nav.shrink .navbar-toggle {
+    padding: 4px 5px;
+    margin: 8px 15px 8px 0;
+}
+  
+nav.shrink .navbar-collapse.collapse {
+    height:initial !important;
+}
+.fa-home{
+    color: #ff599e;
+}
+.fa-product-hunt{
+    color:#ff9148;
+}
+.fa-shopping-cart{
+    color:#4cfdb3;
+}
+.fa-clipboard-check{
+    color:#fde457;
+}
+.fa-laugh-wink{
+    color:#44fd82;
+}
+.fa-sign-in-alt{
+    color:#48ffc2;
+}
+.fa-registered{
+    color:#fde457;
+}
+.fa-arrow-circle-right{
+    color: #4b4b4b;
+}
+.btn-dark-cus{
+    background: #a8ff78;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #78ffd6, #a8ff78);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #78ffd6, #a8ff78); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+}
+.btn-dark-cus:hover,.btn-secondary-cus:hover,.btn-success-cus:hover,.btn-danger-cus:hover{
+ background: #f1f1f1;
+}
+.btn-secondary-cus{
+    background: #00B4DB;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.btn-success-cus{
+    background: #FFEFBA;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.btn-danger-cus{
+    background: #74ebd5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.input-group>.ipf{
+    margin-top: 2em;
+}
+.ipt{
+    margin-top:2em;
 }
