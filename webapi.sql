@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 08:40 AM
+-- Generation Time: Nov 30, 2019 at 03:37 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -64,8 +64,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`emp_id`, `username`, `pass_w`, `pass_router`, `full_name`, `location_id`) VALUES
-(12, 'sukum', '2a4a3ea4095c1f5453b5463c3a746c99', '44076', 'sukum', 8),
-(13, 'reception', '2a4a3ea4095c1f5453b5463c3a746c99', '44337', 'reception', 8);
+(1, 'reception2', 'd4fcac1f8d81957bdf2a615fba88fa32', '66793', 'reception2', 8),
+(2, 'reception3', 'd4fcac1f8d81957bdf2a615fba88fa32', '81481', 'reception3', 9);
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,8 @@ INSERT INTO `location` (`location_id`, `username`, `password`, `working_site`, `
 (5, 'korkit', '12345', 'tranga', 9000, '1080705153.png', '172.20.148.18', 22),
 (6, 'korkit', '12345', 'trang', 9000, '1664097328.jpg', '172.20.10.7', 35),
 (7, 'korkit', '12345', 'กรุงเทพ', 9000, '1250900821.jpg', '172.20.10.8', 48),
-(8, 'korkit', '12345', 'aw', 9000, '725489347.png', '172.20.10.5', 56);
+(8, 'korkit', '12345', 'trang', 9000, '1368407180.png', '172.20.10.5', 63),
+(9, 'korkit', '12345', 'trang', 9000, '262751851.jpg', '172.20.10.9', 65);
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,10 @@ INSERT INTO `login_details` (`login_details_id`, `last_activity`, `cus_id`) VALU
 (2, '2019-11-07 12:50:22', 35),
 (3, '2019-11-07 12:54:54', 35),
 (4, '2019-11-07 12:54:56', 35),
-(6, '2019-11-08 00:38:58', 35);
+(6, '2019-11-08 00:38:58', 35),
+(7, '2019-11-29 00:36:09', 65),
+(8, '2019-11-29 16:12:43', 65),
+(9, '2019-11-29 16:39:17', 65);
 
 -- --------------------------------------------------------
 
@@ -143,8 +147,11 @@ INSERT INTO `orderpd` (`order_id`, `total_cash`, `appointment`, `product_id`, `c
 (23, 2000, '2019-11-10 10:57:54', 11, 46),
 (25, 1500, '2019-11-10 15:34:28', 10, 48),
 (26, 300, '2019-11-17 10:20:37', 4, 49),
-(27, 1500, '2019-11-18 12:42:16', 10, 56),
-(29, 300, '2019-11-18 17:45:04', 4, 58);
+(29, 300, '2019-11-18 17:45:04', 4, 58),
+(30, 2000, '2019-11-27 13:22:17', 11, 62),
+(31, 600, '2019-11-27 15:06:54', 12, 63),
+(32, 600, '2019-12-01 13:39:29', 12, 64),
+(33, 300, '2019-12-01 13:49:48', 4, 65);
 
 -- --------------------------------------------------------
 
@@ -191,8 +198,11 @@ INSERT INTO `payment` (`payment_id`, `payment_at`, `transfer_date`, `expired_dat
 (10, 'ไทยพาญิชย์', '2019-11-09 05:07:00', '2021-05-10 05:07:00', 1500, 'IMG_1053.PNG', 1, 21),
 (12, 'ไทยพาญิชย์', '2019-11-09 03:02:00', '2021-05-10 03:02:00', 1500, 'IMG_1226.JPG', 1, 25),
 (13, 'ไทยพาญิชย์', '2019-11-14 12:00:00', '2020-03-03 12:00:00', 300, 'IMG_1226-9803.JPG', 1, 26),
-(14, 'กรุงไทย', '2019-11-17 12:00:00', '2021-05-18 12:00:00', 1500, 'IMG_1129.PNG', 1, 27),
-(15, 'กรุงไทย', '2019-11-17 13:03:00', '2020-03-06 13:03:00', 300, 'IMG_1298.PNG', 1, 29);
+(15, 'กรุงไทย', '2019-11-17 13:03:00', '2020-03-06 13:03:00', 300, 'IMG_1298.PNG', 1, 29),
+(16, 'ไทยพาญิชย์', '2019-11-24 19:28:00', '2021-11-23 19:28:00', 2000, 'IMG_1106-1121.JPG', 1, 30),
+(17, 'ไทยพาญิชย์', '2019-11-24 12:00:00', '2020-06-30 12:00:00', 600, 'IMG_1053-8434.PNG', 1, 31),
+(18, 'ไทยพาญิชย์', '2019-11-28 19:40:00', '2020-07-04 19:40:00', 600, 'IMG_1095.JPG', 0, 32),
+(19, 'กรุงไทย', '2019-11-28 19:50:00', '2020-03-17 19:50:00', 300, 'IMG_1053-6663.PNG', 1, 33);
 
 -- --------------------------------------------------------
 
@@ -229,7 +239,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `price`, `title`, `function
 CREATE TABLE `siteadmin` (
   `cus_id` int(6) NOT NULL,
   `username` varchar(40) NOT NULL,
-  `pass_w` varchar(40) NOT NULL,
+  `pass_w` varchar(255) NOT NULL,
   `add_ress` varchar(100) NOT NULL,
   `work_phone` varchar(10) NOT NULL,
   `e_mail` varchar(40) NOT NULL,
@@ -251,8 +261,12 @@ INSERT INTO `siteadmin` (`cus_id`, `username`, `pass_w`, `add_ress`, `work_phone
 (46, 'tawan', '2a4a3ea4095c1f5453b5463c3a746c99', '22/5 อ.จอมทอง ต.แม่สอย จ.เชียงใหม่', '0680250231', 'tawan@hotmail.com', 'chiangmai', 'ตะวัน คงดี', '', '2019-11-09 16:57:44'),
 (48, 'somchai', '2a4a3ea4095c1f5453b5463c3a746c99', '55/5 ', '0950244789', 'somchai.u@hotmail.com', 'กรุงเทพมหา', 'somchai jj', '', '2019-11-09 21:34:15'),
 (49, 'tets2', '2a4a3ea4095c1f5453b5463c3a746c99', '15/6', '0950245891', 'madee@hotmail.com', 'trang', 'madee', '', '2019-11-14 16:18:11'),
-(56, 'user8', 'a7693c35e2e3d2911543a9f609d546a1', '223/45', '0872311536', 'kokig_kao@hotmail.com', 'อาคาร บีวั', 'pepo haha', '', '2019-11-15 18:39:31'),
-(58, 'user12', '2a4a3ea4095c1f5453b5463c3a746c99', '15/6', '0950244234', 'user12@hotmail.com', 'trang', 'panda naruk', '', '2019-11-15 23:42:44');
+(58, 'user12', '2a4a3ea4095c1f5453b5463c3a746c99', '15/6', '0950244234', 'user12@hotmail.com', 'trang', 'panda naruk', '', '2019-11-15 23:42:44'),
+(62, 'Ging_2541', '152557eb44493ca0eb5c9bc8f2729c05', '224/5 อ.ไชยา จ.สุราษฎร์ธานี', '0950244234', 'kokig_kao_test@hotmail.com', 'suradtane', 'Rutgiporn Choojam', '', '2019-11-24 19:21:31'),
+(63, 'test10', 'd4fcac1f8d81957bdf2a615fba88fa32', '15/6', '0950244234', 'kokig_kao44@hotmail.com', 'trang', 'kkg llo', '', '2019-11-24 21:06:29'),
+(64, 'test15', 'd8ce17cdfc1bd60c131fd05ece101cb9', '15/6', '0950244234', 'kokig_kao11@hotmail.com', 'trang', 'test15 trang', '', '2019-11-28 19:38:14'),
+(65, 'test16', 'd4fcac1f8d81957bdf2a615fba88fa32', '15/6', '0950244234', 'kokig_kao77@hotmail.com', 'trang', 'fgh jk', '', '2019-11-28 19:49:18'),
+(66, 'test17', 'd4fcac1f8d81957bdf2a615fba88fa32', '15/6', '0123587035', 'kokig_kao@hotmail.com', 'trang', 'Korkit Choojam', '', '2019-11-30 00:05:09');
 
 -- --------------------------------------------------------
 
@@ -366,22 +380,22 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `emp_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `location_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `location_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `login_details`
 --
 ALTER TABLE `login_details`
-  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `orderpd`
 --
 ALTER TABLE `orderpd`
-  MODIFY `order_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `order_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `packet_update`
 --
@@ -391,7 +405,7 @@ ALTER TABLE `packet_update`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `payment_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -401,7 +415,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `siteadmin`
 --
 ALTER TABLE `siteadmin`
-  MODIFY `cus_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `cus_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `video`
 --
