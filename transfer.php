@@ -30,7 +30,7 @@ error_reporting(0);
                                             <i class="far fa-user"></i>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" id="username2" value="<?php echo $_SESSION['user']; ?>" name="username2" placeholder="Username" required>
+                                    <input type="text" class="form-control" id="username2" value="<?php echo $_SESSION['user']; ?>" name="username2" placeholder="Username" autofocus required>
                                 </div>
                             </div>
                             <div class="form-group row">

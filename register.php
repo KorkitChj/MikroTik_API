@@ -44,7 +44,7 @@ include("includes/template_frontend/page_link_config.php");
                                                 <i class="far fa-user"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control ipf" id="username_register" name="username_register" placeholder="Username" required>
+                                        <input type="text" class="form-control ipf" id="username_register" name="username_register" placeholder="Username" autofocus equired>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
