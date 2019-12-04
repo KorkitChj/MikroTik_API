@@ -9,6 +9,7 @@ function mailConfig($email, $fullname,$path){
     }else{
         require '../../phpmailer/vendor/autoload.php';
     }
+    date_default_timezone_set('Asia/Bangkok');
     $mail = new PHPMailer;
     $mail->CharSet = 'UTF-8';
     $mail->IsSMTP();                                      
@@ -63,7 +64,7 @@ function sendMailOrder($email,$name,$phone,$date_field,$order_name,$order_price)
 function sendMailPasswordReset($email,$name,$link){
     $path = "";
     $mail = mailConfig($email, $name,$path);
-    $linkreset = "http://localhost/web/password_reset";
+    $linkreset = "http://{$_SERVER['SERVER_NAME']}/web/password_reset";
     $mail->Subject = 'รีเซ็ตรหัสผ่าน';
     $mail->Body    = 'Thai Mikrotik API ยินดีให้บริการ<br><br>คลิกลิงก์เพื่อรีเซ็ตรหัสผ่าน<br>
     <strong>'.$link.'</strong><br><br>

@@ -1,10 +1,16 @@
 jQuery(function ($) {
+    var mq = window.matchMedia("(max-width: 600px)");
+    if (mq.matches) {
+        $(".page-wrapper").removeClass("toggled")
+    } else {
+        $(".page-wrapper").addClass("toggled");
+    }
     $(".sidebar-dropdown > a").click(function () {
         $(".sidebar-submenu").slideUp(200);
         if (
             $(this)
-                .parent()
-                .hasClass("active")
+            .parent()
+            .hasClass("active")
         ) {
             $(".sidebar-dropdown").removeClass("active");
             $(this)
