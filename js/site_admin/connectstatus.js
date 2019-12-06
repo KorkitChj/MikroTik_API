@@ -4,7 +4,13 @@ $(document).ready(function () {
         "order": [],
         "ajax": {
             url: "../process/site_admin/connectstatus_retrieve_process.php",
-            type: "POST"
+            type: "POST",
+            beforeSend: function() {     
+                $(".modalx").show();
+            },
+            complete: function(){
+                $(".modalx").hide();
+            }
         },
         "columnDefs": [{
             "targets": [0, 5, 7],

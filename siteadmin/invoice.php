@@ -24,6 +24,12 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
 <head>
   <?php include_once("../includes/template_backend/admin/head_tag_contents.php"); ?>
   <link rel="stylesheet" href="../css/styles_pdf.css">
+  <style>
+    .col-md-12 {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  </style>
 </head>
 
 <body>
@@ -41,28 +47,27 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                 <span class="glyphicon glyphicon-download-alt"></span>&nbsp;PDF
               </a>
               <br /><br />
-
-              <div>
-                <header class="clearfix">
-                  <div id="logo">
-                    <img src="../img/api-logo1.png" width="130px">
-                  </div>
-                  <h1 style="background: url('../img/dimension.png');">INVOICE </h1>
-                  <div id="company" class="clearfix">
-                    <div>ThaiMikrotikAPI.com</div>
-                    <div>15/6 ต.โคกยาง อ.กันตัง จ.ตรัง,<br /> 92110, TRG</div>
-                    <div>(+66) 950244234</div>
-                    <div><a class="amail" href="mailto:kokig_kao@hotmail.com">kokig_kao@hotmail.com</a></div>
-                  </div>
-                  <div id="project">
-                    <div><span>ลูกค้า&nbsp;&nbsp;</span><?= $row['full_name'] ?></div>
-                    <div><span>ที่อยู่&nbsp;&nbsp;</span><?= $row['add_ress'] ?></div>
-                    <div><span>หมายเลขโทรศัพท์&nbsp;&nbsp;</span><?= $row['work_phone'] ?></div>
-                    <div><span>อีเมล&nbsp;&nbsp;</span> <a class="amail" href="mailto:<?= $row['e_mail'] ?>"><?= $row['e_mail'] ?></a></div>
-                    <div><span>ไซต์งาน&nbsp;&nbsp;</span><?= $row['site_name'] ?></div>
-                  </div>
-                </header>
-                <main>
+              <header class="clearfix">
+                <div id="logo">
+                  <img src="../img/api-logo1.png" width="130px">
+                </div>
+                <h1 style="background: url('../img/dimension.png');">INVOICE </h1>
+                <div id="company" class="clearfix">
+                  <div>ThaiMikrotikAPI.com</div>
+                  <div>15/6 ต.โคกยาง อ.กันตัง จ.ตรัง,<br /> 92110, TRG</div>
+                  <div>(+66) 950244234</div>
+                  <div><a class="amail" href="mailto:kokig_kao@hotmail.com">kokig_kao@hotmail.com</a></div>
+                </div>
+                <div id="project">
+                  <div><span>ลูกค้า&nbsp;&nbsp;</span><?= $row['full_name'] ?></div>
+                  <div><span>ที่อยู่&nbsp;&nbsp;</span><?= $row['add_ress'] ?></div>
+                  <div><span>หมายเลขโทรศัพท์&nbsp;&nbsp;</span><?= $row['work_phone'] ?></div>
+                  <div><span>อีเมล&nbsp;&nbsp;</span> <a class="amail" href="mailto:<?= $row['e_mail'] ?>"><?= $row['e_mail'] ?></a></div>
+                  <div><span>ไซต์งาน&nbsp;&nbsp;</span><?= $row['site_name'] ?></div>
+                </div>
+              </header>
+              <main>
+                <div class="table-responsive">
                   <table>
                     <thead>
                       <tr>
@@ -87,11 +92,11 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                       </tr>
                     </tbody>
                   </table>
-                </main>
-                <div id="foot">
-                  ขอบคุณที่ใช้บริการของเรา จากเรา ThaiMikrotikAPI.com
                 </div>
-              </div>
+              </main>
+              <!-- <div id="foot" style="margin-top:1em;">
+                  ขอบคุณที่ใช้บริการของเรา จากเรา ThaiMikrotikAPI.com
+                </div> -->
             </div>
           </div>
         </div>

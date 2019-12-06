@@ -12,6 +12,11 @@ $row = $query3->fetch(PDO::FETCH_ASSOC);
 
 <head>
     <?php include("includes/template_frontend/head_tag_contents.php"); ?>
+    <style>
+        img#bn{
+            margin-bottom: 5rem;
+        }
+    </style>
 </head>
 
 <body id="indexbg">
@@ -48,7 +53,7 @@ $row = $query3->fetch(PDO::FETCH_ASSOC);
                     หรือหากท่านมีปัญหาการใช้งานหรือข้อสงสัยสามารถติดต่อผู้ดูแลระบบได้ที่ Facebook</p>
             </div>
             <div class="col">
-                <div class="card bg-light text-dark border-danger shadow-lg p-3 mb-5">
+                <div class="card bg-light text-dark border-danger shadow-lg p-3 mb-5-c">
                     <div class="card-header">
                         <h2 align="center"><b>แนะนำบริการ</b></h2>
                     </div>
@@ -60,9 +65,11 @@ $row = $query3->fetch(PDO::FETCH_ASSOC);
                 </div>
             </div>
         </div>
+        <p><b style="font-size: 32px">การทำงานของระบบ</b><br><img id="bn" class="img-fluid shadow-lg" src="img/banner.png" width="700px"></p>
     </div>
     <?php include("includes/template_frontend/footer.php"); ?>
     <script src="js/main_site/backtotop.js"></script>
 </body>
+
 
 </html>

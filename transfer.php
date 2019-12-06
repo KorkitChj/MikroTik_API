@@ -16,7 +16,7 @@ error_reporting(0);
     <div class="container margin-top">
         <div class="row">
             <div class="col-md-6 ">
-                <div class="card shadow-lg p-3 mb-5">
+                <div class="card shadow-lg p-3 mb-5-c">
                     <div class="card-header">
                         <h2 align="center"><b>แจ้งโอนเงิน</b></h2>
                     </div>
@@ -94,7 +94,7 @@ error_reporting(0);
                 </div>
             </div>
             <div class="col-md-6">
-                <img id="blah" src="#" alt="your image" style="height:600px;width:400px" class="img-fluid rounded shadow-lg p-3 mb-5 bg-white" alt="Responsive image" />
+                <img id="blah" src="#" alt="your image" style="height:600px;width:400px" class="img-fluid rounded shadow-lg p-3 mb-5-c bg-white" alt="Responsive image" />
             </div>
         </div>
     </div>

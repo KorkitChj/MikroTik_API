@@ -9,6 +9,7 @@ include("includes/template_frontend/page_link_config.php");
 </head>
 
 <body id="products">
+<div class="modalx" style="display: none;"></div>
     <?php include("includes/template_frontend/navigation.php"); ?>
 
     <div class="container">

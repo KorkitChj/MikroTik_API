@@ -6,6 +6,12 @@ function products(search) {
         data: {
             data: search
         },
+        beforeSend: function() {     
+            $(".modalx").show();
+        },
+        complete: function(){
+            $(".modalx").hide();
+        },
         success: function (data) {
             $('.row-custom').html(data);
         }

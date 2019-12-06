@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-sm by-0 navbar-expand-lg py-md-0 fixed-top navbar-dark bg-light">
-        <a class="navbar-brand" href="index.php"><img style="width:90px;height:67px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
+        <a class="navbar-brand" href="home"><img style="width:90px;height:67px" src="img/api-logo1.png" class="api-logo1" alt="api-logo1"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

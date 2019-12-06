@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Prompt&display=swap');
 .shopping-cart{
-	padding-bottom: 50px;
+	padding-bottom: 5em;
 	font-family: 'Prompt', sans-serif !important;
 }
 
-.shopping-cart.dark{
+/* .shopping-cart.dark{
 	background-color: #f6f6f6;
-}
-
+} */
 .shopping-cart .content{
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 	background-color: white;
@@ -131,6 +130,6 @@
 		text-align: center; 
 	}
 }
-.container-fluid{
+/* .container-fluid{
     width:90%;
-}
+} */
