@@ -21,7 +21,7 @@ if (!empty($result)) {
     $output = '';
     foreach ($result as $a => $b) {
         $output .= '<div class="col-sm-4">
-                <div class="card card-custom d-flex shadow-lg p-3 mb-5-c">
+                <div class="card card-custom d-flex shadow-lg p-3 mb-5 mt-4">
                     <img class="card-img-top" src="img/products/' . $b['image'] . '" alt="Card image cap">
                         <div class="card-body flex-fill">
                             <h5 class="card-title">' . $b['title'] . '</h5><hr>
@@ -34,7 +34,7 @@ if (!empty($result)) {
         $output .= '<b style="font-weight:bold">ราคา</b>
                     <b class="card-text">' . $b['price'] . '</b><hr>
                     <center><a href="cart/product/' . $b['product_id'] . '" 
-                    onclick="return confirm(\'คุณต้องการสั่งซื้อ\');" class="btn  btn-dark-cus btn-sm">สั่งซื้อ</a></center>
+                    onclick="return confirm(\'คุณต้องการสั่งซื้อ\');" class="btn  bt-s btn-dark-cus btn-sm">สั่งซื้อ</a></center>
         </div>
     </div>
 </div>';

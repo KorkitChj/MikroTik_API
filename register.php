@@ -29,7 +29,7 @@ include("includes/template_frontend/page_link_config.php");
     <div class="container margin-top" style="width:100%; max-width:800px">
         <div class="row ">
             <div class="col">
-                <div class="card  bg-light  shadow-lg p-3 mb-5-c">
+                <div class="card  bg-light  shadow-lg p-3 mb-5 mt-5">
                     <div class="card-header">
                         <h2 align="center"><b>ลงทะเบียน</b></h2>
                     </div>
@@ -44,7 +44,7 @@ include("includes/template_frontend/page_link_config.php");
                                                 <i class="far fa-user"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control ipf" id="username_register" name="username_register" placeholder="Username" autofocus equired>
+                                        <input type="text" class="form-control ipf" id="username_register" name="username_register" placeholder="Username" autofocus required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

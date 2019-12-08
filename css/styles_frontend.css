@@ -19,9 +19,9 @@ nav {
 #products {
     background-color: #f2f2f2;
 }
-.mb-5-c{
+/* .mb-5-c{
     margin-bottom: 5rem!important; 
-}
+} */
 nav.bg-light {
     background-image: linear-gradient(to left, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
 }
@@ -29,12 +29,7 @@ nav.bg-light {
 body {
     font-family: 'Prompt', sans-serif !important;
     background-color: #ffffff;
-    margin-bottom: 60px; /* Margin bottom by footer height */
-    /*background-image: linear-gradient(to bottom, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;*/
-    /* background-color: #ffffff; */
-    /* background-image: url('img/animal-dawn-desktop-backgrounds-875858.jpg');
-        background-repeat: no-repeat;
-        background-size: cover; */
+    margin-bottom: 50px;
 }
 
 #indexbg {
@@ -74,17 +69,20 @@ h3:hover {
 }
 
 footer {
+    position: absolute;
+    height: 50px;
     background-image: linear-gradient(to left, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
     border-bottom: red 0.3em solid;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px; /* Set the fixed height of the footer here */
-    line-height: 60px; /* Vertically center the text there */
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    
 }
 p#fonbt{
     font-family: 'Prompt', sans-serif !important;
     margin-bottom: 0;
+    padding: 5px;
 }
 h1 {
     color: #ffffff;
@@ -158,9 +156,9 @@ hr {
     color: #ddd;
 }
 
-.p-3 {
+/* .p-3 {
     margin-top: 1em;
-}
+} */
 
 .card-custom {
     height: 37em;
@@ -336,6 +334,7 @@ input {
     font-size: 18px;
     /* Increase font size */
     width: 50px;
+    padding: 15px;
 }
 
 #myBtn:hover {
@@ -343,10 +342,12 @@ input {
     /* Add a dark-grey background on hover */
     color: #ffffff;
 }
-
-.iocp {
+ .bt-s{
+     margin-top: -1em;
+ }
+/* .iocp {
     padding: 0.5em;
-}
+} */
 
 body {
     padding-top: 35px;
