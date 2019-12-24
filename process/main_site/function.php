@@ -61,10 +61,10 @@ function sendMailOrder($email,$name,$phone,$date_field,$order_name,$order_price)
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     return mailQuery($mail);
 }
-function sendMailPasswordReset($email,$name,$link){
+function sendMailPasswordReset($email,$name,$link,$user){
     $path = "";
     $mail = mailConfig($email, $name,$path);
-    $linkreset = "http://{$_SERVER['SERVER_NAME']}/web/password_reset";
+    $linkreset = "http://{$_SERVER['SERVER_NAME']}/web/password_reset?u={$user}";
     $mail->Subject = 'รีเซ็ตรหัสผ่าน';
     $mail->Body    = 'Thai Mikrotik API ยินดีให้บริการ<br><br>คลิกลิงก์เพื่อรีเซ็ตรหัสผ่าน<br>
     <strong>'.$link.'</strong><br><br>

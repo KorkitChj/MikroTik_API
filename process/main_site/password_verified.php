@@ -41,6 +41,7 @@ if ($_GET['user'] == '') {
                         </div>
                         <input type="hidden" id="user" name="user[]" value="<?=$_GET['user']?>">
                         <input type="hidden" id="user2" name="user[]" value="<?=$_GET['date']?>">
+                        <input type="hidden" id="user3" name="user[]" value="<?=$_GET['lv']?>">
                         <button type="submit" class="btn btn-lg btn-success-cus btn-block btn-login text-uppercase font-weight-bold mb-2"><i class="fa fa-arrow-circle-right fa-lg"></i>&nbsp;Submit</button>
                         <center><a href="home">Close</a></center>
                     </form>
@@ -49,6 +50,7 @@ if ($_GET['user'] == '') {
         </div>
     </div>
 </body>
+<?php include("../../includes/template_frontend/bottom_tag_contents.php"); ?>
 <script src="js/main_site/password_verified.js"></script>
 
 </html>

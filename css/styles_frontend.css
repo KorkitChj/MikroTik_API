@@ -6,25 +6,31 @@ html{
     min-height: 100%;
 }
 nav {
-    border-bottom: rgb(78, 255, 187) 0.6em solid;
+    border-top: rgb(78, 255, 187) 0.3em solid;
 }
-.carousel-custom {
+/* .carousel-custom {
     margin-top: 5em;
-}
+} */
 
 #my-carousel {
-    margin-top: 3em;
+    margin-top: 1em;
 }
 
 #products {
     background-color: #f2f2f2;
 }
+.navbar-light .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+.nav-link>.fas{
+    padding-left:5px;
+}
 /* .mb-5-c{
     margin-bottom: 5rem!important; 
 } */
-nav.bg-light {
+/* nav.bg-light {
     background-image: linear-gradient(to left, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
-}
+} */
 
 body {
     font-family: 'Prompt', sans-serif !important;
@@ -33,7 +39,7 @@ body {
 }
 
 #indexbg {
-    background-image: linear-gradient(to bottom, #0062cd, #0087e7, #00a9f5, #00cafc, #00e9ff) !important;
+    background-color: #f1f1f1 !important;
 }
 
 /* .bgoverlay {
@@ -41,7 +47,7 @@ body {
     max-height: 700px;
 } */
 
-#bgwi {
+.bgwi {
     color: red;
     background-color: #ffffff !important;
     padding: 2em;
@@ -49,16 +55,16 @@ body {
     margin-top: 2em;
 }
 
-.row>.bgoverlay>#h1hd {
-    color: rgb(0, 0, 0);
+.row>.bgoverlay>.bgwi>#h1hd {
+    color:#626262;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #ffffff !important;
+    color: #757575 !important;
 }
 
 h3 {
-    color: #ffffff;
+    color: #dc3545;
     text-align: center;
     padding: 0.5em;
     font-weight: bold;
@@ -108,7 +114,7 @@ h2>a {
 }
 
 p {
-    color: rgb(255, 255, 255);
+    color: rgba(12,12,12,0.8);
     text-align: center;
 }
 
@@ -169,6 +175,7 @@ hr {
     margin-top: 8px;
     font-size: 17px;
     border: none;
+    border-radius: 1em 0 0 1em;
 }
 
 .topnav .search-container button {
@@ -180,6 +187,7 @@ hr {
     font-size: 17px;
     border: none;
     cursor: pointer;
+    border-radius:0 1em 1em 0;
 }
 
 .topnav .search-container button:hover {
@@ -195,9 +203,9 @@ hr {
         font-size: 30px;
     }
 
-    .carousel-custom {
+    /* .carousel-custom {
         margin-top: 6em;
-    }
+    } */
 
     .topnav input[type=text],
     .topnav .search-container button {
@@ -211,6 +219,31 @@ hr {
 
     .topnav input[type=text] {
         border: 1px solid #ccc;
+    }
+    .nav-link>.fas{
+        padding-left:1em;
+    }
+    .navbar-cus{
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .topnav input[type=text] {
+        padding: 9.3px;
+        margin-top: 8px;
+        font-size: 17px;
+        border: none;
+        border-radius: 1em 1em 1em 1em;
+    }
+    
+    .topnav .search-container button {
+        padding: 6px 10px;
+        margin-top: 8px;
+        margin-right: 16px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+        border-radius:1em 1em 1em 1em;
     }
 }
 
@@ -255,8 +288,8 @@ input.password_color {
 .active_cus {
     border: none;
     outline: none;
-    padding: 10px 5px;
-    background-color: #409fff;
+    /* padding: 10px 5px;
+    background-color: #409fff; */
     cursor: pointer;
     border-radius: 1em;
 
@@ -265,22 +298,22 @@ input.password_color {
 .nav-item:hover {
     border: none;
     outline: none;
-    padding: 10px 5px;
-    background-color: #46a5ff;
+    /* padding: 10px 5px;
+    background-color: #46a5ff; */
     cursor: pointer;
 }
 
 .nav-item {
     border: none;
     outline: none;
-    padding: 10px 5px;
+    /* padding: 10px 5px; */
     cursor: pointer;
     border-radius: 1em;
 }
 
-.margin-top {
+/* .margin-top {
     margin-top: 5em;
-}
+} */
 
 /* width */
 ::-webkit-scrollbar {
@@ -305,7 +338,9 @@ input.password_color {
 input {
     color: black;
 }
-
+.g-recaptcha{
+    padding-top: 10px;
+}
 #myBtn {
     display: none;
     /* Hidden by default */
@@ -329,7 +364,7 @@ input {
     /* Add a mouse pointer on hover */
     /* padding: 15px; */
     /* Some padding */
-    border-radius: 10px;
+    border-radius: 100px;
     /* Rounded corners */
     font-size: 18px;
     /* Increase font size */
@@ -337,6 +372,9 @@ input {
     padding: 15px;
 }
 
+.pagination{
+    padding-bottom: 3em;
+}
 #myBtn:hover {
     background-color:rgba(0,0,0,.075);
     /* Add a dark-grey background on hover */
@@ -349,10 +387,17 @@ input {
     padding: 0.5em;
 } */
 
-body {
+/* body {
     padding-top: 35px;
+} */
+.navbar-cus{
+    margin-right: 10%;
+    margin-left: 10%;
 }
-
+.api-logo1{
+    width:50px;
+    height:50px;
+}
 nav a {
     padding-top: 20px !important;
     padding-bottom: 20px !important;

@@ -98,8 +98,9 @@ error_reporting(0);
             </div>
         </div>
     </div>
-    <script src="js/main_site/transfer.js"></script>
     <?php include("includes/template_frontend/footer.php"); ?>
+    <?php include("includes/template_frontend/bottom_tag_contents.php"); ?>
+    <script src="js/main_site/transfer.js"></script>
     <script src="js/main_site/backtotop.js"></script>
 </body>
 

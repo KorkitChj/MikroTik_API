@@ -1,8 +1,25 @@
 <?php
 include('../../includes/db_connect.php');
+//error_reporting(0);
 if (isset($_POST['data']) == "") {
-    $query = $conn->prepare("SELECT * FROM product ORDER BY price ASC");
+    $sql = "SELECT * FROM product ORDER BY price ASC";
+    $query = $conn->prepare($sql);
     $query->execute();
+    $per_page = 3;
+    $row = $query->rowCount();
+    $pages = ceil($row / $per_page);
+
+    if ($_GET['page'] == "") {
+        $page = "1";
+    } else {
+        $page = $_GET['page'];
+    }
+
+    $start = ($page - 1) * $per_page;
+    $sql   = $sql . " LIMIT $start,$per_page";
+    $query = $conn->prepare($sql);
+    $query->execute();
+
     $result = $query->fetchAll();
 } else {
     $sql = 'SELECT * FROM product WHERE ';
@@ -13,12 +30,24 @@ if (isset($_POST['data']) == "") {
     $sql .= 'OR function LIKE "%' . $_POST["data"] . '%" ';
     $sql .= 'OR image LIKE "%' . $_POST["data"] . '%") ';
     $sql .= 'ORDER BY product_id ASC';
+    
     $query = $conn->prepare($sql);
     $query->execute();
+    $per_page = 3;
+    $row = $query->rowCount();
+    $pages = ceil($row / $per_page);
+
+    if ($_GET['page'] == "") {
+        $page = "1";
+    } else {
+        $page = $_GET['page'];
+    }
+
     $result = $query->fetchAll();
 }
 if (!empty($result)) {
     $output = '';
+    $output .= '<div class="row grid-row d-flex justify-content-center margin-top">';
     foreach ($result as $a => $b) {
         $output .= '<div class="col-sm-4">
                 <div class="card card-custom d-flex shadow-lg p-3 mb-5 mt-4">
@@ -39,10 +68,21 @@ if (!empty($result)) {
     </div>
 </div>';
     }
+    $output .= '</div>
+    <div class="row grid-row d-flex justify-content-center margin-top">
+    <ul class="pagination">';
+    for ($i = 1; $i <= $pages; $i++) {
+        if($page == $i){
+            $output .= '<li class="page-item active"><a class="page-link" href="item?page=' . $i . '">' . $i . '</a></li>';
+        }else{
+            $output .= '<li class="page-item"><a class="page-link" href="item?page=' . $i . '">' . $i . '</a></li>';
+        }
+    }
+    $output .= '</ul></div>';
     echo $output;
 } else {
     $output = '
-    <div style="margin:5.3em;padding:5.3em;" class="alert alert-danger alert-dismissible col-md-12" role="alert" align="center">
+    <div style="margin-top:5.3em;padding:5.3em;" class="alert alert-danger alert-dismissible col-md-12" role="alert" align="center">
     <button type="button" class="close close-custom" data-dismiss="alert">&times;</button>
     <strong>Not found!</strong> ไม่พบรายการสินค้าที่ท่านเลือก
     </div>';

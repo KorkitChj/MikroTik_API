@@ -1,6 +1,9 @@
 <?php
 session_start();
 include("../../includes/template_frontend/page_link_config.php");
+if(!isset($_GET['u'])){
+    Header('Location:home');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +36,7 @@ include("../../includes/template_frontend/page_link_config.php");
                             <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="ใช้ตัวพิมพ์เล็กและรูปแบบที่ถูกต้อง" required autofocus>
                             <label for="username">Email</label>
                         </div>
+                        <input type="hidden" name="pwreset" id="pwreset" value="<?=$_GET['u']?>">
                         <button type="submit" class="btn btn-lg btn-success-cus btn-block btn-login text-uppercase font-weight-bold mb-2"><i class="fas fa-paper-plane"></i>&nbsp;Send</button>
                         <center><a href="login">Login</a></center>
                     </form>
@@ -41,5 +45,6 @@ include("../../includes/template_frontend/page_link_config.php");
         </div>
     </div>
 </body>
+<?php include("../../includes/template_frontend/bottom_tag_contents.php"); ?>
 <script src="js/main_site/password_reset.js"></script>
 </html>

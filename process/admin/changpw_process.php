@@ -5,29 +5,29 @@ session_start();
 require('../../includes/db_connect.php');
 $output = array('success' => false, 'messages' => array());
 if (isset($_POST['oldpassword'])) {
-
-    $oldpassword1 = MD5(strip_tags($_POST["oldpassword"]));
-    $newpasswordr1 = MD5(strip_tags($_POST["newpassword"]));
-    $newpasswordr2 = MD5(strip_tags($_POST["renewpassword"]));
+    $oldpassword = $_POST["oldpassword"];
+    $newpassword = $_POST["newpassword"];
+    $renewpassword = $_POST["renewpassword"];
+    $newpassword1 = password_hash($newpassword,PASSWORD_DEFAULT);
     if (isset($_SESSION["admin_id"])) {
         $username = $_SESSION["admin_name"];
-        if ($newpasswordr1 != $newpasswordr2) {
+        if ($newpassword != $renewpassword) {
             $output['success'] = false;
             $output['messages'] = 'รหัสผ่านใหม่ไม่ตรงกัน กรุณาใส่อีกครั้ง';
-        } elseif ($newpasswordr1 === $newpasswordr2) {
+        } else {
             $result = $conn->prepare("SELECT pass_w FROM admin WHERE username = :username");
             $result->bindParam(':username', $username);
             $result->execute();
             $row = $result->fetch(PDO::FETCH_ASSOC);
             $passdb = $row["pass_w"];
-            if ($oldpassword1 != $passdb) {
+            if (!password_verify($oldpassword,$passdb)) {
                 $output['success'] = false;
                 $output['messages'] = 'รหัสผ่านเก่าไม่ถูกต้อง';
-            } elseif ($oldpassword1 === $passdb) {
-                $sql = "UPDATE admin set pass_w = :newpasswordr1 where username = :username";
+            } else{
+                $sql = "UPDATE admin set pass_w = :newpassword1 where username = :username";
                 $result = $conn->prepare($sql);
                 $result->bindParam(':username', $username);
-                $result->bindParam(':newpasswordr1', $newpasswordr1);
+                $result->bindParam(':newpassword1', $newpassword1);
                 $result->execute();
 
                 if (!empty($result)) {

@@ -15,7 +15,7 @@ session_start();
 
         $name = $_POST["name"];
         $username = $_POST["username"];
-        $password = MD5($_POST["password"]);
+        $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
         $site = $_POST["site"];
         $group = $_POST["group"];
         $comment = $_POST["comment"];

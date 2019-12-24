@@ -1,8 +1,9 @@
 $(document).on('submit', '#password_reset', function (event) {
+    var pwreset = document.getElementById("pwreset").value;
     event.preventDefault();
     var form = $(this);
     $.ajax({
-        url: 'process/main_site/password_reset_process.php',
+        url: 'process/main_site/password_reset_process.php?pwreset='+pwreset,
         type: 'POST',
         data: form.serialize(),
         dataType: 'json',

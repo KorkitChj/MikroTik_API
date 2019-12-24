@@ -47,8 +47,9 @@ var validateSignupForm = function () {
     login.on('submit', function (e) {
         if (login.valid()) {
             var form = $(this);
+            var hlogin = document.getElementById("hlogin").value;
             $.ajax({
-                url: 'process/main_site/login_process.php',
+                url: '/web/process/main_site/login_process.php?hlogin='+hlogin, //change path
                 type: 'POST',
                 data: form.serialize(),
                 dataType: 'json',

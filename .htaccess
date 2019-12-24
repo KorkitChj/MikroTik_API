@@ -26,6 +26,7 @@ RewriteRule ^admin/order_upgrade?$ admin/order_upgrade.php
 RewriteRule ^admin/user_online?$ admin/useronline.php
 RewriteRule ^admin/products_list?$ admin/products.php
 RewriteRule ^admin/report?$ admin/report.php
+RewriteRule ^admin/login?$ admin/login.php
 
 RewriteRule ^siteadmin/connect_status?$ siteadmin/connectstatus.php
 RewriteRule ^siteadmin/invoice?$ siteadmin/invoice.php
@@ -35,6 +36,6 @@ RewriteRule ^employee/employee_status?$ employee/employee.php
 RewriteRule ^employee/chang_password?$ employee/changpwemp.php
 
 RewriteRule ^password_reset?$ process/main_site/password_reset.php
-RewriteRule ^password_verified/(.*)/(.*) process/main_site/password_verified.php?user=$1&date=$2
+RewriteRule ^password_verified/(.*)/(.*)/(.*) process/main_site/password_verified.php?user=$1&date=$2&lv=$3
 #RewriteRule ^password_verified/([A-Za-z0-9-_]+) process/main_site/password_verified.php?user=$1
 #RewriteRule ^process/site_admin/print_invoice_process/id/([0-9]+) process/site_admin/print_invoice_process.php?id=$1

@@ -109,9 +109,9 @@ if(isset($_SESSION['fullname']) == ''){
       </div>
     </form>
   </div>
-  <script src="js/main_site/payment.js"></script>
   <?php include("includes/template_frontend/footer.php"); ?>
-
+  <?php include("includes/template_frontend/bottom_tag_contents.php"); ?>
+  <script src="js/main_site/payment.js"></script>
 </body>
 
 </html>

@@ -6,6 +6,7 @@ if (isset($_GET['order']) == 'false') {
     $_SESSION['order'] = "true";
 }
 include("includes/template_frontend/page_link_config.php");
+define("SITE_KEY", "6Ld0MsgUAAAAAKLP-PtUC-vpBXz_sXkOWJRP-Kha");
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,11 +121,18 @@ include("includes/template_frontend/page_link_config.php");
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="col-12">
+                                    <div class="col-sm-12">
+                                        <div class="g-recaptcha" id="g-recaptcha" data-sitekey="<?php echo SITE_KEY ?>"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="col-sm-12">
                                         <hr />
                                         <?php
-                                        if (isset($_SESSION['register']) != '') { ?>
+                                                                                if (isset($_SESSION['register']) != '') { ?>
                                             <button type="submit" id="registerBtn" name="registerBtn" class="btn btn-dark-cus" disabled>สมัครสมาชิก</button>
                                         <?php } else { ?>
                                             <button type="submit" id="registerBtn" name="registerBtn" class="btn btn-dark-cus">สมัครสมาชิก</button>
@@ -139,9 +147,11 @@ include("includes/template_frontend/page_link_config.php");
                 </div>
             </div>
         </div>
-        <script src="js/main_site/register.js"></script>
     </div>
     <?php include("includes/template_frontend/footer.php"); ?>
+    <?php include("includes/template_frontend/bottom_tag_contents.php"); ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="js/main_site/register.js"></script>
     <script src="js/main_site/backtotop.js"></script>
 </body>
 

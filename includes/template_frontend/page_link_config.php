@@ -27,6 +27,9 @@ switch ($_SERVER["SCRIPT_NAME"]) {
     case "/web/process/main_site/password_verified.php":
         $PAGE_TITLE = "Password Verified";
         break;
+    case "/web/admin/login.php":
+        $PAGE_TITLE = "ALogin";
+        break;
     default:
         $CURRENT_PAGE = "Index";
         $PAGE_TITLE = "Welcome to my homepage!";

@@ -1,7 +1,8 @@
+var page = document.getElementById("pageid").value;
 products();
 function products(search) {
     $.ajax({
-        url: "process/main_site/products_retrieve.php",
+        url: "process/main_site/products_retrieve.php?page="+page,
         method: "POST",
         data: {
             data: search
@@ -13,7 +14,7 @@ function products(search) {
             $(".modalx").hide();
         },
         success: function (data) {
-            $('.row-custom').html(data);
+            $('#gridContainer').html(data);
         }
     });
 }
