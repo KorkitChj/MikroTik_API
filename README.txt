@@ -1,2 +1,2 @@
-PHP version 7.1.8
+PHP version 7++
 Root Directory  => "Web"
