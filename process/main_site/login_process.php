@@ -80,8 +80,8 @@ if (isset($_GET['hlogin'])) {
                     $hashed_password = $result['pass_w'];
                     if (password_verify($password, $hashed_password)) {
                         if ($result['login_num'] == 0) {
-                            $issert_login_num = $conn->prepare("UPDATE admin SET login_num = 1 WHERE e_mail = :e_mail");
-                            $issert_login_num ->execute(array(':e_mail' =>$e_mail));  
+                            //$issert_login_num = $conn->prepare("UPDATE admin SET login_num = 1 WHERE e_mail = :e_mail");
+                            //$issert_login_num ->execute(array(':e_mail' =>$e_mail));  
                             $_SESSION["admin_id"] = $result["admin_id"];
                             $_SESSION["admin_name"] = $result["username"];
                             $output['success'] = true;
