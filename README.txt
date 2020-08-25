@@ -6,11 +6,10 @@ kokig_kao@hotmail.com
 123456789
 -------------------------------------
 Site Admin
-test15
+test
 123456789
 -------------------------------------
 Reception
 reception2
 123456789
 
-test
